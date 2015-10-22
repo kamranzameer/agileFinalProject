@@ -16,17 +16,23 @@
 package edu.harvard.agile;
 
 import java.util.Date;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.validator.annotations.Validation;
-import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import com.opensymphony.xwork2.conversion.annotations.TypeConversion;
+import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validation;
 
 @Validation()
 @Conversion()
 public class HelloWorldAction extends ActionSupport {
     
+	private static final Log LOG = LogFactory.getLog(HelloWorldAction.class);
+	
     private Date now;
     private String name;
     
@@ -40,6 +46,7 @@ public class HelloWorldAction extends ActionSupport {
     public String getName() { return this.name; }
     
     public String execute() throws Exception {
+    	LOG.error("hello log testing");
         return SUCCESS;
     }
 }

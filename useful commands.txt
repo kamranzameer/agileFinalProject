@@ -1,1 +1,8 @@
+-- following command used to generate inital web application
+
 mvn archetype:generate -B -DgroupId=edu.harvard.agile -DartifactId=ezsearch -DarchetypeGroupId=org.apache.struts -DarchetypeArtifactId=struts2-archetype-starter -DarchetypeVersion=2.3.16.3 -DremoteRepositories=http://struts.apache.org
+
+
+-- to run application
+
+mvn jetty:run

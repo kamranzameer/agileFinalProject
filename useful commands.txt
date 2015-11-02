@@ -2,7 +2,17 @@
 
 mvn archetype:generate -B -DgroupId=edu.harvard.agile -DartifactId=ezsearch -DarchetypeGroupId=org.apache.struts -DarchetypeArtifactId=struts2-archetype-starter -DarchetypeVersion=2.3.16.3 -DremoteRepositories=http://struts.apache.org
 
+-- to index files in dir
 
+ java -classpath d:/KZ_WORK/binaries/solr-5.3.1/dist/solr-core-5.3.1.jar -Dauto=yes -Dc=gettingstarted -Ddata=files -Drecursive=yes org.apache.solr.util.SimplePostTool C:/Users/kzameer/Desktop/harvard/cscie45a/
+
+- to start solr
+bin/solr.cmd start -e cloud -noprompt
+
+- to stop solr
+bin/solr.cmd stop -all
+
+ 
 -- to run application
 
 mvn jetty:run

@@ -9,7 +9,7 @@
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/app.js"></script>
 	<script>
-		ezsearch = ezsearch();
+		workPackageManagement = workPackageManagement();
 	</script>
 </head>
 <body>
@@ -102,7 +102,7 @@
 
 							<div class="form-group row">
 		                        <div class="col-sm-12 col-md-offset-4 controls">
-									<button type="button" id="addNewBtn" class="btn btn-success" onclick="ezsearch.submitForm('resetpwdform', function(data) {location.href='../index.jsp'});"></span>&nbsp;&nbsp;Reset
+									<button type="button" id="addNewBtn" class="btn btn-success" onclick="workPackageManagement.submitForm('resetpwdform', function(data) {location.href='../index.jsp'});"></span>&nbsp;&nbsp;Reset
 		                                Password
 									</button>
 								</div>

@@ -3,10 +3,10 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
     <groupId>edu.harvard.agile</groupId>
-    <artifactId>ezsearch</artifactId>
+    <artifactId>workPackageManagement</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>ezsearch</name>
+    <name>workPackageManagement</name>
 	<description>Struts 2 Starter</description>
 
     <properties>
@@ -120,7 +120,7 @@
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webAppSourceDirectory>${basedir}/src/main/webapp/</webAppSourceDirectory>
                     <webAppConfig>
-                        <contextPath>/ezsearch</contextPath>
+                        <contextPath>/wpm</contextPath>
                         <descriptor>${basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
                     </webAppConfig>
                 </configuration>

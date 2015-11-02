@@ -45,7 +45,7 @@
                     <span class="icon-bar"></span>
 
                 </a>
-                <a class="brand" href="#">ezSearch</a>
+                <a class="brand" href="#">Work Pacakge Management</a>
                 <div class="nav-collapse collapse" style="height: 0px;">
                     <p class="navbar-text pull-right">Logged in as
                         <a href="#" class="navbar-link">Username</a>

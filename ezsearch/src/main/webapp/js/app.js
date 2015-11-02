@@ -1,4 +1,4 @@
-var ezsearch = function() {
+var workPackageManagement  = function() {
 	var waitProgress = $('<div class="modal fade" id="waitProgress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header "><h5 class="modal-title" id="myModalLabel"><i class="fa fa-cog fa-spin"></i> Processing</h5></div><div class="modal-body center-block"><div class="progress" id="parent"><div id="prgbar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div></div></div></div></div>');
 
 	$( document ).ajaxComplete(function() {
@@ -43,7 +43,7 @@ var ezsearch = function() {
 	
 	this.submitForm = function(formid, callback, beforesubmit) {
 		var formobj = $("#" + formid);
-		var ezsearch = this;
+		var workPackageManagement = this;
 		var responseData;
 		if (beforesubmit) 
 			beforesubmit();
@@ -62,7 +62,7 @@ var ezsearch = function() {
 	  		responseData = data;
 	  		var delay = setInterval(function() {
 	  			clearInterval(delay);
-		  		ezsearch.hideProcessingDialog();
+		  		workPackageManagement.hideProcessingDialog();
 	  		}, 5000)
 	  	});
 	    return false;

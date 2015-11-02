@@ -98,7 +98,7 @@
     </div>
 </div>
 <script>
-	ezsearch = ezsearch();
+	workPackageManagement = workPackageManagement();
 </script>
 </body>
 </html>

@@ -185,7 +185,7 @@
 								</span>
 								&nbsp;&nbsp;Cancel
 							</button>
-							<button type="button" id="addNewBtn" class="btn btn-success" onclick="ezsearch.submitForm('saveAcademic', function(data) { var content = $( data ).find( '#academicsTable' ); $( '#academicDiv' ).empty().append( content );}, function() {$('#addNewAcademic').modal('hide');});">
+							<button type="button" id="addNewBtn" class="btn btn-success" onclick="workPackageManagement.submitForm('saveAcademic', function(data) { var content = $( data ).find( '#academicsTable' ); $( '#academicDiv' ).empty().append( content );}, function() {$('#addNewAcademic').modal('hide');});">
 								<span class="fa fa-floppy-o">
 								</span>
 								&nbsp;&nbsp;Save

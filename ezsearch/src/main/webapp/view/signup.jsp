@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="utf-8">
-    <title>ezsearch</title>
+    <title>Work Pacakge Management</title>
     <link href="../css/glyphicon.css" rel="stylesheet">
     <link href="../css/theme1/bootstrap.css" rel="stylesheet">
     <link href="../css/theme1/user.css" rel="stylesheet">
@@ -11,7 +11,7 @@
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/app.js"></script>
 	<script>
-		ezsearch = ezsearch();
+		workPackageManagement = workPackageManagement();
 	</script>
 </head>
 <body>
@@ -93,7 +93,7 @@
                         <div class="col-md-12 control">
                             <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
                                 <div class="col-sm-12 col-sm-offset-4 controls">
-                                    <button id="signupBtn" type="button" class="btn btn-success" onclick="ezsearch.submitForm('signupform', function(data) {location.href='../index.jsp'});"><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;Sign Up</button>
+                                    <button id="signupBtn" type="button" class="btn btn-success" onclick="workPackageManagement.submitForm('signupform', function(data) {location.href='../index.jsp'});"><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;Sign Up</button>
                                     &nbsp;
                                     <button id="cancelBtn" type="button" class="btn btn-danger" onclick="window.location = '../index.jsp';" ><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Cancel</button>
                                 </div>

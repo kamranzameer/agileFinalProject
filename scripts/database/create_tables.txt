@@ -1,0 +1,83 @@
+drop table user_role;
+drop table role;
+drop table users;
+drop table user_profile;
+drop table application;
+drop table application_contact;
+
+CREATE TABLE ROLE (
+  role_id varchar2(10) NOT NULL ,
+  role_name varchar2(20) NOT NULL,
+  is_active varchar2(1) default 'Y' NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT role_pk PRIMARY KEY (role_id)
+);
+
+CREATE TABLE USERS (
+  user_id varchar2(40) NOT NULL ,
+  password varchar2(60) NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT user_pk PRIMARY KEY (user_id)
+  ) ;
+
+
+CREATE TABLE USER_ROLE (
+  user_id varchar2(40) NOT NULL ,
+  role_id varchar2(10) NOT NULL,
+  create_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  CONSTRAINT user_role_pk PRIMARY KEY (user_id,role_id),
+  CONSTRAINT user_role_fk1 FOREIGN KEY (user_id) REFERENCES Users(user_id),
+  CONSTRAINT user_role_fk2 FOREIGN KEY (role_Id) REFERENCES Role(role_id)
+) ;
+
+CREATE TABLE USER_PROFILE (
+  user_id varchar2(40) NOT NULL ,
+  first_name varchar2(40) NOT NULL,
+  last_name varchar2(40) NOT NULL,
+  middle_name varchar2(40) NOT NULL,
+  date_of_birth date NOT NULL,
+  email_id varchar2(40) NOT NULL,
+  address_line1 varchar2(40) NOT NULL,
+  address_line2 varchar2(40) NOT NULL,
+  state varchar2(40) NOT NULL,
+  zip_code varchar2(12) NOT NULL,
+ create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT user_profile_pk PRIMARY KEY (user_id),
+  CONSTRAINT user_profile_fk1 FOREIGN KEY (user_id) REFERENCES Users(user_id)
+) ;
+
+CREATE TABLE APPLICATION (
+  application_id varchar2(40) NOT NULL ,
+  application_name varchar2(60) NOT NULL,
+  application_desc varchar2(60) NOT NULL,
+  is_active varchar2(1) default 'Y' NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT application_pk PRIMARY KEY (application_id)
+  ) ;
+
+  
+ CREATE TABLE APPLICATION_CONTACT (
+  application_id varchar2(40) NOT NULL ,
+  user_id varchar2(40) NOT NULL,
+  is_active varchar2(1) default 'Y' NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT application_contact_pk PRIMARY KEY (application_id,user_id)
+  CONSTRAINT application_contact_fk1 FOREIGN KEY (application_id) REFERENCES Application(application_id)
+  CONSTRAINT application_contact_fk2 FOREIGN KEY (user_id) REFERENCES Users(user_id)
+  ) ;

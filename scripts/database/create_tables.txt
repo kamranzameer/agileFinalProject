@@ -1,0 +1,268 @@
+-- Drop table script
+
+drop table user_role;
+drop table role;
+drop table application_contact;
+drop table activity_phase_resources;
+drop table assumptions;
+drop table activity_line;
+drop table work_request;
+drop table work_package;
+drop table resource_type;
+drop table testing_program;
+drop table activity_type;
+drop table application_contacts;
+drop table application;
+drop table user_profile;
+drop table users;
+
+--drop sequence script
+drop sequence assumptions_id_seq;
+drop sequence resource_type_id_seq;
+drop sequence work_request_id_seq;
+drop sequence activity_phase_resource_id_seq;
+drop sequence activity_line_id_seq;
+drop sequence package_id_seq;
+
+
+
+-- ROLE represents different roles of users
+CREATE TABLE ROLE (
+  role_id varchar2(10) NOT NULL ,
+  role_name varchar2(20) NOT NULL,
+  is_active varchar2(1) default 'Y' NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT role_pk PRIMARY KEY (role_id)
+);
+
+-- TESTING_PROGRAM represents different testing programs the education company supports tests
+CREATE TABLE TESTING_PROGRAM (
+  testing_program_code varchar2(3) NOT NULL ,
+  testing_program_desc varchar2(40) NOT NULL ,
+  create_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  CONSTRAINT testing_program_code_pk PRIMARY KEY (testing_program_code)
+  ) ;
+ 
+-- ACTIVITY_TYPE table stores various types of activities such as configuration, development, maintenance etc.
+  CREATE TABLE ACTIVITY_TYPE (
+  activity_type_code varchar2(10) NOT NULL ,
+  activity_type_desc varchar2(40) NOT NULL ,
+  create_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  CONSTRAINT activity_type_code_pk PRIMARY KEY (activity_type_code)
+  ) ;
+
+-- RESOURCE_TYPE table stores various types of resources such as Sr.developer, Architect, BSA, Manager, Consultant and their hourly rates.
+  CREATE TABLE RESOURCE_TYPE (
+  resource_type_id number NOT NULL ,
+  resource_type_name varchar2(40) NOT NULL,
+  hourly_rate number NOT NULL ,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT resource_type_id_pk PRIMARY KEY (resource_type_id)
+  ) ;  
+
+
+
+-- USERS TABLE to store all the users
+CREATE TABLE USERS (
+  user_id varchar2(40) NOT NULL ,
+  password varchar2(60) NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT user_pk PRIMARY KEY (user_id)
+  ) ;
+
+-- USER_ROLE , join table to store all the relationship between users and role
+CREATE TABLE USER_ROLE (
+  user_id varchar2(40) NOT NULL ,
+  role_id varchar2(10) NOT NULL,
+  create_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  CONSTRAINT user_role_pk PRIMARY KEY (user_id,role_id),
+  CONSTRAINT user_role_fk1 FOREIGN KEY (user_id) REFERENCES Users(user_id),
+  CONSTRAINT user_role_fk2 FOREIGN KEY (role_Id) REFERENCES Role(role_id)
+) ;
+
+-- USER_PROFILE TABLE to store information about the user profile
+CREATE TABLE USER_PROFILE (
+  user_id varchar2(40) NOT NULL ,
+  first_name varchar2(40) NOT NULL,
+  last_name varchar2(40) NOT NULL,
+  middle_name varchar2(40) NOT NULL,
+  date_of_birth date NOT NULL,
+  email_id varchar2(40) NOT NULL,
+  address_line1 varchar2(40) NOT NULL,
+  address_line2 varchar2(40) NOT NULL,
+  state varchar2(40) NOT NULL,
+  zip_code varchar2(12) NOT NULL,
+ create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT user_profile_pk PRIMARY KEY (user_id),
+  CONSTRAINT user_profile_fk1 FOREIGN KEY (user_id) REFERENCES Users(user_id)
+) ;
+
+--APPLICATION TABLE is to store the application information
+CREATE TABLE APPLICATION (
+  application_id varchar2(40) NOT NULL ,
+  application_name varchar2(60) NOT NULL,
+  application_desc varchar2(60) NOT NULL,
+  is_active varchar2(1) default 'Y' NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT application_pk PRIMARY KEY (application_id)
+  ) ;
+
+--APPLICATION_CONTACTS TABLE is to store various application contacts for a particular application.
+CREATE TABLE APPLICATION_CONTACTS (
+  application_id varchar2(40) NOT NULL ,
+  user_id varchar2(40) NOT NULL,
+  is_active varchar2(1) default 'Y' NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT application_id_pk PRIMARY KEY (application_id,user_id),
+  CONSTRAINT application_contacts_fk1 FOREIGN KEY (user_id) REFERENCES USERS(user_id),
+  CONSTRAINT application_contacts_fk2 FOREIGN KEY (application_id) REFERENCES APPLICATION(application_id)
+  ) ;
+  
+--WORK_PACKAGE TABLE is to store the work package related information such as status, contract year, start date, end date etc.
+ CREATE TABLE WORK_PACKAGE (
+  package_id number NOT NULL ,
+  package_name varchar2(40) NOT NULL,
+  package_desc varchar2(100) NOT NULL,
+  testing_program_code varchar2(3) NOT NULL,
+  contract_from_year  date NOT NULL,
+  contract_to_year  date NOT NULL,
+  start_date  date NOT NULL,
+  end_date  date NOT NULL,
+  status varchar2(40) NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT work_package_pk PRIMARY KEY (package_id)
+  ) ;
+  
+--WORK_REQUEST TABLE is a one-to-many table, one work package can trigger multiple work requests.
+--Each work request represents work assigned to each application, for a particular work package. 
+  
+ CREATE TABLE WORK_REQUEST (
+  work_request_id number NOT NULL ,
+  application_id varchar2(40) NOT NULL,
+  package_id number NOT NULL,
+  status varchar2(40) NOT NULL,
+  start_date  date NOT NULL,
+  end_date  date NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT work_request_pk PRIMARY KEY (work_request_id)
+  ) ;
+ 
+    
+--ACTIVITY_LINE TABLE is a one-to-many table, one work request can have multiple activity lines.
+--Each activity line represents a type of work such as a new interface,  integration testing, performance testing etc for a particular work package. 
+  
+  CREATE TABLE ACTIVITY_LINE (
+  activity_line_id number NOT NULL ,
+  activity_line_desc varchar2(40) NOT NULL,
+  work_request_id number NOT NULL,
+  activity_type_code varchar2(40) NOT NULL,
+  start_date  date NOT NULL,
+  end_date  date NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT activity_line_pk PRIMARY KEY (activity_line_id)
+  ) ;
+  
+ 
+--ACTIVITY_PHASE_RESOURCES TABLE is a one-to-many table contains allocated hours for each activity line, by resource type 
+  
+  CREATE TABLE ACTIVITY_PHASE_RESOURCES (
+  activity_phase_resource_id number NOT NULL ,
+  activity_line_id number NOT NULL,
+  resource_type_id number NOT NULL,
+  estimated_hours number NOT NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT activity_phase_resource_id_pk PRIMARY KEY (activity_phase_resource_id),
+  CONSTRAINT activity_line_id_fk FOREIGN KEY (activity_line_id)  REFERENCES ACTIVITY_LINE(activity_line_id),
+  CONSTRAINT resource_type_id_fk FOREIGN KEY (resource_type_id) REFERENCES resource_type(resource_type_id)
+  ) ;
+  
+--ASSUMPTIONS TABLE is a one-to-many table contains assumptions that the application contact assumes while estimating  the work assigned to the --application. These assumptions can be related to work request or can be collected by activity line if they belong to a specific activity line.
+    
+  CREATE TABLE ASSUMPTIONS (
+  assumptions_id number NOT NULL ,
+  assumptions_desc varchar2(100) NOT NULL,
+  work_request_id number NOT NULL ,
+  activity_line_id number NULL,
+  create_date date NOT NULL,
+  modified_date date NOT NULL,
+  create_by varchar2(40) NOT NULL,
+  modified_by varchar2(40) NOT NULL,
+  CONSTRAINT assumptions_id_pk PRIMARY KEY (assumptions_id),
+  CONSTRAINT work_request_id_fk1 FOREIGN KEY (work_request_id) REFERENCES WORK_REQUEST(work_request_id),
+  CONSTRAINT activity_line_id_fk1 FOREIGN KEY (activity_line_id) REFERENCES activity_line(activity_line_id)
+  ) ;
+  
+ -- Create sequences script for each of the auto generated ids 
+ CREATE SEQUENCE assumptions_id_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;
+  
+ 
+ CREATE SEQUENCE resource_type_id_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE; 
+  
+ CREATE SEQUENCE work_request_id_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE; 
+ 
+  
+ CREATE SEQUENCE activity_phase_resource_id_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE; 
+ 
+ 
+ CREATE SEQUENCE activity_line_id_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE; 
+ 
+ 
+ CREATE SEQUENCE package_id_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE; 
+ 

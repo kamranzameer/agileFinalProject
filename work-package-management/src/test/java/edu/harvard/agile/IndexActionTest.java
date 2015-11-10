@@ -28,6 +28,6 @@ public class IndexActionTest extends TestCase {
         IndexAction action = new IndexAction();
         String result = action.execute();
         assertEquals(Action.SUCCESS, result);
-        System.out.println("Test sucessfull");
+        Systemm.out.println("Test sucessfull");
     }
 }

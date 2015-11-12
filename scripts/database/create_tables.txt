@@ -145,6 +145,7 @@ CREATE TABLE APPLICATION_CONTACTS (
   package_name varchar2(40) NOT NULL,
   package_desc varchar2(100) NOT NULL,
   testing_program_code varchar2(3) NOT NULL,
+  requestor_name varchar2(60) NOT NULL,
   contract_from_year  date NOT NULL,
   contract_to_year  date NOT NULL,
   start_date  date NOT NULL,

@@ -33,7 +33,7 @@
                             <a class="btn btn-default btn-flat" href="#/workspace"  ng-click="menuService.changeMenu('changepwd')">Profile</a>
                         </div>
                         <div class="pull-right">
-                            <a class="btn btn-default btn-flat" href="#/login">Sign out</a>
+                            <a class="btn btn-default btn-flat" href="/logout">Sign out</a>
                         </div>
                     </li>
                 </ul>

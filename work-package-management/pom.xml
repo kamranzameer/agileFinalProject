@@ -112,7 +112,7 @@
     </dependencies>
 	
     <build>
-      <finalName>struts2-archetype-starter</finalName>
+      <finalName>wpm</finalName>
     	<plugins>
     		<plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -153,6 +153,14 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+	            <groupId>com.atlassian.maven.plugins</groupId>
+	            <artifactId>maven-clover2-plugin</artifactId>
+	            <configuration>
+	            	<contextFilters>@deprecated,assert,static,constructor,catch,throw,toString,equals,hashCode,LOG\.</contextFilters>
+	                <licenseLocation>clover.license</licenseLocation>
+	            </configuration>
+	        </plugin>
     	</plugins>
     </build>
 </project>

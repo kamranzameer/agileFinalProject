@@ -173,6 +173,9 @@ CREATE TABLE APPLICATION_CONTACTS (
   create_by varchar2(40) NOT NULL,
   modified_by varchar2(40) NOT NULL,
   CONSTRAINT work_request_pk PRIMARY KEY (work_request_id)
+  CONSTRAINT work_request_fk1 FOREIGN KEY (application_id) REFERENCES APPLICATION(application_id),
+  CONSTRAINT work_request_fk2 FOREIGN KEY (package_id) REFERENCES WORK_PACKAGE(package_id)
+  
   ) ;
  
     

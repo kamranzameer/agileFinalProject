@@ -1,7 +1,6 @@
 package edu.harvard.agile.util;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,11 +9,19 @@ import javax.sql.DataSource;
 
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
+/**
+ * This class is a DB util class that contains methods to perform actions on the database
+ * @author Incredibles Team
+ *
+ */
 public class DBUtil {
 
+	/**
+	 * This method is to retrieve data source from Oracle Connection pool 
+	 * @return DataSource
+	 * @throws SQLException
+	 */
 	private static DataSource getDataSource() throws SQLException {
-		// Construct DataSource
-
 		OracleConnectionPoolDataSource ds = new OracleConnectionPoolDataSource();
 		ds.setURL("jdbc:oracle:thin:@localhost:1521:xe");
 		ds.setUser("incredibles");
@@ -23,12 +30,22 @@ public class DBUtil {
 
 	}
 
+	/**
+	 * this method is to retrieve connection object using datasource
+	 * @return connection
+	 * @throws Exception
+	 */
 	public static Connection getConnection() throws Exception {
 		Connection connection = getDataSource().getConnection();
 		connection.setAutoCommit(false);
 		return connection;
 	}
 
+	/**
+	 * This method is to close a statement that is open.
+	 * @param stmt
+	 * @return
+	 */
 	public static boolean closeStatement(Statement stmt){
 
 		if (stmt != null) {
@@ -45,6 +62,12 @@ public class DBUtil {
 
 	}
 
+	
+	/**
+	 * This method is to close the connection that is open.
+	 * @param connection
+	 * @return
+	 */
 	public static boolean closeConnection(Connection connection) {
 
 		if (connection != null) {
@@ -64,6 +87,13 @@ public class DBUtil {
 
 	}
 
+	
+	/**
+	 * This method is to get the next value of any oracle sequence 
+	 * @param seqName is a Sequence name
+	 * @return the value of the sequence as int
+	 * @throws Exception
+	 */
 	public static int getNextSequence(String seqName) throws Exception {
 		String seqQuery = "Select " + seqName + ".nextVal from DUAL";
 		int seq = 0;

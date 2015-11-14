@@ -19,6 +19,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.theories.Theory;
 
+/**
+ * This test is test all the methods of the DBUtil class
+ * @author Incredibles Team
+ *
+ */
 public class DBUtilTest {
 
 	OracleConnectionPoolDataSource ds;
@@ -41,6 +46,10 @@ public class DBUtilTest {
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * This test is to test the getConnection method of DBUtil 
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetConnection() throws Exception {
 		Connection connection = DBUtil.getConnection();
@@ -48,18 +57,31 @@ public class DBUtilTest {
 	}
 	
 	
+	/**
+	 * This method is to test the closeconnection method of DBUtil
+	 * @throws Exception
+	 */
 	@Test
 	public void testCloseConnection() throws Exception {
 		Connection connection = DBUtil.getConnection();
 		assertTrue(DBUtil.closeConnection(connection));
 	}
 	
+	/**
+	 * This method is to test the getNextSequence method of DBUtil
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetNextSequence() throws Exception {
 		int seq = DBUtil.getNextSequence("package_id_seq");
 		assertNotEquals(0, seq);
 	}
 	
+	/**
+	 * This method is to test the invalid scenario of getNextSequence method 
+	 * with an invalid sequence name 
+	 * @throws Exception
+	 */
 	@Test(expected = SQLSyntaxErrorException.class)
 	
 	public void testGetNextSequenceInvalid() throws Exception{

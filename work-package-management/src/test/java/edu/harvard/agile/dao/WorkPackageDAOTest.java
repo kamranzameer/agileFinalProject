@@ -15,6 +15,14 @@ import org.junit.Test;
 
 import edu.harvard.agile.model.WorkPackageDTO;
 
+
+
+/**
+ * This is a test class for Work Package DAO.
+ * @author Incredibles Team
+ * 
+ *
+ */
 public class WorkPackageDAOTest {
 
 	@BeforeClass
@@ -33,6 +41,12 @@ public class WorkPackageDAOTest {
 	public void tearDown() throws Exception {
 	}
 
+	
+	
+	/**
+	 * This test method tests the findByPackageId method
+	 * @throws Exception
+	 */
 	@Test
 	public void testFindByPackageId() throws Exception {
 		WorkPackageDAO workPackageDAO = new WorkPackageDAO();
@@ -40,6 +54,10 @@ public class WorkPackageDAOTest {
 		assertTrue(workPackageDTO != null);
 	}
 	
+	/**
+	 * This test is to test findBypackage Id with invalid package id
+	 * @throws Exception
+	 */
 	@Test
 	public void testFindByInvalidPackageId() throws Exception {
 		WorkPackageDAO workPackageDAO = new WorkPackageDAO();
@@ -47,6 +65,10 @@ public class WorkPackageDAOTest {
 		assertTrue(workPackageDTO == null);
 	}
 	
+	/** 
+	 * This test is to test findAllPackages method of the DAO 
+	 * @throws Exception
+	 */
 	@Test
 	public void testFindAllPackages() throws Exception {
 		WorkPackageDAO workPackageDAO = new WorkPackageDAO();
@@ -55,6 +77,10 @@ public class WorkPackageDAOTest {
 		assertTrue(workPackageDTOs.size() > 0);
 	}
 	
+	/**
+	 * This test is to test createPackage method of DAO
+	 * @throws Exception
+	 */
 	@Test
 	public void testCreatePackage() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
@@ -63,6 +89,7 @@ public class WorkPackageDAOTest {
 		workPackage.setContractToYear(new Date());
 		workPackage.setPackageName("TestPackage");
 		workPackage.setPackageDesc("TestPackageDesc");
+		workPackage.setRequestorName("Joe");
 		workPackage.setTestingProgramCode("GRE");
 		workPackage.setStatus("Open");
 		workPackage.setStartDate(new Date());
@@ -76,6 +103,11 @@ public class WorkPackageDAOTest {
 	}
 	
 	
+	/**
+	 * This test is to test an invalid scenario of createPackage method of DAO
+	 * Uses annotation for expected exception.
+	 * @throws Exception
+	 */
 	@Test(expected = SQLIntegrityConstraintViolationException.class)
 	
 	public void testCreatePackageWithoutPackageName() throws Exception {
@@ -85,6 +117,7 @@ public class WorkPackageDAOTest {
 		workPackage.setContractToYear(new Date());
 		workPackage.setPackageDesc("TestPackageDesc");
 		workPackage.setTestingProgramCode("GRE");
+		workPackage.setRequestorName("George");
 		workPackage.setStatus("Open");
 		workPackage.setStartDate(new Date());
 		workPackage.setEndDate(new Date());
@@ -95,6 +128,10 @@ public class WorkPackageDAOTest {
 	}
 	
 	
+	/**
+	 * This test is to test the updatePackage method of the DAO
+	 * @throws Exception
+	 */
 	@Test
 	public void testUpdatePackage() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
@@ -116,6 +153,10 @@ public class WorkPackageDAOTest {
 		
 	}
 	
+	/**
+	 * This test is to test invlaid scenario of updatePackage where the pk is not found
+	 * @throws Exception
+	 */
 	@Test
 	public void testUpdatePackageInvalidPackage() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();

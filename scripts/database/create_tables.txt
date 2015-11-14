@@ -157,6 +157,11 @@ CREATE TABLE APPLICATION_CONTACTS (
   modified_by varchar2(40) NOT NULL,
   CONSTRAINT work_package_pk PRIMARY KEY (package_id)
   ) ;
+--
+-- Constraints for table work_package
+--
+ALTER TABLE work_package ADD CONSTRAINT work_package_fk_1 FOREIGN KEY (testing_program_code) REFERENCES testing_program (testing_program_code);  
+
   
 --WORK_REQUEST TABLE is a one-to-many table, one work package can trigger multiple work requests.
 --Each work request represents work assigned to each application, for a particular work package. 
@@ -173,10 +178,9 @@ CREATE TABLE APPLICATION_CONTACTS (
   create_by varchar2(40) NOT NULL,
   modified_by varchar2(40) NOT NULL,
   CONSTRAINT work_request_pk PRIMARY KEY (work_request_id)
-  CONSTRAINT work_request_fk1 FOREIGN KEY (application_id) REFERENCES APPLICATION(application_id),
-  CONSTRAINT work_request_fk2 FOREIGN KEY (package_id) REFERENCES WORK_PACKAGE(package_id)
-  
-  ) ;
+   ) ;
+ALTER TABLE work_request ADD CONSTRAINT work_request_fk1 FOREIGN KEY (application_id) REFERENCES APPLICATION(application_id);
+ALTER TABLE work_request ADD CONSTRAINT work_request_fk2 FOREIGN KEY (package_id) REFERENCES WORK_PACKAGE(package_id);
  
     
 --ACTIVITY_LINE TABLE is a one-to-many table, one work request can have multiple activity lines.
@@ -228,7 +232,9 @@ CREATE TABLE APPLICATION_CONTACTS (
   CONSTRAINT work_request_id_fk1 FOREIGN KEY (work_request_id) REFERENCES WORK_REQUEST(work_request_id),
   CONSTRAINT activity_line_id_fk1 FOREIGN KEY (activity_line_id) REFERENCES activity_line(activity_line_id)
   ) ;
-  
+ 
+
+
  -- Create sequences script for each of the auto generated ids 
  CREATE SEQUENCE assumptions_id_seq
  START WITH     1

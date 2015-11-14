@@ -1,4 +1,5 @@
 
+
 INSERT INTO ROLE (role_id, role_name,is_active, create_date, modified_date, create_by,modified_by) VALUES('DM', 'Demand Management','Y', sysdate,sysdate,'uannipu','uannipu');
 INSERT INTO ROLE (role_id, role_name,is_active, create_date, modified_date, create_by,modified_by) VALUES('AC', 'Application contact','Y', sysdate,sysdate,'uannipu','uannipu');
 INSERT INTO ROLE (role_id, role_name,is_active, create_date, modified_date, create_by,modified_by) VALUES('BU', 'Business User', 'Y', sysdate,sysdate,'uannipu','uannipu');
@@ -7,9 +8,8 @@ INSERT INTO ROLE (role_id, role_name,is_active, create_date, modified_date, crea
 -- Dumping data for table users
 --
 
-INSERT INTO users (user_id, password, create_date, modified_date,create_by,modified_by) VALUES
-('userdm1', 'passwd', sysdate,sysdate,'uannipu','uannipu');
-INSERT INTO users (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userapp1', 'passwd', 'App', 'User1','uannipu','uannipu');
+INSERT INTO users (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userdm1', 'passwd', sysdate,sysdate,'uannipu','uannipu');
+INSERT INTO users (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userapp1', 'passwd', sysdate,sysdate,'uannipu','uannipu');
 INSERT INTO users (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userapp2', 'passwd', sysdate,sysdate,'uannipu','uannipu');
 INSERT INTO users (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userapp3', 'passwd', sysdate,sysdate,'uannipu','uannipu');
 INSERT INTO users (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userdm2', 'passwd', sysdate,sysdate,'uannipu','uannipu');
@@ -20,19 +20,19 @@ INSERT INTO users (user_id, password, create_date, modified_date,create_by,modif
 -- Dumping data for table user_role
 --
 
-INSERT INTO user_role (user_id, password, create_date, modified_date,create_by,modified_by) VALUES
-('userdm1', 'DM', sysdate,sysdate,'uannipu','uannipu');
-INSERT INTO user_role (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userapp1', 'AC', sysdate,sysdate,'uannipu','uannipu');
-INSERT INTO user_role (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userapp2', 'AC', sysdate,sysdate,'uannipu','uannipu');
-INSERT INTO user_role (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userapp3', 'AC', sysdate,sysdate,'uannipu','uannipu');
-INSERT INTO user_role (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userdm2', 'DM', sysdate,sysdate,'uannipu','uannipu');
-INSERT INTO user_role (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userdm3', 'DM', sysdate,sysdate,'uannipu','uannipu');
-INSERT INTO user_role (user_id, password, create_date, modified_date,create_by,modified_by) VALUES('userbu1', 'BU', sysdate,sysdate,'uannipu','uannipu');
+INSERT INTO user_role (user_id, role_id, create_date, create_by) VALUES('userdm1', 'DM', sysdate,'uannipu');
+INSERT INTO user_role (user_id, role_id, create_date, create_by) VALUES('userapp1', 'AC', sysdate,'uannipu');
+INSERT INTO user_role (user_id, role_id, create_date, create_by) VALUES('userapp2', 'AC', sysdate,'uannipu');
+INSERT INTO user_role (user_id, role_id, create_date, create_by) VALUES('userapp3', 'AC', sysdate,'uannipu');
+INSERT INTO user_role (user_id, role_id, create_date, create_by) VALUES('userdm2', 'DM', sysdate,'uannipu');
+INSERT INTO user_role (user_id, role_id, create_date, create_by) VALUES('userdm3', 'DM', sysdate,'uannipu');
+INSERT INTO user_role (user_id, role_id, create_date, create_by) VALUES('userbu1', 'BU', sysdate,'uannipu');
 
 
 --
 -- Dumping data for table user_profile
 --
+
 
 INSERT INTO user_profile (user_id, first_name, last_name, middle_name, date_of_birth, email_id, address_line1,address_line2, state, zip_code,create_date,modified_date, create_by,modified_by) VALUES
 ('userdm1', 'userd1', 'dm1','M' , sysdate,'userdm1@gmail.com', 'address line1', 'address line 2', 'NJ','09089', sysdate,sysdate,'uannipu','uannipu');
@@ -70,14 +70,14 @@ INSERT INTO testing_program (testing_program_code, testing_program_desc, create_
 INSERT INTO testing_program (testing_program_code, testing_program_desc, create_date, create_by) VALUES('TFL', 'TOEFL', sysdate, 'uannipu');
 INSERT INTO testing_program (testing_program_code, testing_program_desc, create_date, create_by) VALUES('WCA', 'Washington', sysdate, 'uannipu');
 INSERT INTO testing_program (testing_program_code, testing_program_desc, create_date, create_by) VALUES('WYM', 'Wyoming', sysdate, 'uannipu');
-
+INSERT INTO testing_program (testing_program_code, testing_program_desc, create_date, create_by) VALUES('GRE', 'GRE', sysdate, 'uannipu');
 
 --
 -- Dumping data for table application
 --
 INSERT INTO application (application_id, application_name, application_desc, is_active,create_date, modified_date,create_by,modified_by) VALUES('eSS', 'enterprise Scoring System','Scoring application','Y', sysdate, sysdate,'uannipu','uannipu');
 INSERT INTO application (application_id, application_name, application_desc, is_active,create_date, modified_date,create_by,modified_by) VALUES('eRS', 'enterprise Reporting System','Reporting application','Y', sysdate, sysdate,'uannipu','uannipu');
-INSERT INTO application (application_id, application_name, application_desc, is_active,create_date, modified_date,create_by,modified_by) VALUES('eReg', 'enterprise Registration System','Registration application', sysdate, sysdate,'uannipu','uannipu');
+INSERT INTO application (application_id, application_name, application_desc, is_active,create_date, modified_date,create_by,modified_by) VALUES('eReg', 'enterprise Registration System','Registration application', 'Y',sysdate, sysdate,'uannipu','uannipu');
 
 --
 -- Dumping data for table application contacts
@@ -91,12 +91,12 @@ INSERT INTO application_contacts (application_id, user_id, is_active,create_date
 --
 
 
-INSERT INTO work_package (package_id, package_name,package_desc, testing_program_code, contract_from_year, contract_to_year,start_date,end_date, status, create_date, modified_date, create_by, modified_by) VALUES
-(package_id_seq.nextval, 'support continuous testing','cont testing', 'GAT', sysdate, sysdate,sysdate,sysdate,'Open',sysdate, sysdate,'uannipu','uannipu');
-INSERT INTO work_package (package_id, package_name, package_desc,testing_program_code,  contract_from_year, contract_to_year,start_date,end_date, status, create_date, modified_date, create_by, modified_by) VALUES
-(package_id_seq.nextval, 'Add fields to extract', 'fields','GRE',
+INSERT INTO work_package (package_id, package_name,package_desc, testing_program_code,requestor_name, contract_from_year, contract_to_year,start_date,end_date, status, create_date, modified_date, create_by, modified_by) VALUES
+(package_id_seq.nextval, 'support continuous testing','cont testing', 'GAT','Greg', sysdate, sysdate,sysdate,sysdate,'Open',sysdate, sysdate,'uannipu','uannipu');
+INSERT INTO work_package (package_id, package_name, package_desc,testing_program_code,requestor_name,  contract_from_year, contract_to_year,start_date,end_date, status, create_date, modified_date, create_by, modified_by) VALUES
+(package_id_seq.nextval, 'Add fields to extract', 'fields','GRE','Ruth',
 sysdate, sysdate,sysdate,sysdate,'Open',sysdate, sysdate,'uannipu','uannipu');
 
-
+commit;
 
 

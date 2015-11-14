@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+  <Resource name="jdbc/workmanagement" auth="Container" type="javax.sql.DataSource"
+               maxActive="50" maxIdle="30" maxWait="10000"
+               username="incredibles" password="incredibles" 
+               driverClassName="oracle.jdbc.OracleDriver"
+               url="jdbc:oracle:thin:@localhost:1521:xe"/>
+
+	<!-- <Resource
+          name="jdbc/workmanagement"
+          auth="Container"
+          type="javax.sql.DataSource"
+          factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+          initialSize="5"
+          maxActive="35"
+          maxIdle="20"
+          minIdle="10"
+          timeBetweenEvictionRunsMillis="34000"
+          minEvictableIdleTimeMillis="55000"
+          validationQuery="SELECT 1"
+          validationInterval="34000"
+          testOnBorrow="true"
+          removeAbandoned="true"
+          removeAbandonedTimeout="55"
+          username="incredibles"
+          password="incredibles"
+          driverClassName="oracle.jdbc.OracleDriver"
+          url="jdbc:oracle:thin:@52.91.214.231:1521:xe"
+ />-->
+
+</Context>

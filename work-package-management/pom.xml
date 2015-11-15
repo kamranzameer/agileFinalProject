@@ -172,7 +172,7 @@
 		              <exclude>**/mocks/**</exclude>
 		              <exclude>**/test/**</exclude>
 		              <exclude>**/edu/harvard/agile/model/**</exclude>
-		              
+		              <exclude>**/edu/harvard/agile/util/**</exclude>
 		              <!--<exclude>**/model/**</exclude>-->
 		              <exclude>unit/**</exclude>
 		             </excludes>

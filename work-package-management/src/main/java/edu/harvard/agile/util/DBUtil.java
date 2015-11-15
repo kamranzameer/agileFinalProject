@@ -53,7 +53,6 @@ public class DBUtil {
 				stmt.close();
 				return true;
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -77,7 +76,6 @@ public class DBUtil {
 					return connection.isClosed();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 
 			}

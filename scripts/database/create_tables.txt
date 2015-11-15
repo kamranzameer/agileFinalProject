@@ -2,7 +2,6 @@
 
 drop table user_role;
 drop table role;
-drop table application_contact;
 drop table activity_phase_resources;
 drop table assumptions;
 drop table activity_line;

@@ -136,12 +136,13 @@ public class WorkPackageDAOTest {
 	public void testUpdatePackage() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
 		WorkPackageDTO workPackage = new WorkPackageDTO();
-		workPackage.setPackageId(10);
+		workPackage.setPackageId(2);
 		workPackage.setContractFromYear(new Date());
 		workPackage.setContractToYear(new Date());
-		workPackage.setPackageName("TestPackage updated");
+		workPackage.setPackageName("Add fields to extract - updated");
 		workPackage.setPackageDesc("TestPackageDesc updated");
 		workPackage.setTestingProgramCode("GRE");
+		workPackage.setRequestorName("Ruth");
 		workPackage.setStatus("Approved");
 		workPackage.setStartDate(new Date());
 		workPackage.setEndDate(new Date());
@@ -149,7 +150,7 @@ public class WorkPackageDAOTest {
 		workPackage.setModifiedBy("uannipu");
 	
 		WorkPackageDTO workDTO = workPackageDAO.updatePackage(workPackage);
-		assertTrue("TestPackage updated".equals(workDTO.getPackageName())); 
+		assertTrue("Add fields to extract - updated".equals(workDTO.getPackageName())); 
 		
 	}
 	

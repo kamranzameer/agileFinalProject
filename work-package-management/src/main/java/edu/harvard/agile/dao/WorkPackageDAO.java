@@ -33,7 +33,8 @@ public class WorkPackageDAO {
 		initializes the object with values returned from the database and returns the work package DTO. 	
 	*/		
 		Connection con = DBUtil.getConnection();
-		String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE,CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS FROM WORK_PACKAGE where package_id = ?";
+		String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS "
+				+ "FROM WORK_PACKAGE where package_id = ?";
 		PreparedStatement stmt = con.prepareStatement(query);
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
@@ -45,8 +46,8 @@ public class WorkPackageDAO {
 			workPackage.setPackageName(rs.getString("PACKAGE_NAME"));
 			workPackage.setPackageDesc(rs.getString("PACKAGE_DESC"));
 			workPackage.setTestingProgramCode(rs.getString("TESTING_PROGRAM_CODE"));
-			workPackage.setContractFromYear(rs.getDate("CONTRACT_FROM_YEAR"));
 			workPackage.setRequestorName(rs.getString("REQUESTOR_NAME"));
+			workPackage.setContractFromYear(rs.getDate("CONTRACT_FROM_YEAR"));
 			workPackage.setContractToYear(rs.getDate("CONTRACT_TO_YEAR"));
 			workPackage.setStartDate(rs.getDate("START_DATE"));
 			workPackage.setEndDate(rs.getDate("END_DATE"));
@@ -68,7 +69,7 @@ public class WorkPackageDAO {
 		*/		
 	
 		Connection con = DBUtil.getConnection();
-		String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE,CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS FROM WORK_PACKAGE";
+		String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS FROM WORK_PACKAGE";
 		PreparedStatement stmt = con.prepareStatement(query);
 
 		ResultSet rs = stmt.executeQuery();
@@ -117,7 +118,7 @@ public class WorkPackageDAO {
 			int seqId = DBUtil.getNextSequence("package_id_seq");
 			
 			String query = "Insert into WORK_PACKAGE (PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE,REQUESTOR_NAME,CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
-					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 			stmt = con.prepareStatement(query);
 			stmt.setInt(1, seqId);
 			stmt.setString(2, workPackage.getPackageName());
@@ -178,17 +179,16 @@ public class WorkPackageDAO {
 			stmt.setString(2, workPackage.getPackageDesc());
 			stmt.setString(3, workPackage.getTestingProgramCode());
 			stmt.setString(4, workPackage.getRequestorName());
-			stmt.setString(5, workPackage.getRequestorName());
-			stmt.setDate(6, new Date(workPackage.getContractFromYear()
+			stmt.setDate(5, new Date(workPackage.getContractFromYear()
 					.getTime()));
-			stmt.setDate(7, new Date(workPackage.getContractToYear().getTime()));
-			stmt.setDate(8, new Date(workPackage.getStartDate().getTime()));
-			stmt.setDate(9, new Date(workPackage.getEndDate().getTime()));
-			stmt.setString(10, workPackage.getStatus());
+			stmt.setDate(6, new Date(workPackage.getContractToYear().getTime()));
+			stmt.setDate(7, new Date(workPackage.getStartDate().getTime()));
+			stmt.setDate(8, new Date(workPackage.getEndDate().getTime()));
+			stmt.setString(9, workPackage.getStatus());
 
-			stmt.setDate(11, new Date(System.currentTimeMillis()));
-			stmt.setString(12, workPackage.getModifiedBy());
-			stmt.setInt(13, workPackage.getPackageId());
+			stmt.setDate(10, new Date(System.currentTimeMillis()));
+			stmt.setString(11, workPackage.getModifiedBy());
+			stmt.setInt(12, workPackage.getPackageId());
 
 			int rowsUpdated = stmt.executeUpdate();
 			con.commit();

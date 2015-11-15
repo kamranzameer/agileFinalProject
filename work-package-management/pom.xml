@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -159,6 +159,21 @@
 	            <configuration>
 	            	<contextFilters>@deprecated,assert,static,constructor,catch,throw,toString,equals,hashCode,LOG\.</contextFilters>
 	                <licenseLocation>clover.license</licenseLocation>
+	                <includes>
+		              <include>**/*.java</include>
+		            </includes>
+		            <excludes>
+		              <exclude>jsp/**</exclude>
+		              <exclude>**/package-info.java</exclude>
+		              <exclude>**/*Test.java</exclude>
+		              <exclude>com/ibatis/**</exclude>
+		              <exclude>**/annotations/**</exclude>
+		              <exclude>**/exceptions/**</exclude>
+		              <exclude>**/mocks/**</exclude>
+		              <exclude>**/test/**</exclude>
+		              <!--<exclude>**/model/**</exclude>-->
+		              <exclude>unit/**</exclude>
+		             </excludes>
 	            </configuration>
 	        </plugin>
     	</plugins>

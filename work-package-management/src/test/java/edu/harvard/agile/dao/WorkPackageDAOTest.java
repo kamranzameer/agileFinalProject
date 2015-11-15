@@ -3,6 +3,7 @@ package edu.harvard.agile.dao;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
 import java.util.List;
@@ -177,6 +178,31 @@ public class WorkPackageDAOTest {
 		WorkPackageDTO workDTO = workPackageDAO.updatePackage(workPackage);
 		assertNull(workDTO);
 			
+	}
+	
+	/**
+	 * This test is to test the updatePackage method of the DAO
+	 * @throws Exception
+	 */
+	@Test (expected = SQLException.class)
+	public void testUpdatePackageWithRequestorAsNull() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
+		WorkPackageDTO workPackage = new WorkPackageDTO();
+		workPackage.setPackageId(2);
+		workPackage.setContractFromYear(new Date());
+		workPackage.setContractToYear(new Date());
+		workPackage.setPackageName("Add fields to extract - updated");
+		workPackage.setPackageDesc("TestPackageDesc updated");
+		workPackage.setTestingProgramCode("GRE");
+		workPackage.setStatus("Approved");
+		workPackage.setStartDate(new Date());
+		workPackage.setEndDate(new Date());
+		workPackage.setCreateBy("uannipu");
+		workPackage.setModifiedBy("uannipu");
+	
+		WorkPackageDTO workDTO = workPackageDAO.updatePackage(workPackage);
+		assertTrue("Add fields to extract - updated".equals(workDTO.getPackageName())); 
+		
 	}
 	
 	

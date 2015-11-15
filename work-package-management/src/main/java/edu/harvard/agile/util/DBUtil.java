@@ -23,7 +23,7 @@ public class DBUtil {
 	 */
 	private static DataSource getDataSource() throws SQLException {
 		OracleConnectionPoolDataSource ds = new OracleConnectionPoolDataSource();
-		ds.setURL("jdbc:oracle:thin:@localhost:1521:xe");
+		ds.setURL("jdbc:oracle:thin:@52.5.93.209:1521:xe");
 		ds.setUser("incredibles");
 		ds.setPassword("incredibles");
 		return ds;

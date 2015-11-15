@@ -7,21 +7,22 @@
 	    }else if (currentPage.equals("ecit")){
 	    	currentPage = "userProfile.jsp";
 	    }else if (currentPage.equals("wpl")){
-	    	currentPage = "workpackagelist.jsp";
+	    	currentPage = "workpackage/workpackagelist.jsp";
 	    }else if (currentPage.equals("cnwp")){
-	    	currentPage = "createNewWorkPackage.jsp";
+	    	currentPage = "workpackage/createNewWorkPackage.jsp";
 	    }else if (currentPage.equals("wrl")){
-	    	currentPage = "workRequestList.jsp";
+	    	currentPage = "workrequest/workRequestList.jsp";
 	    }else if (currentPage.equals("wrpd")){
-	    	currentPage = "workRequestPackageDetail.jsp";
+	    	currentPage = "workrequest/workRequestPackageDetail.jsp";
 	    }else if (currentPage.equals("wps")){
-	    	currentPage = "workPackageStatistics.jsp";
+	    	currentPage = "workpackage/workPackageStatistics.jsp";
 	    }
 
 	}else{
 	currentPage = "dashboard.jsp";
 	}
 %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 
 <!DOCTYPE html>
@@ -60,28 +61,17 @@
 
 
 		                <li><a href="workspace.jsp?p=ecit"><i class="glyphicon glyphicon-user">&nbsp;</i>Profile</a></li>
-
-						<li class=""> <a href="#" data-toggle="collapse" data-target="#workPackageMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages</a>
-						    <ul style="list-style: none;" class="nav-header collapse" id="workPackageMenu">
-						        <li><a href="workspace.jsp?p=wpl"><i class="glyphicon glyphicon-user"></i> List</a>
-						        </li>
-						        <li><a href="workspace.jsp?p=cnwp"><i class="glyphicon glyphicon-earphone"></i>Create New</a>
-						        </li>
-						    </ul>
+						
+						<shiro:hasAnyRoles name="admin,dmg,bu">
+						<li class=""> <a href="workspace.jsp?p=wpl" data-toggle="collapse" data-target="#workPackageMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages</a>
 						</li>
+						</shiro:hasAnyRoles>
 
 						<li class=""> <a href="workspace.jsp?p=wrl" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Requests</a>
 						</li>
-
-
-						<li class=""> <a href="#" data-toggle="collapse" data-target="#ReportsMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Reports</a>
-						    <ul style="list-style: none;" class="nav-header collapse" id="ReportsMenu">
-						        <li><a href="workspace.jsp?p=wps"><i class="glyphicon glyphicon-user"></i> Work Packages Statistics</a>
-						        </li>
-						    </ul>
+						
+						<li class=""> <a href="workspace.jsp?p=wps" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages Statistics</a>
 						</li>
-
-
 
 
 		                <li><a href="workspace.jsp?p=cp" onclick="javascript:$( '#workspace' ).load( 'changepassword.jsp' )"><i class="glyphicon glyphicon-lock">&nbsp;</i> Change Password</a></li>

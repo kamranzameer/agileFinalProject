@@ -9,10 +9,10 @@
 	            <div class="panel panel-info">
 	                <div class="panel-heading">
 	                    <div class="panel-title"><i class="fa fa-pencil">
-					</i> New Work Package</div>
+					</i> Work Request Estimation</div>
 	                </div>
 	                <div style="padding-top:30px"; class="panel-body">
-						<form id="employerContactInforForm" class="form-horizontal" role="form" method="post" action="employercontactinfotab.jsp">
+						<form id="employerContactInforForm" class="form-horizontal" role="form" method="post" action="workspace.jsp?p=wrl">
 							<div class="row clearfix">
 								<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8  column col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
 										<div class="form-group">
@@ -104,7 +104,7 @@
 							</div>
 							<div class="row clearfix">
 								<div class="col-xs-12 col-sm-10 col-md-8 col-lg-8  column col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
-									<button type="button" id="addNewBtn" class="btn btn-success" onclick="workPackageManagement.submitForm('employerContactInforForm');">
+									<button type="submit" id="addNewBtn" class="btn btn-success">
 										<span class="fa fa-floppy-o">
 										</span>
 										&nbsp;&nbsp;Save

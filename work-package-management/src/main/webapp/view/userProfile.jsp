@@ -12,7 +12,7 @@
 					</i> Contact Information</div>
 	                </div>
 	                <div style="padding-top:30px"; class="panel-body">
-						<form id="employerContactInforForm" class="form-horizontal" role="form" method="post" action="employercontactinfotab.jsp">
+						<form id="employerContactInforForm" class="form-horizontal" role="form" method="post" action="">
 							<div class="row clearfix">
 								<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8  column col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
 										<div class="form-group">

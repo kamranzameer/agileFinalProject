@@ -4,7 +4,7 @@
                maxActive="50" maxIdle="30" maxWait="10000"
                username="incredibles" password="incredibles" 
                driverClassName="oracle.jdbc.OracleDriver"
-               url="jdbc:oracle:thin:@localhost:1521:xe"/>
+               url="jdbc:oracle:thin:@52.5.93.209:1521:xe"/>
 
 	<!-- <Resource
           name="jdbc/workmanagement"

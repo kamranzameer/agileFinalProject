@@ -9,6 +9,14 @@
 
                 <div style="margin-left: 100px; margin-right: 100px">
                     <!-- <form name="loginform" class="form-horizontal" role="form" action="./view/workspace.jsp"> -->
+                    <% 
+        String errorMessage = (String) request.getAttribute("shiroLoginFailure");
+        if (errorMessage != null) { %>
+        	<div style="padding-top:5px; font-size:90%">
+        		<font color="red">Invalid Login</font>
+        	</div>
+            <% } %>
+    
                     <form name="loginform" action="" method="POST" accept-charset="UTF-8" role="form">
 
                         <div style="margin-bottom: 25px" class="input-group">

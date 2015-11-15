@@ -75,7 +75,7 @@
 												2
 											</td>
 											<td>
-												Incompelte
+												Incomplete
 											</td>
 											<td>
 												<a href="#" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
@@ -83,7 +83,15 @@
 												<a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash">&nbsp;</i></a>
 											</td>
 										</tr>
-
+										<tr><td colspan="6"/></tr>
+										<tr><td colspan="6"/></tr>
+										<tr><td colspan="6"/></tr>
+										
+										<tr>
+											<td colspan="6" align="right">
+												<a href="workspace.jsp?p=cnwp" class="btn btn-success">New</a>
+											</td>
+										</tr>
 
 
 									</tbody>

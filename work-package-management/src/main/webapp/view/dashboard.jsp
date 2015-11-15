@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <div class="row clearfix">
     <div class="col-md-12 column">
         <ul class="breadcrumb" style="margin-bottom: 5px;">
@@ -11,6 +11,8 @@
         &nbsp;
     </div>
 </div>
+
+<shiro:hasAnyRoles name="admin,dmg,bu">
 <div class="row" style="margin-top: 30px">
     <div class="col-md-3 col-xs-6">
         <!-- small box -->
@@ -91,3 +93,4 @@
         </div>
     </div><!-- ./col -->
 </div><!-- /.row -->
+</shiro:hasAnyRoles>

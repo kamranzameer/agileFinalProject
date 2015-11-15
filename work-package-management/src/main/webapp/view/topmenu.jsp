@@ -18,13 +18,14 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li class="user-header bg-light-blue">
-                        <img class="img-circle" alt="User Image" src="img/avatar5.png">
                         <p>
-                            Jane Doe - Administrator
+                            <shiro:user>
+                            <%
+                            org.apache.shiro.SecurityUtils.getSubject().getPrincipals().oneByType(java.util.Map.class);
+                            %>
+                            </shiro:user>
                         </p>
-                        <p>
-                        <small>Member since Nov. 2012</small>
-                        </p>
+                        
                     </li>
                     <!-- Menu Body -->
                     <!-- Menu Footer-->
@@ -33,7 +34,7 @@
                             <a class="btn btn-default btn-flat" href="#/workspace"  ng-click="menuService.changeMenu('changepwd')">Profile</a>
                         </div>
                         <div class="pull-right">
-                            <a class="btn btn-default btn-flat" href="/logout">Sign out</a>
+                            <a class="btn btn-default btn-flat" href="../logout">Sign out</a>
                         </div>
                     </li>
                 </ul>

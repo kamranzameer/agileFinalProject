@@ -104,7 +104,7 @@
 							</div>
 							<div class="row clearfix">
 								<div class="col-xs-12 col-sm-10 col-md-8 col-lg-8  column col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
-									<button type="submit" id="addNewBtn" class="btn btn-success">
+									<button type="button" id="addNewBtn" class="btn btn-success" onclick="workPackageManagement.submitForm('employerContactInforForm');">
 										<span class="fa fa-floppy-o">
 										</span>
 										&nbsp;&nbsp;Save

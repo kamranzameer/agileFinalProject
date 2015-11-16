@@ -37,10 +37,10 @@
                                 <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
                                     <div class="col-sm-12 controls">
                                         <button type="submit" class="btn btn-success">
-                                            <span class="glyphicon glyphicon-certificate"></span>&nbsp;&nbsp;Login
+                                            <span class="glyphicon glyphicon-certificate"></span>Login
                                         </button>
                                         <button type="button" class="btn btn-warning" onclick="location.href='view/resetpassword.jsp'">
-                                            <span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Forgot Password
+                                            <span class="glyphicon glyphicon-refresh"></span>Forgot Password
                                         </button>
                                         <div style="padding-top:5px; font-size:85%">
                                             Don't have an account!

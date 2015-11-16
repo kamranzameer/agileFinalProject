@@ -67,6 +67,55 @@ public class WorkPackageDAO {
 
 		return workPackage;
 	}
+	
+	/**
+	 * Find by package name
+	 * 
+	 * @param id
+	 *            - primary key of the table
+	 * @return - a workPackage DTO
+	 * @throws Exception
+	 */
+	public WorkPackageDTO findByPackageName(String packageName) throws Exception {
+
+		/*
+		 * Get connection from DBUtil, executes select query and initializes the
+		 * object with values returned from the database and returns the work
+		 * package DTO.
+		 */
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+		WorkPackageDTO workPackage = null;
+		try {
+			con = DBUtil.getConnection();
+			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS "
+					+ "FROM WORK_PACKAGE where PACKAGE_NAME = ?";
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, packageName);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				workPackage = new WorkPackageDTO();
+				workPackage.setPackageId(rs.getInt("PACKAGE_ID"));
+				workPackage.setPackageName(rs.getString("PACKAGE_NAME"));
+				workPackage.setPackageDesc(rs.getString("PACKAGE_DESC"));
+				workPackage.setTestingProgramCode(rs.getString("TESTING_PROGRAM_CODE"));
+				workPackage.setContractFromYear(rs.getDate("CONTRACT_FROM_YEAR"));
+				workPackage.setRequestorName(rs.getString("REQUESTOR_NAME"));
+				workPackage.setContractToYear(rs.getDate("CONTRACT_TO_YEAR"));
+				workPackage.setStartDate(rs.getDate("START_DATE"));
+				workPackage.setEndDate(rs.getDate("END_DATE"));
+				workPackage.setStatus(rs.getString("STATUS"));
+			}
+		} finally {
+			DBUtil.closeStatement(stmt);
+			DBUtil.closeConnection(con);
+
+		}
+
+		return workPackage;
+	}
 
 	/**
 	 * This method returns all the work packages from the table
@@ -211,6 +260,49 @@ public class WorkPackageDAO {
 			stmt.setDate(10, new Date(System.currentTimeMillis()));
 			stmt.setString(11, workPackage.getModifiedBy());
 			stmt.setInt(12, workPackage.getPackageId());
+
+			int rowsUpdated = stmt.executeUpdate();
+			con.commit();
+
+			return findByPackageId(workPackage.getPackageId());
+		} catch (Exception e) {
+			con.rollback();
+			throw e;
+		} finally {
+			DBUtil.closeStatement(stmt);
+			DBUtil.closeConnection(con);
+
+		}
+	}
+	
+	/**
+	 * This method updates status of work package record in the database
+	 * 
+	 * @param workPackage
+	 * @return
+	 * @throws Exception
+	 */
+	public WorkPackageDTO updatePackageStatus(WorkPackageDTO workPackage) throws Exception {
+
+		/*
+		 * Get connection from DBUtil, set the parameters for the statement and
+		 * executes update query with a where condition. Returns the object that
+		 * was updated by using findby method. Commits the transaction and rolls
+		 * back if any exception occurs.
+		 */
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = DBUtil.getConnection();
+
+			String query = "Update WORK_PACKAGE SET STATUS = ?, MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE PACKAGE_ID = ?";
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, workPackage.getStatus());
+
+			stmt.setDate(2, new Date(System.currentTimeMillis()));
+			stmt.setString(3, workPackage.getModifiedBy());
+			stmt.setInt(4, workPackage.getPackageId());
 
 			int rowsUpdated = stmt.executeUpdate();
 			con.commit();

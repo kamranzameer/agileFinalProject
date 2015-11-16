@@ -66,6 +66,28 @@ public class WorkPackageDAOTest {
 		assertTrue(workPackageDTO == null);
 	}
 	
+	/**
+	 * This test method tests the findByPackageId method
+	 * @throws Exception
+	 */
+	@Test
+	public void testFindByPackageName() throws Exception {
+		WorkPackageDAO workPackageDAO = new WorkPackageDAO();
+		WorkPackageDTO workPackageDTO = workPackageDAO.findByPackageName("support continuous testing");
+		assertTrue(workPackageDTO != null);
+	}
+	
+	/**
+	 * This test is to test findBypackage name with invalid package name
+	 * @throws Exception
+	 */
+	@Test
+	public void testFindByInvalidPackageName() throws Exception {
+		WorkPackageDAO workPackageDAO = new WorkPackageDAO();
+		WorkPackageDTO workPackageDTO = workPackageDAO.findByPackageName("Package name does not exist");
+		assertTrue(workPackageDTO == null);
+	}
+	
 	/** 
 	 * This test is to test findAllPackages method of the DAO 
 	 * @throws Exception
@@ -124,8 +146,7 @@ public class WorkPackageDAOTest {
 		workPackage.setEndDate(new Date());
 		workPackage.setCreateBy("uannipu");
 		workPackage.setModifiedBy("uannipu");
-		WorkPackageDTO workDTO = workPackageDAO.createPackage(workPackage);
-		
+		workPackageDAO.createPackage(workPackage);
 	}
 	
 	
@@ -181,11 +202,44 @@ public class WorkPackageDAOTest {
 	}
 	
 	/**
+	 * This test is to test the updatePackage status method of the DAO
+	 * @throws Exception
+	 */
+	@Test
+	public void testUpdatePackageStatus() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
+		WorkPackageDTO workPackage = new WorkPackageDTO();
+		workPackage.setPackageId(2);
+		workPackage.setStatus("Approved");
+		workPackage.setModifiedBy("uannipu");
+	
+		WorkPackageDTO workDTO = workPackageDAO.updatePackageStatus(workPackage);
+		assertTrue("Approved".equals(workDTO.getStatus()));
+		
+	}
+	
+	/**
+	 * This test is to test the updatePackage status method of the DAO
+	 * @throws Exception
+	 */
+	@Test(expected = SQLException.class)
+	public void testUpdatePackageStatusNull() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
+		WorkPackageDTO workPackage = new WorkPackageDTO();
+		workPackage.setPackageId(2);
+		workPackage.setModifiedBy("uannipu");
+	
+		WorkPackageDTO workDTO = workPackageDAO.updatePackageStatus(workPackage);
+		assertTrue("Approved".equals(workDTO.getStatus()));
+		
+	}
+	
+	/**
 	 * This test is to test the updatePackage method of the DAO
 	 * @throws Exception
 	 */
 	@Test (expected = SQLException.class)
-	public void testUpdatePackageWithRequestorAsNull() throws Exception {
+	public void testUpdatePackageWithMissingNotColumn() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
 		WorkPackageDTO workPackage = new WorkPackageDTO();
 		workPackage.setPackageId(2);

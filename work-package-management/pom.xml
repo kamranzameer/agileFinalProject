@@ -172,6 +172,7 @@
 		              <exclude>jsp/**</exclude>
 		              <exclude>**/package-info.java</exclude>
 		              <exclude>**/*Test.java</exclude>
+		              <exclude>**/*Action.java</exclude>
 		              <exclude>com/ibatis/**</exclude>
 		              <exclude>**/annotations/**</exclude>
 		              <exclude>**/exceptions/**</exclude>

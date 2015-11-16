@@ -11,6 +11,7 @@ import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
 /**
  * This class is a DB util class that contains methods to perform actions on the database
+ * This class is util class for DB actions.
  * @author Incredibles Team
  *
  */

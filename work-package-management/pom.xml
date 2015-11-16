@@ -108,6 +108,18 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0</version>
 		</dependency>
+		<!-- <dependency>
+			<groupId>com.atlassian.maven.plugins</groupId>
+			<artifactId>maven-clover2-plugin</artifactId>
+			<version>4.0.6</version>
+		</dependency> 
+		-->
+		<dependency>
+		    <groupId>com.atlassian.clover</groupId>
+		    <artifactId>clover</artifactId>
+		    <version>4.0.6</version>
+		</dependency>
+				
 		
     </dependencies>
 	
@@ -178,13 +190,13 @@
 		             </excludes>
 	            </configuration>
 	        </plugin>
-	         <plugin>
+	         <!-- <plugin>
 		        <artifactId>maven-war-plugin</artifactId>
 		        <version>2.6</version>
 		        <configuration>
 		          <packagingExcludes>**/*__CLR4_*</packagingExcludes>
 		        </configuration>
-		      </plugin> 
+		      </plugin>  -->
     	</plugins>
     </build>
 </project>

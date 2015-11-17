@@ -179,7 +179,6 @@
 		              <exclude>**/mocks/**</exclude>
 		              <exclude>**/test/**</exclude>
 		              <exclude>**/edu/harvard/agile/model/**</exclude>
-		              <exclude>**/edu/harvard/agile/util/**</exclude>
 		              <exclude>**/DateConverter.java</exclude>
 		              <exclude>**/edu/harvard/agile/security/**</exclude>
 		              <!--<exclude>**/model/**</exclude>-->

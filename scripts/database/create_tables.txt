@@ -198,6 +198,9 @@ ALTER TABLE work_request ADD CONSTRAINT work_request_fk2 FOREIGN KEY (package_id
   modified_by varchar2(40) NOT NULL,
   CONSTRAINT activity_line_pk PRIMARY KEY (activity_line_id)
   ) ;
+ALTER TABLE ACTIVITY_LINE ADD CONSTRAINT activity_line_fk1 FOREIGN KEY (work_request_id) REFERENCES work_request(work_request_id);
+ALTER TABLE ACTIVITY_LINE ADD CONSTRAINT activity_line_fk2 FOREIGN KEY (activity_type_code) REFERENCES activity_type(activity_type_code);
+
   
  
 --ACTIVITY_PHASE_RESOURCES TABLE is a one-to-many table contains allocated hours for each activity line, by resource type 
@@ -274,4 +277,8 @@ ALTER TABLE work_request ADD CONSTRAINT work_request_fk2 FOREIGN KEY (package_id
  INCREMENT BY   1
  NOCACHE
  NOCYCLE; 
+ 
+ ALTER TABLE work_package ADD UNIQUE (package_name);
+ ALTER TABLE resource_type ADD UNIQUE (resource_type_name);
+
  

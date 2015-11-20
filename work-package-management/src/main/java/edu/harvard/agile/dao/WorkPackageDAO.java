@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,20 @@ import edu.harvard.agile.util.DBUtil;
  *         against Work Package table
  *
  */
-public class WorkPackageDAO {
+public class WorkPackageDAO 
+{
+	Connection connection;
+
+	public WorkPackageDAO(Connection connection) {
+		super();
+		this.connection = connection;
+	}
+	
+	//TODO : This constructor should be removed and SQL connection should be accepted from service class for better transaction management
+	public WorkPackageDAO()
+	{
+		
+	}
 
 	/**
 	 * Find by primary key method to find the record by package id.
@@ -71,8 +85,7 @@ public class WorkPackageDAO {
 	/**
 	 * Find by package name
 	 * 
-	 * @param id
-	 *            - primary key of the table
+	 * @param packageName
 	 * @return - a workPackage DTO
 	 * @throws Exception
 	 */
@@ -183,15 +196,14 @@ public class WorkPackageDAO {
 		 * the object that was saved to the database by using findby method.
 		 * Commits the transaction and rolls back if any exception occurs.
 		 */
-
 		Connection con = null;
 		PreparedStatement stmt = null;
 		try {
-			con = DBUtil.getConnection();
 			int seqId = DBUtil.getNextSequence("package_id_seq");
 
 			String query = "Insert into WORK_PACKAGE (PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE,REQUESTOR_NAME,CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
 					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+			con = DBUtil.getConnection();
 			stmt = con.prepareStatement(query);
 			stmt.setInt(1, seqId);
 			stmt.setString(2, workPackage.getPackageName());
@@ -213,10 +225,13 @@ public class WorkPackageDAO {
 			workPackage.setPackageId(seqId);
 
 			return findByPackageId(seqId);
-		} catch (Exception e) {
+		}
+		catch(Exception ex)
+		{
 			con.rollback();
-			throw e;
-		} finally {
+			throw ex;
+		}
+		finally {
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 

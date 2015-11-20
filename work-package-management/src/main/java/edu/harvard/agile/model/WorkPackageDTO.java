@@ -1,6 +1,7 @@
 package edu.harvard.agile.model;
 
 import java.util.Date;
+import java.util.List;
 
 //TODO getAllPackage for the domain object in the import
 
@@ -31,6 +32,10 @@ public class WorkPackageDTO extends ModelBase {
 	private Date modifiedDate;
 	private String createBy;
 	private String modifiedBy;
+	
+	private String[] impactedApplications;
+	
+	private List<ApplicationDTO> affectedApplications;
 
 	public WorkPackageDTO() {
 	}
@@ -145,6 +150,21 @@ public class WorkPackageDTO extends ModelBase {
 
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
+	}
+	
+	public List<ApplicationDTO> getAffectedApplications() {
+		return affectedApplications;
+	}
+
+	public void setAffectedApplications(List<ApplicationDTO> affectedApplications) {
+		this.affectedApplications = affectedApplications;
+	}
+	public String[] getImpactedApplications() {
+		return impactedApplications;
+	}
+
+	public void setImpactedApplications(String[] impactedApplications) {
+		this.impactedApplications = impactedApplications;
 	}
 
 }

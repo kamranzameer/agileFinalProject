@@ -2,11 +2,17 @@ package edu.harvard.agile.model;
 
 import java.util.Date;
 
+//TODO getAllPackage for the domain object in the import
+
 /**
  *
- * <p>Title: UserRoleDTO</p>
+ * <p>
+ * Title: UserRoleDTO
+ * </p>
  *
- * <p>Description: Domain Object describing a UserRoleDTO entity</p>
+ * <p>
+ * Description: Domain Object describing a UserRoleDTO entity
+ * </p>
  *
  */
 public class UserRoleDTO extends ModelBase {
@@ -16,62 +22,59 @@ public class UserRoleDTO extends ModelBase {
 	private Date createDate;
 	private String createBy;
 
+	private RoleDTO roleDTO;
 
+	private UsersDTO usersDTO;
 
-    private RoleDTO roleDTO;
+	public UserRoleDTO() {
+	}
 
+	public String getUserId() {
+		return userId;
+	}
 
-    private UsersDTO usersDTO;
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
+	public String getRoleId() {
+		return roleId;
+	}
 
-    public UserRoleDTO() {
-    }
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
 
-    public String getUserId() {
-        	return userId;
-    }
-	
-    public void setUserId (String userId) {
-        this.userId = userId;
-    }	
-    public String getRoleId() {
-        	return roleId;
-    }
-	
-    public void setRoleId (String roleId) {
-        this.roleId = roleId;
-    }	
-    public Date getCreateDate() {
-        	return createDate;
-    }
-	
-    public void setCreateDate (Date createDate) {
-        this.createDate = createDate;
-    }	
-    public String getCreateBy() {
-        	return createBy;
-    }
-	
-    public void setCreateBy (String createBy) {
-        this.createBy = createBy;
-    }	
+	public Date getCreateDate() {
+		return createDate;
+	}
 
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-    public RoleDTO getRoleDTO () {
-    	    return roleDTO;
-    }
-	
-    public void setRoleDTO (RoleDTO roleDTO) {
-    	    this.roleDTO = roleDTO;
-    }
-	
+	public String getCreateBy() {
+		return createBy;
+	}
 
-    public UsersDTO getUsersDTO () {
-    	    return usersDTO;
-    }
-	
-    public void setUsersDTO (UsersDTO usersDTO) {
-    	    this.usersDTO = usersDTO;
-    }
-	
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public RoleDTO getRoleDTO() {
+		return roleDTO;
+	}
+
+	public void setRoleDTO(RoleDTO roleDTO) {
+		this.roleDTO = roleDTO;
+	}
+
+	public UsersDTO getUsersDTO() {
+		return usersDTO;
+	}
+
+	public void setUsersDTO(UsersDTO usersDTO) {
+		this.usersDTO = usersDTO;
+	}
+
 }

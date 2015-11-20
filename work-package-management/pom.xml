@@ -108,6 +108,12 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0</version>
 		</dependency>
+		<dependency>
+		    <groupId>com.atlassian.clover</groupId>
+		    <artifactId>clover</artifactId>
+		    <version>4.0.6</version>
+		</dependency>
+				
 		
     </dependencies>
 	
@@ -166,25 +172,20 @@
 		              <exclude>jsp/**</exclude>
 		              <exclude>**/package-info.java</exclude>
 		              <exclude>**/*Test.java</exclude>
+		              <exclude>**/*Action.java</exclude>
 		              <exclude>com/ibatis/**</exclude>
 		              <exclude>**/annotations/**</exclude>
 		              <exclude>**/exceptions/**</exclude>
 		              <exclude>**/mocks/**</exclude>
 		              <exclude>**/test/**</exclude>
 		              <exclude>**/edu/harvard/agile/model/**</exclude>
-		              <exclude>**/edu/harvard/agile/util/**</exclude>
+		              <exclude>**/DateConverter.java</exclude>
+		              <exclude>**/edu/harvard/agile/security/**</exclude>
 		              <!--<exclude>**/model/**</exclude>-->
 		              <exclude>unit/**</exclude>
 		             </excludes>
 	            </configuration>
 	        </plugin>
-	         <plugin>
-		        <artifactId>maven-war-plugin</artifactId>
-		        <version>2.6</version>
-		        <configuration>
-		          <packagingExcludes>**/*__CLR4_*</packagingExcludes>
-		        </configuration>
-		      </plugin> 
     	</plugins>
     </build>
 </project>

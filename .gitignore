@@ -3,3 +3,6 @@ bin/
 work-package-management/.classpath
 work-package-management/.classpath
 work-package-management/.classpath
+*.classpath
+work-package-management/.classpath
+*.project

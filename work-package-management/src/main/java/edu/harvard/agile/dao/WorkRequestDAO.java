@@ -185,15 +185,13 @@ public class WorkRequestDAO {
 		 * Commits the transaction and rolls back if any exception occurs.
 		 */
 		
-		Connection con = null;
 		PreparedStatement stmt = null;
 		try {
 			int seqId = DBUtil.getNextSequence("WORK_REQUEST_ID_SEQ");
 
 			String query = "Insert into WORK_REQUEST (WORK_REQUEST_ID,PACKAGE_ID,APPLICATION_ID,STATUS,START_DATE,END_DATE,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
 					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			con = DBUtil.getConnection();
-			stmt = con.prepareStatement(query);
+			stmt = connection.prepareStatement(query);
 			stmt.setInt(1, seqId);
 			stmt.setInt(2, workRequest.getPackageId());
 			stmt.setString(3, workRequest.getApplicationId());
@@ -206,16 +204,10 @@ public class WorkRequestDAO {
 			stmt.setString(10, workRequest.getModifiedBy());
 			int rowsUpdated = stmt.executeUpdate();
 			workRequest.setWorkRequestId(seqId);
-			con.commit();
-			return findByWorkRequestId(seqId);
-		}  catch(Exception ex)
-		{
-			con.rollback();
-			throw ex;
-		}
+			return workRequest;
+		}  
 		finally {
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
 
 		}
 	}

@@ -33,9 +33,7 @@ public class WorkPackageDTO extends ModelBase {
 	private String createBy;
 	private String modifiedBy;
 	
-	private String[] impactedApplications;
-	
-	private List<ApplicationDTO> affectedApplications;
+	private List<ApplicationDTO> impactedApplications;
 
 	public WorkPackageDTO() {
 	}
@@ -152,19 +150,13 @@ public class WorkPackageDTO extends ModelBase {
 		this.modifiedBy = modifiedBy;
 	}
 	
-	public List<ApplicationDTO> getAffectedApplications() {
-		return affectedApplications;
-	}
-
-	public void setAffectedApplications(List<ApplicationDTO> affectedApplications) {
-		this.affectedApplications = affectedApplications;
-	}
-	public String[] getImpactedApplications() {
+	public List<ApplicationDTO> getImpactedApplications() {
 		return impactedApplications;
 	}
 
-	public void setImpactedApplications(String[] impactedApplications) {
+	public void setImpactedApplications(List<ApplicationDTO> impactedApplications) {
 		this.impactedApplications = impactedApplications;
 	}
+
 
 }

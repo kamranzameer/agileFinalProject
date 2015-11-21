@@ -196,15 +196,13 @@ public class WorkPackageDAO
 		 * the object that was saved to the database by using findby method.
 		 * Commits the transaction and rolls back if any exception occurs.
 		 */
-		Connection con = null;
 		PreparedStatement stmt = null;
 		try {
 			int seqId = DBUtil.getNextSequence("package_id_seq");
 
 			String query = "Insert into WORK_PACKAGE (PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE,REQUESTOR_NAME,CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
 					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-			con = DBUtil.getConnection();
-			stmt = con.prepareStatement(query);
+			stmt = connection.prepareStatement(query);
 			stmt.setInt(1, seqId);
 			stmt.setString(2, workPackage.getPackageName());
 			stmt.setString(3, workPackage.getPackageDesc());
@@ -221,19 +219,13 @@ public class WorkPackageDAO
 			stmt.setString(13, workPackage.getCreateBy());
 			stmt.setString(14, workPackage.getModifiedBy());
 			int rowsUpdated = stmt.executeUpdate();
-			con.commit();
 			workPackage.setPackageId(seqId);
 
-			return findByPackageId(seqId);
+			return workPackage;
 		}
-		catch(Exception ex)
-		{
-			con.rollback();
-			throw ex;
-		}
+		
 		finally {
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
 
 		}
 	}

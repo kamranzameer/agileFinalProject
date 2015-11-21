@@ -5,21 +5,25 @@
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 
-    <package name="myPackage" extends="struts-default">
+	<package name="wpm" extends="struts-default">
 
-        <default-action-ref name="index" />
+		<default-action-ref name="index" />
 
-        <action name="index" class="edu.harvard.agile.IndexAction">
-            <result>/jsp/index.jsp</result>
-        </action>
+		<action name="index" class="edu.harvard.agile.IndexAction">
+			<result>/jsp/index.jsp</result>
+		</action>
 
-        <action name="helloWorld" class="helloWorldAction">
-            <result name="input">/jsp/index.jsp</result>
-            <result>/jsp/helloWorld.jsp</result>
-        </action>
+		<action name="helloWorld" class="helloWorldAction">
+			<result name="input">/jsp/index.jsp</result>
+			<result>/jsp/helloWorld.jsp</result>
+		</action>
 
-    </package>
+		<action name="workpackage" class="edu.harvard.agile.action.WorkPackageAction">
+			<result name="success">view/workspace.jsp?p=wpl</result>
+		</action>
+
+	</package>
 
 </struts>

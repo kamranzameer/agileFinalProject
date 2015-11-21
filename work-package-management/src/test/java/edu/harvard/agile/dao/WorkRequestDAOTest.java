@@ -36,84 +36,161 @@ public class WorkRequestDAOTest {
 
 	@Test
 	public void testCreateWorkRequest() throws Exception {
-		WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
-		WorkRequestDTO workRequest = new WorkRequestDTO();
-		workRequest.setPackageId(1);
-		workRequest.setApplicationId("eSS");
-		workRequest.setStatus("Open");
-		workRequest.setStartDate(new Date());
-		workRequest.setEndDate(new Date());
-		workRequest.setCreateBy("uannipu");
-		workRequest.setModifiedBy("uannipu");
-	
-		workRequest = workRequestDAO.createWorkRequest(workRequest);
-		assertTrue(workRequest.getWorkRequestId()!=0);
+		Connection con = null;
+
+		try
+		{
+			con = DBUtil.getConnection();
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO(con);
+			WorkRequestDTO workRequest = new WorkRequestDTO();
+			workRequest.setPackageId(1);
+			workRequest.setApplicationId("eSS");
+			workRequest.setStatus("Open");
+			workRequest.setStartDate(new Date());
+			workRequest.setEndDate(new Date());
+			workRequest.setCreateBy("uannipu");
+			workRequest.setModifiedBy("uannipu");
+
+			workRequest = workRequestDAO.createWorkRequest(workRequest);
+			assertTrue(workRequest.getWorkRequestId()!=0);
+			con.commit();
+		}
+		catch(Exception ex)
+		{
+			con.rollback();
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
 	}
-	
+
 	@Test (expected = Exception.class)
 	public void testCreateWorkRequestWithoutPackageId() throws Exception {
-		WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
-		WorkRequestDTO workRequest = new WorkRequestDTO();
-		workRequest.setApplicationId("eSS");
-		workRequest.setStatus("Open");
-		workRequest.setStartDate(new Date());
-		workRequest.setEndDate(new Date());
-		workRequest.setCreateBy("uannipu");
-		workRequest.setModifiedBy("uannipu");
-	
-		workRequest = workRequestDAO.createWorkRequest(workRequest);
+
+		Connection con = null;
+
+		try
+		{
+			con = DBUtil.getConnection();
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO(con);
+
+			WorkRequestDTO workRequest = new WorkRequestDTO();
+			workRequest.setApplicationId("eSS");
+			workRequest.setStatus("Open");
+			workRequest.setStartDate(new Date());
+			workRequest.setEndDate(new Date());
+			workRequest.setCreateBy("uannipu");
+			workRequest.setModifiedBy("uannipu");
+
+			workRequest = workRequestDAO.createWorkRequest(workRequest);
+			con.commit();
+		}
+		catch(Exception ex)
+		{
+			con.rollback();
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
 	}
-	
+
 	@Test (expected = SQLException.class)
 	public void testCreateWorkRequestWithoutApplicationId() throws Exception {
-		WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
-		WorkRequestDTO workRequest = new WorkRequestDTO();
-		workRequest.setPackageId(1);
-		workRequest.setStatus("Open");
-		workRequest.setStartDate(new Date());
-		workRequest.setEndDate(new Date());
-		workRequest.setCreateBy("uannipu");
-		workRequest.setModifiedBy("uannipu");
-	
-		workRequest = workRequestDAO.createWorkRequest(workRequest);
+		Connection con = null;
+
+		try
+		{
+			con = DBUtil.getConnection();
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO(con);
+			WorkRequestDTO workRequest = new WorkRequestDTO();
+			workRequest.setPackageId(1);
+			workRequest.setStatus("Open");
+			workRequest.setStartDate(new Date());
+			workRequest.setEndDate(new Date());
+			workRequest.setCreateBy("uannipu");
+			workRequest.setModifiedBy("uannipu");
+
+			workRequest = workRequestDAO.createWorkRequest(workRequest);
+			con.commit();
+		}
+		catch(Exception ex)
+		{
+			con.rollback();
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
 	}
-	
+
 	@Test (expected = SQLException.class)
 	public void testCreateWorkRequestWithInvalidPackageId() throws Exception {
-		WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
-		WorkRequestDTO workRequest = new WorkRequestDTO();
-		workRequest.setPackageId(123456);
-		workRequest.setApplicationId("eSS");
-		workRequest.setStatus("Open");
-		workRequest.setStartDate(new Date());
-		workRequest.setEndDate(new Date());
-		workRequest.setCreateBy("uannipu");
-		workRequest.setModifiedBy("uannipu");
-	
-		workRequest = workRequestDAO.createWorkRequest(workRequest);
+		Connection con = null;
+
+		try
+		{
+			con = DBUtil.getConnection();
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO(con);
+			WorkRequestDTO workRequest = new WorkRequestDTO();
+			workRequest.setPackageId(123456);
+			workRequest.setApplicationId("eSS");
+			workRequest.setStatus("Open");
+			workRequest.setStartDate(new Date());
+			workRequest.setEndDate(new Date());
+			workRequest.setCreateBy("uannipu");
+			workRequest.setModifiedBy("uannipu");
+
+			workRequest = workRequestDAO.createWorkRequest(workRequest);
+			con.commit();
+		}
+		catch(Exception ex)
+		{
+			con.rollback();
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
 	}
-	
+
 	@Test (expected = SQLException.class)
 	public void testCreateWorkRequestWithInvalidApplicationId() throws Exception {
-		WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
-		WorkRequestDTO workRequest = new WorkRequestDTO();
-		workRequest.setPackageId(1);
-		workRequest.setApplicationId("invalid application id");
-		workRequest.setStatus("Open");
-		workRequest.setStartDate(new Date());
-		workRequest.setEndDate(new Date());
-		workRequest.setCreateBy("uannipu");
-		workRequest.setModifiedBy("uannipu");
-	
-		workRequest = workRequestDAO.createWorkRequest(workRequest);
+		Connection con = null;
+
+		try
+		{
+			con = DBUtil.getConnection();
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO(con);
+			WorkRequestDTO workRequest = new WorkRequestDTO();
+			workRequest.setPackageId(1);
+			workRequest.setApplicationId("invalid application id");
+			workRequest.setStatus("Open");
+			workRequest.setStartDate(new Date());
+			workRequest.setEndDate(new Date());
+			workRequest.setCreateBy("uannipu");
+			workRequest.setModifiedBy("uannipu");
+
+			workRequest = workRequestDAO.createWorkRequest(workRequest);
+			con.commit();
+		}
+		catch(Exception ex)
+		{
+			con.rollback();
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
 	}
-	
+
 	@Test
 	public void testFindRequestsByApplicationId() throws Exception{
 		WorkRequestDAO workRequest = new WorkRequestDAO();
 		assertNotEquals(0, workRequest.findRequestsByApplicationId("eSS"));
 	}
-	
+
 	@Test
 	public void testFindRequestsByInvalidApplicationId() throws Exception{
 		WorkRequestDAO workRequest = new WorkRequestDAO();
@@ -125,7 +202,7 @@ public class WorkRequestDAOTest {
 		WorkRequestDAO workRequest = new WorkRequestDAO();
 		assertNotNull(workRequest.findByWorkRequestId(2));
 	}
-	
+
 	@Test
 	public void testFindByInvalidWorkRequestId() throws Exception {
 		WorkRequestDAO workRequest = new WorkRequestDAO();
@@ -147,11 +224,11 @@ public class WorkRequestDAOTest {
 		workRequest.setApplicationId("eSS");
 		workRequest.setStatus("Archived");
 		workRequest.setModifiedBy("uannipu");
-	
+
 		workRequest = workRequestDAO.updateWorkRequestStatus(workRequest);
 		assertTrue(workRequest.getStatus().equals("Archived")); 
 	}
-	
+
 	@Test
 	public void testUpdateWorkRequestStatusWithInvalidWorkRequestId() throws Exception {
 		WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
@@ -161,7 +238,7 @@ public class WorkRequestDAOTest {
 		workRequest.setApplicationId("eSS");
 		workRequest.setStatus("Archived");
 		workRequest.setModifiedBy("uannipu");
-	
+
 		workRequest = workRequestDAO.updateWorkRequestStatus(workRequest);
 		assertNull(workRequest); 
 	}

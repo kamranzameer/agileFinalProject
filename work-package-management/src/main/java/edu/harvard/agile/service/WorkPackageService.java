@@ -1,13 +1,14 @@
 package edu.harvard.agile.service;
 
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
+import edu.harvard.agile.dao.WorkPackageDAO;
+import edu.harvard.agile.dao.WorkRequestDAO;
+import edu.harvard.agile.model.ApplicationDTO;
 import edu.harvard.agile.model.WorkPackageDTO;
+import edu.harvard.agile.model.WorkRequestDTO;
 import edu.harvard.agile.util.DBUtil;
 
 /**
@@ -28,9 +29,50 @@ public class WorkPackageService {
 	 * @return
 	 * @throws Exception
 	 */
-	public WorkPackageDTO createPackage(WorkPackageDTO workPackage) throws Exception {
+	public void createPackage(WorkPackageDTO workPackage) throws Exception {
 		
-		return null;
+		Connection connection = null;
+		WorkRequestDTO workRequest = null;
 		
+		try
+		{
+			connection = DBUtil.getConnection();
+		//Create WorkPakcage
+			WorkPackageDAO workPackageDAO = new WorkPackageDAO(connection);
+			WorkRequestDAO workRequestDAO = new WorkRequestDAO(connection);
+			workPackage = workPackageDAO.createPackage(workPackage);
+			
+			//Create WorkRequest for every impacted application
+			List<ApplicationDTO> impactedApplications = workPackage.getImpactedApplications();
+			for (ApplicationDTO application : impactedApplications) 
+			{
+				workRequest = new WorkRequestDTO();
+				workRequest.setApplicationId(application.getApplicationId());
+				workRequest.setPackageId(workPackage.getPackageId());
+				workRequest.setStatus(workPackage.getStatus());
+				workRequest.setCreateBy(workPackage.getCreateBy());
+				workRequest.setStartDate(workPackage.getStartDate());
+				workRequest.setEndDate(workPackage.getEndDate());
+				workRequest.setModifiedBy(workPackage.getModifiedBy());
+				
+				workRequestDAO.createWorkRequest(workRequest);
+			}
+			
+			connection.commit();
+		}
+		catch(Exception ex)
+		{
+			try {
+				connection.rollback();
+			} catch (SQLException e) {
+				//Do nothing
+			}
+			throw ex;
+			
+		}
+		finally
+		{
+			DBUtil.closeConnection(connection);
+		}
 	}
 }

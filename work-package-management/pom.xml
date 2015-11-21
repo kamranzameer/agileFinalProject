@@ -2,18 +2,18 @@
 
 <project>
 	<modelVersion>4.0.0</modelVersion>
-    <groupId>edu.harvard.agile</groupId>
-    <artifactId>workPackageManagement</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <name>workPackageManagement</name>
+	<groupId>edu.harvard.agile</groupId>
+	<artifactId>workPackageManagement</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>workPackageManagement</name>
 	<description>Struts 2 Starter</description>
 
-    <properties>
-        <struts2.version>2.3.16.3</struts2.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <shiro.version>1.2.2</shiro.version>
-    </properties>
+	<properties>
+		<struts2.version>2.3.16.3</struts2.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<shiro.version>1.2.2</shiro.version>
+	</properties>
 
 	<dependencies>
 		<!-- Junit -->
@@ -24,30 +24,35 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--  Struts 2 -->
+		<!-- Struts 2 -->
 		<dependency>
-            <groupId>org.apache.struts</groupId>
-            <artifactId>struts2-core</artifactId>
-            <version>${struts2.version}</version>
-        </dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>${struts2.version}</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.apache.struts</groupId>
-            <artifactId>struts2-sitemesh-plugin</artifactId>
-            <version>${struts2.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-sitemesh-plugin</artifactId>
+			<version>${struts2.version}</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.apache.struts</groupId>
-            <artifactId>struts2-spring-plugin</artifactId>
-            <version>${struts2.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-spring-plugin</artifactId>
+			<version>${struts2.version}</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.apache.struts</groupId>
-            <artifactId>struts2-config-browser-plugin</artifactId>
-            <version>${struts2.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-config-browser-plugin</artifactId>
+			<version>${struts2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-convention-plugin</artifactId>
+			<version>${struts2.version}</version>
+		</dependency>
 
 		<!-- Servlet & Jsp -->
 		<dependency>
@@ -71,17 +76,17 @@
 			<version>1.3</version>
 		</dependency>
 
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.3</version>
-        </dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.3</version>
+		</dependency>
 
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
 
 		<!-- Dwr -->
 		<dependency>
@@ -89,103 +94,103 @@
 			<artifactId>dwr</artifactId>
 			<version>1.1-beta-3</version>
 		</dependency>
-		
+
 		<!-- Shiro dependencies: -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        
-        <!-- ORACLE database driver -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+
+		<!-- ORACLE database driver -->
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.atlassian.clover</groupId>
-		    <artifactId>clover</artifactId>
-		    <version>4.0.6</version>
+			<groupId>com.atlassian.clover</groupId>
+			<artifactId>clover</artifactId>
+			<version>4.0.6</version>
 		</dependency>
-				
-		
-    </dependencies>
-	
-    <build>
-      <finalName>wpm</finalName>
-    	<plugins>
-    		<plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                   <source>1.5</source>
-                   <target>1.5</target>
-                </configuration>
-            </plugin>
-    		<plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.1.7.v20120910</version>
-                <configuration>
-                    <stopKey>CTRL+C</stopKey>
-                    <stopPort>8999</stopPort>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>log4j.configuration</name>
-                            <value>file:${basedir}/src/main/resources/log4j.xml</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <name>slf4j</name>
-                            <value>false</value>
-                        </systemProperty>
-                    </systemProperties>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <webAppSourceDirectory>${basedir}/src/main/webapp/</webAppSourceDirectory>
-                    <webAppConfig>
-                        <contextPath>/wpm</contextPath>
-                        <descriptor>${basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
-                    </webAppConfig>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>log4j</groupId>
-                        <artifactId>log4j</artifactId>
-                        <version>1.2.17</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-	            <groupId>com.atlassian.maven.plugins</groupId>
-	            <artifactId>maven-clover2-plugin</artifactId>
-	            <configuration>
-	            	<contextFilters>@deprecated,assert,static,constructor,catch,throw,toString,equals,hashCode,LOG\.</contextFilters>
-	                <licenseLocation>clover.license</licenseLocation>
-	                <includes>
-		              <include>**/*.java</include>
-		            </includes>
-		            <excludes>
-		              <exclude>jsp/**</exclude>
-		              <exclude>**/package-info.java</exclude>
-		              <exclude>**/*Test.java</exclude>
-		              <exclude>**/*Action.java</exclude>
-		              <exclude>com/ibatis/**</exclude>
-		              <exclude>**/annotations/**</exclude>
-		              <exclude>**/exceptions/**</exclude>
-		              <exclude>**/mocks/**</exclude>
-		              <exclude>**/test/**</exclude>
-		              <exclude>**/edu/harvard/agile/model/**</exclude>
-		              <exclude>**/DateConverter.java</exclude>
-		              <exclude>**/edu/harvard/agile/security/**</exclude>
-		              <!--<exclude>**/model/**</exclude>-->
-		              <exclude>unit/**</exclude>
-		             </excludes>
-	            </configuration>
-	        </plugin>
-    	</plugins>
-    </build>
+
+
+	</dependencies>
+
+	<build>
+		<finalName>wpm</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>8.1.7.v20120910</version>
+				<configuration>
+					<stopKey>CTRL+C</stopKey>
+					<stopPort>8999</stopPort>
+					<systemProperties>
+						<systemProperty>
+							<name>log4j.configuration</name>
+							<value>file:${basedir}/src/main/resources/log4j.xml</value>
+						</systemProperty>
+						<systemProperty>
+							<name>slf4j</name>
+							<value>false</value>
+						</systemProperty>
+					</systemProperties>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webAppSourceDirectory>${basedir}/src/main/webapp/</webAppSourceDirectory>
+					<webAppConfig>
+						<contextPath>/wpm</contextPath>
+						<descriptor>${basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
+					</webAppConfig>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+						<version>1.2.17</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>com.atlassian.maven.plugins</groupId>
+				<artifactId>maven-clover2-plugin</artifactId>
+				<configuration>
+					<contextFilters>@deprecated,assert,static,constructor,catch,throw,toString,equals,hashCode,LOG\.</contextFilters>
+					<licenseLocation>clover.license</licenseLocation>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<excludes>
+						<exclude>jsp/**</exclude>
+						<exclude>**/package-info.java</exclude>
+						<exclude>**/*Test.java</exclude>
+						<exclude>**/*Action.java</exclude>
+						<exclude>com/ibatis/**</exclude>
+						<exclude>**/annotations/**</exclude>
+						<exclude>**/exceptions/**</exclude>
+						<exclude>**/mocks/**</exclude>
+						<exclude>**/test/**</exclude>
+						<exclude>**/edu/harvard/agile/model/**</exclude>
+						<exclude>**/DateConverter.java</exclude>
+						<exclude>**/edu/harvard/agile/security/**</exclude>
+						<!--<exclude>**/model/**</exclude> -->
+						<exclude>unit/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

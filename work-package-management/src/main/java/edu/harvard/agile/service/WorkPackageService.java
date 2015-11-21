@@ -14,22 +14,23 @@ import edu.harvard.agile.util.DBUtil;
 /**
  * @author Incredibles Team
  * 
- *         This service class contains methods to perform Work Package management transactions
+ *         This service class contains methods to perform Work Package
+ *         management transactions
  *
  */
 public class WorkPackageService {
 
-	
+	private WorkPackageDAO workPackageDAO;
+
 	/**
-	 * This method creates
-	 * 1. A new work package in the system
-	 * 2. Creates new Work Request for each impacted application
+	 * This method creates 1. A new work package in the system 2. Creates new
+	 * Work Request for each impacted application
 	 * 
 	 * @param workPackage
 	 * @return
 	 * @throws Exception
 	 */
-	public void createPackage(WorkPackageDTO workPackage) throws Exception {
+	public WorkPackageDTO createPackage(WorkPackageDTO workPackage) throws Exception {
 		
 		Connection connection = null;
 		WorkRequestDTO workRequest = null;
@@ -59,6 +60,7 @@ public class WorkPackageService {
 			}
 			
 			connection.commit();
+			
 		}
 		catch(Exception ex)
 		{
@@ -74,5 +76,16 @@ public class WorkPackageService {
 		{
 			DBUtil.closeConnection(connection);
 		}
+		
+		return workPackage;
+
+	}
+
+	public void setWorkPackageDAO(WorkPackageDAO workPackageDAO) {
+		this.workPackageDAO = workPackageDAO;
+	}
+
+	public List<WorkPackageDTO> findAllPackages() throws Exception {
+		return workPackageDAO.findAllPackages();
 	}
 }

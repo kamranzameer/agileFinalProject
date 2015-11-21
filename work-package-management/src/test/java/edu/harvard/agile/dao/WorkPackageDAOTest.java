@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import edu.harvard.agile.model.UsersDTO;
 import edu.harvard.agile.model.WorkPackageDTO;
 import edu.harvard.agile.util.DBUtil;
 
@@ -128,8 +129,9 @@ public class WorkPackageDAOTest {
 			workPackage.setModifiedBy("uannipu");
 
 			WorkPackageDTO workDTO = workPackageDAO.createPackage(workPackage);
-			assertTrue(workDTO.getPackageId()!=0);
 			con.commit();
+			assertTrue(workDTO.getPackageId()!=0);
+			
 		}
 		catch(Exception ex)
 		{
@@ -292,6 +294,33 @@ public class WorkPackageDAOTest {
 
 	}
 
+	
+	/** 
+	 * This test is to test findAllPackagesByUser method of the DAO 
+	 * @throws Exception
+	 */
+	@Test
+	public void testFindAllPackagesByUser() throws Exception {
+		WorkPackageDAO workPackageDAO = new WorkPackageDAO(); 
+		UsersDTO userDTO = new UsersDTO();
+		userDTO.setUserId("uannipu");
+		List<WorkPackageDTO> workPackageDTOs = workPackageDAO.findAllPackagesCreatedByUser(userDTO);
+		
+		assertTrue(workPackageDTOs.size() > 0);
+	}
+	/**
+	 * This test is to test deletePackageByPackageName method of DAO
+	 * @throws Exception
+	 */
+	@Test
+	public void testDeleteByPackageName() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
 
+		workPackageDAO.deleteByPackageName("TestPackage");
+		WorkPackageDTO workPackage = workPackageDAO.findByPackageName("TestPackage");
+		assertNull(workPackage); 
+		
+	}
+	
 
 }

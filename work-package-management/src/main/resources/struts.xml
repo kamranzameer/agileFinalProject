@@ -11,9 +11,9 @@
 
 		<default-action-ref name="index" />
 
-		<action name="index" class="edu.harvard.agile.IndexAction">
-			<result>/jsp/index.jsp</result>
-		</action>
+        <action name="workPackageList"  class="workPackageListAction">
+            <result>/view/workspace.jsp</result>
+        </action>
 
 		<action name="helloWorld" class="helloWorldAction">
 			<result name="input">/jsp/index.jsp</result>

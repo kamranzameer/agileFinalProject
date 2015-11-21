@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-10 column">
@@ -38,51 +39,33 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>
-												Create new web service
-											</td>
-											<td>
-												01/01/2001
-											</td>
-											<td>
-												3
-											</td>
-											<td>
-												2
-											</td>
-											<td>
-												Incompelte
-											</td>
-											<td>
-												<a href="#" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
-												<a href="#" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
-												<a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash">&nbsp;</i></a>
-											</td>
-										</tr>
+										<s:iterator var = "workPackage" value="workPackages">
+											<tr>
+												<td>
+													${workPackage.packageName}
+												</td>
+												<td>
+													${workPackage.createDate}
+												</td>
+												<td>
+													3
+												</td>
+												<td>
+													2
+												</td>
+												<td>
+													${workPackage.status}
+												</td>
+												<td>
+													<a href="#" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
+													<a href="#" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
+													<a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash">&nbsp;</i></a>
+												</td>
+											</tr>
+										</s:iterator>	
+										
 
-										<tr>
-											<td>
-												Change length of field
-											</td>
-											<td>
-												01/01/2002
-											</td>
-											<td>
-												3
-											</td>
-											<td>
-												2
-											</td>
-											<td>
-												Incomplete
-											</td>
-											<td>
-												<a href="#" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
-												<a href="#" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
-												<a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash">&nbsp;</i></a>
-											</td>
-										</tr>
+										
 										<tr><td colspan="6"/></tr>
 										<tr><td colspan="6"/></tr>
 										<tr><td colspan="6"/></tr>

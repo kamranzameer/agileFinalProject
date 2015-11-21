@@ -1,6 +1,9 @@
 
 <%
     String currentPage = request.getParameter("p");
+	if(currentPage == null){
+		currentPage = (String) request.getAttribute("p");
+	}
     if(currentPage!=null ){
 	    if (currentPage.equals("cp")){
 	    	currentPage = "changepassword.jsp";
@@ -22,6 +25,7 @@
 	currentPage = "dashboard.jsp";
 	}
 %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 
@@ -63,16 +67,16 @@
 		                <li><a href="workspace.jsp?p=ecit"><i class="glyphicon glyphicon-user">&nbsp;</i>Profile</a></li>
 						
 						<shiro:hasAnyRoles name="DM,BU">
-						<li class=""> <a href="" data-toggle="collapse" data-target="#workPackageMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages</a>
+						<li class=""> <a href="workPackageList.action" data-toggle="collapse" data-target="#workPackageMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages</a>
 						</li>
-						<li class=""> <a href="" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages Statistics</a>
+						<li class=""> <a href="workspace.jsp?p=wps" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages Statistics</a>
 						</li>
 						</shiro:hasAnyRoles>
 
-						<li class=""> <a href="" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Requests</a>
+						<li class=""> <a href="workspace.jsp?p=wrl" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Requests</a>
 						</li>
 
-		                <li><a href="" onclick="javascript:$( '#workspace' ).load( 'changepassword.jsp' )"><i class="glyphicon glyphicon-lock">&nbsp;</i> Change Password</a></li>
+		                <li><a href="workspace.jsp?p=cp" onclick="javascript:$( '#workspace' ).load( 'changepassword.jsp' )"><i class="glyphicon glyphicon-lock">&nbsp;</i> Change Password</a></li>
 		                <li><a href="../logout"><i class="glyphicon glyphicon-off">&nbsp;</i>Sign Out</a>&nbsp;</li>
 				    </ul>
 				</div>

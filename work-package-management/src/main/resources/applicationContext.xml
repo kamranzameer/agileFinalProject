@@ -13,7 +13,7 @@
     	<property name="workPackageDAO" ref="workPackageDAO"/>
     </bean>
     
-    <bean id="workPackageListAction" class="edu.harvard.agile.actions.WorkPackageListAction">
+    <bean id="workPackageListAction" class="edu.harvard.agile.action.WorkPackageListAction">
     	<property name="workPackageService" ref="workPackageService"/>
     </bean>
     

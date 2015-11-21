@@ -1,4 +1,4 @@
-package edu.harvard.agile.actions;
+package edu.harvard.agile.action;
 
 import java.util.List;
 

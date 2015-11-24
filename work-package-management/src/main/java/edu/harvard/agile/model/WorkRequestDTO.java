@@ -29,6 +29,8 @@ public class WorkRequestDTO extends ModelBase {
 	private Date modifiedDate;
 	private String createBy;
 	private String modifiedBy;
+	private String workPackageName;
+	private String applicationName;
 
 	private List<AssumptionsDTO> assumptionsDTOs;
 
@@ -68,6 +70,7 @@ public class WorkRequestDTO extends ModelBase {
 	}
 
 	public Date getStartDate() {
+		System.out.println("Returning start date --> " + startDate);
 		return startDate;
 	}
 
@@ -84,6 +87,7 @@ public class WorkRequestDTO extends ModelBase {
 	}
 
 	public Date getCreateDate() {
+		System.out.println("Returning create date --> " + createDate);
 		return createDate;
 	}
 
@@ -129,5 +133,23 @@ public class WorkRequestDTO extends ModelBase {
 	public void addAssumptionsDTOs(AssumptionsDTO assumptions) {
 		getAssumptionsDTOs().add(assumptions);
 	}
+
+	public String getWorkPackageName() {
+		return workPackageName;
+	}
+
+	public void setWorkPackageName(String workPackageName) {
+		this.workPackageName = workPackageName;
+	}
+
+	public String getApplicationName() {
+		return applicationName;
+	}
+
+	public void setApplicationName(String applicationName) {
+		this.applicationName = applicationName;
+	}
+	
+	
 
 }

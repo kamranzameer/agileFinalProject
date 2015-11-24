@@ -16,6 +16,13 @@
             <result>/view/workspace.jsp</result>
         </action>
         
+        
+        <action name="workRequestList"  class="workRequestListAction">
+            <result>/view/workspace.jsp</result>
+        </action>
+        
+        
+        
         <action name="newWorkPackage"  class="edu.harvard.agile.action.WorkPackageAction">
             <result name="success">/view/workspace.jsp</result>
         </action>

@@ -204,7 +204,7 @@ public class WorkRequestDAOTest {
 	@Test
 	public void testFindByWorkRequestId() throws Exception {
 		WorkRequestDAO workRequest = new WorkRequestDAO();
-		assertNotNull(workRequest.findByWorkRequestId(2));
+		assertNotNull(workRequest.findByWorkRequestId(12));
 	}
 
 	@Test
@@ -223,7 +223,7 @@ public class WorkRequestDAOTest {
 	public void testUpdateWorkRequestStatus() throws Exception {
 		WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 		WorkRequestDTO workRequest = new WorkRequestDTO();
-		workRequest.setWorkRequestId(2);
+		workRequest.setWorkRequestId(12);
 		workRequest.setPackageId(1);
 		workRequest.setApplicationId("eSS");
 		workRequest.setStatus("Archived");

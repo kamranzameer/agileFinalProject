@@ -43,8 +43,25 @@ public class WorkRequestDAO {
 		
 		try {
 			con = DBUtil.getConnection();
-			String query = "SELECT WORK_REQUEST_ID,PACKAGE_ID,STATUS,START_DATE,END_DATE FROM WORK_REQUEST where APPLICATION_ID = ?";
-			stmt = con.prepareStatement(query);
+			
+			StringBuilder query = new StringBuilder();
+			query.append(" SELECT A.PACKAGE_ID, ");
+			query.append("        A.WORK_REQUEST_ID, ");
+			query.append("        A.STATUS, ");
+			query.append("        A.START_DATE,"); 
+			query.append("        A.END_DATE, ");
+			query.append("        A.APPLICATION_ID, ");
+			query.append("        B.PACKAGE_NAME, ");
+			query.append("        APPLICATION_NAME, ");
+			query.append("        PACKAGE_NAME ");
+			query.append(" FROM   WORK_REQUEST A, ");
+			query.append("        WORK_PACKAGE B, ");
+			query.append("        APPLICATION C ");
+			query.append(" WHERE  A.PACKAGE_ID = B.PACKAGE_ID ");
+			query.append("        AND A.APPLICATION_ID = C.APPLICATION_ID ");
+			query.append("        AND C.APPLICATION_ID = ?");
+			
+			stmt = con.prepareStatement(query.toString());
 			stmt.setString(1, id);
 			rs = stmt.executeQuery();
 			WorkRequestDTO workRequest = null;
@@ -53,10 +70,16 @@ public class WorkRequestDAO {
 				workRequest = new WorkRequestDTO();
 				workRequest.setPackageId(rs.getInt("PACKAGE_ID"));
 				workRequest.setWorkRequestId(rs.getInt("WORK_REQUEST_ID"));
+				
+				System.out.println("wr start_date --> " + rs.getDate("START_DATE"));
 				workRequest.setStartDate(rs.getDate("START_DATE"));
+				System.out.println("wr dto start_date --> " + workRequest.getStartDate());
 				workRequest.setEndDate(rs.getDate("END_DATE"));
 				workRequest.setStatus(rs.getString("STATUS"));
 				workRequest.setApplicationId(id);
+				
+				workRequest.setApplicationName(rs.getString("APPLICATION_NAME"));
+				workRequest.setWorkPackageName(rs.getString("PACKAGE_NAME"));
 				
 				workRequestDTOs.add(workRequest);
 			}
@@ -87,23 +110,43 @@ public class WorkRequestDAO {
 
 		Connection con = null;
 		PreparedStatement stmt = null;
-		WorkRequestDTO WorkRequest = null;
+		WorkRequestDTO workRequest = null;
 		ResultSet rs = null;
+				
 		try {
 			con = DBUtil.getConnection();
-			String query = "SELECT PACKAGE_ID,STATUS,START_DATE,END_DATE,APPLICATION_ID FROM WORK_REQUEST where WORK_REQUEST_ID = ?";
-			stmt = con.prepareStatement(query);
+			
+			StringBuilder query = new StringBuilder();
+			query.append(" SELECT A.PACKAGE_ID, ");
+			query.append("        A.STATUS, ");
+			query.append("        A.START_DATE,"); 
+			query.append("        A.END_DATE, ");
+			query.append("        A.APPLICATION_ID, ");
+			query.append("        B.PACKAGE_NAME, ");
+			query.append("        APPLICATION_NAME, ");
+			query.append("        PACKAGE_NAME ");
+			query.append(" FROM   WORK_REQUEST A, ");
+			query.append("        WORK_PACKAGE B, ");
+			query.append("        APPLICATION C ");
+			query.append(" WHERE  A.PACKAGE_ID = B.PACKAGE_ID ");
+			query.append("        AND A.APPLICATION_ID = C.APPLICATION_ID ");
+			query.append("        AND WORK_REQUEST_ID = ?");
+			
+			stmt = con.prepareStatement(query.toString());
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				WorkRequest = new WorkRequestDTO();
-				WorkRequest.setWorkRequestId(id);
-				WorkRequest.setPackageId(rs.getInt("PACKAGE_ID"));	
-				WorkRequest.setApplicationId(rs.getString("APPLICATION_ID"));
-				WorkRequest.setStartDate(rs.getDate("START_DATE"));
-				WorkRequest.setEndDate(rs.getDate("END_DATE"));
-				WorkRequest.setStatus(rs.getString("STATUS"));
+				workRequest = new WorkRequestDTO();
+				workRequest.setWorkRequestId(id);
+				workRequest.setPackageId(rs.getInt("PACKAGE_ID"));	
+				workRequest.setApplicationId(rs.getString("APPLICATION_ID"));
+				workRequest.setStartDate(rs.getDate("START_DATE"));
+				workRequest.setEndDate(rs.getDate("END_DATE"));
+				workRequest.setStatus(rs.getString("STATUS"));
+				
+				workRequest.setApplicationName(rs.getString("APPLICATION_NAME"));
+				workRequest.setWorkPackageName(rs.getString("PACKAGE_NAME"));
 			}
 		} finally {
 			DBUtil.closeRS(rs);
@@ -112,7 +155,7 @@ public class WorkRequestDAO {
 
 		}
 
-		return WorkRequest;
+		return workRequest;
 	}
 
 	/**
@@ -132,11 +175,29 @@ public class WorkRequestDAO {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		List<WorkRequestDTO> workRequestDTOs = null;
+
 		try {
 
 			con = DBUtil.getConnection();
-			String query = "SELECT WORK_REQUEST_ID,PACKAGE_ID,APPLICATION_ID,STATUS,START_DATE,END_DATE FROM WORK_REQUEST";
-			stmt = con.prepareStatement(query);
+
+			StringBuilder query = new StringBuilder();
+			query.append(" SELECT A.PACKAGE_ID, ");
+			query.append("        A.WORK_REQUEST_ID, ");
+			query.append("        A.STATUS, ");
+			query.append("        A.START_DATE,"); 
+			query.append("        A.END_DATE, ");
+			query.append("        A.APPLICATION_ID, ");
+			query.append("        B.PACKAGE_NAME, ");
+			query.append("        APPLICATION_NAME, ");
+			query.append("        PACKAGE_NAME ");
+			query.append(" FROM   WORK_REQUEST A, ");
+			query.append("        WORK_PACKAGE B, ");
+			query.append("        APPLICATION C ");
+			query.append(" WHERE  A.PACKAGE_ID = B.PACKAGE_ID ");
+			query.append("        AND A.APPLICATION_ID = C.APPLICATION_ID ");
+			
+			
+			stmt = con.prepareStatement(query.toString());
 
 			rs = stmt.executeQuery();
 
@@ -151,6 +212,10 @@ public class WorkRequestDAO {
 				workRequest.setEndDate(rs.getDate("END_DATE"));
 				workRequest.setStatus(rs.getString("STATUS"));
 				workRequest.setApplicationId(rs.getString("APPLICATION_ID"));
+				workRequest.setApplicationName(rs.getString("APPLICATION_NAME"));
+				workRequest.setWorkPackageName(rs.getString("PACKAGE_NAME"));
+				
+
 				
 				workRequestDTOs.add(workRequest);
 			}

@@ -6,14 +6,26 @@
 
     <bean id="helloWorldAction" class="edu.harvard.agile.HelloWorldAction"></bean>
     <bean id="indexAction" class="edu.harvard.agile.IndexAction"></bean>
-    
+
+
+<!--  DAOs bean definition -->    
     <bean id="workPackageDAO" class= "edu.harvard.agile.dao.WorkPackageDAO"/>
+    <bean id="workRequestDAO" class= "edu.harvard.agile.dao.WorkRequestDAO"/>
     <bean id="applicationDAO" class= "edu.harvard.agile.dao.ApplicationDAO"/>
     <bean id="testingProgramDAO" class= "edu.harvard.agile.dao.TestingProgramDAO"/>
     
+
+<!--  Services bean definition -->
+
     <bean id="workPackageService" class= "edu.harvard.agile.service.WorkPackageService">
     	<property name="workPackageDAO" ref="workPackageDAO"/>
     </bean>
+    
+    
+    <bean id="workRequestService" class= "edu.harvard.agile.service.WorkRequestService">
+    	<property name="workRequestDAO" ref="workRequestDAO"/>
+    </bean>
+    
     
     <bean id="testingProgramService" class= "edu.harvard.agile.service.TestingProgramService">
     	<property name="testingProgramDAO" ref="testingProgramDAO"/>
@@ -23,9 +35,19 @@
     	<property name="applicationDAO" ref="applicationDAO"/>
     </bean>
     
+    
+<!--  Actions bean definition -->
+    
     <bean id="workPackageListAction" class="edu.harvard.agile.action.WorkPackageListAction">
     	<property name="workPackageService" ref="workPackageService"/>
     </bean>
+    
+    
+    <bean id="workRequestListAction" class="edu.harvard.agile.action.WorkRequestListAction">
+    	<property name="workRequestService" ref="workRequestService"/>
+    </bean>
+    
+    
     
     <bean id="workPackageAction" class="edu.harvard.agile.action.WorkPackageAction">
     	<property name="workPackageService" ref="workPackageService"/>

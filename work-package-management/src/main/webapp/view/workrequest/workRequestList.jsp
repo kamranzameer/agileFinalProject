@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-10 column">
@@ -14,7 +15,7 @@
 	                <div style="padding-top:30px"; class="panel-body">
 						<div class="row clearfix">
 							<div id="academicDiv" class="table-responsive col-xs-12 col-sm-12 col-md-11 col-lg-11">
-								<table class="table table-striped table-bordered table-hover" id="academicsTable">
+								<table class="table table-striped table-hover" id="academicsTable">
 									<thead>
 										<tr>
 											<th>
@@ -35,18 +36,19 @@
 										</tr>
 									</thead>
 									<tbody>
+										<s:iterator var = "workRequest" value="workRequests">
 										<tr>
 											<td>
-												Scoring Application
+												${workRequest.applicationName}
 											</td>
 											<td>
-												Change length of field
+												${workRequest.workPackageName}
 											</td>
 											<td>
-												01/01/2001
+												${workRequest.startDate}
 											</td>
 											<td>
-												Incompelte
+												${workRequest.status}
 											</td>
 											<td>
 												<a href="#" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
@@ -54,6 +56,7 @@
 												<a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash">&nbsp;</i></a>
 											</td>
 										</tr>
+										</s:iterator>
 
 									</tbody>
 								</table>

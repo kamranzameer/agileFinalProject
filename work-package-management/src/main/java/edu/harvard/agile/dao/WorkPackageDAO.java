@@ -170,7 +170,12 @@ public class WorkPackageDAO
 				workPackage.setRequestorName(rs.getString("REQUESTOR_NAME"));
 				workPackage.setContractFromYear(rs.getDate("CONTRACT_FROM_YEAR"));
 				workPackage.setContractToYear(rs.getDate("CONTRACT_TO_YEAR"));
+				
+				System.out.println("wp start_date --> " + rs.getDate("START_DATE"));
 				workPackage.setStartDate(rs.getDate("START_DATE"));
+				
+				System.out.println("wp dto start_date --> " + workPackage.getStartDate());
+				
 				workPackage.setEndDate(rs.getDate("END_DATE"));
 				workPackage.setStatus(rs.getString("STATUS"));
 				

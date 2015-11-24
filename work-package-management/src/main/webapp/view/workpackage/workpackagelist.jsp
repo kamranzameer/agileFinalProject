@@ -15,7 +15,7 @@
 	                <div style="padding-top:30px"; class="panel-body">
 						<div class="row clearfix">
 							<div id="academicDiv" class="table-responsive col-xs-12 col-sm-12 col-md-11 col-lg-11">
-								<table class="table table-striped table-bordered table-hover" id="academicsTable">
+								<table class="table table-striped table-hover" id="academicsTable">
 									<thead>
 										<tr>
 											<th>
@@ -45,7 +45,7 @@
 													${workPackage.packageName}
 												</td>
 												<td>
-													${workPackage.createDate}
+													${workPackage.startDate}
 												</td>
 												<td>
 													${workPackage.totalApplications}

@@ -38,13 +38,14 @@ public class ApplicationDAO {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ApplicationDTO application = null;
+		ResultSet rs = null;
 		
 		try {
 			con = DBUtil.getConnection();
 			String query = "SELECT APPLICATION_NAME, APPLICATION_DESC, IS_ACTIVE, CREATE_DATE, MODIFIED_DATE, CREATE_BY, MODIFIED_BY FROM APPLICATION where APPLICATION_ID = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, id);
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 			
 			
 			while (rs.next()) {
@@ -56,6 +57,7 @@ public class ApplicationDAO {
 				
 			}
 		} finally {
+			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 
@@ -81,6 +83,7 @@ public class ApplicationDAO {
 
 		Connection con = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		List<ApplicationDTO> applicationDTOs = null;
 		try {
 
@@ -88,7 +91,7 @@ public class ApplicationDAO {
 			String query = "SELECT APPLICATION_ID, APPLICATION_NAME, APPLICATION_DESC, IS_ACTIVE, CREATE_DATE, MODIFIED_DATE, CREATE_BY, MODIFIED_BY FROM APPLICATION";
 			stmt = con.prepareStatement(query);
 
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 
 			applicationDTOs = new ArrayList<ApplicationDTO>();
 			ApplicationDTO application = null;
@@ -103,6 +106,7 @@ public class ApplicationDAO {
 				applicationDTOs.add(application);
 			}
 		} finally {
+			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 

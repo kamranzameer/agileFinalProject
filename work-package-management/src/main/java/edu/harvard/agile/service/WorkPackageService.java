@@ -39,8 +39,8 @@ public class WorkPackageService {
 		{
 			connection = DBUtil.getConnection();
 		//Create WorkPakcage
-			WorkPackageDAO workPackageDAO = new WorkPackageDAO(connection);
-			WorkRequestDAO workRequestDAO = new WorkRequestDAO(connection);
+			WorkPackageDAO workPackageDAO = new WorkPackageDAO();
+			WorkRequestDAO workRequestDAO = new WorkRequestDAO();
 			workPackage = workPackageDAO.createPackage(workPackage);
 			
 			//Create WorkRequest for every impacted application
@@ -56,7 +56,7 @@ public class WorkPackageService {
 				workRequest.setEndDate(workPackage.getEndDate());
 				workRequest.setModifiedBy(workPackage.getModifiedBy());
 				
-				workRequestDAO.createWorkRequest(workRequest);
+				workRequestDAO.createWorkRequest(workRequest, connection);
 			}
 			
 			connection.commit();

@@ -19,19 +19,7 @@ import edu.harvard.agile.util.DBUtil;
  */
 public class WorkRequestDAO {
 
-	private Connection connection;
 	
-	public WorkRequestDAO(Connection connection) {
-		super();
-		this.connection = connection;
-	}
-	
-	//TODO : This constructor should be removed and SQL connection should be accepted from service class for better transaction management
-	public WorkRequestDAO()
-	{
-		
-	}
-
 	/**
 	 * Find by primary key method to find the record by WorkRequest id.
 	 * 
@@ -50,6 +38,7 @@ public class WorkRequestDAO {
 
 		Connection con = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		List<WorkRequestDTO> workRequestDTOs = new ArrayList<WorkRequestDTO>();
 		
 		try {
@@ -57,7 +46,7 @@ public class WorkRequestDAO {
 			String query = "SELECT WORK_REQUEST_ID,PACKAGE_ID,STATUS,START_DATE,END_DATE FROM WORK_REQUEST where APPLICATION_ID = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, id);
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 			WorkRequestDTO workRequest = null;
 			
 			while (rs.next()) {
@@ -72,6 +61,7 @@ public class WorkRequestDAO {
 				workRequestDTOs.add(workRequest);
 			}
 		} finally {
+			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 
@@ -98,12 +88,13 @@ public class WorkRequestDAO {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		WorkRequestDTO WorkRequest = null;
+		ResultSet rs = null;
 		try {
 			con = DBUtil.getConnection();
 			String query = "SELECT PACKAGE_ID,STATUS,START_DATE,END_DATE,APPLICATION_ID FROM WORK_REQUEST where WORK_REQUEST_ID = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setInt(1, id);
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				WorkRequest = new WorkRequestDTO();
@@ -115,6 +106,7 @@ public class WorkRequestDAO {
 				WorkRequest.setStatus(rs.getString("STATUS"));
 			}
 		} finally {
+			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 
@@ -138,6 +130,7 @@ public class WorkRequestDAO {
 
 		Connection con = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		List<WorkRequestDTO> workRequestDTOs = null;
 		try {
 
@@ -145,7 +138,7 @@ public class WorkRequestDAO {
 			String query = "SELECT WORK_REQUEST_ID,PACKAGE_ID,APPLICATION_ID,STATUS,START_DATE,END_DATE FROM WORK_REQUEST";
 			stmt = con.prepareStatement(query);
 
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 
 			workRequestDTOs = new ArrayList<WorkRequestDTO>();
 			WorkRequestDTO workRequest = null;
@@ -162,6 +155,7 @@ public class WorkRequestDAO {
 				workRequestDTOs.add(workRequest);
 			}
 		} finally {
+			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 
@@ -177,7 +171,7 @@ public class WorkRequestDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public WorkRequestDTO createWorkRequest(WorkRequestDTO workRequest) throws Exception {
+	public WorkRequestDTO createWorkRequest(WorkRequestDTO workRequest, Connection connection) throws Exception {
 		/*
 		 * Get connection from DBUtil, set the parameters for the statement and
 		 * executes insert query. Uses oracle sequence as primary key. Returns
@@ -208,7 +202,6 @@ public class WorkRequestDAO {
 		}  
 		finally {
 			DBUtil.closeStatement(stmt);
-
 		}
 	}
 

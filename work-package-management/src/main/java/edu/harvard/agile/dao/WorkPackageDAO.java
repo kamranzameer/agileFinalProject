@@ -21,12 +21,6 @@ import edu.harvard.agile.util.DBUtil;
  */
 public class WorkPackageDAO 
 {
-	private Connection connection;
-
-	public WorkPackageDAO(Connection connection) {
-		super();
-		this.connection = connection;
-	}
 	
 	//TODO : This constructor should be removed and SQL connection should be accepted from service class for better transaction management
 	public WorkPackageDAO()
@@ -52,6 +46,7 @@ public class WorkPackageDAO
 
 		Connection con = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		WorkPackageDTO workPackage = null;
 		try {
 			con = DBUtil.getConnection();
@@ -59,7 +54,7 @@ public class WorkPackageDAO
 					+ "FROM WORK_PACKAGE where package_id = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setInt(1, id);
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				workPackage = new WorkPackageDTO();
@@ -75,6 +70,7 @@ public class WorkPackageDAO
 				workPackage.setStatus(rs.getString("STATUS"));
 			}
 		} finally {
+			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 
@@ -100,6 +96,7 @@ public class WorkPackageDAO
 
 		Connection con = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		WorkPackageDTO workPackage = null;
 		try {
 			con = DBUtil.getConnection();
@@ -107,7 +104,7 @@ public class WorkPackageDAO
 					+ "FROM WORK_PACKAGE where PACKAGE_NAME = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, packageName);
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				workPackage = new WorkPackageDTO();
@@ -123,6 +120,7 @@ public class WorkPackageDAO
 				workPackage.setStatus(rs.getString("STATUS"));
 			}
 		} finally {
+			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 
@@ -146,6 +144,7 @@ public class WorkPackageDAO
 
 		Connection con = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		List<WorkPackageDTO> workPackages = null;
 		try {
 
@@ -153,7 +152,7 @@ public class WorkPackageDAO
 			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS FROM WORK_PACKAGE";
 			stmt = con.prepareStatement(query);
 
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 
 			workPackages = new ArrayList<WorkPackageDTO>();
 			WorkPackageDTO workPackage = null;
@@ -175,6 +174,7 @@ public class WorkPackageDAO
 				workPackages.add(workPackage);
 			}
 		} finally {
+			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 
@@ -198,6 +198,7 @@ public class WorkPackageDAO
 		 * Commits the transaction and rolls back if any exception occurs.
 		 */
 		PreparedStatement stmt = null;
+		Connection connection = null;
 		try {
 			int seqId = DBUtil.getNextSequence("package_id_seq");
 
@@ -227,6 +228,7 @@ public class WorkPackageDAO
 		
 		finally {
 			DBUtil.closeStatement(stmt);
+			DBUtil.closeConnection(connection);
 
 		}
 	}
@@ -342,6 +344,7 @@ public class WorkPackageDAO
 		Connection con = null;
 		PreparedStatement stmt = null;
 		List<WorkPackageDTO> workPackages = null;
+		ResultSet rs = null;
 		try {
 
 			con = DBUtil.getConnection();
@@ -351,7 +354,7 @@ public class WorkPackageDAO
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, user.getUserId());
 
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 
 			workPackages = new ArrayList<WorkPackageDTO>();
 			WorkPackageDTO workPackage = null;
@@ -376,6 +379,7 @@ public class WorkPackageDAO
 				workPackages.add(workPackage);
 			}
 		} finally {
+			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 

@@ -60,6 +60,27 @@ public class DBUtil {
 		return false;
 
 	}
+	
+	
+	/**
+	 * This method is to close a statement that is open.
+	 * @param stmt
+	 * @return
+	 */
+	public static boolean closeRS(ResultSet rs){
+
+		if (rs != null) {
+			try {
+				rs.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return false;
+
+	}
 
 	
 	/**

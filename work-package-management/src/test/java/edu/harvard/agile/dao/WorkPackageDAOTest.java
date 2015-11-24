@@ -113,8 +113,7 @@ public class WorkPackageDAOTest {
 
 		try
 		{
-			con = DBUtil.getConnection();
-			WorkPackageDAO workPackageDAO  = new WorkPackageDAO(con);
+			WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
 			WorkPackageDTO workPackage = new WorkPackageDTO();
 			workPackage.setContractFromYear(new Date());
 			workPackage.setContractToYear(new Date());
@@ -129,7 +128,6 @@ public class WorkPackageDAOTest {
 			workPackage.setModifiedBy("junit");
 
 			WorkPackageDTO workDTO = workPackageDAO.createPackage(workPackage);
-			con.commit();
 			assertTrue(workDTO.getPackageId()!=0);
 			
 		}
@@ -158,8 +156,7 @@ public class WorkPackageDAOTest {
 
 		try
 		{
-			con = DBUtil.getConnection();
-			WorkPackageDAO workPackageDAO  = new WorkPackageDAO(con);
+			WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
 			WorkPackageDTO workPackage = new WorkPackageDTO();
 			workPackage.setContractFromYear(new Date());
 			workPackage.setContractToYear(new Date());
@@ -172,7 +169,6 @@ public class WorkPackageDAOTest {
 			workPackage.setCreateBy("uannipu");
 			workPackage.setModifiedBy("uannipu");
 			workPackageDAO.createPackage(workPackage);
-			con.commit();
 		}
 		catch(Exception ex)
 		{

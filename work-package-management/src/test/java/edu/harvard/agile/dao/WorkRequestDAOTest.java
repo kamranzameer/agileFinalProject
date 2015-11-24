@@ -41,7 +41,7 @@ public class WorkRequestDAOTest {
 		try
 		{
 			con = DBUtil.getConnection();
-			WorkRequestDAO workRequestDAO  = new WorkRequestDAO(con);
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 			WorkRequestDTO workRequest = new WorkRequestDTO();
 			workRequest.setPackageId(1);
 			workRequest.setApplicationId("eSS");
@@ -51,7 +51,7 @@ public class WorkRequestDAOTest {
 			workRequest.setCreateBy("uannipu");
 			workRequest.setModifiedBy("uannipu");
 
-			workRequest = workRequestDAO.createWorkRequest(workRequest);
+			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			assertTrue(workRequest.getWorkRequestId()!=0);
 			con.commit();
 		}
@@ -73,7 +73,7 @@ public class WorkRequestDAOTest {
 		try
 		{
 			con = DBUtil.getConnection();
-			WorkRequestDAO workRequestDAO  = new WorkRequestDAO(con);
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 
 			WorkRequestDTO workRequest = new WorkRequestDTO();
 			workRequest.setApplicationId("eSS");
@@ -83,7 +83,7 @@ public class WorkRequestDAOTest {
 			workRequest.setCreateBy("uannipu");
 			workRequest.setModifiedBy("uannipu");
 
-			workRequest = workRequestDAO.createWorkRequest(workRequest);
+			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			con.commit();
 		}
 		catch(Exception ex)
@@ -104,7 +104,7 @@ public class WorkRequestDAOTest {
 		try
 		{
 			con = DBUtil.getConnection();
-			WorkRequestDAO workRequestDAO  = new WorkRequestDAO(con);
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 			WorkRequestDTO workRequest = new WorkRequestDTO();
 			workRequest.setPackageId(1);
 			workRequest.setStatus("Open");
@@ -113,7 +113,7 @@ public class WorkRequestDAOTest {
 			workRequest.setCreateBy("uannipu");
 			workRequest.setModifiedBy("uannipu");
 
-			workRequest = workRequestDAO.createWorkRequest(workRequest);
+			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			con.commit();
 		}
 		catch(Exception ex)
@@ -134,7 +134,7 @@ public class WorkRequestDAOTest {
 		try
 		{
 			con = DBUtil.getConnection();
-			WorkRequestDAO workRequestDAO  = new WorkRequestDAO(con);
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 			WorkRequestDTO workRequest = new WorkRequestDTO();
 			workRequest.setPackageId(123456);
 			workRequest.setApplicationId("eSS");
@@ -144,7 +144,7 @@ public class WorkRequestDAOTest {
 			workRequest.setCreateBy("uannipu");
 			workRequest.setModifiedBy("uannipu");
 
-			workRequest = workRequestDAO.createWorkRequest(workRequest);
+			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			con.commit();
 		}
 		catch(Exception ex)
@@ -165,7 +165,7 @@ public class WorkRequestDAOTest {
 		try
 		{
 			con = DBUtil.getConnection();
-			WorkRequestDAO workRequestDAO  = new WorkRequestDAO(con);
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 			WorkRequestDTO workRequest = new WorkRequestDTO();
 			workRequest.setPackageId(1);
 			workRequest.setApplicationId("invalid application id");
@@ -175,7 +175,7 @@ public class WorkRequestDAOTest {
 			workRequest.setCreateBy("uannipu");
 			workRequest.setModifiedBy("uannipu");
 
-			workRequest = workRequestDAO.createWorkRequest(workRequest);
+			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			con.commit();
 		}
 		catch(Exception ex)

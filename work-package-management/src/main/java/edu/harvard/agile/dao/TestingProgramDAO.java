@@ -34,6 +34,7 @@ public class TestingProgramDAO {
 
 		Connection con = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		List<TestingProgramDTO> testingProgramDTOs = null;
 		try {
 
@@ -41,7 +42,7 @@ public class TestingProgramDAO {
 			String query = "SELECT TESTING_PROGRAM_CODE, TESTING_PROGRAM_DESC FROM  TESTING_PROGRAM";
 			stmt = con.prepareStatement(query);
 
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 
 			testingProgramDTOs = new ArrayList<TestingProgramDTO>();
 			TestingProgramDTO testingProgram = null;
@@ -54,6 +55,7 @@ public class TestingProgramDAO {
 				testingProgramDTOs.add(testingProgram);
 			}
 		} finally {
+			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
 			DBUtil.closeConnection(con);
 

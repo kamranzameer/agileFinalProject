@@ -190,7 +190,7 @@ public class WorkPackageDAO
 	 * @return
 	 * @throws Exception
 	 */
-	public WorkPackageDTO createPackage(WorkPackageDTO workPackage) throws Exception {
+	public WorkPackageDTO createPackage(WorkPackageDTO workPackage, Connection connection ) throws Exception {
 		/*
 		 * Get connection from DBUtil, set the parameters for the statement and
 		 * executes insert query. Uses oracle sequence as primary key. Returns
@@ -198,7 +198,6 @@ public class WorkPackageDAO
 		 * Commits the transaction and rolls back if any exception occurs.
 		 */
 		PreparedStatement stmt = null;
-		Connection connection = null;
 		try {
 			int seqId = DBUtil.getNextSequence("package_id_seq");
 
@@ -228,8 +227,6 @@ public class WorkPackageDAO
 		
 		finally {
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(connection);
-
 		}
 	}
 

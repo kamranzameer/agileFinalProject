@@ -41,7 +41,7 @@ public class WorkPackageService {
 		//Create WorkPakcage
 			WorkPackageDAO workPackageDAO = new WorkPackageDAO();
 			WorkRequestDAO workRequestDAO = new WorkRequestDAO();
-			workPackage = workPackageDAO.createPackage(workPackage);
+			workPackage = workPackageDAO.createPackage(workPackage, connection);
 			
 			//Create WorkRequest for every impacted application
 			List<ApplicationDTO> impactedApplications = workPackage.getImpactedApplications();

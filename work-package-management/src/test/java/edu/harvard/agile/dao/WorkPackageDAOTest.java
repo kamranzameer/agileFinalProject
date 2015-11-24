@@ -109,7 +109,7 @@ public class WorkPackageDAOTest {
 	 */
 	@Test
 	public void testCreatePackage() throws Exception {
-		Connection con = null;
+		Connection connection = DBUtil.getConnection();
 
 		try
 		{
@@ -127,17 +127,23 @@ public class WorkPackageDAOTest {
 			workPackage.setCreateBy("junit");
 			workPackage.setModifiedBy("junit");
 
-			WorkPackageDTO workDTO = workPackageDAO.createPackage(workPackage);
+			WorkPackageDTO workDTO = workPackageDAO.createPackage(workPackage, connection);
 			assertTrue(workDTO.getPackageId()!=0);
 			
 		}
 		catch(Exception ex)
 		{
-			con.rollback();
+			if(connection!= null)
+			{
+				connection.rollback();
+			}
 		}
 		finally
 		{
-			DBUtil.closeConnection(con);
+			if(connection!=null)
+			{
+				DBUtil.closeConnection(connection);
+			}
 		}
 
 	}
@@ -152,7 +158,7 @@ public class WorkPackageDAOTest {
 
 	public void testCreatePackageWithoutPackageName() throws Exception {
 
-		Connection con = null;
+		Connection connection = DBUtil.getConnection();
 
 		try
 		{
@@ -168,16 +174,20 @@ public class WorkPackageDAOTest {
 			workPackage.setEndDate(new Date());
 			workPackage.setCreateBy("uannipu");
 			workPackage.setModifiedBy("uannipu");
-			workPackageDAO.createPackage(workPackage);
+			workPackageDAO.createPackage(workPackage, connection);
 		}
 		catch(Exception ex)
 		{
-			con.rollback();
+			if(connection!=null){
+				connection.rollback();
+			}
 			throw ex;
 		}
 		finally
 		{
-			DBUtil.closeConnection(con);
+			if(connection!=null){
+				DBUtil.closeConnection(connection);
+			}
 		}
 	}
 

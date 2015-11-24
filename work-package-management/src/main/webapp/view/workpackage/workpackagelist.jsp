@@ -72,7 +72,7 @@
 										
 										<tr>
 											<td colspan="6" align="right">
-												<a href="workspace.jsp?p=cnwp" class="btn btn-success">New</a>
+												<a href="newWorkPackage.action" class="btn btn-success">New</a>
 											</td>
 										</tr>
 

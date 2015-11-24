@@ -8,15 +8,28 @@
     <bean id="indexAction" class="edu.harvard.agile.IndexAction"></bean>
     
     <bean id="workPackageDAO" class= "edu.harvard.agile.dao.WorkPackageDAO"/>
+    <bean id="applicationDAO" class= "edu.harvard.agile.dao.ApplicationDAO"/>
+    <bean id="testingProgramDAO" class= "edu.harvard.agile.dao.TestingProgramDAO"/>
     
     <bean id="workPackageService" class= "edu.harvard.agile.service.WorkPackageService">
     	<property name="workPackageDAO" ref="workPackageDAO"/>
+    </bean>
+    
+    <bean id="testingProgramService" class= "edu.harvard.agile.service.TestingProgramService">
+    	<property name="testingProgramDAO" ref="testingProgramDAO"/>
+    </bean>
+    
+    <bean id="applicationService" class= "edu.harvard.agile.service.ApplicationService">
+    	<property name="applicationDAO" ref="applicationDAO"/>
     </bean>
     
     <bean id="workPackageListAction" class="edu.harvard.agile.action.WorkPackageListAction">
     	<property name="workPackageService" ref="workPackageService"/>
     </bean>
     
-    
-
+    <bean id="workPackageAction" class="edu.harvard.agile.action.WorkPackageAction">
+    	<property name="workPackageService" ref="workPackageService"/>
+    	<property name="applicationService" ref="applicationService"/>
+    	<property name="testingProgramService" ref="testingProgramService"/>
+    </bean>
 </beans>

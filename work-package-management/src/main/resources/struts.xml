@@ -6,6 +6,7 @@
 <struts>
 
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
 
 	<package name="wpm" extends="struts-default">
 
@@ -14,14 +15,17 @@
         <action name="workPackageList"  class="workPackageListAction">
             <result>/view/workspace.jsp</result>
         </action>
-
+        
+        <action name="newWorkPackage"  class="edu.harvard.agile.action.WorkPackageAction">
+            <result name="success">/view/workspace.jsp</result>
+        </action>
+        <action name="saveWorkPackage"  class="edu.harvard.agile.action.WorkPackageAction" method="save">
+            <result name="success">/view/workspace.jsp</result>
+        </action>
+        
 		<action name="helloWorld" class="helloWorldAction">
 			<result name="input">/jsp/index.jsp</result>
 			<result>/jsp/helloWorld.jsp</result>
-		</action>
-
-		<action name="workpackage" class="edu.harvard.agile.action.WorkPackageAction">
-			<result name="success">view/workspace.jsp?p=wpl</result>
 		</action>
 
 	</package>

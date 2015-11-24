@@ -118,15 +118,15 @@ public class WorkPackageDAOTest {
 			WorkPackageDTO workPackage = new WorkPackageDTO();
 			workPackage.setContractFromYear(new Date());
 			workPackage.setContractToYear(new Date());
-			workPackage.setPackageName("TestPackage");
+			workPackage.setPackageName("TestPackage for delete");
 			workPackage.setPackageDesc("TestPackageDesc");
 			workPackage.setRequestorName("Joe");
 			workPackage.setTestingProgramCode("GRE");
 			workPackage.setStatus("Open");
 			workPackage.setStartDate(new Date());
 			workPackage.setEndDate(new Date());
-			workPackage.setCreateBy("uannipu");
-			workPackage.setModifiedBy("uannipu");
+			workPackage.setCreateBy("junit");
+			workPackage.setModifiedBy("junit");
 
 			WorkPackageDTO workDTO = workPackageDAO.createPackage(workPackage);
 			con.commit();
@@ -177,6 +177,7 @@ public class WorkPackageDAOTest {
 		catch(Exception ex)
 		{
 			con.rollback();
+			throw ex;
 		}
 		finally
 		{
@@ -316,8 +317,8 @@ public class WorkPackageDAOTest {
 	public void testDeleteByPackageName() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
 
-		workPackageDAO.deleteByPackageName("TestPackage");
-		WorkPackageDTO workPackage = workPackageDAO.findByPackageName("TestPackage");
+		workPackageDAO.deleteByPackageName("TestPackage for delete");
+		WorkPackageDTO workPackage = workPackageDAO.findByPackageName("TestPackage for delete");
 		assertNull(workPackage); 
 		
 	}

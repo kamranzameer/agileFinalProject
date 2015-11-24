@@ -57,4 +57,9 @@ public class TestingProgramDTO extends ModelBase {
 		this.createBy = createBy;
 	}
 
+	@Override
+	public String toString() {
+		return testingProgramDesc;
+	}
+
 }

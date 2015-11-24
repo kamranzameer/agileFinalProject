@@ -114,4 +114,11 @@ public class ApplicationDTO extends ModelBase {
 		getApplicationContactsDTOs().add(applicationContacts);
 	}
 
+	@Override
+	public String toString() {
+		return applicationName;
+	}
+	
+	
+
 }

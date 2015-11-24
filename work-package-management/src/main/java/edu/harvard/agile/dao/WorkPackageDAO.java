@@ -68,6 +68,9 @@ public class WorkPackageDAO
 				workPackage.setStartDate(rs.getDate("START_DATE"));
 				workPackage.setEndDate(rs.getDate("END_DATE"));
 				workPackage.setStatus(rs.getString("STATUS"));
+				workPackage.setTotalApplications(getTotalApplications(rs.getInt("PACKAGE_ID")));
+				workPackage.setTotalCost(getWorkPackageTotalCost(rs.getInt("PACKAGE_ID")));
+				
 			}
 		} finally {
 			DBUtil.closeRS(rs);
@@ -170,6 +173,9 @@ public class WorkPackageDAO
 				workPackage.setStartDate(rs.getDate("START_DATE"));
 				workPackage.setEndDate(rs.getDate("END_DATE"));
 				workPackage.setStatus(rs.getString("STATUS"));
+				
+				workPackage.setTotalApplications(getTotalApplications(rs.getInt("PACKAGE_ID")));
+				workPackage.setTotalCost(getWorkPackageTotalCost(rs.getInt("PACKAGE_ID")));
 
 				workPackages.add(workPackage);
 			}
@@ -417,6 +423,77 @@ public class WorkPackageDAO
 		}
 		
 	}
+	
+	public Integer getWorkPackageTotalCost(Integer workPackageId) throws Exception{
+		StringBuilder query = new StringBuilder("");
+		query.append(" SELECT SUM (HOURLY_RATE * TOTAL_HOURS) ");
+		query.append(" FROM   (SELECT A.RESOURCE_TYPE_ID,  ");
+		query.append("                B.HOURLY_RATE,  ");
+		query.append("                SUM (ESTIMATED_HOURS) total_hours  ");
+		query.append("         FROM   ACTIVITY_PHASE_RESOURCES A,  ");
+		query.append("                RESOURCE_TYPE B,  ");
+		query.append("                ACTIVITY_LINE C,  ");
+		query.append("                WORK_REQUEST D  ");
+		query.append("         WHERE  A.RESOURCE_TYPE_ID = B.RESOURCE_TYPE_ID  ");
+		query.append("                AND A.ACTIVITY_LINE_ID = C.ACTIVITY_LINE_ID  ");
+		query.append("                AND C.WORK_REQUEST_ID = D.WORK_REQUEST_ID  ");
+		query.append("                AND D.PACKAGE_ID = ?  ");
+		query.append("         GROUP  BY A.RESOURCE_TYPE_ID,  ");
+		query.append("                   B.HOURLY_RATE) ");
+		
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DBUtil.getConnection();
+			stmt = con.prepareStatement(query.toString());
+			stmt.setInt(1, workPackageId);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} finally {
+			DBUtil.closeRS(rs);
+			DBUtil.closeStatement(stmt);
+			DBUtil.closeConnection(con);
+
+		}
+
+		return null;
+		
+		
+		
+	}
+	
+	
+	public Integer getTotalApplications(Integer workPackageId) throws Exception{
+		String query =  "SELECT COUNT(1) FROM WORK_REQUEST WHERE PACKAGE_ID = ?";
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DBUtil.getConnection();
+			stmt = con.prepareStatement(query.toString());
+			stmt.setInt(1, workPackageId);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} finally {
+			DBUtil.closeRS(rs);
+			DBUtil.closeStatement(stmt);
+			DBUtil.closeConnection(con);
+
+		}
+
+		return null;
+	}
+
 
 
 	

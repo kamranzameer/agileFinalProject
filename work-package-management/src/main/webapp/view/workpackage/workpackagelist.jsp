@@ -28,7 +28,7 @@
 												# of Applications
 											</th>
 											<th>
-												% Estiamte Received
+												Total Estimate Received
 											</th>
 											<th>
 												Status
@@ -48,10 +48,10 @@
 													${workPackage.createDate}
 												</td>
 												<td>
-													3
+													${workPackage.totalApplications}
 												</td>
 												<td>
-													2
+													${workPackage.totalCost}
 												</td>
 												<td>
 													${workPackage.status}

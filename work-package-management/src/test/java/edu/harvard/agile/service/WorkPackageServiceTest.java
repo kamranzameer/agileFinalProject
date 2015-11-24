@@ -52,7 +52,7 @@ public class WorkPackageServiceTest {
 		WorkPackageDTO workPackage = new WorkPackageDTO();
 		workPackage.setContractFromYear(new Date());
 		workPackage.setContractToYear(new Date());
-		workPackage.setPackageName("TestPackageService");
+		workPackage.setPackageName("TestPackageService : "+System.currentTimeMillis());
 		workPackage.setPackageDesc("TestPackage through service");
 		workPackage.setRequestorName("Joe");
 		workPackage.setTestingProgramCode("GRE");

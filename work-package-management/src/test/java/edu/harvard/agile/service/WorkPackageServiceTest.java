@@ -99,5 +99,13 @@ public class WorkPackageServiceTest {
 		new WorkPackageService().createPackage(workPackage);
 		
 	}
+	
+	@Test
+	public void testFindCountBystatus() throws Exception {
+		WorkPackageService workPackageService = new WorkPackageService();
+		int count = workPackageService.findCountByStatus("Open");
+		assertTrue(count >0);
+	}
+
 
 }

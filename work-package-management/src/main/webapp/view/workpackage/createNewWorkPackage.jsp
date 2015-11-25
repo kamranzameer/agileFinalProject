@@ -22,13 +22,13 @@
 												<label class="control-label" for="packageName">
 													Package Name
 												</label>
-												<input class="form-control" id="packageName" name="packageName" placeholder="Enter package name" required>
+												<input class="form-control" id="packageName" name="workPackageDTO.packageName" placeholder="Enter package name" required>
 											</div>
 											<div class="col-md-6">
 												<label class="control-label" for="packageDesc">
 													Package Description
 												</label>
-												<input class="form-control" id="packageDesc" name="packageDesc" placeholder="Enter package description" type="text" required>
+												<input class="form-control" id="packageDesc" name="workPackageDTO.packageDesc" placeholder="Enter package description" type="text" required>
 											</div>
 										</div>
 										<div class="form-group">
@@ -36,7 +36,7 @@
 												<label class="control-label" for="testingProgramCode">
 													Select Testing Program
 												</label>
-												<select class="form-control" tooltip="Select Test Program" name="testingProgramCode" value="testingProgramCode" required>
+												<select class="form-control" tooltip="Select Test Program" name="workPackageDTO.testingProgramCode" value="testingProgramCode" required>
 												<s:iterator var = "testProgram" value="testPrograms">
 												<option value="${testProgram.testingProgramCode}">${testProgram.testingProgramDesc}</option>
 											</s:iterator>
@@ -46,7 +46,7 @@
 												<label class="control-label" for="requestor">
 													Requestor
 												</label>
-												<label class="form-control" id="requestorName" name="requestorName">
+												<label class="form-control" id="requestorName" name="workPackageDTO.requestorName">
 													<shiro:principal/>
 												</label>
 												<!-- <input class="form-control" id="requestorName" name="requestorName" placeholder="Enter name of Requestor" type="text">-->
@@ -81,13 +81,12 @@
 												<input class="form-control" id="endDate" name="endDate" placeholder="Enter End Date" type="date" required>
 											</div>
 										</div>
-										
 										<div class="form-group">
 											<div class="col-md-6">
 												<label class="control-label" for="status">
 													Status
 												</label>
-												<select class="form-control" id="status" name="status" required>
+												<select class="form-control" id="status" name="workPackageDTO.status" required>
 													<option value="open">open</option>
 												</select>
 											</div>
@@ -98,13 +97,13 @@
 													Choose Impacted Applications
 												</label>
 												<br/>
-										<select tooltip="Choose Impacted Applications" multiple="true" class="form-control"
-											id="impactedApplications" name="impactedApplications" required>
-											<s:iterator var = "application" value="applications">
-												<option value="${application.applicationId}">${application.applicationName}</option>
-											</s:iterator>
-										</select>
-									</div>
+												<select tooltip="Choose Impacted Applications" multiple="true" class="form-control"
+													id="impactedApplications" name="impactedApplications" required>
+													<s:iterator var = "application" value="applications">
+													<option value="${application.applicationId}">${application.applicationName}</option>
+													</s:iterator>
+												</select>
+											</div>
 										</div>
 								</div>
 							</div>

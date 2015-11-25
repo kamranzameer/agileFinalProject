@@ -54,4 +54,8 @@
     	<property name="applicationService" ref="applicationService"/>
     	<property name="testingProgramService" ref="testingProgramService"/>
     </bean>
+    
+      <bean id="dashboardAction" class="edu.harvard.agile.action.DashboardAction">
+    	<property name="workPackageService" ref="workPackageService"/>
+    </bean>
 </beans>

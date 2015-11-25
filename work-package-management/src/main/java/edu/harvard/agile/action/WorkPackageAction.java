@@ -1,5 +1,6 @@
 package edu.harvard.agile.action;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -20,8 +21,13 @@ public class WorkPackageAction extends WPMActionBase {
 	private List<ApplicationDTO> applications;
 	private List<String> impactedApplications;
 	private List<TestingProgramDTO> testPrograms;
-	//private TestingProgramDTO selectedTestProgram;
-	private boolean save;
+	String[] statusArr = {"open"};
+	private List<String> statusList = Arrays.asList(statusArr);
+	private String contractFromYear;
+	private String contractToYear;
+	private String startDate;
+	private String endDate;
+	
 
 	@Override
 	public void prepare() throws Exception {
@@ -30,11 +36,6 @@ public class WorkPackageAction extends WPMActionBase {
 		
 	}
 	
-	public void setSave(boolean isSave)
-	{
-		this.save = isSave;
-	}
-
 	public String execute(){
 		ServletActionContext.getRequest().setAttribute("p", "cnwp");
 		return SUCCESS;
@@ -44,9 +45,13 @@ public class WorkPackageAction extends WPMActionBase {
 	{
 		System.out.println("Save");
 		try {
-			
-			
-			processNewPackage();
+			System.out.println(workPackageDTO.getPackageName());
+			System.out.println(workPackageDTO.getPackageDesc());
+			System.out.println(workPackageDTO.getTestingProgramCode());
+			System.out.println(contractFromYear);
+			System.out.println(workPackageDTO.getStatus());
+			System.out.println(getImpactedApplications());
+			//processNewPackage();
 		} catch (Exception e) {
 			e.printStackTrace();
 			//return ERROR;
@@ -106,6 +111,51 @@ public class WorkPackageAction extends WPMActionBase {
 
 	public void setTestPrograms(List<TestingProgramDTO> testPrograms) {
 		this.testPrograms = testPrograms;
+	}
+	
+	public List<String> getStatusList() {
+		return statusList;
+	}
+
+	public void setStatusList(List<String> statusList) {
+		this.statusList = statusList;
+	}
+	
+	public String getContractFromYear() {
+		return contractFromYear;
+	}
+
+	public void setContractFromYear(String contractFromYear) {
+		this.contractFromYear = contractFromYear;
+	}
+
+	public String getContractToYear() {
+		return contractToYear;
+	}
+
+	public void setContractToYear(String contractToYear) {
+		this.contractToYear = contractToYear;
+	}
+	
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	
+	
+	//private TestingProgramDTO selectedTestProgram;
+	//private boolean save;
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 }

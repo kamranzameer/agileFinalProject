@@ -19,6 +19,8 @@
 	    	currentPage = "workrequest/workRequestPackageDetail.jsp";
 	    }else if (currentPage.equals("wps")){
 	    	currentPage = "workpackage/workPackageStatistics.jsp";
+	    }else{
+	    	currentPage = "dashboard.jsp";
 	    }
 
 	}else{
@@ -61,9 +63,9 @@
 		        <div class="col-md-12">
 				<div class="bs-docs-sidebar hidden-print affix col-md-2" role="complementary" style="background-color: rgba(11, 43, 50, 0.82)">
 				    <ul class="nav bs-docs-sidenav">
-		                <li><a href="dashboard.action"><i class="glyphicon glyphicon-dashboard">&nbsp;</i>Dashboard</a></li>
+		                <li class=""><a href="myDashboard.action"><i class="glyphicon glyphicon-dashboard">&nbsp;</i>Dashboard</a></li>
 
-		                <li><a href="workspace.jsp?p=ecit"><i class="glyphicon glyphicon-user">&nbsp;</i>Profile</a></li>
+		                <li class=""><a href="workspace.jsp?p=ecit"><i class="glyphicon glyphicon-user">&nbsp;</i>Profile</a></li>
 						
 						<shiro:hasAnyRoles name="DM,BU">
 						<li class=""> <a href="workPackageList.action" data-toggle="collapse" data-target="#workPackageMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages</a>
@@ -75,15 +77,14 @@
 						<li class=""> <a href="workRequestList.action" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Requests</a>
 						</li>
 
-		                <li><a href="workspace.jsp?p=cp" onclick="javascript:$( '#workspace' ).load( 'changepassword.jsp' )"><i class="glyphicon glyphicon-lock">&nbsp;</i> Change Password</a></li>
-		                <li><a href="../logout"><i class="glyphicon glyphicon-off">&nbsp;</i>Sign Out</a>&nbsp;</li>
+		                <li class=""> <a href="workspace.jsp?p=cp" onclick="javascript:$( '#workspace' ).load( 'changepassword.jsp' )"><i class="glyphicon glyphicon-lock">&nbsp;</i> Change Password</a></li>
+		                <li class=""><a href="../logout"><i class="glyphicon glyphicon-off">&nbsp;</i>Sign Out</a>&nbsp;</li>
 				    </ul>
 				</div>
 	        	</div>
         	</div>
         </div>
         <div class="col-md-9" id="workspace">
-			<cfinclude template=#destPage# />
 			<jsp:include page="<%=currentPage%>"/>
         </div>
     </div>

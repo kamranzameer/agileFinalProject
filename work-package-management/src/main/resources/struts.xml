@@ -21,21 +21,18 @@
             <result>/view/workspace.jsp</result>
         </action>
         
-        <action name="newWorkPackage"  class="edu.harvard.agile.action.WorkPackageAction">
+        <action name="newWorkPackage"  class="workPackageAction">
             <result name="success">/view/workspace.jsp</result>
         </action>
-        <action name="saveWorkPackage"  class="edu.harvard.agile.action.WorkPackageAction" method="save">
+        <action name="saveWorkPackage"  class="workPackageAction" method="save">
             <result name="success">/view/workspace.jsp</result>
         </action>
         
-        <action name="dashboard" class="edu.harvard.agile.action.DashboardAction" method="execute">
-        	<result name="success">/view/workspace.jsp</result>
+        <action name="myDashboard" class="dashboardAction">
+        	<result>/view/workspace.jsp</result>
 		</action>
         
-		<action name="helloWorld" class="helloWorldAction">
-			<result name="input">/jsp/index.jsp</result>
-			<result>/jsp/helloWorld.jsp</result>
-		</action>
+		
 
 	</package>
 

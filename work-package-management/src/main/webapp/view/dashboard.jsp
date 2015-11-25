@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <div class="row clearfix">
     <div class="col-md-12 column">

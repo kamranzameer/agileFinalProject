@@ -121,7 +121,6 @@ public class WorkPackageDTO extends ModelBase {
 	}
 
 	public Date getCreateDate() {
-		System.out.println("Returning create date --> " + createDate);
 		return createDate;
 	}
 

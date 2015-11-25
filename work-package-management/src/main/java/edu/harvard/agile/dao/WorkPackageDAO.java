@@ -501,5 +501,47 @@ public class WorkPackageDAO
 
 
 
+	/**
+	 * Find total count by status.
+	 * 
+	 * @param status
+	 *            - such as open, inprogress, approved
+	 * @return -  total count
+	 * @throws Exception
+	 */
+	public int findCountByStatus(String status) throws Exception {
+
+		/*
+		 * Get connection from DBUtil, executes select query and initializes the
+		 * object with values returned from the database and returns the work
+		 * package DTO.
+		 */
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			con = DBUtil.getConnection();
+			String query = "SELECT count(PACKAGE_ID) "
+					+ "FROM WORK_PACKAGE where status = ?";
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, status);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} finally {
+			DBUtil.closeRS(rs);
+			DBUtil.closeStatement(stmt);
+			DBUtil.closeConnection(con);
+
+		}
+
+		return count;
+	}
+	
+
 	
 }

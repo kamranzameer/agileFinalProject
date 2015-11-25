@@ -80,6 +80,22 @@ public class WorkPackageService {
 		return workPackage;
 
 	}
+	
+	/**
+	 * This method finds count by status. 
+	 * 
+	 * @param String status 
+	 * @return int count
+	 * @throws Exception
+	 */
+	public int findCountByStatus(String status) throws Exception {
+		
+			WorkPackageDAO workPackageDAO = new WorkPackageDAO();
+			int count = workPackageDAO.findCountByStatus(status);
+		
+		return count;
+
+	}
 
 	public void setWorkPackageDAO(WorkPackageDAO workPackageDAO) {
 		this.workPackageDAO = workPackageDAO;

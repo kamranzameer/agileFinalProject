@@ -329,5 +329,17 @@ public class WorkPackageDAOTest {
 		
 	}
 	
+	/**
+	 * This test is to test findCountByStatus method of DAO
+	 * @throws Exception
+	 */
+	@Test
+	public void testfindcountByStatus() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
+
+		int count = workPackageDAO.findCountByStatus("Open");
+		assertTrue(count > 0); 
+		
+	}
 
 }

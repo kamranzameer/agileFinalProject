@@ -37,17 +37,9 @@ public class WorkPackageServiceTest {
 	@Test
 	public void testCreatePackage() throws Exception 
 	{
-		List<ApplicationDTO> impactedApps = new ArrayList<ApplicationDTO>();
-		ApplicationDTO appDTO = new ApplicationDTO();
-		appDTO.setApplicationId("eSS");
-		appDTO.setApplicationName("enterprise Scoring System");
-		
-		ApplicationDTO appDTO1 = new ApplicationDTO();
-		appDTO1.setApplicationId("eRS");
-		appDTO1.setApplicationName("enterprise Reporting System");
-		
-		impactedApps.add(appDTO);
-		impactedApps.add(appDTO1);
+		List<String> impactedApps = new ArrayList<String>();
+		impactedApps.add("eRS");
+		impactedApps.add("eSS");
 		
 		WorkPackageDTO workPackage = new WorkPackageDTO();
 		workPackage.setContractFromYear(new Date());
@@ -71,17 +63,9 @@ public class WorkPackageServiceTest {
 	@Test(expected = SQLIntegrityConstraintViolationException.class)
 	public void testCreatePackageWithoutPackageName() throws Exception
 	{
-		List<ApplicationDTO> impactedApps = new ArrayList<ApplicationDTO>();
-		ApplicationDTO appDTO = new ApplicationDTO();
-		appDTO.setApplicationId("eSS");
-		appDTO.setApplicationName("enterprise Scoring System");
-		
-		ApplicationDTO appDTO1 = new ApplicationDTO();
-		appDTO1.setApplicationId("eRS");
-		appDTO1.setApplicationName("enterprise Reporting System");
-		
-		impactedApps.add(appDTO);
-		impactedApps.add(appDTO1);
+		List<String> impactedApps = new ArrayList<String>();
+		impactedApps.add("eRS");
+		impactedApps.add("eSS");
 		
 		WorkPackageDTO workPackage = new WorkPackageDTO();
 		workPackage.setContractFromYear(new Date());

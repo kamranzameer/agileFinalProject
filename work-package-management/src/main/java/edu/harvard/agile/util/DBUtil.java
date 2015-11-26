@@ -117,19 +117,22 @@ public class DBUtil {
 		String seqQuery = "Select " + seqName + ".nextVal from DUAL";
 		int seq = 0;
 		Connection con = null;
+		Statement st = null;
+		ResultSet rs = null;
 
 		try {
 			con = getConnection();
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(seqQuery);
+			st = con.createStatement();
+			rs = st.executeQuery(seqQuery);
 
 			if (rs.next()) {
 				seq = rs.getInt(1);
 			}
 		} finally {
-			if (con != null) {
-				con.close();
-			}
+			
+			closeStatement(st);
+			closeRS(rs);
+			closeConnection(con);
 		}
 
 		return seq;

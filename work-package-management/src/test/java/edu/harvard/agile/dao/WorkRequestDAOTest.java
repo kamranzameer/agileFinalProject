@@ -58,6 +58,7 @@ public class WorkRequestDAOTest {
 		catch(Exception ex)
 		{
 			con.rollback();
+			throw ex;
 		}
 		finally
 		{

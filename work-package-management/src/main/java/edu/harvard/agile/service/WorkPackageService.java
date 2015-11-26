@@ -44,11 +44,11 @@ public class WorkPackageService {
 			workPackage = workPackageDAO.createPackage(workPackage, connection);
 			
 			//Create WorkRequest for every impacted application
-			List<ApplicationDTO> impactedApplications = workPackage.getImpactedApplications();
-			for (ApplicationDTO application : impactedApplications) 
+			List<String> impactedApplications = workPackage.getImpactedApplications();
+			for (String application : impactedApplications) 
 			{
 				workRequest = new WorkRequestDTO();
-				workRequest.setApplicationId(application.getApplicationId());
+				workRequest.setApplicationId(application);
 				workRequest.setPackageId(workPackage.getPackageId());
 				workRequest.setStatus(workPackage.getStatus());
 				workRequest.setCreateBy(workPackage.getCreateBy());

@@ -35,7 +35,7 @@ public class WorkPackageDTO extends ModelBase {
 	private Integer totalCost;
 	private Integer totalApplications;
 	
-	private List<ApplicationDTO> impactedApplications;
+	private List<String> impactedApplications;
 
 	public WorkPackageDTO() {
 	}
@@ -152,11 +152,11 @@ public class WorkPackageDTO extends ModelBase {
 		this.modifiedBy = modifiedBy;
 	}
 	
-	public List<ApplicationDTO> getImpactedApplications() {
+	public List<String> getImpactedApplications() {
 		return impactedApplications;
 	}
 
-	public void setImpactedApplications(List<ApplicationDTO> impactedApplications) {
+	public void setImpactedApplications(List<String> impactedApplications) {
 		this.impactedApplications = impactedApplications;
 	}
 

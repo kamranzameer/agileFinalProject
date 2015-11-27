@@ -61,7 +61,7 @@
 		        <div class="col-md-12">
 				<div class="bs-docs-sidebar hidden-print affix col-md-2" role="complementary" style="background-color: rgba(11, 43, 50, 0.82)">
 				    <ul class="nav bs-docs-sidenav">
-		                <li><a href="dashboard.action"><i class="glyphicon glyphicon-dashboard">&nbsp;</i>Dashboard</a></li>
+		                <li><a href="homepage.jsp"><i class="glyphicon glyphicon-dashboard">&nbsp;</i>Dashboard</a></li>
 
 		                <li><a href="workspace.jsp?p=ecit"><i class="glyphicon glyphicon-user">&nbsp;</i>Profile</a></li>
 						
@@ -83,7 +83,6 @@
         	</div>
         </div>
         <div class="col-md-9" id="workspace">
-			<cfinclude template=#destPage# />
 			<jsp:include page="<%=currentPage%>"/>
         </div>
     </div>

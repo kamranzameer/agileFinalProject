@@ -28,7 +28,7 @@
             <result name="success">/view/workspace.jsp</result>
         </action>
         
-        <action name="dashboard" class="edu.harvard.agile.action.DashboardAction" method="execute">
+        <action name="mydashboard" class="edu.harvard.agile.action.DashboardAction" method="execute">
         	<result name="success">/view/workspace.jsp</result>
 		</action>
         

@@ -12,7 +12,9 @@
     <bean id="workPackageDAO" class= "edu.harvard.agile.dao.WorkPackageDAO"/>
     <bean id="workRequestDAO" class= "edu.harvard.agile.dao.WorkRequestDAO"/>
     <bean id="applicationDAO" class= "edu.harvard.agile.dao.ApplicationDAO"/>
+    <bean id="applicationContactsDAO" class= "edu.harvard.agile.dao.ApplicationContactsDAO"/>
     <bean id="testingProgramDAO" class= "edu.harvard.agile.dao.TestingProgramDAO"/>
+    <bean id="dashboardInfo" class= "edu.harvard.agile.action.DashboardInfo"/>
     
 
 <!--  Services bean definition -->
@@ -24,6 +26,7 @@
     
     <bean id="workRequestService" class= "edu.harvard.agile.service.WorkRequestService">
     	<property name="workRequestDAO" ref="workRequestDAO"/>
+    	<property name="applicationService" ref="applicationService"/> 
     </bean>
     
     
@@ -33,6 +36,8 @@
     
     <bean id="applicationService" class= "edu.harvard.agile.service.ApplicationService">
     	<property name="applicationDAO" ref="applicationDAO"/>
+    	<property name="applicationContactsDAO" ref="applicationContactsDAO"/>
+    	
     </bean>
     
     
@@ -57,5 +62,6 @@
     
       <bean id="dashboardAction" class="edu.harvard.agile.action.DashboardAction">
     	<property name="workPackageService" ref="workPackageService"/>
+    	<property name="dashboardInfo" ref="dashboardInfo"/>
     </bean>
 </beans>

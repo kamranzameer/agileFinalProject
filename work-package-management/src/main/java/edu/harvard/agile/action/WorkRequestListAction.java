@@ -15,7 +15,6 @@ public class WorkRequestListAction extends WPMActionBase {
 	@Override
 	public void prepare() throws Exception {
 		workRequests = workRequestService.findAllWorkRequests();
-		System.out.println(workRequests.size());
 	}
 
 	public String execute() throws Exception {

@@ -131,7 +131,7 @@ public class ApplicationDAOTest {
 		appDTO.setApplicationId(appId);
 		appDTO.setIsActive("N");
 		appDTO.setModifiedBy("Yetish");
-		assertTrue(appDAO.updateApplicationStatus(appDTO).getIsActive().equals("N"));
+		assertTrue(appDAO.updateApplicationStatus(appDTO) > 0);
 	}
 	
 	@Test (expected = SQLException.class)
@@ -142,6 +142,7 @@ public class ApplicationDAOTest {
 		appDTO.setApplicationId(appId);
 		appDTO.setModifiedBy("Yetish");
 		appDAO.updateApplicationStatus(appDTO);
+		assertTrue(appDAO.updateApplicationStatus(appDTO) == 0);
 		
 	}
 	
@@ -152,7 +153,7 @@ public class ApplicationDAOTest {
 		appDTO.setApplicationId("InvalidApp");
 		appDTO.setIsActive("N");
 		appDTO.setModifiedBy("Yetish");
-		assertNull(appDAO.updateApplicationStatus(appDTO));
+		assertTrue(appDAO.updateApplicationStatus(appDTO) == 0);
 		
 	}
 

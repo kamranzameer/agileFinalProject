@@ -15,7 +15,6 @@ public class WorkPackageListAction extends WPMActionBase {
 	@Override
 	public void prepare() throws Exception {
 		workPackages = workPackageService.findAllPackages();
-		System.out.println(workPackages.size());
 	}
 
 	public String execute() throws Exception {

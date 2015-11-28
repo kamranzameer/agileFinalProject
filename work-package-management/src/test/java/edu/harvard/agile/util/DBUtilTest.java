@@ -53,6 +53,7 @@ public class DBUtilTest {
 	public void testGetConnection() throws Exception {
 		Connection connection = DBUtil.getConnection();
 		assertNotNull(connection);
+		DBUtil.closeConnection(connection);
 	}
 	
 	

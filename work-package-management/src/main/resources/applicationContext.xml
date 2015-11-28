@@ -63,5 +63,7 @@
       <bean id="dashboardAction" class="edu.harvard.agile.action.DashboardAction">
     	<property name="workPackageService" ref="workPackageService"/>
     	<property name="dashboardInfo" ref="dashboardInfo"/>
+    	<property name="workRequestService" ref="workRequestService"/>
+    	
     </bean>
 </beans>

@@ -6,7 +6,6 @@
 <html>
 
 
-<s:action name="mydashboard" executeResult="true"/>
-
+<s:action name="myDashboard" executeResult="true"/>
 
 </html>

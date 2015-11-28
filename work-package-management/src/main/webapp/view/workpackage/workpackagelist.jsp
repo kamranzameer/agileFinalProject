@@ -18,6 +18,11 @@
 								<table class="table table-striped table-hover" id="academicsTable">
 									<thead>
 										<tr>
+											<td colspan="6" align="right">
+												<a href="newWorkPackage.action" class="btn btn-success">New</a>
+											</td>
+										</tr>
+										<tr>
 											<th>
 												Package Name
 											</th>

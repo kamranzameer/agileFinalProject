@@ -71,9 +71,7 @@ public class WorkRequestDAO {
 				workRequest.setPackageId(rs.getInt("PACKAGE_ID"));
 				workRequest.setWorkRequestId(rs.getInt("WORK_REQUEST_ID"));
 				
-				System.out.println("wr start_date --> " + rs.getDate("START_DATE"));
 				workRequest.setStartDate(rs.getDate("START_DATE"));
-				System.out.println("wr dto start_date --> " + workRequest.getStartDate());
 				workRequest.setEndDate(rs.getDate("END_DATE"));
 				workRequest.setStatus(rs.getString("STATUS"));
 				workRequest.setApplicationId(id);

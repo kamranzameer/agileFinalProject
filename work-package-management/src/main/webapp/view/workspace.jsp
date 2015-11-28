@@ -12,7 +12,7 @@
 	    }else if (currentPage.equals("wpl")){
 	    	currentPage = "workpackage/workpackagelist.jsp";
 	    }else if (currentPage.equals("cnwp")){
-	    	currentPage = "workpackage/createnewworkpackage.jsp";
+	    	currentPage = "workpackage/createNewWorkPackage.jsp";
 	    }else if (currentPage.equals("wrl")){
 	    	currentPage = "workrequest/workRequestList.jsp";
 	    }else if (currentPage.equals("wrpd")){

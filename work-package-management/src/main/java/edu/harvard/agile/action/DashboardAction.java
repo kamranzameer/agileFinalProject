@@ -23,6 +23,7 @@ public class DashboardAction extends WPMActionBase {
 	/**
 	 * @return the workRequestService
 	 */
+	@Required
 	public WorkRequestService getWorkRequestService() {
 		return workRequestService;
 	}

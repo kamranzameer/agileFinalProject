@@ -70,7 +70,6 @@ public class WorkRequestDTO extends ModelBase {
 	}
 
 	public Date getStartDate() {
-		System.out.println("Returning start date --> " + startDate);
 		return startDate;
 	}
 
@@ -87,7 +86,6 @@ public class WorkRequestDTO extends ModelBase {
 	}
 
 	public Date getCreateDate() {
-		System.out.println("Returning create date --> " + createDate);
 		return createDate;
 	}
 

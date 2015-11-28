@@ -68,8 +68,8 @@ public class WorkPackageDAO
 				workPackage.setStartDate(rs.getDate("START_DATE"));
 				workPackage.setEndDate(rs.getDate("END_DATE"));
 				workPackage.setStatus(rs.getString("STATUS"));
-				workPackage.setTotalApplications(getTotalApplications(rs.getInt("PACKAGE_ID")));
-				workPackage.setTotalCost(getWorkPackageTotalCost(rs.getInt("PACKAGE_ID")));
+				workPackage.setTotalApplications(getTotalApplications(rs.getInt("PACKAGE_ID"), con));
+				workPackage.setTotalCost(getWorkPackageTotalCost(rs.getInt("PACKAGE_ID"), con));
 				
 			}
 		} finally {
@@ -171,16 +171,13 @@ public class WorkPackageDAO
 				workPackage.setContractFromYear(rs.getDate("CONTRACT_FROM_YEAR"));
 				workPackage.setContractToYear(rs.getDate("CONTRACT_TO_YEAR"));
 				
-			//  System.out.println("wp start_date --> " + rs.getDate("START_DATE"));
 				workPackage.setStartDate(rs.getDate("START_DATE"));
-				
-			//	System.out.println("wp dto start_date --> " + workPackage.getStartDate());
 				
 				workPackage.setEndDate(rs.getDate("END_DATE"));
 				workPackage.setStatus(rs.getString("STATUS"));
 				
-				workPackage.setTotalApplications(getTotalApplications(rs.getInt("PACKAGE_ID")));
-				workPackage.setTotalCost(getWorkPackageTotalCost(rs.getInt("PACKAGE_ID")));
+				workPackage.setTotalApplications(getTotalApplications(rs.getInt("PACKAGE_ID"), con));
+				workPackage.setTotalCost(getWorkPackageTotalCost(rs.getInt("PACKAGE_ID"), con));
 
 				workPackages.add(workPackage);
 			}
@@ -248,7 +245,7 @@ public class WorkPackageDAO
 	 * @return
 	 * @throws Exception
 	 */
-	public WorkPackageDTO updatePackage(WorkPackageDTO workPackage) throws Exception {
+	public int updatePackage(WorkPackageDTO workPackage) throws Exception {
 
 		/*
 		 * Get connection from DBUtil, set the parameters for the statement and
@@ -282,7 +279,7 @@ public class WorkPackageDAO
 			int rowsUpdated = stmt.executeUpdate();
 			con.commit();
 
-			return findByPackageId(workPackage.getPackageId());
+			return rowsUpdated;
 		} catch (Exception e) {
 			con.rollback();
 			throw e;
@@ -325,7 +322,7 @@ public class WorkPackageDAO
 			int rowsUpdated = stmt.executeUpdate();
 			con.commit();
 
-			return findByPackageId(workPackage.getPackageId());
+			return workPackage;
 		} catch (Exception e) {
 			con.rollback();
 			throw e;
@@ -358,7 +355,6 @@ public class WorkPackageDAO
 			con = DBUtil.getConnection();
 			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS,CREATE_BY,CREATE_DATE,MODIFIED_BY,MODIFIED_DATE FROM WORK_PACKAGE"
 					+ "		WHERE CREATE_BY = ?";
-		System.out.println("query is  "+query);
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, user.getUserId());
 
@@ -429,7 +425,7 @@ public class WorkPackageDAO
 		
 	}
 	
-	public Integer getWorkPackageTotalCost(Integer workPackageId) throws Exception{
+	public Integer getWorkPackageTotalCost(Integer workPackageId, Connection con) throws Exception{
 		StringBuilder query = new StringBuilder("");
 		query.append(" SELECT SUM (HOURLY_RATE * TOTAL_HOURS) ");
 		query.append(" FROM   (SELECT A.RESOURCE_TYPE_ID,  ");
@@ -446,12 +442,12 @@ public class WorkPackageDAO
 		query.append("         GROUP  BY A.RESOURCE_TYPE_ID,  ");
 		query.append("                   B.HOURLY_RATE) ");
 		
-		Connection con = null;
+		//Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		try {
-			con = DBUtil.getConnection();
+			//con = DBUtil.getConnection();
 			stmt = con.prepareStatement(query.toString());
 			stmt.setInt(1, workPackageId);
 			rs = stmt.executeQuery();
@@ -462,7 +458,7 @@ public class WorkPackageDAO
 		} finally {
 			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
+			//DBUtil.closeConnection(con);
 
 		}
 
@@ -473,15 +469,15 @@ public class WorkPackageDAO
 	}
 	
 	
-	public Integer getTotalApplications(Integer workPackageId) throws Exception{
+	public Integer getTotalApplications(Integer workPackageId, Connection con) throws Exception{
 		String query =  "SELECT COUNT(1) FROM WORK_REQUEST WHERE PACKAGE_ID = ?";
 
-		Connection con = null;
+		//Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		try {
-			con = DBUtil.getConnection();
+			//con = DBUtil.getConnection();
 			stmt = con.prepareStatement(query.toString());
 			stmt.setInt(1, workPackageId);
 			rs = stmt.executeQuery();
@@ -492,7 +488,7 @@ public class WorkPackageDAO
 		} finally {
 			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
+			//DBUtil.closeConnection(con);
 
 		}
 

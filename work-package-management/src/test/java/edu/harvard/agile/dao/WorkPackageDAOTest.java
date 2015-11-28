@@ -213,8 +213,7 @@ public class WorkPackageDAOTest {
 		workPackage.setCreateBy("uannipu");
 		workPackage.setModifiedBy("uannipu");
 
-		WorkPackageDTO workDTO = workPackageDAO.updatePackage(workPackage);
-		assertTrue("Add fields to extract - updated".equals(workDTO.getPackageName())); 
+		assertTrue(workPackageDAO.updatePackage(workPackage) > 0);
 
 	}
 
@@ -238,8 +237,8 @@ public class WorkPackageDAOTest {
 		workPackage.setCreateBy("uannipu");
 		workPackage.setModifiedBy("uannipu");
 
-		WorkPackageDTO workDTO = workPackageDAO.updatePackage(workPackage);
-		assertNull(workDTO);
+		assertTrue(workPackageDAO.updatePackage(workPackage) == 0);
+		
 
 	}
 
@@ -296,9 +295,8 @@ public class WorkPackageDAOTest {
 		workPackage.setCreateBy("uannipu");
 		workPackage.setModifiedBy("uannipu");
 
-		WorkPackageDTO workDTO = workPackageDAO.updatePackage(workPackage);
-		assertTrue("Add fields to extract - updated".equals(workDTO.getPackageName())); 
-
+		assertTrue(workPackageDAO.updatePackage(workPackage) == 0);
+		 
 	}
 
 	

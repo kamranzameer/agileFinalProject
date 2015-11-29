@@ -36,9 +36,15 @@ public class WorkRequestService {
 		this.workRequestDAO = workRequestDAO;
 	}
 
-		public List<WorkRequestDTO> findRequestsByPackageId(int packageId) throws Exception {
+	/**
+	 * Method to fetch all work requests by package id
+	 * @param packageId
+	 * @return a list of WorkRequestDTO
+	 * @throws Exception
+	 */
+	public List<WorkRequestDTO> findRequestsByPackageId(int packageId) throws Exception {
 			return workRequestDAO.findRequestsByPackageId(packageId);
-		}
+	}
 
 	/**
 	 * Method to fetch all work requests

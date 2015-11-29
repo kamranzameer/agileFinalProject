@@ -420,6 +420,11 @@ public class WorkRequestDAO {
 		}
 	}
 
+	/**
+	 * @param workRequestId
+	 * @return total cost for all the activity lines under work request by hourly rate and resource type
+	 * @throws Exception
+	 */
 	public Integer getWorkRequsetTotalCost(Integer workRequestId)
 			throws Exception {
 		StringBuilder query = new StringBuilder("");
@@ -463,6 +468,11 @@ public class WorkRequestDAO {
 	}
 	
 	
+	/**
+	 * @param workRequestId 
+	 * @return total hours for all the activity line phases under work request
+	 * @throws Exception
+	 */
 	public Integer getWorkRequsetTotalHours(Integer workRequestId) throws Exception{
 		StringBuilder query = new StringBuilder("");
 		query.append(" SELECT SUM (TOTAL_HOURS) ");

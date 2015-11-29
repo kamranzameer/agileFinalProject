@@ -31,8 +31,7 @@ public class ApplicationDAO {
 
 		/*
 		 * Get connection from DBUtil, executes select query and initializes the
-		 * object with values returned from the database and returns the work
-		 * package DTO.
+		 * object with values returned from the database and returns the application DTO
 		 */
 
 		Connection con = null;

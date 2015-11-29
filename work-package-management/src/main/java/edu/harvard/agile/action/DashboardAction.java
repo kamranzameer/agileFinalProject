@@ -2,6 +2,11 @@ package edu.harvard.agile.action;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Required;
 
 import edu.harvard.agile.model.WorkRequestDTO;
@@ -73,14 +78,21 @@ public class DashboardAction extends WPMActionBase {
 		dashboardInfo.setInprogressWorkPackagesCount(workPackageService.findCountByStatus("Inprogress"));
 		dashboardInfo.setCompletedWorkPackagesCount(workPackageService.findCountByStatus("Completed"));
 		dashboardInfo.setTotalWorkPackagesCount(workPackageService.findAllPackages().size());
-		List<WorkRequestDTO> workRequests = workRequestService.findAllWorkRequestsByUser("userapp1");
 		
-		if(!workRequests.isEmpty()){
-			workRequestsCountByUser = workRequests.size();
+		
+
+		Subject currentUser = SecurityUtils.getSubject();
+		String userID = SecurityUtils.getSubject().getPrincipal().toString();
+		ServletActionContext.getRequest().getSession().setAttribute("userID", userID);
+		
+		if (currentUser.hasRole("AC")) {
+				List<WorkRequestDTO> workRequests = workRequestService.findAllWorkRequestsByUser(userID);
+				if(!workRequests.isEmpty()){
+					workRequestsCountByUser = workRequests.size();
+				}
+				dashboardInfo.setAppTotalWorkRequestsCount(workRequestsCountByUser);
+			}
 		}
-		dashboardInfo.setAppTotalWorkRequestsCount(workRequestsCountByUser);
-		
-	}
 
 	public String execute() throws Exception {
 		return SUCCESS;

@@ -70,6 +70,8 @@ public class DashboardAction extends WPMActionBase {
 	@Override
 	public void prepare() throws Exception {
 		int workRequestsCountByUser = 0;
+		
+		//Prepare data for Dashboard page
 		dashboardInfo = new DashboardInfo();
 		dashboardInfo.setApprovedWorkPackagesCount(workPackageService.findCountByStatus("Approved"));
 		dashboardInfo.setOpenWorkPackagesCount(workPackageService.findCountByStatus("Open"));

@@ -2,6 +2,7 @@ package edu.harvard.agile.action;
 
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -19,10 +20,14 @@ public class WorkRequestListAction extends WPMActionBase {
 
 	@Override
 	public void prepare() throws Exception {
-		workRequests = workRequestService.findAllWorkRequests();
+		
+		//Load all Work Requests for the logged in user
+		workRequests = workRequestService.findAllWorkRequestsByUser(SecurityUtils.getSubject().getPrincipal().toString());
 	}
 
 	public String execute() throws Exception {
+		
+		//Display workrequests list page
 		ServletActionContext.getRequest().setAttribute("p", "wrl");
 		return SUCCESS;
 	}

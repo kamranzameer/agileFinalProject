@@ -54,6 +54,16 @@
     </bean>
     
     
+    <bean id="workPackageDetailAction" class="edu.harvard.agile.action.WorkPackageDetailAction">
+    	<property name="workPackageService" ref="workPackageService"/>
+    	<property name="workRequestService" ref="workRequestService"/>
+    	
+    </bean>
+    
+    
+    
+    
+    
     
     <bean id="workPackageAction" class="edu.harvard.agile.action.WorkPackageAction">
     	<property name="workPackageService" ref="workPackageService"/>

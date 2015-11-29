@@ -31,6 +31,8 @@ public class WorkRequestDTO extends ModelBase {
 	private String modifiedBy;
 	private String workPackageName;
 	private String applicationName;
+	private int totalHours;
+	private int totalCost;
 
 	private List<AssumptionsDTO> assumptionsDTOs;
 
@@ -147,6 +149,24 @@ public class WorkRequestDTO extends ModelBase {
 	public void setApplicationName(String applicationName) {
 		this.applicationName = applicationName;
 	}
+
+	public int getTotalHours() {
+		return totalHours;
+	}
+
+	public void setTotalHours(int totalHours) {
+		this.totalHours = totalHours;
+	}
+
+	public int getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(int totalCost) {
+		this.totalCost = totalCost;
+	}
+	
+	
 	
 	
 

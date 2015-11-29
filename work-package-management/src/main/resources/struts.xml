@@ -5,13 +5,48 @@
 
 <struts>
 
+
+
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
 
 	<package name="wpm" extends="struts-default">
 
+		 <interceptors>
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="exception" />
+				<interceptor-ref name="alias" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="chain" />
+				<interceptor-ref name="debugging" />
+				<interceptor-ref name="profiling" />
+				<interceptor-ref name="scopedModelDriven" />
+				<interceptor-ref name="modelDriven" />
+				<interceptor-ref name="fileUpload" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="staticParams" />
+				<interceptor-ref name="actionMappingParams" />
+				<interceptor-ref name="params">
+				<param name="excludeParams">dojo\..*,^struts\..*</param>
+				</interceptor-ref>
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="conversionError" />
+				<interceptor-ref name="validation">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+				<interceptor-ref name="workflow">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors> 
+
 		<default-action-ref name="index" />
 
+<<<<<<< HEAD
+		<action name="workPackageList" class="workPackageListAction">
+			<result>/view/workspace.jsp</result>
+=======
         <action name="workPackageList"  class="workPackageListAction">
             <result>/view/workspace.jsp</result>
         </action>
@@ -29,9 +64,33 @@
         
         <action name="myDashboard" class="dashboardAction">
         	<result>/view/workspace.jsp</result>
+>>>>>>> 802bbd8724fe1b9f1532704eba978fc9647ddbe9
 		</action>
-        
-		
+
+
+		<action name="workRequestList" class="workRequestListAction">
+			<result>/view/workspace.jsp</result>
+		</action>
+
+		<action name="workPackageDetail" class="workPackageDetailAction">
+			<result>/view/workspace.jsp</result>
+		</action>
+
+
+
+		<action name="newWorkPackage" class="workPackageAction">
+			<result name="success">/view/workspace.jsp</result>
+		</action>
+		<action name="saveWorkPackage" class="workPackageAction"
+			method="save">
+			<result name="success">/view/workspace.jsp</result>
+		</action>
+
+		<action name="myDashboard" class="dashboardAction">
+			<result>/view/workspace.jsp</result>
+		</action>
+
+
 
 	</package>
 

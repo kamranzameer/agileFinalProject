@@ -44,7 +44,7 @@ public class WorkRequestDAOTest {
 			con = DBUtil.getConnection();
 			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 			WorkRequestDTO workRequest = new WorkRequestDTO();
-			workRequest.setPackageId(73);
+			workRequest.setPackageId(2);
 			workRequest.setApplicationId("eSS");
 			workRequest.setStatus("Open");
 			workRequest.setStartDate(new Date());
@@ -208,7 +208,7 @@ public class WorkRequestDAOTest {
 			//setup
 			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 			WorkRequestDTO workRequest = new WorkRequestDTO();
-			workRequest.setPackageId(73);
+			workRequest.setPackageId(2);
 			workRequest.setApplicationId("eSS");
 			workRequest.setStatus("Open");
 			workRequest.setStartDate(new Date());

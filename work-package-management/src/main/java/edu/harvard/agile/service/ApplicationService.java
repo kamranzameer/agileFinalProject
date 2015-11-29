@@ -19,13 +19,7 @@ public class ApplicationService {
 	private ApplicationDAO applicationDAO;
 	private ApplicationContactsDAO applicationContactsDAO;
 
-	/**
-	 * @return the applicationContactsDAO
-	 */
-	public ApplicationContactsDAO getApplicationContactsDAO() {
-		return applicationContactsDAO;
-	}
-
+	
 	/**
 	 * @param applicationContactsDAO the applicationContactsDAO to set
 	 */

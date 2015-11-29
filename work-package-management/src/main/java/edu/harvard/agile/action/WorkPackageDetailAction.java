@@ -21,7 +21,7 @@ public class WorkPackageDetailAction extends WPMActionBase {
 
 	@Override
 	public void prepare() throws Exception {
-		workPackage = workPackageService.findById(workPackageId);
+		workPackage = workPackageService.findByPackageId(workPackageId);
 		workRequests = workRequestService.findRequestsByPackageId(workPackageId);
 		for(WorkRequestDTO wr : workRequests){
 			wr.setActivityLineDTOs(activityLineService.findByRequestId(wr.getWorkRequestId()));

@@ -76,5 +76,25 @@ public class WorkRequestServiceTest {
 		
 		assertTrue(workRequest.findAllWorkRequestsByUser("invaliduser").size() == 0);
 	}
+	
+	@Test
+	public void testfindRequestsByPackageId() throws Exception
+	{
+		WorkRequestService wrs = new WorkRequestService();
+		wrs.setWorkRequestDAO(new WorkRequestDAO());
+		wrs.setApplicationService(new ApplicationService());
+		
+		assertTrue(wrs.findRequestsByPackageId(1).size() > 0);
+	}
+	
+	@Test
+	public void testfindRequestsByInvalidPackageId() throws Exception
+	{
+		WorkRequestService wrs = new WorkRequestService();
+		wrs.setWorkRequestDAO(new WorkRequestDAO());
+		wrs.setApplicationService(new ApplicationService());
+		
+		assertTrue(wrs.findRequestsByPackageId(123456).size() == 0);
+	}
 
 }

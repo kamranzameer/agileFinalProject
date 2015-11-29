@@ -111,7 +111,7 @@ public class WorkPackageService {
 	}
 	
 	
-	public WorkPackageDTO findById(int workPackageId) throws Exception {
+	public WorkPackageDTO findByPackageId(int workPackageId) throws Exception {
 		return workPackageDAO.findByPackageId(workPackageId);
 	}
 }

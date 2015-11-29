@@ -64,4 +64,5 @@ public class ApplicationServiceTest {
 		ApplicationContactsDTO applicationContact = appService.findApplicationContactByUser("invaliduser");
 		Assert.assertNull(applicationContact);
 	}
+	
 }

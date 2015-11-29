@@ -102,6 +102,36 @@ public class WorkPackageServiceTest {
 		int count = workPackageService.findCountByStatus("Open");
 		assertTrue(count >0);
 	}
+	
+	@Test
+	public void testFindByPackageId() throws Exception
+	{
+		WorkPackageService wps = new WorkPackageService();
+		wps.setWorkPackageDAO(new WorkPackageDAO());
+		wps.setWorkRequestDAO(new WorkRequestDAO());
+		
+		assertNotNull(wps.findByPackageId(1));
+	}
+	
+	@Test
+	public void testFindByInvalidPackageId() throws Exception
+	{
+		WorkPackageService wps = new WorkPackageService();
+		wps.setWorkPackageDAO(new WorkPackageDAO());
+		wps.setWorkRequestDAO(new WorkRequestDAO());
+		
+		assertNull(wps.findByPackageId(123456));
+	}
+	
+	@Test
+	public void testFindAllPackages() throws Exception
+	{
+		WorkPackageService wps = new WorkPackageService();
+		wps.setWorkPackageDAO(new WorkPackageDAO());
+		wps.setWorkRequestDAO(new WorkRequestDAO());
+		
+		assertTrue(wps.findAllPackages().size() > 0);
+	}
 
 
 }

@@ -88,8 +88,8 @@ public class WorkRequestDAOTest {
 			workRequest.setStatus("Open");
 			workRequest.setStartDate(new Date());
 			workRequest.setEndDate(new Date());
-			workRequest.setCreateBy("uannipu");
-			workRequest.setModifiedBy("uannipu");
+			workRequest.setCreateBy("junit");
+			workRequest.setModifiedBy("junit");
 
 			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			con.commit();
@@ -118,8 +118,8 @@ public class WorkRequestDAOTest {
 			workRequest.setStatus("Open");
 			workRequest.setStartDate(new Date());
 			workRequest.setEndDate(new Date());
-			workRequest.setCreateBy("uannipu");
-			workRequest.setModifiedBy("uannipu");
+			workRequest.setCreateBy("junit");
+			workRequest.setModifiedBy("junit");
 
 			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			con.commit();
@@ -149,8 +149,8 @@ public class WorkRequestDAOTest {
 			workRequest.setStatus("Open");
 			workRequest.setStartDate(new Date());
 			workRequest.setEndDate(new Date());
-			workRequest.setCreateBy("uannipu");
-			workRequest.setModifiedBy("uannipu");
+			workRequest.setCreateBy("junit");
+			workRequest.setModifiedBy("junit");
 
 			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			con.commit();
@@ -180,8 +180,8 @@ public class WorkRequestDAOTest {
 			workRequest.setStatus("Open");
 			workRequest.setStartDate(new Date());
 			workRequest.setEndDate(new Date());
-			workRequest.setCreateBy("uannipu");
-			workRequest.setModifiedBy("uannipu");
+			workRequest.setCreateBy("junit");
+			workRequest.setModifiedBy("junit");
 
 			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			con.commit();
@@ -272,7 +272,7 @@ public class WorkRequestDAOTest {
 		workRequest.setPackageId(1);
 		workRequest.setApplicationId("eSS");
 		workRequest.setStatus("Archived");
-		workRequest.setModifiedBy("uannipu");
+		workRequest.setModifiedBy("junit");
 
 		workRequest = workRequestDAO.updateWorkRequestStatus(workRequest);
 		assertTrue(workRequest.getStatus().equals("Archived")); 
@@ -286,10 +286,59 @@ public class WorkRequestDAOTest {
 		workRequest.setPackageId(1);
 		workRequest.setApplicationId("eSS");
 		workRequest.setStatus("Archived");
-		workRequest.setModifiedBy("uannipu");
+		workRequest.setModifiedBy("junit");
 
 		workRequest = workRequestDAO.updateWorkRequestStatus(workRequest);
 		assertNull(workRequest); 
+	}
+	
+	@Test
+	public void testUpdateWorkRequestStatusWithNullModifiedBy() throws Exception {
+		WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
+		WorkRequestDTO workRequest = new WorkRequestDTO();
+		workRequest.setWorkRequestId(1233445);
+		workRequest.setPackageId(1);
+		workRequest.setApplicationId("eSS");
+		workRequest.setStatus("Archived");
+
+		workRequest = workRequestDAO.updateWorkRequestStatus(workRequest);
+		assertNull(workRequest); 
+	}
+	
+	@Test
+	public void testfindRequestsByPackageId() throws Exception
+	{
+		assertTrue(new WorkRequestDAO().findRequestsByPackageId(1).size() > 0);
+	}
+	
+	@Test
+	public void testfindRequestsByInvalidPackageId() throws Exception
+	{
+		assertTrue(new WorkRequestDAO().findRequestsByPackageId(123456).size() == 0);
+	}
+	
+	@Test
+	public void testgetWorkRequsetTotalCost() throws Exception
+	{
+		assertTrue(new WorkRequestDAO().getWorkRequsetTotalCost(12) > 0);
+	}
+	
+	@Test
+	public void testgetInvalidWorkRequsetTotalCost() throws Exception
+	{
+		assertTrue(new WorkRequestDAO().getWorkRequsetTotalCost(123456) == 0);
+	}
+	
+	@Test
+	public void testgetWorkRequsetTotalHours() throws Exception
+	{
+		assertTrue(new WorkRequestDAO().getWorkRequsetTotalHours(12) > 0);
+	}
+	
+	@Test
+	public void testgetInvalidWorkRequsetTotalHours() throws Exception
+	{
+		assertTrue(new WorkRequestDAO().getWorkRequsetTotalHours(123456) == 0);
 	}
 
 }

@@ -24,6 +24,7 @@
 
     <bean id="workPackageService" class= "edu.harvard.agile.service.WorkPackageService">
     	<property name="workPackageDAO" ref="workPackageDAO"/>
+    	<property name="workRequestDAO" ref="workRequestDAO"/>
     </bean>
     
     

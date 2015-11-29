@@ -14,7 +14,7 @@
 					</i> New Work Package</div>
 	                </div>
 	                <div style="padding-top:30px"; class="panel-body">
-						<form id="createworkpackageform" class="form-horizontal" role="form" method="post" action="saveWorkPackage.action">
+						<form id="createworkpackageform" name="createworkpackageform" class="form-horizontal" role="form" method="post" action="saveWorkPackage.action" onSubmit="return validate_dates(this)">
 							<div class="row clearfix">
 								<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8  column col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
 										<div class="form-group">
@@ -58,7 +58,7 @@
 												<label class="control-label" for="contractFromYear">
 													Contract Start Year
 												</label>
-												<input class="form-control" id="contractFromYear" name="contractFromYear" placeholder="Enter Contract Start Year" type="date" required>
+												<input class="form-control" id="contractFromYear" name="contractFromYear" placeholder="Enter Contract Start Year" type="date" required pattern="yyyy">
 											</div>
 											<div class="col-md-6">
 												<label class="control-label" for="contractToYear">

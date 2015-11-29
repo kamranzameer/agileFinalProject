@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import edu.harvard.agile.dao.WorkPackageDAO;
+import edu.harvard.agile.dao.WorkRequestDAO;
 import edu.harvard.agile.model.ApplicationDTO;
 import edu.harvard.agile.model.WorkPackageDTO;
 
@@ -54,8 +56,12 @@ public class WorkPackageServiceTest {
 		workPackage.setCreateBy("junit");
 		workPackage.setModifiedBy("junit");
 		workPackage.setImpactedApplications(impactedApps);
+		WorkPackageService wps = new WorkPackageService();
+		wps.setWorkPackageDAO(new WorkPackageDAO());
+		wps.setWorkRequestDAO(new WorkRequestDAO());
 		
-		new WorkPackageService().createPackage(workPackage);
+		
+		wps.createPackage(workPackage);
 		
 		assertTrue(true);
 	}
@@ -80,13 +86,19 @@ public class WorkPackageServiceTest {
 		workPackage.setModifiedBy("junit");
 		workPackage.setImpactedApplications(impactedApps);
 		
-		new WorkPackageService().createPackage(workPackage);
+		WorkPackageService wps = new WorkPackageService();
+		wps.setWorkPackageDAO(new WorkPackageDAO());
+		wps.setWorkRequestDAO(new WorkRequestDAO());
+		
+		
+		wps.createPackage(workPackage);
 		
 	}
 	
 	@Test
 	public void testFindCountBystatus() throws Exception {
 		WorkPackageService workPackageService = new WorkPackageService();
+		workPackageService.setWorkPackageDAO(new WorkPackageDAO());
 		int count = workPackageService.findCountByStatus("Open");
 		assertTrue(count >0);
 	}

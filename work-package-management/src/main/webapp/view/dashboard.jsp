@@ -3,7 +3,8 @@
 <div class="row clearfix">
     <div class="col-md-12 column">
         <ul class="breadcrumb" style="margin-bottom: 5px;">
-            <li>Dashboard</li>
+            <% String userID = session.getAttribute("userID").toString(); %>
+            <li>Dashboard : Welcome <%=userID%></li>
         </ul>
     </div>
 </div>

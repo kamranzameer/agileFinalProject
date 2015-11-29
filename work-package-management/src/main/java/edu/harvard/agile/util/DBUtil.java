@@ -40,7 +40,6 @@ public class DBUtil {
 		Connection connection = getDataSource().getConnection();
 		connection.setAutoCommit(false);
 		
-		System.out.println("================ CONNECTION OPEN ============================");
 		return connection;
 	}
 
@@ -96,7 +95,6 @@ public class DBUtil {
 		if (connection != null) {
 			try {
 				//if (!connection.isClosed()) {
-				System.out.println("================ CONNECTION CLOSE ============================");
 					connection.close();
 					return connection.isClosed();
 				//}

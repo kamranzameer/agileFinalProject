@@ -20,7 +20,13 @@ public class WorkRequestService {
 		this.workRequestDAO = workRequestDAO;
 	}
 
-	public List<WorkRequestDTO> findAllWorkRequests() throws Exception {
-		return workRequestDAO.findAllWorkRequests();
-	}
+		public List<WorkRequestDTO> findAllWorkRequests() throws Exception {
+			return workRequestDAO.findAllWorkRequests();
+		}
+		
+		public List<WorkRequestDTO> findRequestsByPackageId(int packageId) throws Exception {
+			return workRequestDAO.findRequestsByPackageId(packageId);
+		}
+	
+	
 }

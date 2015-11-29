@@ -104,4 +104,9 @@ public class WorkPackageService {
 	public List<WorkPackageDTO> findAllPackages() throws Exception {
 		return workPackageDAO.findAllPackages();
 	}
+	
+	
+	public WorkPackageDTO findById(int workPackageId) throws Exception {
+		return workPackageDAO.findByPackageId(workPackageId);
+	}
 }

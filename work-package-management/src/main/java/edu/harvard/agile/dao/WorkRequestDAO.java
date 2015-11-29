@@ -19,7 +19,6 @@ import edu.harvard.agile.util.DBUtil;
  */
 public class WorkRequestDAO {
 
-	
 	/**
 	 * Find by primary key method to find the record by WorkRequest id.
 	 * 
@@ -28,7 +27,8 @@ public class WorkRequestDAO {
 	 * @return - a WorkRequest DTO
 	 * @throws Exception
 	 */
-	public List<WorkRequestDTO> findRequestsByApplicationId(String id) throws Exception {
+	public List<WorkRequestDTO> findRequestsByApplicationId(String id)
+			throws Exception {
 
 		/*
 		 * Get connection from DBUtil, executes select query and initializes the
@@ -40,15 +40,15 @@ public class WorkRequestDAO {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		List<WorkRequestDTO> workRequestDTOs = new ArrayList<WorkRequestDTO>();
-		
+
 		try {
 			con = DBUtil.getConnection();
-			
+
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.WORK_REQUEST_ID, ");
 			query.append("        A.STATUS, ");
-			query.append("        A.START_DATE,"); 
+			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
 			query.append("        B.PACKAGE_NAME, ");
@@ -60,25 +60,26 @@ public class WorkRequestDAO {
 			query.append(" WHERE  A.PACKAGE_ID = B.PACKAGE_ID ");
 			query.append("        AND A.APPLICATION_ID = C.APPLICATION_ID ");
 			query.append("        AND C.APPLICATION_ID = ?");
-			
+
 			stmt = con.prepareStatement(query.toString());
 			stmt.setString(1, id);
 			rs = stmt.executeQuery();
 			WorkRequestDTO workRequest = null;
-			
+
 			while (rs.next()) {
 				workRequest = new WorkRequestDTO();
 				workRequest.setPackageId(rs.getInt("PACKAGE_ID"));
 				workRequest.setWorkRequestId(rs.getInt("WORK_REQUEST_ID"));
-				
+
 				workRequest.setStartDate(rs.getDate("START_DATE"));
 				workRequest.setEndDate(rs.getDate("END_DATE"));
 				workRequest.setStatus(rs.getString("STATUS"));
 				workRequest.setApplicationId(id);
-				
-				workRequest.setApplicationName(rs.getString("APPLICATION_NAME"));
+
+				workRequest
+						.setApplicationName(rs.getString("APPLICATION_NAME"));
 				workRequest.setWorkPackageName(rs.getString("PACKAGE_NAME"));
-				
+
 				workRequestDTOs.add(workRequest);
 			}
 		} finally {
@@ -90,7 +91,83 @@ public class WorkRequestDAO {
 
 		return workRequestDTOs;
 	}
-	
+
+	/**
+	 * Find by primary key method to find the record by WorkRequest id.
+	 * 
+	 * @param id
+	 *            - Application ID
+	 * @return - a WorkRequest DTO
+	 * @throws Exception
+	 */
+	public List<WorkRequestDTO> findRequestsByPackageId(int pacakgeId)
+			throws Exception {
+
+		/*
+		 * Get connection from DBUtil, executes select query and initializes the
+		 * object with values returned from the database and returns the work
+		 * package DTO.
+		 */
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<WorkRequestDTO> workRequestDTOs = new ArrayList<WorkRequestDTO>();
+
+		try {
+			con = DBUtil.getConnection();
+
+			StringBuilder query = new StringBuilder();
+			query.append(" SELECT A.PACKAGE_ID, ");
+			query.append("        A.WORK_REQUEST_ID, ");
+			query.append("        A.STATUS, ");
+			query.append("        A.START_DATE,");
+			query.append("        A.END_DATE, ");
+			query.append("        A.APPLICATION_ID, ");
+			query.append("        B.PACKAGE_NAME, ");
+			query.append("        APPLICATION_NAME, ");
+			query.append("        PACKAGE_NAME ");
+			query.append(" FROM   WORK_REQUEST A, ");
+			query.append("        WORK_PACKAGE B, ");
+			query.append("        APPLICATION C ");
+			query.append(" WHERE  A.PACKAGE_ID = B.PACKAGE_ID ");
+			query.append("        AND A.APPLICATION_ID = C.APPLICATION_ID ");
+			query.append("        AND A.PACKAGE_ID = ?");
+
+			stmt = con.prepareStatement(query.toString());
+			stmt.setInt(1, pacakgeId);
+			rs = stmt.executeQuery();
+			WorkRequestDTO workRequest = null;
+
+			while (rs.next()) {
+				workRequest = new WorkRequestDTO();
+				workRequest.setPackageId(rs.getInt("PACKAGE_ID"));
+				workRequest.setWorkRequestId(rs.getInt("WORK_REQUEST_ID"));
+
+				workRequest.setStartDate(rs.getDate("START_DATE"));
+				workRequest.setEndDate(rs.getDate("END_DATE"));
+				workRequest.setStatus(rs.getString("STATUS"));
+				workRequest.setApplicationId(rs.getString("APPLICATION_ID"));
+				workRequest
+						.setApplicationName(rs.getString("APPLICATION_NAME"));
+				workRequest.setWorkPackageName(rs.getString("PACKAGE_NAME"));
+
+				workRequest.setTotalCost(getWorkRequsetTotalCost(rs.getInt("WORK_REQUEST_ID")));
+				workRequest.setTotalHours(getWorkRequsetTotalHours(rs.getInt("WORK_REQUEST_ID")));
+				
+
+				workRequestDTOs.add(workRequest);
+			}
+		} finally {
+			DBUtil.closeRS(rs);
+			DBUtil.closeStatement(stmt);
+			DBUtil.closeConnection(con);
+
+		}
+
+		return workRequestDTOs;
+	}
+
 	/**
 	 * Find by package name
 	 * 
@@ -110,14 +187,14 @@ public class WorkRequestDAO {
 		PreparedStatement stmt = null;
 		WorkRequestDTO workRequest = null;
 		ResultSet rs = null;
-				
+
 		try {
 			con = DBUtil.getConnection();
-			
+
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.STATUS, ");
-			query.append("        A.START_DATE,"); 
+			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
 			query.append("        B.PACKAGE_NAME, ");
@@ -129,7 +206,7 @@ public class WorkRequestDAO {
 			query.append(" WHERE  A.PACKAGE_ID = B.PACKAGE_ID ");
 			query.append("        AND A.APPLICATION_ID = C.APPLICATION_ID ");
 			query.append("        AND WORK_REQUEST_ID = ?");
-			
+
 			stmt = con.prepareStatement(query.toString());
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
@@ -137,13 +214,14 @@ public class WorkRequestDAO {
 			if (rs.next()) {
 				workRequest = new WorkRequestDTO();
 				workRequest.setWorkRequestId(id);
-				workRequest.setPackageId(rs.getInt("PACKAGE_ID"));	
+				workRequest.setPackageId(rs.getInt("PACKAGE_ID"));
 				workRequest.setApplicationId(rs.getString("APPLICATION_ID"));
 				workRequest.setStartDate(rs.getDate("START_DATE"));
 				workRequest.setEndDate(rs.getDate("END_DATE"));
 				workRequest.setStatus(rs.getString("STATUS"));
-				
-				workRequest.setApplicationName(rs.getString("APPLICATION_NAME"));
+
+				workRequest
+						.setApplicationName(rs.getString("APPLICATION_NAME"));
 				workRequest.setWorkPackageName(rs.getString("PACKAGE_NAME"));
 			}
 		} finally {
@@ -163,7 +241,8 @@ public class WorkRequestDAO {
 	 * @throws Exception
 	 */
 	public List<WorkRequestDTO> findAllWorkRequests() throws Exception {
-		 /* Get connection from DBUtil, executes select query. Iterates through
+		/*
+		 * Get connection from DBUtil, executes select query. Iterates through
 		 * result set, initialize new workRequestDTO object with the values
 		 * returned from the database, add to the list and return the list of
 		 * objects.
@@ -182,7 +261,7 @@ public class WorkRequestDAO {
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.WORK_REQUEST_ID, ");
 			query.append("        A.STATUS, ");
-			query.append("        A.START_DATE,"); 
+			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
 			query.append("        B.PACKAGE_NAME, ");
@@ -193,8 +272,7 @@ public class WorkRequestDAO {
 			query.append("        APPLICATION C ");
 			query.append(" WHERE  A.PACKAGE_ID = B.PACKAGE_ID ");
 			query.append("        AND A.APPLICATION_ID = C.APPLICATION_ID ");
-			
-			
+
 			stmt = con.prepareStatement(query.toString());
 
 			rs = stmt.executeQuery();
@@ -210,11 +288,10 @@ public class WorkRequestDAO {
 				workRequest.setEndDate(rs.getDate("END_DATE"));
 				workRequest.setStatus(rs.getString("STATUS"));
 				workRequest.setApplicationId(rs.getString("APPLICATION_ID"));
-				workRequest.setApplicationName(rs.getString("APPLICATION_NAME"));
+				workRequest
+						.setApplicationName(rs.getString("APPLICATION_NAME"));
 				workRequest.setWorkPackageName(rs.getString("PACKAGE_NAME"));
-				
 
-				
 				workRequestDTOs.add(workRequest);
 			}
 		} finally {
@@ -234,14 +311,15 @@ public class WorkRequestDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public WorkRequestDTO createWorkRequest(WorkRequestDTO workRequest, Connection connection) throws Exception {
+	public WorkRequestDTO createWorkRequest(WorkRequestDTO workRequest,
+			Connection connection) throws Exception {
 		/*
 		 * Get connection from DBUtil, set the parameters for the statement and
 		 * executes insert query. Uses oracle sequence as primary key. Returns
 		 * the object that was saved to the database by using findby method.
 		 * Commits the transaction and rolls back if any exception occurs.
 		 */
-		
+
 		PreparedStatement stmt = null;
 		try {
 			int seqId = DBUtil.getNextSequence("WORK_REQUEST_ID_SEQ");
@@ -262,8 +340,7 @@ public class WorkRequestDAO {
 			int rowsUpdated = stmt.executeUpdate();
 			workRequest.setWorkRequestId(seqId);
 			return workRequest;
-		}  
-		finally {
+		} finally {
 			DBUtil.closeStatement(stmt);
 		}
 	}
@@ -275,7 +352,8 @@ public class WorkRequestDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public WorkRequestDTO updateWorkRequestStatus(WorkRequestDTO WorkRequest) throws Exception {
+	public WorkRequestDTO updateWorkRequestStatus(WorkRequestDTO WorkRequest)
+			throws Exception {
 
 		/*
 		 * Get connection from DBUtil, set the parameters for the statement and
@@ -310,5 +388,92 @@ public class WorkRequestDAO {
 
 		}
 	}
+
+	public Integer getWorkRequsetTotalCost(Integer workRequestId)
+			throws Exception {
+		StringBuilder query = new StringBuilder("");
+		query.append(" SELECT SUM (HOURLY_RATE * TOTAL_HOURS) ");
+		query.append(" FROM   (SELECT A.RESOURCE_TYPE_ID,  ");
+		query.append("                B.HOURLY_RATE,  ");
+		query.append("                SUM (ESTIMATED_HOURS) total_hours  ");
+		query.append("         FROM   ACTIVITY_PHASE_RESOURCES A,  ");
+		query.append("                RESOURCE_TYPE B,  ");
+		query.append("                ACTIVITY_LINE C,  ");
+		query.append("                WORK_REQUEST D  ");
+		query.append("         WHERE  A.RESOURCE_TYPE_ID = B.RESOURCE_TYPE_ID  ");
+		query.append("                AND A.ACTIVITY_LINE_ID = C.ACTIVITY_LINE_ID  ");
+		query.append("                AND C.WORK_REQUEST_ID = D.WORK_REQUEST_ID  ");
+		query.append("                AND D.WORK_REQUEST_ID = ?  ");
+		query.append("         GROUP  BY A.RESOURCE_TYPE_ID,  ");
+		query.append("                   B.HOURLY_RATE) ");
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = DBUtil.getConnection();
+			stmt = con.prepareStatement(query.toString());
+			stmt.setInt(1, workRequestId);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} finally {
+			DBUtil.closeRS(rs);
+			DBUtil.closeStatement(stmt);
+			DBUtil.closeConnection(con);
+
+		}
+
+		return null;
+
+	}
+	
+	
+	public Integer getWorkRequsetTotalHours(Integer workRequestId) throws Exception{
+		StringBuilder query = new StringBuilder("");
+		query.append(" SELECT SUM (TOTAL_HOURS) ");
+		query.append(" FROM   (SELECT A.RESOURCE_TYPE_ID,  ");
+		query.append("                B.HOURLY_RATE,  ");
+		query.append("                SUM (ESTIMATED_HOURS) total_hours  ");
+		query.append("         FROM   ACTIVITY_PHASE_RESOURCES A,  ");
+		query.append("                RESOURCE_TYPE B,  ");
+		query.append("                ACTIVITY_LINE C,  ");
+		query.append("                WORK_REQUEST D  ");
+		query.append("         WHERE  A.RESOURCE_TYPE_ID = B.RESOURCE_TYPE_ID  ");
+		query.append("                AND A.ACTIVITY_LINE_ID = C.ACTIVITY_LINE_ID  ");
+		query.append("                AND C.WORK_REQUEST_ID = D.WORK_REQUEST_ID  ");
+		query.append("                AND D.WORK_REQUEST_ID = ?  ");
+		query.append("         GROUP  BY A.RESOURCE_TYPE_ID,  ");
+		query.append("                   B.HOURLY_RATE) ");
+		
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DBUtil.getConnection();
+			stmt = con.prepareStatement(query.toString());
+			stmt.setInt(1, workRequestId);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} finally {
+			DBUtil.closeRS(rs);
+			DBUtil.closeStatement(stmt);
+			DBUtil.closeConnection(con);
+
+		}
+
+		return null;
+		
+		
+		
+	}
+
 
 }

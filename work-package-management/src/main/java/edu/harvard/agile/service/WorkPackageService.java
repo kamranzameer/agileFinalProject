@@ -21,6 +21,7 @@ import edu.harvard.agile.util.DBUtil;
 public class WorkPackageService {
 
 	private WorkPackageDAO workPackageDAO;
+	private WorkRequestDAO workRequestDAO;
 
 	/**
 	 * This method creates 1. A new work package in the system 2. Creates new
@@ -39,8 +40,6 @@ public class WorkPackageService {
 		{
 			connection = DBUtil.getConnection();
 		//Create WorkPakcage
-			WorkPackageDAO workPackageDAO = new WorkPackageDAO();
-			WorkRequestDAO workRequestDAO = new WorkRequestDAO();
 			workPackage = workPackageDAO.createPackage(workPackage, connection);
 			
 			//Create WorkRequest for every impacted application
@@ -90,17 +89,23 @@ public class WorkPackageService {
 	 */
 	public int findCountByStatus(String status) throws Exception {
 		
-			WorkPackageDAO workPackageDAO = new WorkPackageDAO();
-			int count = workPackageDAO.findCountByStatus(status);
-		
+		int count = workPackageDAO.findCountByStatus(status);
 		return count;
-
 	}
 
 	public void setWorkPackageDAO(WorkPackageDAO workPackageDAO) {
 		this.workPackageDAO = workPackageDAO;
 	}
+	
+	public void setWorkRequestDAO(WorkRequestDAO workRequestDAO) {
+		this.workRequestDAO = workRequestDAO;
+	}
 
+	/**
+	 * Fetch all work packages
+	 * @return
+	 * @throws Exception
+	 */
 	public List<WorkPackageDTO> findAllPackages() throws Exception {
 		return workPackageDAO.findAllPackages();
 	}

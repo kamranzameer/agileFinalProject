@@ -41,6 +41,7 @@
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/bootstrap-datepicker.js"></script>
 	<script src="../js/app.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/datevalidation.js"></script>
 </head>
 <body>
 <div class="container" style="margin-left:5px; margin-right:5px">

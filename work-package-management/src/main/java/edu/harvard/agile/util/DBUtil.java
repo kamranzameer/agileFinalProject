@@ -1,9 +1,12 @@
 package edu.harvard.agile.util;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
@@ -14,22 +17,45 @@ import oracle.jdbc.pool.OracleConnectionPoolDataSource;
  */
 public class DBUtil {
 
+	static OracleConnectionPoolDataSource ds;
+	static
+	{
+		Properties prop = new Properties();
+		InputStream in = DBUtil.class.getResourceAsStream("/wpm.properties");
+		try {
+			prop.load(in);
+			ds = new OracleConnectionPoolDataSource();
+
+			ds.setURL(prop.getProperty("dburl"));
+			ds.setUser(prop.getProperty("dbuser"));
+			ds.setPassword(prop.getProperty("dbpasswd"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(1); //Dont continue.
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.exit(1); //Dont continue.
+		}
+		finally
+		{
+			try {
+				in.close();
+			} catch (IOException e) {
+				// Dont do anything
+			}
+		}
+	}
 	/**
 	 * This method is to retrieve data source from Oracle Connection pool 
 	 * @return DataSource
 	 * @throws SQLException
 	 */
-	private static OracleConnectionPoolDataSource getDataSource() throws Exception
+	/*private static void getDataSource(Properties prop) throws Exception
 	{
-		OracleConnectionPoolDataSource ds = new OracleConnectionPoolDataSource();
-
-		ds.setURL("jdbc:oracle:thin:@52.5.93.209:1521:xe");
-		ds.setUser("incredibles");
-		ds.setPassword("incredibles");
 		
-
-		return ds;
-	}
+		
+	}*/
 
 	/**
 	 * this method is to retrieve connection object using datasource
@@ -37,7 +63,7 @@ public class DBUtil {
 	 * @throws Exception
 	 */
 	public static Connection getConnection() throws Exception {
-		Connection connection = getDataSource().getConnection();
+		Connection connection = ds.getConnection();
 		connection.setAutoCommit(false);
 		
 		return connection;

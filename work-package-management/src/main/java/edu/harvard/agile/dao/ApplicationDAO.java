@@ -149,7 +149,7 @@ public class ApplicationDAO {
 			int rowsUpdated = stmt.executeUpdate();
 			con.commit();
 
-			return findByApplicationId(application.getApplicationId());
+			return application;
 		} catch (Exception e) {
 			con.rollback();
 			throw e;
@@ -163,11 +163,11 @@ public class ApplicationDAO {
 	/**
 	 * This method updates status of application record in the database
 	 * 
-	 * @param Application
+	 * @param application
 	 * @return
 	 * @throws Exception
 	 */
-	public ApplicationDTO updateApplicationStatus(ApplicationDTO Application) throws Exception {
+	public int updateApplicationStatus(ApplicationDTO application) throws Exception {
 
 		/*
 		 * Get connection from DBUtil, set the parameters for the statement and
@@ -183,16 +183,16 @@ public class ApplicationDAO {
 
 			String query = "Update APPLICATION SET IS_ACTIVE = ?, MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE APPLICATION_ID = ?";
 			stmt = con.prepareStatement(query);
-			stmt.setString(1, Application.getIsActive());
+			stmt.setString(1, application.getIsActive());
 
 			stmt.setDate(2, new Date(System.currentTimeMillis()));
-			stmt.setString(3, Application.getModifiedBy());
-			stmt.setString(4, Application.getApplicationId());
+			stmt.setString(3, application.getModifiedBy());
+			stmt.setString(4, application.getApplicationId());
 
 			int rowsUpdated = stmt.executeUpdate();
 			con.commit();
 
-			return findByApplicationId(Application.getApplicationId());
+			return rowsUpdated;
 		} catch (Exception e) {
 			con.rollback();
 			throw e;
@@ -203,4 +203,6 @@ public class ApplicationDAO {
 		}
 	}
 
+
+	
 }

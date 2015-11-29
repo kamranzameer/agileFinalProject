@@ -99,7 +99,7 @@ public class WorkPackageDAOTest {
 	public void testFindAllPackages() throws Exception {
 		WorkPackageDAO workPackageDAO = new WorkPackageDAO();
 		List<WorkPackageDTO> workPackageDTOs = workPackageDAO.findAllPackages();
-
+		
 		assertTrue(workPackageDTOs.size() > 0);
 	}
 
@@ -185,9 +185,7 @@ public class WorkPackageDAOTest {
 		}
 		finally
 		{
-			if(connection!=null){
-				DBUtil.closeConnection(connection);
-			}
+			DBUtil.closeConnection(connection);
 		}
 	}
 
@@ -213,8 +211,7 @@ public class WorkPackageDAOTest {
 		workPackage.setCreateBy("uannipu");
 		workPackage.setModifiedBy("uannipu");
 
-		WorkPackageDTO workDTO = workPackageDAO.updatePackage(workPackage);
-		assertTrue("Add fields to extract - updated".equals(workDTO.getPackageName())); 
+		assertTrue(workPackageDAO.updatePackage(workPackage) > 0);
 
 	}
 
@@ -238,8 +235,8 @@ public class WorkPackageDAOTest {
 		workPackage.setCreateBy("uannipu");
 		workPackage.setModifiedBy("uannipu");
 
-		WorkPackageDTO workDTO = workPackageDAO.updatePackage(workPackage);
-		assertNull(workDTO);
+		assertTrue(workPackageDAO.updatePackage(workPackage) == 0);
+		
 
 	}
 
@@ -296,9 +293,8 @@ public class WorkPackageDAOTest {
 		workPackage.setCreateBy("uannipu");
 		workPackage.setModifiedBy("uannipu");
 
-		WorkPackageDTO workDTO = workPackageDAO.updatePackage(workPackage);
-		assertTrue("Add fields to extract - updated".equals(workDTO.getPackageName())); 
-
+		assertTrue(workPackageDAO.updatePackage(workPackage) == 0);
+		 
 	}
 
 	
@@ -315,6 +311,7 @@ public class WorkPackageDAOTest {
 		
 		assertTrue(workPackageDTOs.size() > 0);
 	}
+	
 	/**
 	 * This test is to test deletePackageByPackageName method of DAO
 	 * @throws Exception
@@ -323,11 +320,34 @@ public class WorkPackageDAOTest {
 	public void testDeleteByPackageName() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
 
-		workPackageDAO.deleteByPackageName("TestPackage for delete");
-		WorkPackageDTO workPackage = workPackageDAO.findByPackageName("TestPackage for delete");
-		assertNull(workPackage); 
+		assertTrue(workPackageDAO.deleteByPackageName("TestPackage for delete") > 0);
 		
 	}
+	
+	/**
+	 * This test is to test deletePackageByPackageName method of DAO
+	 * @throws Exception
+	 */
+	@Test
+	public void testDeleteByInvalidPackageName() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
+
+		assertTrue(workPackageDAO.deleteByPackageName("Invalid TestPackage for delete") == 0);
+		
+	}
+	
+	/**
+	 * This test is to test deletePackageByPackageName method of DAO
+	 * @throws Exception
+	 */
+	@Test(expected = SQLException.class)
+	public void testDeleteByPackageNameWithChildRecords() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
+
+		assertTrue(workPackageDAO.deleteByPackageName("support continuous testing") == 0);
+		
+	}
+	
 	
 	/**
 	 * This test is to test findCountByStatus method of DAO
@@ -339,6 +359,62 @@ public class WorkPackageDAOTest {
 
 		int count = workPackageDAO.findCountByStatus("Open");
 		assertTrue(count > 0); 
+		
+	}
+	
+	/**
+	 * This test is to test getTotalApplications method of DAO
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetTotalApplications() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
+		
+		Connection con = DBUtil.getConnection();
+		assertTrue(workPackageDAO.getTotalApplications(1, con) > 0);
+		DBUtil.closeConnection(con);
+		
+	}
+	
+	/**
+	 * This test is to test getTotalApplications method of DAO
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetTotalApplicationsForAnInvalidPackage() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
+		
+		Connection con = DBUtil.getConnection();
+		assertTrue(workPackageDAO.getTotalApplications(73443322, con) == 0);
+		DBUtil.closeConnection(con);
+		
+	}
+	
+	/**
+	 * This test is to test getWorkPackageTotalCost method of DAO
+	 * @throws Exception
+	 */
+	@Test
+	public void testgetWorkPackageTotalCost() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
+		
+		Connection con = DBUtil.getConnection();
+		assertTrue(workPackageDAO.getWorkPackageTotalCost(73, con) == 0);
+		DBUtil.closeConnection(con);
+		
+	}
+	
+	/**
+	 * This test is to test getWorkPackageTotalCost method of DAO
+	 * @throws Exception
+	 */
+	@Test
+	public void testgetWorkPackageTotalCostForAnInvalidPackage() throws Exception {
+		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
+		
+		Connection con = DBUtil.getConnection();
+		assertTrue(workPackageDAO.getWorkPackageTotalCost(73443322, con) == 0);
+		DBUtil.closeConnection(con);
 		
 	}
 

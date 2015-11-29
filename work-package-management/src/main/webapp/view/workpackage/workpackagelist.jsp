@@ -22,7 +22,6 @@
 												<a href="newWorkPackage.action" class="btn btn-success">New</a>
 											</td>
 										</tr>
-									
 										<tr>
 											<th>
 												Package Name

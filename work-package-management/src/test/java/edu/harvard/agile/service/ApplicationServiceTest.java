@@ -10,7 +10,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import edu.harvard.agile.dao.ApplicationContactsDAO;
 import edu.harvard.agile.dao.ApplicationDAO;
+import edu.harvard.agile.model.ApplicationContactsDTO;
 import edu.harvard.agile.model.ApplicationDTO;
 
 public class ApplicationServiceTest {
@@ -47,4 +49,19 @@ public class ApplicationServiceTest {
 		List<ApplicationDTO> applications = appService.findAllApplications();
 	}
 
+	@Test
+	public void testFindApplicationContactByUser() throws Exception {
+		ApplicationService appService = new ApplicationService();
+		appService.setApplicationContactsDAO(new ApplicationContactsDAO());
+		ApplicationContactsDTO applicationContact = appService.findApplicationContactByUser("userapp1");
+		Assert.assertNotNull(applicationContact);
+	}
+	
+	@Test
+	public void testFindApplicationContactByInvalidUser() throws Exception {
+		ApplicationService appService = new ApplicationService();
+		appService.setApplicationContactsDAO(new ApplicationContactsDAO());
+		ApplicationContactsDTO applicationContact = appService.findApplicationContactByUser("invaliduser");
+		Assert.assertNull(applicationContact);
+	}
 }

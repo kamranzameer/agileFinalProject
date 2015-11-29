@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.sql.DataSource;
-
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
 /**
@@ -21,13 +19,16 @@ public class DBUtil {
 	 * @return DataSource
 	 * @throws SQLException
 	 */
-	private static DataSource getDataSource() throws SQLException {
+	private static OracleConnectionPoolDataSource getDataSource() throws Exception
+	{
 		OracleConnectionPoolDataSource ds = new OracleConnectionPoolDataSource();
+
 		ds.setURL("jdbc:oracle:thin:@52.5.93.209:1521:xe");
 		ds.setUser("incredibles");
 		ds.setPassword("incredibles");
-		return ds;
+		
 
+		return ds;
 	}
 
 	/**
@@ -38,6 +39,7 @@ public class DBUtil {
 	public static Connection getConnection() throws Exception {
 		Connection connection = getDataSource().getConnection();
 		connection.setAutoCommit(false);
+		
 		return connection;
 	}
 
@@ -92,10 +94,10 @@ public class DBUtil {
 
 		if (connection != null) {
 			try {
-				if (!connection.isClosed()) {
+				//if (!connection.isClosed()) {
 					connection.close();
 					return connection.isClosed();
-				}
+				//}
 			} catch (SQLException e) {
 				e.printStackTrace();
 
@@ -117,19 +119,22 @@ public class DBUtil {
 		String seqQuery = "Select " + seqName + ".nextVal from DUAL";
 		int seq = 0;
 		Connection con = null;
+		Statement st = null;
+		ResultSet rs = null;
 
 		try {
 			con = getConnection();
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(seqQuery);
+			st = con.createStatement();
+			rs = st.executeQuery(seqQuery);
 
 			if (rs.next()) {
 				seq = rs.getInt(1);
 			}
 		} finally {
-			if (con != null) {
-				con.close();
-			}
+			
+			closeStatement(st);
+			closeRS(rs);
+			closeConnection(con);
 		}
 
 		return seq;

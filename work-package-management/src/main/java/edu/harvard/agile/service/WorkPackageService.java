@@ -44,11 +44,11 @@ public class WorkPackageService {
 			workPackage = workPackageDAO.createPackage(workPackage, connection);
 			
 			//Create WorkRequest for every impacted application
-			List<ApplicationDTO> impactedApplications = workPackage.getImpactedApplications();
-			for (ApplicationDTO application : impactedApplications) 
+			List<String> impactedApplications = workPackage.getImpactedApplications();
+			for (String application : impactedApplications) 
 			{
 				workRequest = new WorkRequestDTO();
-				workRequest.setApplicationId(application.getApplicationId());
+				workRequest.setApplicationId(application);
 				workRequest.setPackageId(workPackage.getPackageId());
 				workRequest.setStatus(workPackage.getStatus());
 				workRequest.setCreateBy(workPackage.getCreateBy());
@@ -82,7 +82,7 @@ public class WorkPackageService {
 	}
 	
 	/**
-	 * This method finds count by status. 
+	 * This method finds workp package count by status. 
 	 * 
 	 * @param String status 
 	 * @return int count
@@ -104,9 +104,13 @@ public class WorkPackageService {
 	public List<WorkPackageDTO> findAllPackages() throws Exception {
 		return workPackageDAO.findAllPackages();
 	}
+<<<<<<< HEAD
 	
 	
 	public WorkPackageDTO findById(int workPackageId) throws Exception {
 		return workPackageDAO.findByPackageId(workPackageId);
 	}
 }
+=======
+}
+>>>>>>> 802bbd8724fe1b9f1532704eba978fc9647ddbe9

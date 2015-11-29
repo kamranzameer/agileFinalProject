@@ -3,6 +3,7 @@ package edu.harvard.agile.action;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -12,17 +13,21 @@ import edu.harvard.agile.model.WorkPackageDTO;
 import edu.harvard.agile.service.ApplicationService;
 import edu.harvard.agile.service.TestingProgramService;
 import edu.harvard.agile.service.WorkPackageService;
+import edu.harvard.agile.util.WorkPackageUtil;
 
+/**
+ * Action class to process all Work package related requests
+ * @author incredibles
+ *
+ */
 public class WorkPackageAction extends WPMActionBase {
 	private WorkPackageService workPackageService;
 	private ApplicationService applicationService;
 	private TestingProgramService testingProgramService;
 	private WorkPackageDTO workPackageDTO;
 	private List<ApplicationDTO> applications;
-	private List<String> impactedApplications;
 	private List<TestingProgramDTO> testPrograms;
-	String[] statusArr = {"open"};
-	private List<String> statusList = Arrays.asList(statusArr);
+	private List<String> impactedApplications;
 	private String contractFromYear;
 	private String contractToYear;
 	private String startDate;
@@ -33,7 +38,6 @@ public class WorkPackageAction extends WPMActionBase {
 	public void prepare() throws Exception {
 		applications = applicationService.findAllApplications();
 		testPrograms = testingProgramService.findAllTestingPrograms();
-		
 	}
 	
 	public String execute(){
@@ -41,17 +45,14 @@ public class WorkPackageAction extends WPMActionBase {
 		return SUCCESS;
 	}
 	
+	/**
+	 * Called to create new work package
+	 * @return
+	 */
 	public String save()
 	{
-		System.out.println("Save");
 		try {
-			System.out.println(workPackageDTO.getPackageName());
-			System.out.println(workPackageDTO.getPackageDesc());
-			System.out.println(workPackageDTO.getTestingProgramCode());
-			System.out.println(contractFromYear);
-			System.out.println(workPackageDTO.getStatus());
-			System.out.println(getImpactedApplications());
-			//processNewPackage();
+			processNewPackage();
 		} catch (Exception e) {
 			e.printStackTrace();
 			//return ERROR;
@@ -59,10 +60,21 @@ public class WorkPackageAction extends WPMActionBase {
 		return SUCCESS;
 	}
 
+	/**
+	 * Build WorkPackage DTO and create work package
+	 * @throws Exception
+	 */
 	private void processNewPackage() throws Exception 
 	{
-		//workPackageDTO.setImpactedApplications(impactedApplications);
-		//workPackageDTO.setTestingProgramCode(testingProgramCode);
+		workPackageDTO.setContractFromYear(WorkPackageUtil.convertDate(contractFromYear, "yyyy-MM-dd"));
+		workPackageDTO.setContractToYear(WorkPackageUtil.convertDate(contractToYear, "yyyy-MM-dd"));
+		workPackageDTO.setStartDate(WorkPackageUtil.convertDate(startDate, "yyyy-MM-dd"));
+		workPackageDTO.setEndDate(WorkPackageUtil.convertDate(endDate, "yyyy-MM-dd"));
+		workPackageDTO.setImpactedApplications(impactedApplications);
+		String userID = SecurityUtils.getSubject().getPrincipal().toString(); //logged in user
+		workPackageDTO.setRequestorName(userID);
+		workPackageDTO.setCreateBy(userID);
+		workPackageDTO.setModifiedBy(userID);
 		workPackageService.createPackage(workPackageDTO);
 	}
 
@@ -97,28 +109,12 @@ public class WorkPackageAction extends WPMActionBase {
 		this.applications = applications;
 	}
 	
-	public List<String> getImpactedApplications() {
-		return impactedApplications;
-	}
-
-	public void setImpactedApplications(List<String> impactedApplications) {
-		this.impactedApplications = impactedApplications;
-	}
-
 	public List<TestingProgramDTO> getTestPrograms() {
 		return testPrograms;
 	}
 
 	public void setTestPrograms(List<TestingProgramDTO> testPrograms) {
 		this.testPrograms = testPrograms;
-	}
-	
-	public List<String> getStatusList() {
-		return statusList;
-	}
-
-	public void setStatusList(List<String> statusList) {
-		this.statusList = statusList;
 	}
 	
 	public String getContractFromYear() {
@@ -145,17 +141,20 @@ public class WorkPackageAction extends WPMActionBase {
 		this.startDate = startDate;
 	}
 
-	
-	
-	//private TestingProgramDTO selectedTestProgram;
-	//private boolean save;
-
 	public String getEndDate() {
 		return endDate;
 	}
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+	
+	public List<String> getImpactedApplications() {
+		return impactedApplications;
+	}
+
+	public void setImpactedApplications(List<String> impactedApplications) {
+		this.impactedApplications = impactedApplications;
 	}
 
 }

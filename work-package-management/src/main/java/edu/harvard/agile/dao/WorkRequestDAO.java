@@ -344,6 +344,37 @@ public class WorkRequestDAO {
 			DBUtil.closeStatement(stmt);
 		}
 	}
+	
+	/**
+	 * This method deletes work request from database.
+	 * 
+	 * @param workRequest
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteWorkRequest(WorkRequestDTO workRequest, Connection connection) throws Exception {
+		/*
+		 * Get connection from DBUtil, set the parameters for the statement and
+		 * executes insert query. Uses oracle sequence as primary key. Returns
+		 * the object that was saved to the database by using findby method.
+		 * Commits the transaction and rolls back if any exception occurs.
+		 */
+		
+		PreparedStatement stmt = null;
+		try {
+			int seqId = DBUtil.getNextSequence("WORK_REQUEST_ID_SEQ");
+
+			String query = "DELETE FROM WORK_REQUEST WHERE WORK_REQUEST_ID = ?";
+			stmt = connection.prepareStatement(query);
+			stmt.setInt(1, workRequest.getWorkRequestId());
+			int rowsUpdated = stmt.executeUpdate();
+
+			return rowsUpdated;
+		}  
+		finally {
+			DBUtil.closeStatement(stmt);
+		}
+	}
 
 	/**
 	 * This method updates status of work request record in the database

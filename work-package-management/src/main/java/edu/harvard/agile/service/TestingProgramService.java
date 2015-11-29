@@ -19,7 +19,12 @@ public class TestingProgramService {
 	public void setTestingProgramDAO(TestingProgramDAO testingProgramDAO) {
 		this.testingProgramDAO = testingProgramDAO;
 	}
-
+	
+	/**
+	 * Fetch all Testing programs
+	 * @return
+	 * @throws Exception
+	 */
 	public List<TestingProgramDTO> findAllTestingPrograms() throws Exception {
 		return testingProgramDAO.findAllTestingPrograms();
 	}

@@ -3,7 +3,8 @@
 <div class="row clearfix">
     <div class="col-md-12 column">
         <ul class="breadcrumb" style="margin-bottom: 5px;">
-            <li>Dashboard</li>
+            <% String userID = session.getAttribute("userID").toString(); %>
+            <li>Dashboard : Welcome <%=userID%></li>
         </ul>
     </div>
 </div>
@@ -19,8 +20,9 @@
         <!-- small box -->
         <div class="small-box-usr bg-aqua">
             <div class="inner">
+   												
                 <h3>
-                    201
+                   ${dashboardInfo.totalWorkPackagesCount}
                 </h3>
                 <p>
                     Total <br>
@@ -40,7 +42,7 @@
         <div class="small-box-usr bg-green">
             <div class="inner">
                 <h3>
-                    120<!-- <sup style="font-size: 20px">GB</sup> -->
+                     ${dashboardInfo.inprogressWorkPackagesCount}<!-- <sup style="font-size: 20px">GB</sup> -->
                 </h3>
                 <p>
                     In Progress<br>
@@ -60,7 +62,7 @@
         <div class="small-box-usr bg-yellow">
             <div class="inner">
                 <h3>
-                    64
+                    ${dashboardInfo.completedWorkPackagesCount}
                 </h3>
                 <p>
                     Completed<br>Work Packages
@@ -79,10 +81,10 @@
         <div class="small-box-usr bg-red">
             <div class="inner">
                 <h3>
-                    76
+                   ${dashboardInfo.approvedWorkPackagesCount} 
                 </h3>
                 <p>
-                    Something else<br>Here
+                    Approved<br>Work Packages
                 </p>
             </div>
             <div class="icon">
@@ -102,7 +104,8 @@
         <div class="small-box-usr bg-aqua">
             <div class="inner">
                 <h3>
-                    10
+                	
+                     ${dashboardInfo.appTotalWorkRequestsCount} 
                 </h3>
                 <p>
                     Total <br>

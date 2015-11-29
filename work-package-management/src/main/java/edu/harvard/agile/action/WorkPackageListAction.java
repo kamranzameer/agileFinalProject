@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Required;
 import edu.harvard.agile.model.WorkPackageDTO;
 import edu.harvard.agile.service.WorkPackageService;
 
+/**
+ * Action class to handle list all workpackages requests
+ * @author Incredibles
+ *
+ */
 public class WorkPackageListAction extends WPMActionBase {
 	private WorkPackageService workPackageService;
 	private List<WorkPackageDTO> workPackages;
@@ -15,7 +20,6 @@ public class WorkPackageListAction extends WPMActionBase {
 	@Override
 	public void prepare() throws Exception {
 		workPackages = workPackageService.findAllPackages();
-		System.out.println(workPackages.size());
 	}
 
 	public String execute() throws Exception {

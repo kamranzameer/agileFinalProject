@@ -8,6 +8,11 @@ import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 
+/**
+ * Authorization class used by Shiro to check for User permissions before allowing logged in user access to page
+ * @author Incredibles
+ *
+ */
 public class UserAuthorizationFilter extends RolesAuthorizationFilter {
 
     @Override

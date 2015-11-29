@@ -18,6 +18,7 @@ import edu.harvard.agile.util.DBUtil;
 
 public class WorkRequestDAOTest {
 
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -43,21 +44,28 @@ public class WorkRequestDAOTest {
 			con = DBUtil.getConnection();
 			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 			WorkRequestDTO workRequest = new WorkRequestDTO();
-			workRequest.setPackageId(1);
+			workRequest.setPackageId(73);
 			workRequest.setApplicationId("eSS");
 			workRequest.setStatus("Open");
 			workRequest.setStartDate(new Date());
 			workRequest.setEndDate(new Date());
-			workRequest.setCreateBy("uannipu");
-			workRequest.setModifiedBy("uannipu");
+			workRequest.setCreateBy("junit");
+			workRequest.setModifiedBy("junit");
 
 			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			assertTrue(workRequest.getWorkRequestId()!=0);
+			
+			//cleanup
+			workRequestDAO.deleteWorkRequest(workRequest, con);
 			con.commit();
+			
+			
+			
 		}
 		catch(Exception ex)
 		{
 			con.rollback();
+			throw ex;
 		}
 		finally
 		{
@@ -177,6 +185,43 @@ public class WorkRequestDAOTest {
 
 			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			con.commit();
+		}
+		catch(Exception ex)
+		{
+			con.rollback();
+			throw ex;
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
+	}
+	
+	@Test
+	public void testDeleteRequest() throws Exception {
+		Connection con = null;
+
+		try
+		{
+			con = DBUtil.getConnection();
+			
+			//setup
+			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
+			WorkRequestDTO workRequest = new WorkRequestDTO();
+			workRequest.setPackageId(73);
+			workRequest.setApplicationId("eSS");
+			workRequest.setStatus("Open");
+			workRequest.setStartDate(new Date());
+			workRequest.setEndDate(new Date());
+			workRequest.setCreateBy("junit");
+			workRequest.setModifiedBy("junit");
+
+			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
+			
+			assertTrue(workRequestDAO.deleteWorkRequest(workRequest, con) > 0);
+			
+			con.commit();
+			
 		}
 		catch(Exception ex)
 		{

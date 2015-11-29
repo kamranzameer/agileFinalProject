@@ -12,17 +12,20 @@
 	    }else if (currentPage.equals("wpl")){
 	    	currentPage = "workpackage/workpackagelist.jsp";
 	    }else if (currentPage.equals("cnwp")){
-	    	currentPage = "workpackage/createnewworkpackage.jsp";
+	    	currentPage = "workpackage/createNewWorkPackage.jsp";
 	    }else if (currentPage.equals("wrl")){
 	    	currentPage = "workrequest/workRequestList.jsp";
 	    }else if (currentPage.equals("wrpd")){
 	    	currentPage = "workrequest/workRequestPackageDetail.jsp";
 	    }else if (currentPage.equals("wps")){
 	    	currentPage = "workpackage/workPackageStatistics.jsp";
+<<<<<<< HEAD
 	    }else if (currentPage.equals("wpd")){
 	    	currentPage = "workpackage/workpackagedetail.jsp";
 	    }else{
 	    	currentPage = "dashboard.jsp";
+=======
+>>>>>>> 802bbd8724fe1b9f1532704eba978fc9647ddbe9
 	    }
 
 	}else{
@@ -65,9 +68,9 @@
 		        <div class="col-md-12">
 				<div class="bs-docs-sidebar hidden-print affix col-md-2" role="complementary" style="background-color: rgba(11, 43, 50, 0.82)">
 				    <ul class="nav bs-docs-sidenav">
-		                <li class=""><a href="myDashboard.action"><i class="glyphicon glyphicon-dashboard">&nbsp;</i>Dashboard</a></li>
+		                <li><a href="homepage.jsp"><i class="glyphicon glyphicon-dashboard">&nbsp;</i>Dashboard</a></li>
 
-		                <li class=""><a href="workspace.jsp?p=ecit"><i class="glyphicon glyphicon-user">&nbsp;</i>Profile</a></li>
+		                <li><a href="workspace.jsp?p=ecit"><i class="glyphicon glyphicon-user">&nbsp;</i>Profile</a></li>
 						
 						<shiro:hasAnyRoles name="DM,BU">
 						<li class=""> <a href="workPackageList.action" data-toggle="collapse" data-target="#workPackageMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages</a>
@@ -79,8 +82,8 @@
 						<li class=""> <a href="workRequestList.action" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Requests</a>
 						</li>
 
-		                <li class=""> <a href="workspace.jsp?p=cp" onclick="javascript:$( '#workspace' ).load( 'changepassword.jsp' )"><i class="glyphicon glyphicon-lock">&nbsp;</i> Change Password</a></li>
-		                <li class=""><a href="../logout"><i class="glyphicon glyphicon-off">&nbsp;</i>Sign Out</a>&nbsp;</li>
+		                <li><a href="workspace.jsp?p=cp" onclick="javascript:$( '#workspace' ).load( 'changepassword.jsp' )"><i class="glyphicon glyphicon-lock">&nbsp;</i> Change Password</a></li>
+		                <li><a href="../logout"><i class="glyphicon glyphicon-off">&nbsp;</i>Sign Out</a>&nbsp;</li>
 				    </ul>
 				</div>
 	        	</div>

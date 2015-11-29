@@ -62,21 +62,21 @@ public class ActivityPhaseResourcesDAO {
 			
 			
 			while (rs.next()) {
-				activityLine = new ActivityLineDTO();
-				
-				activityLine.setActivityLineDesc(rs.getString("ACTIVITY_LINE_DESC"));
-				activityLine.setActivityLineId(rs.getInt("ACTIVITY_LINE_ID"));
-				activityLine.setActivityTypeCode(rs.getString("ACTIVITY_TYPE_CODE"));
-				activityLine.setCreateBy(rs.getString("CREATE_BY"));
-				activityLine.setCreateDate(rs.getDate("CREATE_DATE"));
-				activityLine.setEndDate(rs.getDate("END_DATE"));
-				activityLine.setStartDate(rs.getDate("START_DATE"));
-				activityLine.setWorkRequestId(rs.getInt("WORK_REQUEST_ID"));
-				
-				activityLine.setTotalCost(getTotalCost(rs.getInt("ACTIVITY_LINE_ID")));
-				activityLine.setTotalHours(getTotalHours(rs.getInt("ACTIVITY_LINE_ID")));
-				
-				activityLines.add(activityLine);
+//				activityLine = new ActivityLineDTO();
+//				
+//				activityLine.setActivityLineDesc(rs.getString("ACTIVITY_LINE_DESC"));
+//				activityLine.setActivityLineId(rs.getInt("ACTIVITY_LINE_ID"));
+//				activityLine.setActivityTypeCode(rs.getString("ACTIVITY_TYPE_CODE"));
+//				activityLine.setCreateBy(rs.getString("CREATE_BY"));
+//				activityLine.setCreateDate(rs.getDate("CREATE_DATE"));
+//				activityLine.setEndDate(rs.getDate("END_DATE"));
+//				activityLine.setStartDate(rs.getDate("START_DATE"));
+//				activityLine.setWorkRequestId(rs.getInt("WORK_REQUEST_ID"));
+//				
+//				activityLine.setTotalCost(getTotalCost(rs.getInt("ACTIVITY_LINE_ID")));
+//				activityLine.setTotalHours(getTotalHours(rs.getInt("ACTIVITY_LINE_ID")));
+//				
+//				activityLines.add(activityLine);
 			}
 		} finally {
 			DBUtil.closeRS(rs);
@@ -85,7 +85,8 @@ public class ActivityPhaseResourcesDAO {
 
 		}
 
-		return activityLines;
+//		return activityLines;
+		return null;
 	}
 	
 	

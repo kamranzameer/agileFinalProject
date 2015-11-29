@@ -43,10 +43,6 @@
 
 		<default-action-ref name="index" />
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
         <action name="workPackageList"  class="workPackageListAction">
             <result>/view/workspace.jsp</result>
         </action>
@@ -54,26 +50,7 @@
         <action name="workRequestList"  class="workRequestListAction">
             <result>/view/workspace.jsp</result>
         </action>
-        
-<<<<<<< HEAD
-=======
-        <action name="newWorkPackage"  class="workPackageAction">
-            <result name="success">/view/workspace.jsp</result>
-        </action>
-        <action name="saveWorkPackage"  class="workPackageAction" method="save">
-            <result name="success">/view/workspace.jsp</result>
-        </action>
-        
-        <action name="myDashboard" class="dashboardAction">
-        	<result>/view/workspace.jsp</result>
-		</action>
 
-
-		<action name="workRequestList" class="workRequestListAction">
-			<result>/view/workspace.jsp</result>
-		</action>
-
->>>>>>> origin/master
 		<action name="workPackageDetail" class="workPackageDetailAction">
 			<result>/view/workspace.jsp</result>
 		</action>

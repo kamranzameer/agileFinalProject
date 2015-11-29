@@ -109,17 +109,9 @@ public class WorkPackageService {
 	public List<WorkPackageDTO> findAllPackages() throws Exception {
 		return workPackageDAO.findAllPackages();
 	}
-<<<<<<< HEAD
-
-	public WorkPackageDTO findById(int workPackageId) throws Exception {
-		return workPackageDAO.findByPackageId(workPackageId);
-	}
-}
-=======
 	
 	
 	public WorkPackageDTO findById(int workPackageId) throws Exception {
 		return workPackageDAO.findByPackageId(workPackageId);
 	}
 }
->>>>>>> origin/master

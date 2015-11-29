@@ -36,20 +36,10 @@ public class WorkRequestService {
 		this.workRequestDAO = workRequestDAO;
 	}
 
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> origin/master
 		public List<WorkRequestDTO> findRequestsByPackageId(int packageId) throws Exception {
 			return workRequestDAO.findRequestsByPackageId(packageId);
 		}
-	
-	
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 	/**
 	 * Method to fetch all work requests
 	 * @return
@@ -76,11 +66,5 @@ public class WorkRequestService {
 	public List<WorkRequestDTO> findAllWorkRequestsByUser(String userid) throws Exception {
 		ApplicationContactsDTO appContact = applicationService.findApplicationContactByUser(userid);
 		return workRequestDAO.findRequestsByApplicationId(appContact.getApplicationId());
-<<<<<<< HEAD
-}
-
-}
-=======
 	}
 }
->>>>>>> origin/master

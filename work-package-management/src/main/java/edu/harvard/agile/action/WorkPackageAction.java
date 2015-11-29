@@ -15,6 +15,11 @@ import edu.harvard.agile.service.TestingProgramService;
 import edu.harvard.agile.service.WorkPackageService;
 import edu.harvard.agile.util.WorkPackageUtil;
 
+/**
+ * Action class to process all Work package related requests
+ * @author incredibles
+ *
+ */
 public class WorkPackageAction extends WPMActionBase {
 	private WorkPackageService workPackageService;
 	private ApplicationService applicationService;
@@ -40,6 +45,10 @@ public class WorkPackageAction extends WPMActionBase {
 		return SUCCESS;
 	}
 	
+	/**
+	 * Called to create new work package
+	 * @return
+	 */
 	public String save()
 	{
 		try {
@@ -51,6 +60,10 @@ public class WorkPackageAction extends WPMActionBase {
 		return SUCCESS;
 	}
 
+	/**
+	 * Build WorkPackage DTO and create work package
+	 * @throws Exception
+	 */
 	private void processNewPackage() throws Exception 
 	{
 		workPackageDTO.setContractFromYear(WorkPackageUtil.convertDate(contractFromYear, "yyyy-MM-dd"));
@@ -58,7 +71,7 @@ public class WorkPackageAction extends WPMActionBase {
 		workPackageDTO.setStartDate(WorkPackageUtil.convertDate(startDate, "yyyy-MM-dd"));
 		workPackageDTO.setEndDate(WorkPackageUtil.convertDate(endDate, "yyyy-MM-dd"));
 		workPackageDTO.setImpactedApplications(impactedApplications);
-		String userID = SecurityUtils.getSubject().getPrincipal().toString();
+		String userID = SecurityUtils.getSubject().getPrincipal().toString(); //logged in user
 		workPackageDTO.setRequestorName(userID);
 		workPackageDTO.setCreateBy(userID);
 		workPackageDTO.setModifiedBy(userID);

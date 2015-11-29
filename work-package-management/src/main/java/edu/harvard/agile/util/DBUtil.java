@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.sql.DataSource;
-
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
 /**
@@ -16,23 +14,21 @@ import oracle.jdbc.pool.OracleConnectionPoolDataSource;
  */
 public class DBUtil {
 
-	static OracleConnectionPoolDataSource ds;
 	/**
 	 * This method is to retrieve data source from Oracle Connection pool 
 	 * @return DataSource
 	 * @throws SQLException
 	 */
-	static
+	private static OracleConnectionPoolDataSource getDataSource() throws Exception
 	{
-		try {
-			ds = new OracleConnectionPoolDataSource();
-			ds.setURL("jdbc:oracle:thin:@52.5.93.209:1521:xe");
-			ds.setUser("incredibles");
-			ds.setPassword("incredibles");
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
+		OracleConnectionPoolDataSource ds = new OracleConnectionPoolDataSource();
+
+		ds.setURL("jdbc:oracle:thin:@52.5.93.209:1521:xe");
+		ds.setUser("incredibles");
+		ds.setPassword("incredibles");
+		
+
+		return ds;
 	}
 
 	/**
@@ -41,8 +37,10 @@ public class DBUtil {
 	 * @throws Exception
 	 */
 	public static Connection getConnection() throws Exception {
-		Connection connection = ds.getConnection();
+		Connection connection = getDataSource().getConnection();
 		connection.setAutoCommit(false);
+		
+		System.out.println("================ CONNECTION OPEN ============================");
 		return connection;
 	}
 
@@ -97,10 +95,11 @@ public class DBUtil {
 
 		if (connection != null) {
 			try {
-				if (!connection.isClosed()) {
+				//if (!connection.isClosed()) {
+				System.out.println("================ CONNECTION CLOSE ============================");
 					connection.close();
 					return connection.isClosed();
-				}
+				//}
 			} catch (SQLException e) {
 				e.printStackTrace();
 

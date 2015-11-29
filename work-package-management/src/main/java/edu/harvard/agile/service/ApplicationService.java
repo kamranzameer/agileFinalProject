@@ -38,10 +38,21 @@ public class ApplicationService {
 		this.applicationDAO = applicationDAO;
 	}
 
+	/**
+	 * Fetch all applications
+	 * @return
+	 * @throws Exception
+	 */
 	public List<ApplicationDTO> findAllApplications() throws Exception {
 		return applicationDAO.findAllApplications();
 	}
 	
+	/**
+	 * Fetch all applications assigned to a user
+	 * @param userid
+	 * @return
+	 * @throws Exception
+	 */
 	public ApplicationContactsDTO findApplicationContactByUser(String userid) throws Exception{
 		return applicationContactsDAO.findContactsByUser(userid);
 	}

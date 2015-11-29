@@ -15,8 +15,15 @@ public class WorkPackageUtil
 {
 	public static Date convertDate(String dateStr, String format) throws ParseException
 	{
-		DateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
-		Date date = dateFormat.parse(dateStr);
-		return date;
+		if(dateStr != null && dateStr.trim().length() > 0)
+		{
+			DateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+			Date date = dateFormat.parse(dateStr);
+			return date;
+		}
+		else
+		{
+			return null;
+		}
 	}
 }

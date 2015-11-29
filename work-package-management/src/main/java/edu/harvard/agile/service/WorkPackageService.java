@@ -82,7 +82,7 @@ public class WorkPackageService {
 	}
 	
 	/**
-	 * This method finds count by status. 
+	 * This method finds workp package count by status. 
 	 * 
 	 * @param String status 
 	 * @return int count

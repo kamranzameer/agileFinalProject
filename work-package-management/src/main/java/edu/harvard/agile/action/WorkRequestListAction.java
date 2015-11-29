@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Required;
 import edu.harvard.agile.model.WorkRequestDTO;
 import edu.harvard.agile.service.WorkRequestService;
 
+/**
+ * Action class to handle list all work requests
+ * @author Incredibles
+ *
+ */
 public class WorkRequestListAction extends WPMActionBase {
 	private WorkRequestService workRequestService;
 	private List<WorkRequestDTO> workRequests;

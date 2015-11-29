@@ -22,12 +22,6 @@ import edu.harvard.agile.util.DBUtil;
 public class WorkPackageDAO 
 {
 	
-	//TODO : This constructor should be removed and SQL connection should be accepted from service class for better transaction management
-	public WorkPackageDAO()
-	{
-		
-	}
-
 	/**
 	 * Find by primary key method to find the record by package id.
 	 * 
@@ -399,7 +393,7 @@ public class WorkPackageDAO
 	 * @return - null
 	 * @throws Exception
 	 */
-	public void deleteByPackageName(String packageName) throws Exception {
+	public int deleteByPackageName(String packageName) throws Exception {
 
 		/*
 		 * Get connection from DBUtil, executes delete query 
@@ -414,6 +408,7 @@ public class WorkPackageDAO
 			stmt.setString(1, packageName);
 			int rowsDeleted   = stmt.executeUpdate();
 			con.commit();
+			return rowsDeleted;
 		} catch(Exception e){
 			con.rollback();
 			throw e;

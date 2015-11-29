@@ -36,17 +36,12 @@ public class WorkRequestService {
 		this.workRequestDAO = workRequestDAO;
 	}
 
-<<<<<<< HEAD
-		public List<WorkRequestDTO> findAllWorkRequests() throws Exception {
-			return workRequestDAO.findAllWorkRequests();
-		}
-		
+
 		public List<WorkRequestDTO> findRequestsByPackageId(int packageId) throws Exception {
 			return workRequestDAO.findRequestsByPackageId(packageId);
 		}
 	
 	
-=======
 	/**
 	 * Method to fetch all work requests
 	 * @return
@@ -74,5 +69,5 @@ public class WorkRequestService {
 		ApplicationContactsDTO appContact = applicationService.findApplicationContactByUser(userid);
 		return workRequestDAO.findRequestsByApplicationId(appContact.getApplicationId());
 }
->>>>>>> 802bbd8724fe1b9f1532704eba978fc9647ddbe9
+
 }

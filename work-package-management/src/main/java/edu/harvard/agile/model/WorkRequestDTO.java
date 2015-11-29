@@ -34,6 +34,7 @@ public class WorkRequestDTO extends ModelBase {
 	private int totalHours;
 	private int totalCost;
 
+	private List<ActivityLineDTO> activityLineDTOs;
 	private List<AssumptionsDTO> assumptionsDTOs;
 
 	public WorkRequestDTO() {
@@ -165,6 +166,16 @@ public class WorkRequestDTO extends ModelBase {
 	public void setTotalCost(int totalCost) {
 		this.totalCost = totalCost;
 	}
+
+	public List<ActivityLineDTO> getActivityLineDTOs() {
+		return activityLineDTOs;
+	}
+
+	public void setActivityLineDTOs(List<ActivityLineDTO> activityLineDTOs) {
+		this.activityLineDTOs = activityLineDTOs;
+	}
+	
+	
 	
 	
 	

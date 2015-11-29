@@ -1,20 +1,14 @@
 package edu.harvard.agile.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import edu.harvard.agile.model.ApplicationContactsDTO;
-import edu.harvard.agile.model.ApplicationDTO;
-import edu.harvard.agile.util.DBUtil;
 
 public class ApplicationContactsDAOTest {
 

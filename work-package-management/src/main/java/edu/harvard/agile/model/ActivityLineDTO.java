@@ -29,6 +29,9 @@ public class ActivityLineDTO extends ModelBase {
 	private Date modifiedDate;
 	private String createBy;
 	private String modifiedBy;
+	private int totalHours;
+	private int totalCost;
+
 
 	private List<ActivityPhaseResourcesDTO> activityPhaseResourcesDTOs;
 
@@ -148,5 +151,23 @@ public class ActivityLineDTO extends ModelBase {
 	public void addAssumptionsDTOs(AssumptionsDTO assumptions) {
 		getAssumptionsDTOs().add(assumptions);
 	}
+
+	public int getTotalHours() {
+		return totalHours;
+	}
+
+	public void setTotalHours(int totalHours) {
+		this.totalHours = totalHours;
+	}
+
+	public int getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(int totalCost) {
+		this.totalCost = totalCost;
+	}
+	
+	
 
 }

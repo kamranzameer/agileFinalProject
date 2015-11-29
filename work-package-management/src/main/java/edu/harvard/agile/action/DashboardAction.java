@@ -2,8 +2,6 @@ package edu.harvard.agile.action;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;

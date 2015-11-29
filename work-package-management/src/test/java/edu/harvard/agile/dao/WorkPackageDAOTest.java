@@ -100,7 +100,6 @@ public class WorkPackageDAOTest {
 		WorkPackageDAO workPackageDAO = new WorkPackageDAO();
 		List<WorkPackageDTO> workPackageDTOs = workPackageDAO.findAllPackages();
 		
-		System.out.println("findall");
 		assertTrue(workPackageDTOs.size() > 0);
 	}
 

@@ -81,7 +81,7 @@ public class WorkPackageService {
 	}
 	
 	/**
-	 * This method finds workp package count by status. 
+	 * This method finds work package count by status. 
 	 * 
 	 * @param String status 
 	 * @return int count
@@ -111,6 +111,11 @@ public class WorkPackageService {
 	}
 	
 	
+	/**
+	 * @param workPackageId
+	 * @return workpackageDTO
+	 * @throws Exception
+	 */
 	public WorkPackageDTO findById(int workPackageId) throws Exception {
 		return workPackageDAO.findByPackageId(workPackageId);
 	}

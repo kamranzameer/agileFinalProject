@@ -21,7 +21,7 @@ import edu.harvard.agile.util.DBUtil;
 public class ApplicationContactsDAO {
 
 	/**
-	 * Find by primary key method to find the record by Application id.
+	 * Find application contacts by user id.
 	 * 
 	 * @param id
 	 *            - user ID
@@ -32,8 +32,7 @@ public class ApplicationContactsDAO {
 
 		/*
 		 * Get connection from DBUtil, executes select query and initializes the
-		 * object with values returned from the database and returns the work
-		 * package DTO.
+		 * object with values returned from the database and returns the application contact DTO.
 		 */
 
 		Connection con = null;

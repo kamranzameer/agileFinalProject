@@ -11,6 +11,11 @@ import edu.harvard.agile.service.ActivityLineService;
 import edu.harvard.agile.service.WorkPackageService;
 import edu.harvard.agile.service.WorkRequestService;
 
+/**
+ * @author Incredibles
+ * This action class is to prepare work package details with related work requests
+ *
+ */
 public class WorkPackageDetailAction extends WPMActionBase {
 	private WorkPackageService workPackageService;
 	private WorkRequestService workRequestService; 
@@ -19,6 +24,10 @@ public class WorkPackageDetailAction extends WPMActionBase {
 	private List<WorkRequestDTO> workRequests;
 	private Integer workPackageId = null; 
 
+	/* 
+	 * Finds the work package by id, and finds the work requests and activity lines, for the package. 
+	 * 
+	 */
 	@Override
 	public void prepare() throws Exception {
 		workPackage = workPackageService.findById(workPackageId);

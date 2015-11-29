@@ -420,6 +420,12 @@ public class WorkPackageDAO
 		
 	}
 	
+	/**
+	 * @param workPackageId
+	 * @param con
+	 * @return find total cost by resource type and hourly rate for a work package.
+	 * @throws Exception
+	 */
 	public Integer getWorkPackageTotalCost(Integer workPackageId, Connection con) throws Exception{
 		StringBuilder query = new StringBuilder("");
 		query.append(" SELECT SUM (HOURLY_RATE * TOTAL_HOURS) ");
@@ -464,6 +470,12 @@ public class WorkPackageDAO
 	}
 	
 	
+	/**
+	 * @param workPackageId
+	 * @param con
+	 * @return find if atleast one  work request exist for work package
+	 * @throws Exception
+	 */
 	public Integer getTotalApplications(Integer workPackageId, Connection con) throws Exception{
 		String query =  "SELECT COUNT(1) FROM WORK_REQUEST WHERE PACKAGE_ID = ?";
 
@@ -504,8 +516,7 @@ public class WorkPackageDAO
 
 		/*
 		 * Get connection from DBUtil, executes select query and initializes the
-		 * object with values returned from the database and returns the work
-		 * package DTO.
+		 * object with values returned from the database and returns the count.
 		 */
 
 		Connection con = null;

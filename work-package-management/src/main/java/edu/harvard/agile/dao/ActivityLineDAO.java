@@ -9,6 +9,12 @@ import java.util.List;
 import edu.harvard.agile.model.ActivityLineDTO;
 import edu.harvard.agile.util.DBUtil;
 
+/**
+ * @author Incredibles Team
+ * 		   This DAO class contains methods to perform actions on the database
+ *         against Activity Line table
+ *
+ */
 public class ActivityLineDAO {
 
 	/**
@@ -22,8 +28,8 @@ public class ActivityLineDAO {
 
 		/*
 		 * Get connection from DBUtil, executes select query and initializes the
-		 * object with values returned from the database and returns the work
-		 * package DTO.
+		 * object with values returned from the database and returns the Activity Line
+		 * DTO.
 		 */
 
 		Connection con = null;
@@ -72,8 +78,17 @@ public class ActivityLineDAO {
 	
 	
 	
+	/**
+	 * @param activityLineId
+	 * @return total cost for all the activity lines within a work request
+	 * @throws Exception
+	 */
 	public Integer getTotalCost(Integer activityLineId)
 			throws Exception {
+		/*
+		Build a select query to calculate the total cost for all the activity lines under work request
+		by resource type and hourly rate.
+		*/
 		StringBuilder query = new StringBuilder("");
 		query.append(" SELECT SUM (HOURLY_RATE * TOTAL_HOURS) ");
 		query.append(" FROM   (SELECT A.RESOURCE_TYPE_ID,  ");
@@ -115,7 +130,18 @@ public class ActivityLineDAO {
 	}
 	
 	
+	/**
+	 * @param activityLineId
+	 * @return total hours for all the activity phases that belong to an activity line
+	 * @throws Exception
+	 */
 	public Integer getTotalHours(Integer activityLineId) throws Exception{
+		
+		/*
+		Build a select query to calculate the total hours for all the activity phases under an activity line
+		and group by resource type and hourly rate.
+		*/
+		
 		StringBuilder query = new StringBuilder("");
 		query.append(" SELECT SUM (TOTAL_HOURS) ");
 		query.append(" FROM   (SELECT A.RESOURCE_TYPE_ID,  ");
@@ -153,8 +179,6 @@ public class ActivityLineDAO {
 		}
 
 		return null;
-		
-		
 		
 	}
 }

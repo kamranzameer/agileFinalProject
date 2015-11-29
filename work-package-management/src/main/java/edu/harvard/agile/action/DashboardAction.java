@@ -15,6 +15,7 @@ import edu.harvard.agile.service.WorkRequestService;
 /**
  * @author Incredibles
  * This class is invoked after successful login of user
+ * to display the home page of the user based on role.
  *
  */
 public class DashboardAction extends WPMActionBase {
@@ -67,6 +68,8 @@ public class DashboardAction extends WPMActionBase {
 		this.dashboardInfo = dashboardInfo;
 	}
 
+	/* Method that sets the required dashboard info with the DAO calls.
+	 */
 	@Override
 	public void prepare() throws Exception {
 		int workRequestsCountByUser = 0;
@@ -80,11 +83,13 @@ public class DashboardAction extends WPMActionBase {
 		dashboardInfo.setTotalWorkPackagesCount(workPackageService.findAllPackages().size());
 		
 		
-
+		//Get the current logged in user
 		Subject currentUser = SecurityUtils.getSubject();
 		String userID = SecurityUtils.getSubject().getPrincipal().toString();
+		//put the user in session
 		ServletActionContext.getRequest().getSession().setAttribute("userID", userID);
 		
+		//set the dashboard info required for the app contact user role type
 		if (currentUser.hasRole("AC")) {
 				List<WorkRequestDTO> workRequests = workRequestService.findAllWorkRequestsByUser(userID);
 				if(!workRequests.isEmpty()){

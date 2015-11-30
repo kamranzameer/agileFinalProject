@@ -80,7 +80,7 @@ public class DashboardInfo {
 	 * @param inprogressWorkPackagesCount the inprogressWorkPackagesCount to set
 	 */
 	public void setInprogressWorkPackagesCount(int inprogressWorkPackagesCount) {
-		this.inprogressWorkPackagesCount = inprogressWorkPackagesCount;
+		this.inprogressWorkPackagesCount = inprogressWorkPackagesCount+getOpenWorkPackagesCount();
 	}
 	/**
 	 * @return the completedWorkPackagesCount

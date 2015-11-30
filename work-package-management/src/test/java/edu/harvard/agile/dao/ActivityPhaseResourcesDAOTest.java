@@ -34,14 +34,11 @@ public class ActivityPhaseResourcesDAOTest {
 	@Test
 	public void testFindByActivityLineId() throws Exception {
 		assertTrue(new ActivityPhaseResourcesDAO().findByActivityLineId(10).size() > 0);
-		
 	}
 	
 	@Test
 	public void testFindByInvalidActivityLineId() throws Exception {
 		assertTrue(new ActivityPhaseResourcesDAO().findByActivityLineId(123456).size() == 0);
-		
-		
 	}
 
 	@Test

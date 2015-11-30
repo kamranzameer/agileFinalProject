@@ -12,20 +12,19 @@ import edu.harvard.agile.util.DBUtil;
 
 /**
  * @author Incredibles Team This DAO class contains methods to perform actions
- *         on the database against Activity Line table
+ *         on the database against Assumptions table
  *
  */
 public class AssumptionsDAO {
 
 	/**
-	 * Find by work request method to find the record by work request id.
+	 * Find all assumptions by Activity line item
 	 * 
 	 * @param id
-	 *            - work request id
 	 * @return - List<Assumptions>
 	 * @throws Exception
 	 */
-	public List<String> findAssumptionsVyActivityLineId(int activityLineId)
+	public List<String> findAssumptionsByActivityLineId(int activityLineId)
 			throws Exception {
 
 		/*

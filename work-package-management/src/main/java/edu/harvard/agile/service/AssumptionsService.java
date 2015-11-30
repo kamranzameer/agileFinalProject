@@ -14,9 +14,16 @@ import edu.harvard.agile.dao.AssumptionsDAO;
 public class AssumptionsService {
 
 	AssumptionsDAO assumptionsDAO;
-	public List<String> findAssumptionsVyActivityLineId(int activityLineId)
+	
+	/**
+	 * Fetch all assumptions for an Activity Line item
+	 * @param activityLineId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<String> findAssumptionsByActivityLineId(int activityLineId)
 			throws Exception {
-		return assumptionsDAO.findAssumptionsVyActivityLineId(activityLineId);
+		return assumptionsDAO.findAssumptionsByActivityLineId(activityLineId);
 	}
 	
 		@Required

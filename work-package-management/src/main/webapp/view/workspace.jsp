@@ -76,9 +76,11 @@
 						<li class=""> <a href="workspace.jsp?p=wps" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages Statistics</a>
 						</li>
 						</shiro:hasAnyRoles>
-
-						<li class=""> <a href="workRequestList.action" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Requests</a>
-						</li>
+						
+						<shiro:hasAnyRoles name="AC">
+							<li class=""> <a href="workRequestList.action" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Requests</a>
+							</li>
+						</shiro:hasAnyRoles>
 
 		                <li><a href="workspace.jsp?p=cp" onclick="javascript:$( '#workspace' ).load( 'changepassword.jsp' )"><i class="glyphicon glyphicon-lock">&nbsp;</i> Change Password</a></li>
 		                <li><a href="../logout"><i class="glyphicon glyphicon-off">&nbsp;</i>Sign Out</a>&nbsp;</li>

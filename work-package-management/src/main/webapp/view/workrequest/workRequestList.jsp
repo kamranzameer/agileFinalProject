@@ -52,7 +52,7 @@
 											</td>
 											<td>
 												<a href="#" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
-												<a href="workspace.jsp?p=wrpd" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
+												<a href="#" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
 												<a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash">&nbsp;</i></a>
 											</td>
 										</tr>

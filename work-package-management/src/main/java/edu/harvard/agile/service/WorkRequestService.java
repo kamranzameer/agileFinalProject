@@ -70,6 +70,7 @@ public class WorkRequestService {
 	 * @throws Exception
 	 */
 	public List<WorkRequestDTO> findAllWorkRequestsByUser(String userid) throws Exception {
+		
 		ApplicationContactsDTO appContact = applicationService.findApplicationContactByUser(userid);
 		return workRequestDAO.findRequestsByApplicationId(appContact.getApplicationId());
 	}

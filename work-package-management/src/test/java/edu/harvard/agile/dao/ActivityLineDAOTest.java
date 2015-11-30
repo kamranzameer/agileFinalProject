@@ -1,12 +1,16 @@
 package edu.harvard.agile.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
+import java.sql.Connection;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import edu.harvard.agile.util.DBUtil;
 
 public class ActivityLineDAOTest {
 
@@ -29,6 +33,7 @@ public class ActivityLineDAOTest {
 	@Test
 	public void testFindByRequestId() throws Exception {
 		assertTrue(new ActivityLineDAO().findByRequestId(12).size() > 0);
+		
 	}
 	
 	@Test
@@ -38,22 +43,30 @@ public class ActivityLineDAOTest {
 
 	@Test
 	public void testGetTotalCost() throws Exception {
-		assertTrue(new ActivityLineDAO().getTotalCost(12) > 0);
+		Connection con = DBUtil.getConnection();
+		assertTrue(new ActivityLineDAO().getTotalCost(10, con) > 0);
+		DBUtil.closeConnection(con);
 	}
 	
 	@Test
 	public void testGetTotalCostByInvalidActivityLineId() throws Exception {
-		assertTrue(new ActivityLineDAO().getTotalCost(1234565) > 0);
+		Connection con = DBUtil.getConnection();
+		assertTrue(new ActivityLineDAO().getTotalCost(1234565, con) == 0);
+		DBUtil.closeConnection(con);
 	}
 
 	@Test
 	public void testGetTotalHours() throws Exception {
-		assertTrue(new ActivityLineDAO().getTotalHours(1) > 0);
+		Connection con = DBUtil.getConnection();
+		assertTrue(new ActivityLineDAO().getTotalHours(10, con) > 0);
+		DBUtil.closeConnection(con);
 	}
 	
 	@Test
 	public void testGetTotalHoursByInvalidActivityLineId() throws Exception {
-		assertTrue(new ActivityLineDAO().getTotalHours(12345) > 0);
+		Connection con = DBUtil.getConnection();
+		assertTrue(new ActivityLineDAO().getTotalHours(12345, con) == 0);
+		DBUtil.closeConnection(con);
 	}
 
 }

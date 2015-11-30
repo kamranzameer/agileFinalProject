@@ -91,7 +91,7 @@ public class ActivityPhaseResourcesDAO {
 	
 	
 	
-	public Integer getTotalCost(Integer activityLineId)
+	public Integer getTotalCost(Integer activityLineId, Connection con)
 			throws Exception {
 		StringBuilder query = new StringBuilder("");
 		query.append(" SELECT SUM (HOURLY_RATE * TOTAL_HOURS) ");
@@ -105,16 +105,14 @@ public class ActivityPhaseResourcesDAO {
 		query.append("         WHERE  A.RESOURCE_TYPE_ID = B.RESOURCE_TYPE_ID  ");
 		query.append("                AND A.ACTIVITY_LINE_ID = C.ACTIVITY_LINE_ID  ");
 		query.append("                AND C.WORK_REQUEST_ID = D.WORK_REQUEST_ID  ");
-		query.append("                AND D.ACTIVITY_LINE_ID = ?  ");
+		query.append("                AND C.ACTIVITY_LINE_ID = ?  ");
 		query.append("         GROUP  BY A.RESOURCE_TYPE_ID,  ");
 		query.append("                   B.HOURLY_RATE) ");
 
-		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
 		try {
-			con = DBUtil.getConnection();
 			stmt = con.prepareStatement(query.toString());
 			stmt.setInt(1, activityLineId);
 			rs = stmt.executeQuery();
@@ -125,7 +123,6 @@ public class ActivityPhaseResourcesDAO {
 		} finally {
 			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
 
 		}
 
@@ -134,7 +131,7 @@ public class ActivityPhaseResourcesDAO {
 	}
 	
 	
-	public Integer getTotalHours(Integer activityLineId) throws Exception{
+	public Integer getTotalHours(Integer activityLineId, Connection con) throws Exception{
 		StringBuilder query = new StringBuilder("");
 		query.append(" SELECT SUM (TOTAL_HOURS) ");
 		query.append(" FROM   (SELECT A.RESOURCE_TYPE_ID,  ");
@@ -151,12 +148,10 @@ public class ActivityPhaseResourcesDAO {
 		query.append("         GROUP  BY A.RESOURCE_TYPE_ID,  ");
 		query.append("                   B.HOURLY_RATE) ");
 		
-		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		try {
-			con = DBUtil.getConnection();
 			stmt = con.prepareStatement(query.toString());
 			stmt.setInt(1, activityLineId);
 			rs = stmt.executeQuery();
@@ -167,7 +162,6 @@ public class ActivityPhaseResourcesDAO {
 		} finally {
 			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
 
 		}
 

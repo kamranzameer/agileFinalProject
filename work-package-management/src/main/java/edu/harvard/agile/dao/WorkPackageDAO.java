@@ -201,7 +201,7 @@ public class WorkPackageDAO
 		 */
 		PreparedStatement stmt = null;
 		try {
-			int seqId = DBUtil.getNextSequence("package_id_seq");
+			int seqId = DBUtil.getNextSequence("package_id_seq", connection);
 
 			String query = "Insert into WORK_PACKAGE (PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE,REQUESTOR_NAME,CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
 					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
@@ -275,7 +275,7 @@ public class WorkPackageDAO
 
 			return rowsUpdated;
 		} catch (Exception e) {
-			con.rollback();
+			DBUtil.rollBack(con);
 			throw e;
 		} finally {
 			DBUtil.closeStatement(stmt);
@@ -318,7 +318,7 @@ public class WorkPackageDAO
 
 			return workPackage;
 		} catch (Exception e) {
-			con.rollback();
+			DBUtil.rollBack(con);
 			throw e;
 		} finally {
 			DBUtil.closeStatement(stmt);
@@ -410,7 +410,7 @@ public class WorkPackageDAO
 			con.commit();
 			return rowsDeleted;
 		} catch(Exception e){
-			con.rollback();
+			DBUtil.rollBack(con);
 			throw e;
 		} finally {
 			DBUtil.closeStatement(stmt);

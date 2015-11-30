@@ -63,11 +63,7 @@ public class WorkPackageService {
 		}
 		catch(Exception ex)
 		{
-			try {
-				connection.rollback();
-			} catch (SQLException e) {
-				//Do nothing
-			}
+			DBUtil.rollBack(connection);
 			throw ex;
 			
 		}

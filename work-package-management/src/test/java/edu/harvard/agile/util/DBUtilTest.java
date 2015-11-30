@@ -107,8 +107,10 @@ public class DBUtilTest {
 	 */
 	@Test
 	public void testGetNextSequence() throws Exception {
-		int seq = DBUtil.getNextSequence("package_id_seq");
+		Connection connection = DBUtil.getConnection();
+		int seq = DBUtil.getNextSequence("package_id_seq", connection);
 		assertNotEquals(0, seq);
+		DBUtil.closeConnection(connection);
 	}
 	
 	/**
@@ -119,7 +121,9 @@ public class DBUtilTest {
 	@Test(expected = SQLSyntaxErrorException.class)
 	
 	public void testGetNextSequenceInvalid() throws Exception{
-		DBUtil.getNextSequence("package_id_sequence");
+		Connection connection = DBUtil.getConnection();
+		DBUtil.getNextSequence("package_id_sequence", connection);
+		DBUtil.closeConnection(connection);
 	}
 
 }

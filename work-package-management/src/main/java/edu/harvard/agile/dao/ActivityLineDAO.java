@@ -61,8 +61,8 @@ public class ActivityLineDAO {
 				activityLine.setStartDate(rs.getDate("START_DATE"));
 				activityLine.setWorkRequestId(rs.getInt("WORK_REQUEST_ID"));
 				
-				activityLine.setTotalCost(getTotalCost(rs.getInt("ACTIVITY_LINE_ID")));
-				activityLine.setTotalHours(getTotalHours(rs.getInt("ACTIVITY_LINE_ID")));
+				activityLine.setTotalCost(getTotalCost(rs.getInt("ACTIVITY_LINE_ID"), con));
+				activityLine.setTotalHours(getTotalHours(rs.getInt("ACTIVITY_LINE_ID"), con));
 				
 				activityLines.add(activityLine);
 			}
@@ -83,7 +83,7 @@ public class ActivityLineDAO {
 	 * @return total cost for all the activity lines within a work request
 	 * @throws Exception
 	 */
-	public Integer getTotalCost(Integer activityLineId)
+	public Integer getTotalCost(Integer activityLineId, Connection con)
 			throws Exception {
 		/*
 		Build a select query to calculate the total cost for all the activity lines under work request
@@ -101,16 +101,14 @@ public class ActivityLineDAO {
 		query.append("         WHERE  A.RESOURCE_TYPE_ID = B.RESOURCE_TYPE_ID  ");
 		query.append("                AND A.ACTIVITY_LINE_ID = C.ACTIVITY_LINE_ID  ");
 		query.append("                AND C.WORK_REQUEST_ID = D.WORK_REQUEST_ID  ");
-		query.append("                AND D.ACTIVITY_LINE_ID = ?  ");
+		query.append("                AND C.ACTIVITY_LINE_ID = ?  ");
 		query.append("         GROUP  BY A.RESOURCE_TYPE_ID,  ");
 		query.append("                   B.HOURLY_RATE) ");
 
-		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
 		try {
-			con = DBUtil.getConnection();
 			stmt = con.prepareStatement(query.toString());
 			stmt.setInt(1, activityLineId);
 			rs = stmt.executeQuery();
@@ -121,7 +119,6 @@ public class ActivityLineDAO {
 		} finally {
 			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
 
 		}
 
@@ -135,7 +132,7 @@ public class ActivityLineDAO {
 	 * @return total hours for all the activity phases that belong to an activity line
 	 * @throws Exception
 	 */
-	public Integer getTotalHours(Integer activityLineId) throws Exception{
+	public Integer getTotalHours(Integer activityLineId, Connection con) throws Exception{
 		
 		/*
 		Build a select query to calculate the total hours for all the activity phases under an activity line
@@ -158,12 +155,10 @@ public class ActivityLineDAO {
 		query.append("         GROUP  BY A.RESOURCE_TYPE_ID,  ");
 		query.append("                   B.HOURLY_RATE) ");
 		
-		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		try {
-			con = DBUtil.getConnection();
 			stmt = con.prepareStatement(query.toString());
 			stmt.setInt(1, activityLineId);
 			rs = stmt.executeQuery();
@@ -174,8 +169,6 @@ public class ActivityLineDAO {
 		} finally {
 			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
-
 		}
 
 		return null;

@@ -87,7 +87,7 @@ public class WorkRequestServiceTest {
 		assertTrue(wrs.findRequestsByPackageId(1).size() > 0);
 	}
 	
-	@Test
+	/*@Test
 	public void testfindRequestsByInvalidPackageId() throws Exception
 	{
 		WorkRequestService wrs = new WorkRequestService();
@@ -96,5 +96,5 @@ public class WorkRequestServiceTest {
 		
 		assertTrue(wrs.findRequestsByPackageId(123456).size() == 0);
 	}
-
+*/
 }

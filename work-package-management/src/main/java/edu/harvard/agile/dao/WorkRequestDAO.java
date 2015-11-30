@@ -152,8 +152,8 @@ public class WorkRequestDAO {
 						.setApplicationName(rs.getString("APPLICATION_NAME"));
 				workRequest.setWorkPackageName(rs.getString("PACKAGE_NAME"));
 
-				workRequest.setTotalCost(getWorkRequsetTotalCost(rs.getInt("WORK_REQUEST_ID")));
-				workRequest.setTotalHours(getWorkRequsetTotalHours(rs.getInt("WORK_REQUEST_ID")));
+				workRequest.setTotalCost(getWorkRequsetTotalCost(rs.getInt("WORK_REQUEST_ID"), con));
+				workRequest.setTotalHours(getWorkRequsetTotalHours(rs.getInt("WORK_REQUEST_ID"), con));
 				
 
 				workRequestDTOs.add(workRequest);
@@ -322,7 +322,7 @@ public class WorkRequestDAO {
 
 		PreparedStatement stmt = null;
 		try {
-			int seqId = DBUtil.getNextSequence("WORK_REQUEST_ID_SEQ");
+			int seqId = DBUtil.getNextSequence("WORK_REQUEST_ID_SEQ", connection);
 
 			String query = "Insert into WORK_REQUEST (WORK_REQUEST_ID,PACKAGE_ID,APPLICATION_ID,STATUS,START_DATE,END_DATE,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
 					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -362,7 +362,7 @@ public class WorkRequestDAO {
 		
 		PreparedStatement stmt = null;
 		try {
-			int seqId = DBUtil.getNextSequence("WORK_REQUEST_ID_SEQ");
+			int seqId = DBUtil.getNextSequence("WORK_REQUEST_ID_SEQ", connection);
 
 			String query = "DELETE FROM WORK_REQUEST WHERE WORK_REQUEST_ID = ?";
 			stmt = connection.prepareStatement(query);
@@ -383,7 +383,7 @@ public class WorkRequestDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public WorkRequestDTO updateWorkRequestStatus(WorkRequestDTO WorkRequest)
+	public int updateWorkRequestStatus(WorkRequestDTO WorkRequest)
 			throws Exception {
 
 		/*
@@ -409,9 +409,9 @@ public class WorkRequestDAO {
 			int rowsUpdated = stmt.executeUpdate();
 			con.commit();
 
-			return findByWorkRequestId(WorkRequest.getWorkRequestId());
+			return rowsUpdated;
 		} catch (Exception e) {
-			con.rollback();
+			DBUtil.rollBack(con);
 			throw e;
 		} finally {
 			DBUtil.closeStatement(stmt);
@@ -425,7 +425,7 @@ public class WorkRequestDAO {
 	 * @return total cost for all the activity lines under work request by hourly rate and resource type
 	 * @throws Exception
 	 */
-	public Integer getWorkRequsetTotalCost(Integer workRequestId)
+	public Integer getWorkRequsetTotalCost(Integer workRequestId, Connection con)
 			throws Exception {
 		StringBuilder query = new StringBuilder("");
 		query.append(" SELECT SUM (HOURLY_RATE * TOTAL_HOURS) ");
@@ -443,12 +443,10 @@ public class WorkRequestDAO {
 		query.append("         GROUP  BY A.RESOURCE_TYPE_ID,  ");
 		query.append("                   B.HOURLY_RATE) ");
 
-		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
 		try {
-			con = DBUtil.getConnection();
 			stmt = con.prepareStatement(query.toString());
 			stmt.setInt(1, workRequestId);
 			rs = stmt.executeQuery();
@@ -456,14 +454,12 @@ public class WorkRequestDAO {
 			if (rs.next()) {
 				return rs.getInt(1);
 			}
+			else
+				return 0;
 		} finally {
 			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
-
 		}
-
-		return null;
 
 	}
 	
@@ -473,7 +469,7 @@ public class WorkRequestDAO {
 	 * @return total hours for all the activity line phases under work request
 	 * @throws Exception
 	 */
-	public Integer getWorkRequsetTotalHours(Integer workRequestId) throws Exception{
+	public Integer getWorkRequsetTotalHours(Integer workRequestId, Connection con) throws Exception{
 		StringBuilder query = new StringBuilder("");
 		query.append(" SELECT SUM (TOTAL_HOURS) ");
 		query.append(" FROM   (SELECT A.RESOURCE_TYPE_ID,  ");
@@ -490,12 +486,10 @@ public class WorkRequestDAO {
 		query.append("         GROUP  BY A.RESOURCE_TYPE_ID,  ");
 		query.append("                   B.HOURLY_RATE) ");
 		
-		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		try {
-			con = DBUtil.getConnection();
 			stmt = con.prepareStatement(query.toString());
 			stmt.setInt(1, workRequestId);
 			rs = stmt.executeQuery();
@@ -503,16 +497,12 @@ public class WorkRequestDAO {
 			if (rs.next()) {
 				return rs.getInt(1);
 			}
+			else
+				return 0;
 		} finally {
 			DBUtil.closeRS(rs);
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
-
 		}
-
-		return null;
-		
-		
 		
 	}
 

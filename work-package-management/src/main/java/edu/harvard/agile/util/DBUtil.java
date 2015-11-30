@@ -63,9 +63,11 @@ public class DBUtil {
 	 * @throws Exception
 	 */
 	public static Connection getConnection() throws Exception {
+		
 		Connection connection = ds.getConnection();
 		connection.setAutoCommit(false);
 		
+		//System.out.println("================ OPEN CONNECTION =====================");
 		return connection;
 	}
 
@@ -120,10 +122,9 @@ public class DBUtil {
 
 		if (connection != null) {
 			try {
-				//if (!connection.isClosed()) {
-					connection.close();
-					return connection.isClosed();
-				//}
+				connection.close();
+				//System.out.println("================ CLOSE CONNECTION =====================");
+				return connection.isClosed();
 			} catch (SQLException e) {
 				e.printStackTrace();
 
@@ -133,7 +134,22 @@ public class DBUtil {
 		return false;
 
 	}
+	
+	/**
+	 * This method is to close the connection that is open.
+	 * @param connection
+	 * @return
+	 */
+	public static void rollBack(Connection connection) {
 
+		if (connection != null) {
+			try {
+				connection.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	/**
 	 * This method is to get the next value of any oracle sequence 
@@ -141,15 +157,13 @@ public class DBUtil {
 	 * @return the value of the sequence as int
 	 * @throws Exception
 	 */
-	public static int getNextSequence(String seqName) throws Exception {
+	public static int getNextSequence(String seqName, Connection con) throws Exception {
 		String seqQuery = "Select " + seqName + ".nextVal from DUAL";
 		int seq = 0;
-		Connection con = null;
 		Statement st = null;
 		ResultSet rs = null;
 
 		try {
-			con = getConnection();
 			st = con.createStatement();
 			rs = st.executeQuery(seqQuery);
 
@@ -160,7 +174,6 @@ public class DBUtil {
 			
 			closeStatement(st);
 			closeRS(rs);
-			closeConnection(con);
 		}
 
 		return seq;

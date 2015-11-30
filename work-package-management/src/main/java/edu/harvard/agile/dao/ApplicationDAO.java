@@ -150,7 +150,7 @@ public class ApplicationDAO {
 
 			return application;
 		} catch (Exception e) {
-			con.rollback();
+			DBUtil.rollBack(con);
 			throw e;
 		} finally {
 			DBUtil.closeStatement(stmt);
@@ -193,7 +193,7 @@ public class ApplicationDAO {
 
 			return rowsUpdated;
 		} catch (Exception e) {
-			con.rollback();
+			DBUtil.rollBack(con);
 			throw e;
 		} finally {
 			DBUtil.closeStatement(stmt);

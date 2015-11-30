@@ -7,6 +7,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Required;
 
+import edu.harvard.agile.model.DashboardInfo;
 import edu.harvard.agile.model.WorkRequestDTO;
 import edu.harvard.agile.service.ApplicationService;
 import edu.harvard.agile.service.WorkPackageService;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.harvard.agile.action;
+package edu.harvard.agile.model;
 
 /**
  * @author Incredibles
@@ -30,10 +30,7 @@ public class DashboardInfo {
 		this.appTotalWorkRequestsCount = appTotalWorkRequestsCount;
 	}
 
-	DashboardInfo(){
-		
-	}
-	
+
 	/**
 	 * @return the openWorkPackagesCount
 	 */

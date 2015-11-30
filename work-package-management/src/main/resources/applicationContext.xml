@@ -14,7 +14,7 @@
     <bean id="applicationDAO" class= "edu.harvard.agile.dao.ApplicationDAO"/>
     <bean id="applicationContactsDAO" class= "edu.harvard.agile.dao.ApplicationContactsDAO"/>
     <bean id="testingProgramDAO" class= "edu.harvard.agile.dao.TestingProgramDAO"/>
-    <bean id="dashboardInfo" class= "edu.harvard.agile.action.DashboardInfo"/>
+    <bean id="dashboardInfo" class= "edu.harvard.agile.model.DashboardInfo"/>
     <bean id="activityLineDAO" class= "edu.harvard.agile.dao.ActivityLineDAO"/>
     <bean id="activityPhaseResourcesDAO" class= "edu.harvard.agile.dao.ActivityPhaseResourcesDAO"/>
     <bean id="assumptionsDAO" class= "edu.harvard.agile.dao.AssumptionsDAO"/>

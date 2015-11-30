@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.harvard.agile.model.ActivityLineDTO;
 import edu.harvard.agile.model.ActivityPhaseResourcesDTO;
 import edu.harvard.agile.util.DBUtil;
 
@@ -42,7 +41,7 @@ public class ActivityPhaseResourcesDAO {
 			query.append("        B.RESOURCE_TYPE_NAME,   ");
 			query.append("        A.RESOURCE_TYPE_ID,   ");
 			query.append("        B.HOURLY_RATE,   ");
-			query.append("        SUM (A.ESTIMATED_HOURS) total_hours   ");
+			query.append("        SUM (A.ESTIMATED_HOURS) AS TOTAL_HOURS   ");
 			query.append(" FROM   ACTIVITY_PHASE_RESOURCES A,   ");
 			query.append("        RESOURCE_TYPE B,   ");
 			query.append("        ACTIVITY_LINE C,   ");
@@ -62,21 +61,15 @@ public class ActivityPhaseResourcesDAO {
 			
 			
 			while (rs.next()) {
-//				activityLine = new ActivityLineDTO();
-//				
-//				activityLine.setActivityLineDesc(rs.getString("ACTIVITY_LINE_DESC"));
-//				activityLine.setActivityLineId(rs.getInt("ACTIVITY_LINE_ID"));
-//				activityLine.setActivityTypeCode(rs.getString("ACTIVITY_TYPE_CODE"));
-//				activityLine.setCreateBy(rs.getString("CREATE_BY"));
-//				activityLine.setCreateDate(rs.getDate("CREATE_DATE"));
-//				activityLine.setEndDate(rs.getDate("END_DATE"));
-//				activityLine.setStartDate(rs.getDate("START_DATE"));
-//				activityLine.setWorkRequestId(rs.getInt("WORK_REQUEST_ID"));
-//				
-//				activityLine.setTotalCost(getTotalCost(rs.getInt("ACTIVITY_LINE_ID")));
-//				activityLine.setTotalHours(getTotalHours(rs.getInt("ACTIVITY_LINE_ID")));
-//				
-//				activityLines.add(activityLine);
+				activityPhaseResource = new ActivityPhaseResourcesDTO();
+				activityPhaseResource.setActivityPhaseResourceId(rs.getInt("ACTIVITY_PHASE_RESOURCE_ID"));
+				activityPhaseResource.setResourceTypeName(rs.getString("RESOURCE_TYPE_NAME"));
+				activityPhaseResource.setResourceTypeId(rs.getInt("RESOURCE_TYPE_ID"));
+				activityPhaseResource.setEstimatedHours(rs.getInt("TOTAL_HOURS"));
+				activityPhaseResource.setHourlyRate(rs.getInt("HOURLY_RATE"));
+				activityPhaseResource.setTotalCost(rs.getInt("TOTAL_HOURS") * rs.getInt("HOURLY_RATE"));
+				
+				activityPhaseResources.add(activityPhaseResource);
 			}
 		} finally {
 			DBUtil.closeRS(rs);
@@ -85,8 +78,7 @@ public class ActivityPhaseResourcesDAO {
 
 		}
 
-//		return activityLines;
-		return null;
+		return activityPhaseResources;
 	}
 	
 	

@@ -5,9 +5,11 @@ import java.util.List;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Required;
 
+import edu.harvard.agile.model.ActivityLineDTO;
 import edu.harvard.agile.model.WorkPackageDTO;
 import edu.harvard.agile.model.WorkRequestDTO;
 import edu.harvard.agile.service.ActivityLineService;
+import edu.harvard.agile.service.ActivityPhaseResourcesService;
 import edu.harvard.agile.service.WorkPackageService;
 import edu.harvard.agile.service.WorkRequestService;
 
@@ -20,6 +22,7 @@ public class WorkPackageDetailAction extends WPMActionBase {
 	private WorkPackageService workPackageService;
 	private WorkRequestService workRequestService; 
 	private ActivityLineService activityLineService;
+	private ActivityPhaseResourcesService activityPhaseResourcesService;
 	private WorkPackageDTO workPackage;
 	private List<WorkRequestDTO> workRequests;
 	private Integer workPackageId = null; 
@@ -34,8 +37,11 @@ public class WorkPackageDetailAction extends WPMActionBase {
 		workRequests = workRequestService.findRequestsByPackageId(workPackageId);
 		for(WorkRequestDTO wr : workRequests){
 			wr.setActivityLineDTOs(activityLineService.findByRequestId(wr.getWorkRequestId()));
+			System.out.println("work reqest id = " + wr.getWorkRequestId() + "total activity lines found = " + wr.getActivityLineDTOs().size());
+			for(ActivityLineDTO ald : wr.getActivityLineDTOs()){
+				ald.setActivityPhaseResourcesDTOs(activityPhaseResourcesService.findByActivityLineId(ald.getActivityLineId()));
+			}
 		}
-		
 	}
 
 	public String execute() throws Exception {
@@ -85,6 +91,14 @@ public class WorkPackageDetailAction extends WPMActionBase {
 	public void setActivityLineService(ActivityLineService activityLineService) {
 		this.activityLineService = activityLineService;
 	}
+
+	@Required
+	public void setActivityPhaseResourcesService(
+			ActivityPhaseResourcesService activityPhaseResourcesService) {
+		this.activityPhaseResourcesService = activityPhaseResourcesService;
+	}
+	
+	
 	
 	
 	

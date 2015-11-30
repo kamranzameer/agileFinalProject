@@ -25,6 +25,13 @@ public class ActivityPhaseResourcesDTO extends ModelBase {
 	private Date modifiedDate;
 	private String createBy;
 	private String modifiedBy;
+	private int totalHours;
+	private int hourlyRate;
+	private String resourceTypeName;
+	private int totalCost;
+	
+	
+					
 
 	private ActivityLineDTO activityLineDTO;
 
@@ -112,5 +119,39 @@ public class ActivityPhaseResourcesDTO extends ModelBase {
 	public void setResourceTypeDTO(ResourceTypeDTO resourceTypeDTO) {
 		this.resourceTypeDTO = resourceTypeDTO;
 	}
+
+	public int getTotalHours() {
+		return totalHours;
+	}
+
+	public void setTotalHours(int totalHours) {
+		this.totalHours = totalHours;
+	}
+
+	public int getHourlyRate() {
+		return hourlyRate;
+	}
+
+	public void setHourlyRate(int hourlyRate) {
+		this.hourlyRate = hourlyRate;
+	}
+
+	public String getResourceTypeName() {
+		return resourceTypeName;
+	}
+
+	public void setResourceTypeName(String resourceTypeName) {
+		this.resourceTypeName = resourceTypeName;
+	}
+
+	public int getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(int totalCost) {
+		this.totalCost = totalCost;
+	}
+	
+	
 
 }

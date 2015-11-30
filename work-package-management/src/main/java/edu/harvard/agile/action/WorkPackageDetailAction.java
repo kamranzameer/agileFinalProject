@@ -10,6 +10,7 @@ import edu.harvard.agile.model.WorkPackageDTO;
 import edu.harvard.agile.model.WorkRequestDTO;
 import edu.harvard.agile.service.ActivityLineService;
 import edu.harvard.agile.service.ActivityPhaseResourcesService;
+import edu.harvard.agile.service.AssumptionsService;
 import edu.harvard.agile.service.WorkPackageService;
 import edu.harvard.agile.service.WorkRequestService;
 
@@ -23,6 +24,7 @@ public class WorkPackageDetailAction extends WPMActionBase {
 	private WorkRequestService workRequestService; 
 	private ActivityLineService activityLineService;
 	private ActivityPhaseResourcesService activityPhaseResourcesService;
+	private AssumptionsService assumptionsService;
 	private WorkPackageDTO workPackage;
 	private List<WorkRequestDTO> workRequests;
 	private Integer workPackageId = null; 
@@ -39,6 +41,7 @@ public class WorkPackageDetailAction extends WPMActionBase {
 			wr.setActivityLineDTOs(activityLineService.findByRequestId(wr.getWorkRequestId()));
 			System.out.println("work reqest id = " + wr.getWorkRequestId() + "total activity lines found = " + wr.getActivityLineDTOs().size());
 			for(ActivityLineDTO ald : wr.getActivityLineDTOs()){
+				ald.setAssumptions(assumptionsService.findAssumptionsVyActivityLineId(ald.getActivityLineId()));
 				ald.setActivityPhaseResourcesDTOs(activityPhaseResourcesService.findByActivityLineId(ald.getActivityLineId()));
 			}
 		}
@@ -97,6 +100,13 @@ public class WorkPackageDetailAction extends WPMActionBase {
 			ActivityPhaseResourcesService activityPhaseResourcesService) {
 		this.activityPhaseResourcesService = activityPhaseResourcesService;
 	}
+
+	@Required
+	public void setAssumptionsService(AssumptionsService assumptionsService) {
+		this.assumptionsService = assumptionsService;
+	}
+	
+	
 	
 	
 	

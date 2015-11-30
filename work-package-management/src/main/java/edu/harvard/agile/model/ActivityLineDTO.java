@@ -29,13 +29,20 @@ public class ActivityLineDTO extends ModelBase {
 	private Date modifiedDate;
 	private String createBy;
 	private String modifiedBy;
+	public List<String> getAssumptions() {
+		return assumptions;
+	}
+
+	public void setAssumptions(List<String> assumptions) {
+		this.assumptions = assumptions;
+	}
+
 	private int totalHours;
 	private int totalCost;
 
-
 	private List<ActivityPhaseResourcesDTO> activityPhaseResourcesDTOs;
 
-	private List<AssumptionsDTO> assumptionsDTOs;
+	private List<String> assumptions;
 
 	public ActivityLineDTO() {
 	}
@@ -137,21 +144,6 @@ public class ActivityLineDTO extends ModelBase {
 		getActivityPhaseResourcesDTOs().add(activityPhaseResources);
 	}
 
-	public List<AssumptionsDTO> getAssumptionsDTOs() {
-		if (assumptionsDTOs == null) {
-			assumptionsDTOs = new ArrayList<AssumptionsDTO>();
-		}
-		return assumptionsDTOs;
-	}
-
-	public void setAssumptionsDTOs(List<AssumptionsDTO> assumptionsDTOs) {
-		this.assumptionsDTOs = assumptionsDTOs;
-	}
-
-	public void addAssumptionsDTOs(AssumptionsDTO assumptions) {
-		getAssumptionsDTOs().add(assumptions);
-	}
-
 	public int getTotalHours() {
 		return totalHours;
 	}
@@ -167,7 +159,13 @@ public class ActivityLineDTO extends ModelBase {
 	public void setTotalCost(int totalCost) {
 		this.totalCost = totalCost;
 	}
-	
-	
+
+	public String getAssumptionsHtml() {
+		String s = "";
+		for (String assumption : assumptions) {
+			s = s + assumption + "<br/>";
+		}
+		return s;
+	}
 
 }

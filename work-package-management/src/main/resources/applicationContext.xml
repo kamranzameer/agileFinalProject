@@ -17,6 +17,9 @@
     <bean id="dashboardInfo" class= "edu.harvard.agile.action.DashboardInfo"/>
     <bean id="activityLineDAO" class= "edu.harvard.agile.dao.ActivityLineDAO"/>
     <bean id="activityPhaseResourcesDAO" class= "edu.harvard.agile.dao.ActivityPhaseResourcesDAO"/>
+    <bean id="assumptionsDAO" class= "edu.harvard.agile.dao.AssumptionsDAO"/>
+    
+    
     
 
 <!--  Services bean definition -->
@@ -52,6 +55,13 @@
     </bean>
     
     
+    <bean id="assumptionsService" class= "edu.harvard.agile.service.AssumptionsService">
+    	<property name="assumptionsDAO" ref="assumptionsDAO"/>
+    </bean>
+    
+    
+    
+    
 
     
 <!--  Actions bean definition -->
@@ -71,6 +81,9 @@
     	<property name="workRequestService" ref="workRequestService"/>
     	<property name="activityLineService" ref="activityLineService"/>
     	<property name="activityPhaseResourcesService" ref="activityPhaseResourcesService"/>
+    	<property name="assumptionsService" ref="assumptionsService"/>
+    	
+    	
     </bean>
     
     

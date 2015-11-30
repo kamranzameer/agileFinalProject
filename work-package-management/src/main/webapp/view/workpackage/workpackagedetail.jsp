@@ -105,8 +105,8 @@
 												  <div class="accordion-group">
 												    <div class="accordion-heading">
 												      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse${workRequest.workRequestId}">
-												       (+) ${workRequest.applicationName}, Total Hours : ${workRequest.totalHours}, Total Cost : ${workRequest.totalCost}
-												      </a>
+												       (+) ${workRequest.applicationName}
+												      </a>, <strong>Total Hours : </strong>${workRequest.totalHours}, <strong>Total Cost :</strong> ${workRequest.totalCost}
 												    </div>
 												    <div id="collapse${workRequest.workRequestId}" class="accordion-body collapse">
 												      <div class="accordion-inner">
@@ -118,8 +118,9 @@
 																		  <div class="accordion-group">
 																		    <div class="accordion-heading">
 																		      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#inneraccordion${activityLine.activityLineId}" href="#innercollapse${activityLine.activityLineId}">
-																		        ${activityLine.activityLineDesc}: Total Hours = ${activityLine.totalHours}, Total Cost: ${activityLine.totalCost}
+																		        (+)${activityLine.activityLineDesc},
 																		      </a>
+																		       <strong>Total Hours:</strong> ${activityLine.totalHours}, <strong>Total Cost:</strong> ${activityLine.totalCost}
 																		    </div>
 																		    <div id="innercollapse${activityLine.activityLineId}" class="accordion-body collapse">
 																		      <div class="accordion-inner">

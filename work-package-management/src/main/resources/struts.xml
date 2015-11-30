@@ -62,7 +62,7 @@
 		</action>
 		<action name="saveWorkPackage" class="workPackageAction"
 			method="save">
-			<result name="success">/view/workspace.jsp</result>
+			<result name="success">/view/homepage.jsp</result>
 		</action>
 
 		<action name="myDashboard" class="dashboardAction">

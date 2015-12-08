@@ -11,8 +11,6 @@
 	    	currentPage = "userProfile.jsp";
 	    }else if (currentPage.equals("wpl")){
 	    	currentPage = "workpackage/workpackagelist.jsp";
-	    }else if (currentPage.equals("acl")){
-	    	currentPage = "workpackage/activitylist.jsp";
 	    }else if (currentPage.equals("cnwp")){
 	    	currentPage = "workpackage/createNewWorkPackage.jsp";
 	    }else if (currentPage.equals("cnac")){

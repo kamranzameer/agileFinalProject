@@ -25,8 +25,10 @@ function addAssumption()
 	var table = document.getElementById("assumptionsTable");
     var row = table.insertRow(-1);
     var cell1 = row.insertCell(-1);
-    var cell2 = row.insertCell(-1);
+    
     cell1.innerHTML = "<input type=\"text\" size=\"20\"/>";
+    cell1.colSpan = "4";
+    var cell2 = row.insertCell(-1);
     cell2.innerHTML = "<a href=\"#\"><span class=\"glyphicon glyphicon-remove\"></span></a>";
 }
 
@@ -87,10 +89,11 @@ function addAssumption()
 										</div>
 								</div>
 							</div>
-							<BR>
-							<div id="activityDiv" class="table-responsive col-xs-12 col-sm-12 col-md-11 col-lg-11">
 							
-							<table id="resourcesTable" class="table table-striped table-hover">
+							<hr style="border-color: #EEEEEE;"/>
+							
+							<div id="activityDiv" class="table-responsive col-xs-12 col-sm-12 col-md-11 col-lg-11">
+								<table id="resourcesTable" class="table table-striped table-hover">
 									<thead class="panel-heading">
 										<tr>
 											<td colspan="5" align="right">
@@ -118,34 +121,35 @@ function addAssumption()
 									</tbody>
 									
 								</table>
-								<table class="table table-striped table-hover">
-									<tr>
-										<td colspan="4" align="right">
-											<b>Total Cost :</b> 
-										</td>
-										<td align="right">
-											<b>$7178</b>
-										</td>
-									</tr>
-								</table>
 							</div>
-							<div id="openModal" class="modalDialog">
+							<div id="activityDiv" class="table-responsive col-xs-12 col-sm-12 col-md-11 col-lg-11">
+							<table class="table table-striped table-hover">
+								<tr>
+									<td colspan="4" align="right">
+										<b>Total Cost :</b> 
+									</td>
+									<td align="right">
+										<b>$7178</b>
+									</td>
+								</tr>
+							</table>
+							</div>
+							
+							<div class="table-responsive col-xs-12 col-sm-12 col-md-11 col-lg-11">
 								<div>
-									<a href="#close" title="Close" class="close">X</a>
-									<p>Enter Justification/Comments</p>								
+																	
 							
 									<table id="assumptionsTable" class="table table-striped table-hover">
 											<thead class="panel-heading">
 												<tr>
-													<td align="right">
+													<td colspan="5" align="right">
 														<a href="javascript:addAssumption();" class="btn btn-success">+</a>
 													</td>
 												</tr>
 												<tr>
-													<th>
+													<th colspan="5">
 														Assumptions
 													</th>
-													<th/>
 												</tr>
 											</thead>
 											<tbody>
@@ -165,7 +169,7 @@ function addAssumption()
 							</div>
 						    <div class="row clearfix">
 						        <div class="col-md-10 column">
-						            <p>&nbsp</p>
+						            <p>&nbsp;</p>
 						        </div>
 						    </div>
 						</form>

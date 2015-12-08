@@ -67,9 +67,6 @@
     	<property name="workPackageService" ref="workPackageService"/>
     </bean>
     
-    <bean id="activitiesListAction" class="edu.harvard.agile.action.ActivitiesListAction">
-    </bean>
-    
     <bean id="activityAction" class="edu.harvard.agile.action.ActivityAction">
     </bean>
     

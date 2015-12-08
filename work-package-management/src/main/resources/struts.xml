@@ -47,10 +47,6 @@
             <result>/view/workspace.jsp</result>
         </action>
         
-         <action name="activitiesList"  class="activitiesListAction">
-            <result>/view/workspace.jsp</result>
-        </action>
-        
         <action name="workRequestList"  class="workRequestListAction">
             <result>/view/workspace.jsp</result>
         </action>

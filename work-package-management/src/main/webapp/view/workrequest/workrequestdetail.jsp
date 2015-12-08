@@ -241,6 +241,8 @@
 										</span>
 										&nbsp;&nbsp;Back
 									</button>
+									
+									<a href="newActivity.action" class="btn btn-success">New</a>
 								</div>
 							</div>
 						    <div class="row clearfix">

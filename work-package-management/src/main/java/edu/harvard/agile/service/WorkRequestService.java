@@ -74,4 +74,16 @@ public class WorkRequestService {
 		ApplicationContactsDTO appContact = applicationService.findApplicationContactByUser(userid);
 		return workRequestDAO.findRequestsByApplicationId(appContact.getApplicationId());
 	}
+
+	/**
+	 * Find by work request id
+	 * 
+	 * @param workRequestId
+	 * @return - a WorkRequest DTO
+	 * @throws Exception
+	 */
+	public WorkRequestDTO findByWorkRequestId(int id) throws Exception {
+		return workRequestDAO.findByWorkRequestId(id);
+	}
+	
 }

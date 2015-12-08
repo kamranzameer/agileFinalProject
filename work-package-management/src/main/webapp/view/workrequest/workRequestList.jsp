@@ -28,6 +28,12 @@
 												Created Date
 											</th>
 											<th>
+												Total Hours
+											</th>
+											<th>
+												Total Cost
+											</th>
+											<th>
 												Status
 											</th>
 											<th>
@@ -48,11 +54,17 @@
 												${workRequest.startDate}
 											</td>
 											<td>
+												${workRequest.totalHours}
+											</td>
+											<td>
+												${workRequest.totalCost}
+											</td>
+											<td>
 												${workRequest.status}
 											</td>
 											<td>
-												<a href="activitiesList.action" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
-												<a href="#" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
+												<a href="workRequestDetail.action?workRequestId=${workRequest.workRequestId}" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
+												<a href="activitiesList.action" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
 												<a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash">&nbsp;</i></a>
 											</td>
 										</tr>

@@ -25,6 +25,8 @@
 	    	currentPage = "workpackage/workPackageStatistics.jsp";
 	    }else if (currentPage.equals("wpd")){
 	    	currentPage = "workpackage/workpackagedetail.jsp";
+	    }else if (currentPage.equals("wrd")){
+	    	currentPage = "workrequest/workrequestdetail.jsp";
 	    }else{
 	    	currentPage = "dashboard.jsp";
 	    }

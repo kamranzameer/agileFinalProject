@@ -85,8 +85,15 @@
     	<property name="activityLineService" ref="activityLineService"/>
     	<property name="activityPhaseResourcesService" ref="activityPhaseResourcesService"/>
     	<property name="assumptionsService" ref="assumptionsService"/>
-    	
-    	
+    </bean>
+    
+    
+    <bean id="workRequestDetailAction" class="edu.harvard.agile.action.WorkRequestDetailAction">
+    	<property name="workPackageService" ref="workPackageService"/>
+    	<property name="workRequestService" ref="workRequestService"/>
+    	<property name="activityLineService" ref="activityLineService"/>
+    	<property name="activityPhaseResourcesService" ref="activityPhaseResourcesService"/>
+    	<property name="assumptionsService" ref="assumptionsService"/>
     </bean>
     
     

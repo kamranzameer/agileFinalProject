@@ -79,6 +79,9 @@ public class WorkRequestDAO {
 				workRequest
 						.setApplicationName(rs.getString("APPLICATION_NAME"));
 				workRequest.setWorkPackageName(rs.getString("PACKAGE_NAME"));
+				
+				workRequest.setTotalCost(getWorkRequsetTotalCost(rs.getInt("WORK_REQUEST_ID"), con));
+        workRequest.setTotalHours(getWorkRequsetTotalHours(rs.getInt("WORK_REQUEST_ID"), con));
 
 				workRequestDTOs.add(workRequest);
 			}
@@ -169,9 +172,9 @@ public class WorkRequestDAO {
 	}
 
 	/**
-	 * Find by package name
+	 * Find by work request id
 	 * 
-	 * @param packageName
+	 * @param workRequestId
 	 * @return - a WorkRequest DTO
 	 * @throws Exception
 	 */
@@ -193,6 +196,7 @@ public class WorkRequestDAO {
 
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
+			query.append("        A.WORK_REQUEST_ID, ");
 			query.append("        A.STATUS, ");
 			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
@@ -223,6 +227,10 @@ public class WorkRequestDAO {
 				workRequest
 						.setApplicationName(rs.getString("APPLICATION_NAME"));
 				workRequest.setWorkPackageName(rs.getString("PACKAGE_NAME"));
+				
+				workRequest.setTotalCost(getWorkRequsetTotalCost(rs.getInt("WORK_REQUEST_ID"), con));
+        workRequest.setTotalHours(getWorkRequsetTotalHours(rs.getInt("WORK_REQUEST_ID"), con));
+        
 			}
 		} finally {
 			DBUtil.closeRS(rs);

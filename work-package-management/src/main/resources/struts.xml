@@ -58,6 +58,10 @@
 		<action name="workPackageDetail" class="workPackageDetailAction">
 			<result>/view/workspace.jsp</result>
 		</action>
+		
+		<action name="workRequestDetail" class="workRequestDetailAction">
+			<result>/view/workspace.jsp</result>
+		</action>
 
 
 

@@ -36,10 +36,12 @@ public class ApplicationDAOTest {
 		st = con.prepareStatement(sql);
 		st.setString(1, appId);
 		st.executeUpdate();
+		con.commit();
 		}
 		catch(Exception ex)
 		{
-			//dont do anything
+			con.rollback();
+			throw ex;
 		}
 		finally
 		{

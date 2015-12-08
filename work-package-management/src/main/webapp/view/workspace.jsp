@@ -11,8 +11,12 @@
 	    	currentPage = "userProfile.jsp";
 	    }else if (currentPage.equals("wpl")){
 	    	currentPage = "workpackage/workpackagelist.jsp";
+	    }else if (currentPage.equals("acl")){
+	    	currentPage = "workpackage/activitylist.jsp";
 	    }else if (currentPage.equals("cnwp")){
 	    	currentPage = "workpackage/createNewWorkPackage.jsp";
+	    }else if (currentPage.equals("cnac")){
+	    	currentPage = "workpackage/createnewactivity.jsp";
 	    }else if (currentPage.equals("wrl")){
 	    	currentPage = "workrequest/workRequestList.jsp";
 	    }else if (currentPage.equals("wrpd")){
@@ -68,8 +72,6 @@
 				    <ul class="nav bs-docs-sidenav">
 		                <li><a href="homepage.jsp"><i class="glyphicon glyphicon-dashboard">&nbsp;</i>Dashboard</a></li>
 
-		                <li><a href="workspace.jsp?p=ecit"><i class="glyphicon glyphicon-user">&nbsp;</i>Profile</a></li>
-						
 						<shiro:hasAnyRoles name="DM,BU">
 						<li class=""> <a href="workPackageList.action" data-toggle="collapse" data-target="#workPackageMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages</a>
 						</li>
@@ -82,7 +84,6 @@
 							</li>
 						</shiro:hasAnyRoles>
 
-		                <li><a href="workspace.jsp?p=cp" onclick="javascript:$( '#workspace' ).load( 'changepassword.jsp' )"><i class="glyphicon glyphicon-lock">&nbsp;</i> Change Password</a></li>
 		                <li><a href="../logout"><i class="glyphicon glyphicon-off">&nbsp;</i>Sign Out</a>&nbsp;</li>
 				    </ul>
 				</div>

@@ -221,14 +221,15 @@ public class WorkRequestDAOTest {
 			workRequest.setModifiedBy("junit");
 
 			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
-			
 			assertTrue(workRequestDAO.deleteWorkRequest(workRequest, con) > 0);
 			
 			con.commit();
 			
+			
 		}
 		catch(Exception ex)
 		{
+			ex.printStackTrace();
 			DBUtil.rollBack(con);
 			throw ex;
 		}

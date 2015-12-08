@@ -62,7 +62,7 @@ public class DBUtil {
 	 * @return connection
 	 * @throws Exception
 	 */
-	public static Connection getConnection() throws Exception {
+	public static Connection getConnection() throws SQLException {
 		
 		Connection connection = ds.getConnection();
 		connection.setAutoCommit(false);
@@ -155,9 +155,10 @@ public class DBUtil {
 	 * This method is to get the next value of any oracle sequence 
 	 * @param seqName is a Sequence name
 	 * @return the value of the sequence as int
+	 * @throws SQLException 
 	 * @throws Exception
 	 */
-	public static int getNextSequence(String seqName, Connection con) throws Exception {
+	public static int getNextSequence(String seqName, Connection con) throws SQLException {
 		String seqQuery = "Select " + seqName + ".nextVal from DUAL";
 		int seq = 0;
 		Statement st = null;

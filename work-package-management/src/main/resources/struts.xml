@@ -47,6 +47,10 @@
             <result>/view/workspace.jsp</result>
         </action>
         
+         <action name="activitiesList"  class="activitiesListAction">
+            <result>/view/workspace.jsp</result>
+        </action>
+        
         <action name="workRequestList"  class="workRequestListAction">
             <result>/view/workspace.jsp</result>
         </action>
@@ -58,6 +62,9 @@
 
 
 		<action name="newWorkPackage" class="workPackageAction">
+			<result name="success">/view/workspace.jsp</result>
+		</action>
+		<action name="newActivity" class="activityAction">
 			<result name="success">/view/workspace.jsp</result>
 		</action>
 		<action name="saveWorkPackage" class="workPackageAction"

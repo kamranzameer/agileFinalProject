@@ -362,9 +362,7 @@ public class WorkRequestDAO {
 		
 		PreparedStatement stmt = null;
 		try {
-			int seqId = DBUtil.getNextSequence("WORK_REQUEST_ID_SEQ", connection);
-
-			String query = "DELETE FROM WORK_REQUEST WHERE WORK_REQUEST_ID = ?";
+			String query = "DELETE WORK_REQUEST WHERE WORK_REQUEST_ID = ?";
 			stmt = connection.prepareStatement(query);
 			stmt.setInt(1, workRequest.getWorkRequestId());
 			int rowsUpdated = stmt.executeUpdate();

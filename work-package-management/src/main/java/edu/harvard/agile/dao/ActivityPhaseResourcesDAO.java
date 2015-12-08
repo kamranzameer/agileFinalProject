@@ -1,8 +1,10 @@
 package edu.harvard.agile.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,16 +12,59 @@ import edu.harvard.agile.model.ActivityPhaseResourcesDTO;
 import edu.harvard.agile.util.DBUtil;
 
 public class ActivityPhaseResourcesDAO {
+	
+	/**
+	 * Insert a record into ACTIVITY_PHASE_RESOURCES table
+	 * @param activityPhaseResources
+	 * @param con
+	 * @return
+	 * @throws SQLException
+	 */
+	public int[] createActivityPhaseResources(List<ActivityPhaseResourcesDTO> activityPhaseResources, Connection con) throws SQLException
+	{
+		String sql = "INSERT INTO ACTIVITY_PHASE_RESOURCES (ACTIVITY_PHASE_RESOURCE_ID, ACTIVITY_LINE_ID, RESOURCE_TYPE_ID, "
+				+ "ESTIMATED_HOURS, CREATE_DATE, MODIFIED_DATE, CREATE_BY, MODIFIED_BY)	VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement statement = null;
+
+		try
+		{
+			statement = con.prepareStatement(sql);
+			for (ActivityPhaseResourcesDTO activityPhaseResourcesDTO : activityPhaseResources) 
+			{
+				activityPhaseResourcesDTO.setActivityPhaseResourceId(DBUtil.getNextSequence("ACTIVITY_PHASE_RESOURCE_ID_SEQ", con));
+
+				statement.setInt(1, activityPhaseResourcesDTO.getActivityPhaseResourceId());
+				statement.setInt(2, activityPhaseResourcesDTO.getActivityLineId());
+				statement.setInt(3, activityPhaseResourcesDTO.getResourceTypeId());
+				statement.setInt(4, activityPhaseResourcesDTO.getEstimatedHours());
+				statement.setDate(5, new Date(System.currentTimeMillis()));
+				statement.setDate(6, new Date(System.currentTimeMillis()));
+				statement.setString(7,  activityPhaseResourcesDTO.getCreateBy());
+				statement.setString(8,  activityPhaseResourcesDTO.getModifiedBy());
+
+				statement.addBatch();
+			}
+			
+			int[] rowsUPdated = statement.executeBatch();
+			
+			return rowsUPdated;
+		}
+		finally
+		{
+			DBUtil.closeStatement(statement);
+		}
+
+	}
 
 	/**
-	 * Find by work request method to find the record by work request id.
+	 * Find allocated Resource Types, their effort and total cost by Activity Line 
 	 * 
 	 * @param id - work request id
 	 * @return - ActivityLineDTOs
 	 * @throws Exception
 	 */
 	public List<ActivityPhaseResourcesDTO> findByActivityLineId(int activityLineId) throws Exception {
-
+		
 		/*
 		 * Get connection from DBUtil, executes select query and initializes the
 		 * object with values returned from the database and returns the work
@@ -83,7 +128,7 @@ public class ActivityPhaseResourcesDAO {
 	
 	
 	
-	public Integer getTotalCost(Integer activityLineId, Connection con)
+	/*public Integer getTotalCost(Integer activityLineId, Connection con)
 			throws Exception {
 		StringBuilder query = new StringBuilder("");
 		query.append(" SELECT SUM (HOURLY_RATE * TOTAL_HOURS) ");
@@ -161,5 +206,5 @@ public class ActivityPhaseResourcesDAO {
 		
 		
 		
-	}
+	}*/
 }

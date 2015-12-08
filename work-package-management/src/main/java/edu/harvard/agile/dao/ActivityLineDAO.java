@@ -1,8 +1,10 @@
 package edu.harvard.agile.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ import edu.harvard.agile.util.DBUtil;
 public class ActivityLineDAO {
 
 	/**
-	 * Find by work request method to find the record by work request id.
+	 * Find all Activities created for a work request
 	 * 
 	 * @param id - work request id
 	 * @return - ActivityLineDTOs
@@ -43,7 +45,9 @@ public class ActivityLineDAO {
 			
 			
 			
-			String query = "SELECT  ACTIVITY_LINE_ID, ACTIVITY_LINE_DESC, WORK_REQUEST_ID,  ACTIVITY_TYPE_CODE, START_DATE, END_DATE,  CREATE_DATE, MODIFIED_DATE, CREATE_BY, MODIFIED_BY FROM ACTIVITY_LINE WHERE WORK_REQUEST_ID = ?";
+			String query = "SELECT  ACTIVITY_LINE_ID, ACTIVITY_LINE_DESC, WORK_REQUEST_ID,  ACTIVITY_LINE.ACTIVITY_TYPE_CODE, "
+					+ "ACTIVITY_TYPE.ACTIVITY_TYPE_DESC, START_DATE, END_DATE FROM ACTIVITY_LINE, ACTIVITY_TYPE WHERE "
+					+ "WORK_REQUEST_ID = ? AND ACTIVITY_LINE.ACTIVITY_TYPE_CODE = ACTIVITY_TYPE.ACTIVITY_TYPE_CODE";
 			stmt = con.prepareStatement(query);
 			stmt.setInt(1, workRequestId);
 			rs = stmt.executeQuery();
@@ -55,8 +59,7 @@ public class ActivityLineDAO {
 				activityLine.setActivityLineDesc(rs.getString("ACTIVITY_LINE_DESC"));
 				activityLine.setActivityLineId(rs.getInt("ACTIVITY_LINE_ID"));
 				activityLine.setActivityTypeCode(rs.getString("ACTIVITY_TYPE_CODE"));
-				activityLine.setCreateBy(rs.getString("CREATE_BY"));
-				activityLine.setCreateDate(rs.getDate("CREATE_DATE"));
+				activityLine.setActivityTypeDesc(rs.getString("ACTIVITY_TYPE_DESC"));
 				activityLine.setEndDate(rs.getDate("END_DATE"));
 				activityLine.setStartDate(rs.getDate("START_DATE"));
 				activityLine.setWorkRequestId(rs.getInt("WORK_REQUEST_ID"));
@@ -172,6 +175,37 @@ public class ActivityLineDAO {
 		}
 
 		return null;
+	}
+	
+	public ActivityLineDTO createActivityLine(ActivityLineDTO activityLine, Connection con) throws SQLException
+	{
+		String sql = "INSERT INTO ACTIVITY_LINE ( ACTIVITY_LINE_ID, ACTIVITY_LINE_DESC, "
+				+ "WORK_REQUEST_ID, ACTIVITY_TYPE_CODE, START_DATE, END_DATE, CREATE_DATE, "
+				+ "MODIFIED_DATE,CREATE_BY,MODIFIED_BY) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement statement = null;
+		
+		try {
+			statement = con.prepareStatement(sql);
+			activityLine.setActivityLineId(DBUtil.getNextSequence("ACTIVITY_LINE_ID_SEQ", con));
+			statement.setInt(1, activityLine.getActivityLineId());
+			statement.setString(2, activityLine.getActivityLineDesc());
+			statement.setInt(3, activityLine.getWorkRequestId());
+			statement.setString(4, activityLine.getActivityTypeCode());
+			statement.setDate(5, new Date(System.currentTimeMillis()));
+			statement.setDate(6, new Date(System.currentTimeMillis()));
+			statement.setDate(7, new Date(System.currentTimeMillis()));
+			statement.setDate(8, new Date(System.currentTimeMillis()));
+			statement.setString(9, activityLine.getCreateBy());
+			statement.setString(10, activityLine.getModifiedBy());
+			
+			int rowsUpdated = statement.executeUpdate();
+		}
+		finally
+		{
+			DBUtil.closeStatement(statement);
+		}
+
+		return activityLine;
 		
 	}
 }

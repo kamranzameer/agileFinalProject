@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
@@ -35,6 +36,35 @@ public class WorkPackageDAOTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		Connection con = null;
+		PreparedStatement st = null;
+		String sql1 = "DELETE WORK_PACKAGE WHERE CREATE_BY= 'junit'";
+		String sql2 = "DELETE WORK_REQUEST WHERE CREATE_BY= 'junit'";
+		
+		try
+		{
+			con = DBUtil.getConnection();
+			st = con.prepareStatement(sql2);
+			st.executeUpdate();
+			st.close();
+			
+			st = con.prepareStatement(sql1);
+			st.executeUpdate();
+			
+			
+			con.commit();
+		}
+		catch(SQLException ex)
+		{
+			ex.printStackTrace();
+			con.rollback();
+			throw ex;
+		}
+		finally
+		{
+			DBUtil.closeStatement(st);
+			DBUtil.closeConnection(con);
+		}
 	}
 
 	@Before

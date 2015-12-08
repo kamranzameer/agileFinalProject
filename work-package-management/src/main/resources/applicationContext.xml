@@ -18,9 +18,8 @@
     <bean id="activityLineDAO" class= "edu.harvard.agile.dao.ActivityLineDAO"/>
     <bean id="activityPhaseResourcesDAO" class= "edu.harvard.agile.dao.ActivityPhaseResourcesDAO"/>
     <bean id="assumptionsDAO" class= "edu.harvard.agile.dao.AssumptionsDAO"/>
-    
-    
-    
+    <bean id="activityPhaseResourceDAO" class= "edu.harvard.agile.dao.ActivityPhaseResourcesDAO"/>
+   
 
 <!--  Services bean definition -->
 
@@ -47,6 +46,8 @@
 
 	<bean id="activityLineService" class= "edu.harvard.agile.service.ActivityLineService">
     	<property name="activityLineDAO" ref="activityLineDAO"/>
+    	<property name="activityPhaseResourceDAO" ref="activityPhaseResourceDAO"/>
+    	<property name="assumptionsDAO" ref="assumptionsDAO"/>
     </bean>
     
     
@@ -60,14 +61,16 @@
     </bean>
     
     
-    
-    
-
-    
 <!--  Actions bean definition -->
     
     <bean id="workPackageListAction" class="edu.harvard.agile.action.WorkPackageListAction">
     	<property name="workPackageService" ref="workPackageService"/>
+    </bean>
+    
+    <bean id="activitiesListAction" class="edu.harvard.agile.action.ActivitiesListAction">
+    </bean>
+    
+    <bean id="activityAction" class="edu.harvard.agile.action.ActivityAction">
     </bean>
     
     

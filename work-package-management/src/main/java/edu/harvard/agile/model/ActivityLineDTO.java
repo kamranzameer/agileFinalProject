@@ -23,28 +23,33 @@ public class ActivityLineDTO extends ModelBase {
 	private String activityLineDesc;
 	private Integer workRequestId;
 	private String activityTypeCode;
+	private String activityTypeDesc;
 	private Date startDate;
 	private Date endDate;
 	private Date createDate;
 	private Date modifiedDate;
 	private String createBy;
 	private String modifiedBy;
+	private int totalHours;
+	private int totalCost;
+	private List<ActivityPhaseResourcesDTO> activityPhaseResourcesDTOs;
+	private List<String> assumptions;
+	private List<AssumptionsDTO> assumptionDTOs;
+	
+	public List<AssumptionsDTO> getAssumptionDTOs() {
+		return assumptionDTOs;
+	}
+
+	public void setAssumptionDTOs(List<AssumptionsDTO> assumptionDTOs) {
+		this.assumptionDTOs = assumptionDTOs;
+	}
+
 	public List<String> getAssumptions() {
 		return assumptions;
 	}
 
 	public void setAssumptions(List<String> assumptions) {
 		this.assumptions = assumptions;
-	}
-
-	private int totalHours;
-	private int totalCost;
-
-	private List<ActivityPhaseResourcesDTO> activityPhaseResourcesDTOs;
-
-	private List<String> assumptions;
-
-	public ActivityLineDTO() {
 	}
 
 	public Integer getActivityLineId() {
@@ -78,6 +83,15 @@ public class ActivityLineDTO extends ModelBase {
 	public void setActivityTypeCode(String activityTypeCode) {
 		this.activityTypeCode = activityTypeCode;
 	}
+	
+	public String getActivityTypeDesc() {
+		return activityTypeDesc;
+	}
+
+	public void setActivityTypeDesc(String activityTypeDesc) {
+		this.activityTypeDesc = activityTypeDesc;
+	}
+
 
 	public Date getStartDate() {
 		return startDate;

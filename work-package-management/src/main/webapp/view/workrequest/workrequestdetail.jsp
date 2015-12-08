@@ -14,10 +14,63 @@
 					</i> Work Package Detail</div>
 	                </div>
 	                <div style="padding-top:30px"; class="panel-body">
-						<form id="workPackageDetail" class="form-horizontal" role="form" method="post" action="workPackageList.action">
+						<form id="workPackageDetail" class="form-horizontal" role="form" method="post" action="workRequestList.action">
 							<div class="row clearfix">
 								<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8  column col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
 										<div class="form-group">
+										
+											<div class= "row">
+												<div class="col-md-6">
+														<strong>
+															Work Request Name:
+														</strong>
+												</div>
+												
+												<div class="col-md-6">
+														${workRequest.applicationName}
+												</div>
+											</div>
+											
+											
+											<div class= "row">
+												<div class="col-md-6">
+														<strong>
+															Total Hours:
+														</strong>
+												</div>
+												
+												<div class="col-md-6">
+														${workRequest.totalHours}
+												</div>
+											</div>
+											
+											<div class= "row">
+												<div class="col-md-6">
+														<strong>
+															Total Cost :
+														</strong>
+												</div>
+												
+												<div class="col-md-6">
+														${workRequest.totalCost}
+												</div>
+											</div>
+											
+											<div class= "row">
+												<div class="col-md-6">
+														<strong>
+															Request Status:
+														</strong>
+												</div>
+												<div class="col-md-6">
+														${workRequest.status}
+												</div>
+											</div>
+											
+											<hr style="border-color: #EEEEEE;"/>
+											
+											
+
 											<div class= "row">
 												<div class="col-md-6">
 														<strong>
@@ -112,7 +165,7 @@
 											<div class= "row">
 												<div class="col-md-6">
 														<strong>
-															Status:
+															Package Status:
 														</strong>
 												</div>
 												<div class="col-md-6">
@@ -120,53 +173,19 @@
 												</div>
 											</div>
 											
-											<div class= "row">
-												<div class="col-md-6">
-														<strong>
-															Total Applications:
-														</strong>
-												</div>
-												<div class="col-md-6">
-													${workPackage.totalApplications}
-											</div>
-											</div>
-											
-											
-											<div class= "row">
-												<div class="col-md-6">
-														<strong>
-															Total Cost:
-														</strong>
-												</div>
-												<div class="col-md-6">
-													${workPackage.totalCost}
-											</div>
-											</div>
 											
 											
 											<hr style="border-color: #EEEEEE;"/>
 											
 											
-											<h4>Work Requests</h4>
 											
 											
-											<div class="accordion" id="accordion2">
+											<h4>Details</h4>
 											
 											
-											<s:iterator var = "workRequest" value="workRequests">
-												  <div class="accordion-group">
-												    <div class="accordion-heading">
-												      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse${workRequest.workRequestId}">
-												       (+) ${workRequest.applicationName}
-												      </a>, <strong>Total Hours : </strong>${workRequest.totalHours}, <strong>Total Cost :</strong> ${workRequest.totalCost}
-												    </div>
-												    <div id="collapse${workRequest.workRequestId}" class="accordion-body collapse">
-												      <div class="accordion-inner">
 												      		<!-- ----------------------------start inner------------------------ -->
-												      		<s:iterator var = "activityLine" value="#workRequest.activityLineDTOs">
-												      			<div class="row clearfix">
-														      		<div class="col-sm-12 column col-sm-offset-1">
-															      		<div class="accordion" id="inneraccordion${activityLine.activityLineId}">
+															      		<div class="accordion" id="inneraccordion${workRequest.workRequestId}">
+															      		<s:iterator var = "activityLine" value="workRequest.activityLineDTOs">
 																		  <div class="accordion-group">
 																		    <div class="accordion-heading">
 																		      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#inneraccordion${activityLine.activityLineId}" href="#innercollapse${activityLine.activityLineId}">
@@ -195,21 +214,15 @@
 																		      </div>
 																		    </div>
 																		  </div>
+																		  </s:iterator>
 																		 </div> 
-																	</div>	 
-																</div>
-															</s:iterator>	
+																		 
+																
+																
 																
 																
 															
-												        	<!-- ---------------------end inner---------------------------- -->
-	
-												      </div>
-												    </div>
-												  </div>
-											 </s:iterator>	  
-											</div>	
-											
+																					
 											<!-- <div class="panel panel-info">
 												<div class="panel-heading">
 								                    <div class="panel-title"><i class="fa fa-pencil">

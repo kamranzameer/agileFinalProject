@@ -2,6 +2,7 @@ package edu.harvard.agile.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import edu.harvard.agile.dao.WorkPackageDAO;
@@ -116,4 +117,56 @@ public class WorkPackageService {
 
 		return workPackageDAO.findByPackageId(workPackageId);
 	}
+	
+	
+	/**
+	 * This method 1. updates work package in the system 
+	 * 2.updates work request status that belong to work package
+	 * 
+	 * 
+	 * @param workPackage
+	 * @return
+	 * @throws Exception
+	 */
+	public WorkPackageDTO updatePackageStatus(WorkPackageDTO workPackage) throws Exception {
+		
+		Connection connection = null;
+	//	WorkRequestDTO workRequest = null;
+		
+		try
+		{
+			connection = DBUtil.getConnection();
+		//Create WorkPakcage
+			workPackage = workPackageDAO.updatePackageStatus(workPackage);
+			
+			List<WorkRequestDTO> workRequests = workRequestDAO.findRequestsByPackageId(workPackage.getPackageId());
+			
+		
+			for (WorkRequestDTO workRequest : workRequests) 
+			{
+				
+				workRequest.setStatus(workPackage.getStatus());
+				workRequest.setModifiedDate(new Date());
+				workRequest.setModifiedBy(workPackage.getModifiedBy());
+				
+				workRequestDAO.updateWorkRequestStatus(workRequest);
+			}
+			
+			connection.commit();
+			
+		}
+		catch(Exception ex)
+		{
+			DBUtil.rollBack(connection);
+			throw ex;
+			
+		}
+		finally
+		{
+			DBUtil.closeConnection(connection);
+		}
+		
+		return workPackage;
+
+	}	
 }

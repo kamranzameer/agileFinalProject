@@ -65,6 +65,7 @@ public class WorkPackageServiceTest {
 		
 		assertTrue(true);
 	}
+
 	
 	@Test(expected = SQLIntegrityConstraintViolationException.class)
 	public void testCreatePackageWithoutPackageName() throws Exception
@@ -133,5 +134,25 @@ public class WorkPackageServiceTest {
 		assertTrue(wps.findAllPackages().size() > 0);
 	}
 
+	@Test
+	public void testUpdatePackageStatus() throws Exception 
+	{
+				
+		WorkPackageService wps = new WorkPackageService();
+		wps.setWorkPackageDAO(new WorkPackageDAO());
+		wps.setWorkRequestDAO(new WorkRequestDAO());
+		
+		
+		WorkPackageDTO workPackage = wps.findByPackageId(1);
+		workPackage.setStatus("Approved");
+		workPackage.setModifiedBy("junit");
+		workPackage.setModifiedDate(new Date());
+		wps.updatePackageStatus(workPackage);
+		WorkPackageDTO newwp = wps.findByPackageId(1);
+		assertEquals(newwp.getStatus(),"Approved");
+		assertTrue(true);
+		
+	}
 
+	
 }

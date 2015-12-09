@@ -282,8 +282,24 @@ public class WorkPackageDAOTest {
 		workPackage.setStatus("Approved");
 		workPackage.setModifiedBy("uannipu");
 
-		WorkPackageDTO workDTO = workPackageDAO.updatePackageStatus(workPackage);
-		assertTrue("Approved".equals(workDTO.getStatus()));
+		Connection connection = DBUtil.getConnection();
+
+		try
+		{
+			WorkPackageDTO workDTO = workPackageDAO.updatePackageStatus(workPackage, connection);
+			assertTrue("Approved".equals(workDTO.getStatus()));
+		}
+		catch(Exception ex)
+		{
+			if(connection!=null){
+				connection.rollback();
+			}
+			throw ex;
+		}
+		finally
+		{
+			DBUtil.closeConnection(connection);
+		}
 
 	}
 
@@ -298,8 +314,25 @@ public class WorkPackageDAOTest {
 		workPackage.setPackageId(2);
 		workPackage.setModifiedBy("uannipu");
 
-		WorkPackageDTO workDTO = workPackageDAO.updatePackageStatus(workPackage);
-		assertTrue("Approved".equals(workDTO.getStatus()));
+		Connection connection = DBUtil.getConnection();
+
+		try
+		{
+
+			WorkPackageDTO workDTO = workPackageDAO.updatePackageStatus(workPackage, connection);
+			assertTrue("Approved".equals(workDTO.getStatus()));
+		}
+		catch(Exception ex)
+		{
+			if(connection!=null){
+				connection.rollback();
+			}
+			throw ex;
+		}
+		finally
+		{
+			DBUtil.closeConnection(connection);
+		}
 
 	}
 

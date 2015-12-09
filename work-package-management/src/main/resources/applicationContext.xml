@@ -16,6 +16,8 @@
     <bean id="testingProgramDAO" class= "edu.harvard.agile.dao.TestingProgramDAO"/>
     <bean id="dashboardInfo" class= "edu.harvard.agile.model.DashboardInfo"/>
     <bean id="activityLineDAO" class= "edu.harvard.agile.dao.ActivityLineDAO"/>
+    <bean id="activityTypeDAO" class= "edu.harvard.agile.dao.ActivityTypeDAO"/>
+    <bean id="resourceTypeDAO" class= "edu.harvard.agile.dao.ResourceTypeDAO"/>
     <bean id="activityPhaseResourcesDAO" class= "edu.harvard.agile.dao.ActivityPhaseResourcesDAO"/>
     <bean id="assumptionsDAO" class= "edu.harvard.agile.dao.AssumptionsDAO"/>
     <bean id="activityPhaseResourceDAO" class= "edu.harvard.agile.dao.ActivityPhaseResourcesDAO"/>
@@ -50,6 +52,14 @@
     	<property name="assumptionsDAO" ref="assumptionsDAO"/>
     </bean>
     
+    <bean id="activityTypeService" class= "edu.harvard.agile.service.ActivityTypeService">
+    	<property name="activityTypeDAO" ref="activityTypeDAO"/>
+    </bean>
+    
+     <bean id="resourceTypeService" class= "edu.harvard.agile.service.ResourceTypeService">
+    	<property name="resourceTypeDAO" ref="resourceTypeDAO"/>
+    </bean>
+    
     
     <bean id="activityPhaseResourcesService" class= "edu.harvard.agile.service.ActivityPhaseResourcesService">
     	<property name="activityPhaseResourcesDAO" ref="activityPhaseResourcesDAO"/>
@@ -68,6 +78,9 @@
     </bean>
     
     <bean id="activityAction" class="edu.harvard.agile.action.ActivityAction">
+    	<property name="activityLineService" ref="activityLineService"/>
+    	<property name="activityTypeService" ref="activityTypeService"/>
+    	<property name="resourceTypeService" ref="resourceTypeService"/>
     </bean>
     
     

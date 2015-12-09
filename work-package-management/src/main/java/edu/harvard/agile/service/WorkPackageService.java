@@ -136,8 +136,7 @@ public class WorkPackageService {
 		try
 		{
 			connection = DBUtil.getConnection();
-		//Create WorkPakcage
-			workPackage = workPackageDAO.updatePackageStatus(workPackage);
+			workPackage = workPackageDAO.updatePackageStatus(workPackage, connection);
 			
 			List<WorkRequestDTO> workRequests = workRequestDAO.findRequestsByPackageId(workPackage.getPackageId());
 			
@@ -149,7 +148,7 @@ public class WorkPackageService {
 				workRequest.setModifiedDate(new Date());
 				workRequest.setModifiedBy(workPackage.getModifiedBy());
 				
-				workRequestDAO.updateWorkRequestStatus(workRequest);
+				workRequestDAO.updateWorkRequestStatus(workRequest, connection);
 			}
 			
 			connection.commit();

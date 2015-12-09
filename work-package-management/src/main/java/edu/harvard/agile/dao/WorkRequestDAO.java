@@ -389,7 +389,7 @@ public class WorkRequestDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public int updateWorkRequestStatus(WorkRequestDTO WorkRequest)
+	public int updateWorkRequestStatus(WorkRequestDTO WorkRequest, Connection con)
 			throws Exception {
 
 		/*
@@ -399,10 +399,8 @@ public class WorkRequestDAO {
 		 * back if any exception occurs.
 		 */
 
-		Connection con = null;
 		PreparedStatement stmt = null;
 		try {
-			con = DBUtil.getConnection();
 
 			String query = "Update WORK_REQUEST SET STATUS = ?, MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE WORK_REQUEST_ID = ?";
 			stmt = con.prepareStatement(query);
@@ -413,15 +411,10 @@ public class WorkRequestDAO {
 			stmt.setInt(4, WorkRequest.getWorkRequestId());
 
 			int rowsUpdated = stmt.executeUpdate();
-			con.commit();
 
 			return rowsUpdated;
-		} catch (Exception e) {
-			DBUtil.rollBack(con);
-			throw e;
-		} finally {
+		}  finally {
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
 
 		}
 	}

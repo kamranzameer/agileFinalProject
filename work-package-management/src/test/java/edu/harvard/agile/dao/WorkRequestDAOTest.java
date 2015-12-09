@@ -279,7 +279,22 @@ public class WorkRequestDAOTest {
 		workRequest.setStatus("Archived");
 		workRequest.setModifiedBy("junit");
 
-		assertTrue(workRequestDAO.updateWorkRequestStatus(workRequest) > 0); 
+		Connection connection = DBUtil.getConnection();
+
+		try
+		{
+		assertTrue(workRequestDAO.updateWorkRequestStatus(workRequest, connection) > 0); 
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+			DBUtil.rollBack(connection);
+			throw ex;
+		}
+		finally
+		{
+			DBUtil.closeConnection(connection);
+		}
 	}
 
 	@Test
@@ -292,7 +307,22 @@ public class WorkRequestDAOTest {
 		workRequest.setStatus("Archived");
 		workRequest.setModifiedBy("junit");
 
-		assertTrue(workRequestDAO.updateWorkRequestStatus(workRequest) == 0); 
+		Connection connection = DBUtil.getConnection();
+
+		try
+		{
+		assertTrue(workRequestDAO.updateWorkRequestStatus(workRequest, connection) == 0); 
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+			DBUtil.rollBack(connection);
+			throw ex;
+		}
+		finally
+		{
+			DBUtil.closeConnection(connection);
+		}
 	}
 	
 	@Test (expected = SQLException.class)
@@ -303,7 +333,20 @@ public class WorkRequestDAOTest {
 		workRequest.setApplicationId("eSS");
 		workRequest.setStatus(null);
 		
-		workRequestDAO.updateWorkRequestStatus(workRequest);
+		Connection connection = DBUtil.getConnection();
+		try
+		{
+		workRequestDAO.updateWorkRequestStatus(workRequest, connection);
+		}
+		catch(Exception ex)
+		{
+			DBUtil.rollBack(connection);
+			throw ex;
+		}
+		finally
+		{
+			DBUtil.closeConnection(connection);
+		}
 	}
 	
 	@Test

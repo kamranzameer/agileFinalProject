@@ -291,7 +291,7 @@ public class WorkPackageDAO
 	 * @return
 	 * @throws Exception
 	 */
-	public WorkPackageDTO updatePackageStatus(WorkPackageDTO workPackage) throws Exception {
+	public WorkPackageDTO updatePackageStatus(WorkPackageDTO workPackage, Connection con) throws Exception {
 
 		/*
 		 * Get connection from DBUtil, set the parameters for the statement and
@@ -300,10 +300,8 @@ public class WorkPackageDAO
 		 * back if any exception occurs.
 		 */
 
-		Connection con = null;
 		PreparedStatement stmt = null;
 		try {
-			con = DBUtil.getConnection();
 
 			String query = "Update WORK_PACKAGE SET STATUS = ?, MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE PACKAGE_ID = ?";
 			stmt = con.prepareStatement(query);
@@ -314,15 +312,10 @@ public class WorkPackageDAO
 			stmt.setInt(4, workPackage.getPackageId());
 
 			int rowsUpdated = stmt.executeUpdate();
-			con.commit();
 
 			return workPackage;
-		} catch (Exception e) {
-			DBUtil.rollBack(con);
-			throw e;
-		} finally {
+		}  finally {
 			DBUtil.closeStatement(stmt);
-			DBUtil.closeConnection(con);
 
 		}
 	}

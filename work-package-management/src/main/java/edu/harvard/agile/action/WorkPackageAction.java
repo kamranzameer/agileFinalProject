@@ -1,6 +1,6 @@
 package edu.harvard.agile.action;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
@@ -32,12 +32,19 @@ public class WorkPackageAction extends WPMActionBase {
 	private String contractToYear;
 	private String startDate;
 	private String endDate;
+	private Integer workPackageId = null; 
+	private WorkPackageDTO workPackage = null;
+	private List<String> statuses = new ArrayList<String>();
 	
 
 	@Override
 	public void prepare() throws Exception {
 		applications = applicationService.findAllApplications();
 		testPrograms = testingProgramService.findAllTestingPrograms();
+		
+		statuses.add("open");
+		statuses.add("close");
+		statuses.add("pend");
 	}
 	
 	public String execute(){
@@ -59,6 +66,26 @@ public class WorkPackageAction extends WPMActionBase {
 		}		
 		return SUCCESS;
 	}
+	
+	/**
+	 * Called to edit work package
+	 * @return
+	 * @throws Exception 
+	 */
+	public String edit() throws Exception {
+		workPackage = workPackageService.findByPackageId(workPackageId);
+		ServletActionContext.getRequest().setAttribute("p", "cnwp");
+		return SUCCESS;
+	}
+	
+	
+	public String update() throws Exception {
+		workPackage = workPackageService.findByPackageId(workPackageId);
+		workPackage.setStatus(workPackageDTO.getStatus());
+		ServletActionContext.getRequest().setAttribute("p", "cnwp");
+		workPackageService.updatePackageStatus(workPackage);
+		return SUCCESS;
+	}
 
 	/**
 	 * Build WorkPackage DTO and create work package
@@ -77,7 +104,7 @@ public class WorkPackageAction extends WPMActionBase {
 		workPackageDTO.setModifiedBy(userID);
 		workPackageService.createPackage(workPackageDTO);
 	}
-
+	
 	@Required
 	public void setWorkPackageService(WorkPackageService workPackageService) {
 		this.workPackageService = workPackageService;
@@ -155,6 +182,30 @@ public class WorkPackageAction extends WPMActionBase {
 
 	public void setImpactedApplications(List<String> impactedApplications) {
 		this.impactedApplications = impactedApplications;
+	}
+	
+	public Integer getWorkPackageId() {
+		return workPackageId;
+	}
+
+	public void setWorkPackageId(Integer workPackageId) {
+		this.workPackageId = workPackageId;
+	}
+	
+	public WorkPackageDTO getWorkPackage() {
+		return workPackage;
+	}
+
+	public void setWorkPackage(WorkPackageDTO workPackage) {
+		this.workPackage = workPackage;
+	}
+
+	public List<String> getStatuses() {
+		return statuses;
+	}
+
+	public void setStatuses(List<String> statuses) {
+		this.statuses = statuses;
 	}
 
 }

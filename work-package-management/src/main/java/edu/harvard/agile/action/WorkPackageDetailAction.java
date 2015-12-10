@@ -1,7 +1,9 @@
 package edu.harvard.agile.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -27,7 +29,26 @@ public class WorkPackageDetailAction extends WPMActionBase {
 	private AssumptionsService assumptionsService;
 	private WorkPackageDTO workPackage;
 	private List<WorkRequestDTO> workRequests;
-	private Integer workPackageId = null; 
+	private Integer workPackageId = null;
+	private List<String> statuses;
+    private String status;
+
+
+	public List<String> getStatuses() {
+		return statuses;
+	}
+
+	public void setStatuses(List<String> statuses) {
+		this.statuses = statuses;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	/* 
 	 * Finds the work package by id, and finds the work requests and activity lines, for the package. 
@@ -45,12 +66,33 @@ public class WorkPackageDetailAction extends WPMActionBase {
 				ald.setActivityPhaseResourcesDTOs(activityPhaseResourcesService.findByActivityLineId(ald.getActivityLineId()));
 			}
 		}
+        //we need to display as dynamic
+		statuses = new ArrayList<String>();
+        statuses.add("open");
+        statuses.add("close");
+        statuses.add("pend");
+        statuses.add("Approved");
+
 	}
 
 	public String execute() throws Exception {
 		ServletActionContext.getRequest().setAttribute("p", "wpd");
 		return SUCCESS;
 	}
+	
+	public String update() throws Exception {
+        ServletActionContext.getRequest().setAttribute("p", "wpd");
+        workPackage = workPackageService.findByPackageId(workPackageId);
+        workPackage.setStatus(status);
+        
+        String userID = SecurityUtils.getSubject().getPrincipal().toString(); //logged in user
+        workPackage.setRequestorName(userID);
+        workPackage.setCreateBy(userID);
+        workPackage.setModifiedBy(userID);
+        workPackageService.updatePackageStatus(workPackage);
+        return SUCCESS;
+ }
+
 
 	@Required
 	public void setWorkPackageService(WorkPackageService workPackageService) {

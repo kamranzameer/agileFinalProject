@@ -109,16 +109,21 @@
 											</div>
 											
 											
-											<div class= "row">
-												<div class="col-md-6">
-														<strong>
-															Status:
-														</strong>
-												</div>
-												<div class="col-md-6">
-														${workPackage.status}
-												</div>
+									
+											<div class="row">
+											       <div class="col-md-6">
+											              <strong> Status: </strong>
+											       </div>
+											       <div class="col-md-6">
+											              <s:select class="form-control" id="status"
+											                     cssStyle="min-width:150px; color:black"
+											                     value="%{workPackage.status}" list="statuses"
+											                     name="workPackageDTO.status">
+											              </s:select>
+											       </div>
 											</div>
+
+
 											
 											<div class= "row">
 												<div class="col-md-6">
@@ -143,6 +148,10 @@
 											</div>
 											</div>
 											
+											 <br/>
+							                <div class= "row" align="center">
+								                <a href="javascript:updateStatus()" class="btn btn-success">Save</a>
+							                </div>
 											
 											<hr style="border-color: #EEEEEE;"/>
 											
@@ -241,3 +250,16 @@
 			</div>
 		</div>
 	</div>
+	<script>
+       
+       function updateStatus() {
+              if('${workPackage.status}' != $('#status').val()) {
+                     window.location='updateWorkPackageStatus.action?workPackageId=${workPackage.packageId}&status='+$('#status').val();  
+              } else {
+                     alert('Please update status.')
+              }
+              
+       }
+       </script>
+
+	

@@ -10,7 +10,9 @@
 	            <div class="panel panel-info">
 	                <div class="panel-heading">
 	                    <div class="panel-title"><i class="fa fa-windows">
-					</i> Work Request List</div>
+					 </i> Work Request List  &nbsp; &nbsp; &nbsp; &nbsp;<s:if test="workRequests.size >0"> <span> Application Name : <s:text name="%{workRequests[0].applicationName}"/>  </span>  </s:if></div>
+
+
 	                </div>
 	                <div style="padding-top:30px"; class="panel-body">
 						<div class="row clearfix">
@@ -18,10 +20,7 @@
 								<table class="table table-striped table-hover" id="academicsTable">
 									<thead>
 										<tr>
-											<th>
-												Application Name
-											</th>
-											<th>
+										<th>
 												Package Name
 											</th>
 											<th>
@@ -44,9 +43,6 @@
 									<tbody>
 										<s:iterator var = "workRequest" value="workRequests">
 										<tr>
-											<td>
-												${workRequest.applicationName}
-											</td>
 											<td>
 												${workRequest.workPackageName}
 											</td>

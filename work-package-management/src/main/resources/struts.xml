@@ -64,12 +64,16 @@
 		<action name="newWorkPackage" class="workPackageAction">
 			<result name="success">/view/workspace.jsp</result>
 		</action>
-		<action name="newActivity" class="activityAction">
+		<action name="newActivity" class="activityAction" method="newActivity">
 			<result name="success">/view/workspace.jsp</result>
 		</action>
 		<action name="saveWorkPackage" class="workPackageAction"
 			method="save">
 			<result name="success">/view/homepage.jsp</result>
+		</action>
+		<action name="addRow" class="activityAction"
+			method="addRow">
+			<result name="success">/view/resourcetable.jsp</result>
 		</action>
 
 		<action name="myDashboard" class="dashboardAction">

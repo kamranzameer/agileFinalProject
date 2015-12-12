@@ -151,6 +151,19 @@ public class ActivityPhaseResourcesDTO extends ModelBase {
 	public void setTotalCost(int totalCost) {
 		this.totalCost = totalCost;
 	}
+
+	@Override
+	public String toString() {
+		return "ActivityPhaseResourcesDTO [activityPhaseResourceId="
+				+ activityPhaseResourceId + ", activityLineId="
+				+ activityLineId + ", resourceTypeId=" + resourceTypeId
+				+ ", estimatedHours=" + estimatedHours + ", createDate="
+				+ createDate + ", modifiedDate=" + modifiedDate + ", createBy="
+				+ createBy + ", modifiedBy=" + modifiedBy + ", totalHours="
+				+ totalHours + ", hourlyRate=" + hourlyRate
+				+ ", resourceTypeName=" + resourceTypeName + ", totalCost="
+				+ totalCost + "]";
+	}
 	
 	
 

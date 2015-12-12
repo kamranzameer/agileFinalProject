@@ -3,20 +3,22 @@ package edu.harvard.agile.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Required;
 
-import edu.harvard.agile.dao.ActivityPhaseResourcesDAO;
+import edu.harvard.agile.model.ActivityLineDTO;
 import edu.harvard.agile.model.ActivityPhaseResourcesDTO;
 import edu.harvard.agile.model.ActivityTypeDTO;
+import edu.harvard.agile.model.AssumptionsDTO;
 import edu.harvard.agile.model.ResourceTypeDTO;
 import edu.harvard.agile.service.ActivityLineService;
-import edu.harvard.agile.service.ActivityPhaseResourcesService;
 import edu.harvard.agile.service.ActivityTypeService;
 import edu.harvard.agile.service.ResourceTypeService;
+import edu.harvard.agile.util.WorkPackageUtil;
 
 /**
- * Action class to handle list all workpackages requests
+ * Action class to handle list all ActivityLine item requests
  * @author Incredibles
  *
  */
@@ -24,34 +26,26 @@ public class ActivityAction extends WPMActionBase {
 	private ActivityTypeService activityTypeService;
 	private ActivityLineService activityLineService;
 	private ResourceTypeService resourceTypeService;
+	private ActivityLineDTO activityLineDTO;
+	private Integer workRequestId = null;
+	private String startDate;
+	private String endDate;
+	
 	private List<ActivityTypeDTO> activityTypes;
 	private List<ResourceTypeDTO> resourceTypes;
 	private List<ActivityPhaseResourcesDTO> activityPhaseResourcesDTOs;// = new ArrayList<ActivityPhaseResourcesDTO>();; 
+	private String assumptions;//New line separated list of assumptions
 
 	@Override
 	public void prepare() throws Exception {
 		
-		if(activityTypes == null)
-		{
-			System.out.println("load activity types first time");
-			activityTypes = activityTypeService.findAllActivityTypes();
-		}
-		
-		if(resourceTypes == null)
-		{
-			System.out.println("load resource types first time");
-			resourceTypes = resourceTypeService.findAllResourceTypes();
-		}
-		
-		//addRow();//For first row
-		/*ActivityPhaseResourcesService aps = new ActivityPhaseResourcesService();
-		aps.setActivityPhaseResourcesDAO(new ActivityPhaseResourcesDAO());
-		activityPhaseResourcesDTOs = aps.findByActivityLineId(10);*/
-		
-		System.out.println("in prepare");
-		
+		//Load activity types
+		activityTypes = activityTypeService.findAllActivityTypes();
+		//Load resource types
+		resourceTypes = resourceTypeService.findAllResourceTypes();
 	}
 	
+	//new activity called from workrequest detail
 	public String newActivity()
 	{
 		activityPhaseResourcesDTOs = new ArrayList<ActivityPhaseResourcesDTO>();
@@ -103,11 +97,89 @@ public class ActivityAction extends WPMActionBase {
 		this.activityPhaseResourcesDTOs = activityPhaseResourcesDTOs;
 	}
 	
-	public String addRow()
+	public String getAssumptions() {
+		return assumptions;
+	}
+
+	public void setAssumptions(String assumptions) {
+		this.assumptions = assumptions;
+	}
+	public ActivityLineDTO getActivityLineDTO() {
+		return activityLineDTO;
+	}
+
+	public void setActivityLineDTO(ActivityLineDTO activityLineDTO) {
+		this.activityLineDTO = activityLineDTO;
+	}
+	
+	public Integer getWorkRequestId() {
+		return workRequestId;
+	}
+
+	public void setWorkRequestId(Integer workRequestId) {
+		this.workRequestId = workRequestId;
+	}
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	
+	public String saveActivity() throws Exception 
 	{
-		activityPhaseResourcesDTOs.add(new ActivityPhaseResourcesDTO());
-		System.out.println("in add row : "+activityPhaseResourcesDTOs.size());
+		String userID = SecurityUtils.getSubject().getPrincipal().toString(); //logged in user
+		setActivityPhaseResourcesDTOs(getActivityPhaseResourcesDTOs());
+		
+		//populate activity line details
+		activityLineDTO.setWorkRequestId(workRequestId);
+		activityLineDTO.setCreateBy(userID);
+		activityLineDTO.setModifiedBy(userID);
+		activityLineDTO.setStartDate(WorkPackageUtil.convertDate(startDate, "yyyy-MM-dd"));
+		activityLineDTO.setEndDate(WorkPackageUtil.convertDate(endDate, "yyyy-MM-dd"));
+		
+		//populate logged in user details to ActivityPhaseResourcesDTO
+		for (ActivityPhaseResourcesDTO activityPhaseResourcesDTO : activityPhaseResourcesDTOs) 
+		{
+			activityPhaseResourcesDTO.setCreateBy(userID);
+			activityPhaseResourcesDTO.setModifiedBy(userID);
+		}
+		activityLineDTO.setActivityPhaseResourcesDTOs(activityPhaseResourcesDTOs);
+		
+		//If assumptions are entered populate them to ActivityLineDTO
+		if(assumptions != null && assumptions.length() > 0)
+		{
+			String[] assumptionsArr = assumptions.split("\n");
+			
+			List<AssumptionsDTO> assumptionsDTOs = new ArrayList<AssumptionsDTO>();
+			
+			for (String assumption : assumptionsArr) 
+			{
+				AssumptionsDTO assumptionDTO = new AssumptionsDTO();
+				assumptionDTO.setAssumptionsDesc(assumption);
+				assumptionDTO.setCreateBy(userID);
+				assumptionDTO.setModifiedBy(userID);
+				assumptionDTO.setWorkRequestId(workRequestId);
+				assumptionsDTOs.add(assumptionDTO);
+			}
+			
+			activityLineDTO.setAssumptionDTOs(assumptionsDTOs);
+		}
+		
+		activityLineService.createActivityLine(activityLineDTO);
 		return SUCCESS;
 	}
+	
+	
 	
 }

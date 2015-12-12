@@ -113,4 +113,13 @@ public class AssumptionsDTO extends ModelBase {
 		this.workRequestDTO = workRequestDTO;
 	}
 
+	@Override
+	public String toString() {
+		return "AssumptionsDTO [assumptionsId=" + assumptionsId
+				+ ", assumptionsDesc=" + assumptionsDesc + ", workRequestId="
+				+ workRequestId + "]";
+	}
+	
+	
+
 }

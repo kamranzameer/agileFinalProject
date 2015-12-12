@@ -36,7 +36,7 @@
 												<label class="control-label" for="testingProgramCode">
 													Select Testing Program
 												</label>
-												<select id="testingProgram" class="form-control" tooltip="Select Test Program" name="workPackageDTO.testingProgramCode" value="${workPackage.testingProgramCode}" placeholder="testingProgramCode" >
+												<select class="form-control" tooltip="Select Test Program" name="workPackageDTO.testingProgramCode" value="${workPackage.testingProgramCode}" placeholder="testingProgramCode" >
 												<s:iterator var = "testProgram" value="testPrograms">
 												<option value="${testProgram.testingProgramCode}">${testProgram.testingProgramDesc}</option>
 											</s:iterator>
@@ -59,7 +59,7 @@
 													Contract Start Year
 												</label>
 											
-												<input class="form-control" id="contractFromYear" name="contractFromYear" value="${workPackage.contractFromYear}" placeholder="Enter Contract Start Year" >
+												<input class="form-control" id="contractFromYear" name="contractFromYear" value="${workPackage.contractFromYear}" placeholder="Enter Contract Start Year" type="date">
 											</div>		
 				
 						
@@ -67,7 +67,7 @@
 												<label class="control-label" for="contractToYear">
 													Contract End Year
 												</label>
-												<input class="form-control" id="contractToYear" name="contractToYear" value="${workPackage.contractToYear}" placeholder="Enter Contract End Year">
+												<input class="form-control" id="contractToYear" name="contractToYear" value="${workPackage.contractToYear}" placeholder="Enter Contract End Year" type="date">
 											</div>
 										</div>
 										<div class="form-group">
@@ -75,13 +75,13 @@
 												<label class="control-label" for="startDate">
 													Start Date
 												</label>
-												<input class="form-control" id="startDate" name="startDate" value="${workPackage.startDate}" placeholder="Enter Start Date">
+												<input class="form-control" id="startDate" name="startDate" value="${workPackage.startDate}" placeholder="Enter Start Date" type="date">
 											</div>
 											<div class="col-md-6">
 												<label class="control-label" for="endDate">
 													End Date
 												</label>
-												<input class="form-control" id="endDate" name="endDate"  value="${workPackage.endDate}" placeholder="Enter End Date">
+												<input class="form-control" id="endDate" name="endDate"  value="${workPackage.endDate}" placeholder="Enter End Date" type="date">
 											</div>
 										</div>
 										<div class="form-group">
@@ -102,10 +102,10 @@
 													Choose Impacted Applications
 												</label>
 												<br/>
-<s:select tooltip="Choose Impacted Applications" multiple="true" list="applications" listKey="applicationId" listValue="applicationName" value="%{workPackage.impactedApplications}" 
-cssClass="form-control"	id="impactedApplications" name="impactedApplications" style="color:black;" >
-</s:select>
-										</div>
+												<s:select tooltip="Choose Impacted Applications" multiple="true"  list="applications" listKey="applicationId" listValue="applicationName" value="%{workPackage.impactedApplications}" cssClass="form-control"
+													id="impactedApplications" name="impactedApplications" style="color:black;" >
+												</s:select>
+											</div>
 										</div>
 								</div>
 							</div>
@@ -146,6 +146,9 @@ cssClass="form-control"	id="impactedApplications" name="impactedApplications" st
 		
 	
 <script>
+
+
+
 var contractFromYear = new Date();
 var contractToYear = new Date();
 var startDate = new Date();
@@ -156,10 +159,9 @@ if ('${workPackage.packageId}' != '') {
 	contractToYear = '${workPackage.contractToYear}';
 	startDate = '${workPackage.startDate}';
 	endDate = '${workPackage.endDate}';
-	testingProgram = '${workPackage.testingProgramCode}';
-	$('#status').val('${workPackage.status}');
-//	$('#impactedApplications').val('${workPackage.impactedApplications}');
-	$('#testingProgram').val(testingProgram);
+	
+	$('#status').val('${workPackage.impactedApplications}');
+	
 	$('#createworkpackageform').attr('action', 'updateWorkPackage.action?workPackageId=${workPackage.packageId}');
 	$('#pageTitle').html('Update Work Package');
 }

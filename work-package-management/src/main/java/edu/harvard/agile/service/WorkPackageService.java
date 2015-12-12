@@ -121,7 +121,8 @@ public class WorkPackageService {
 			apps.add(workRequest.getApplicationId());
 		}
 		
-		workPackage.setImpactedApplications(apps);
+		if(workPackage != null)
+			workPackage.setImpactedApplications(apps);
 		
 		return workPackage ;
 	}

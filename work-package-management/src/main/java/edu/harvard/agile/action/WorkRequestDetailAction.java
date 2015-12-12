@@ -41,9 +41,6 @@ public class WorkRequestDetailAction extends WPMActionBase {
 
 		workRequest.setActivityLineDTOs(activityLineService
 				.findByRequestId(workRequest.getWorkRequestId()));
-		System.out.println("work reqest id = " + workRequest.getWorkRequestId()
-				+ "total activity lines found = "
-				+ workRequest.getActivityLineDTOs().size());
 		for (ActivityLineDTO ald : workRequest.getActivityLineDTOs()) {
 			ald.setAssumptions(assumptionsService
 					.findAssumptionsByActivityLineId(ald.getActivityLineId()));

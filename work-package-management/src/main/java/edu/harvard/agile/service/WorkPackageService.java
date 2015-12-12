@@ -119,7 +119,6 @@ public class WorkPackageService {
 		List<String> apps = new ArrayList<String>();
 		for(WorkRequestDTO workRequest : workRequests){
 			apps.add(workRequest.getApplicationId());
-			System.out.println("adding app in finder package: " + workRequest.getApplicationId());
 		}
 		
 		workPackage.setImpactedApplications(apps);
@@ -187,7 +186,6 @@ public class WorkPackageService {
 			workPackageDAO.updatePackage(workPackage);
 	        if(workPackage.getStatus().equals(StatusEnum.OPEN.name())){
 	        	List<WorkRequestDTO> workRequests = workRequestDAO.findRequestsByPackageId(workPackage.getPackageId());
-	        	System.out.println("in if open " + workRequests.size()); 
 	        	for (WorkRequestDTO workRequest : workRequests) { 
 		    		workRequestDAO.deleteWorkRequest(workRequest, connection);
 			}
@@ -195,7 +193,6 @@ public class WorkPackageService {
 	        
 	    	List<String> apps = workPackage.getImpactedApplications();
 			for (String application : apps) { 
-				System.out.println("in for app " + apps.size() + " : app name :  " + application); 
 				WorkRequestDTO workRequest = new WorkRequestDTO();
 				workRequest.setApplicationId(application);
 				workRequest.setPackageId(workPackage.getPackageId());

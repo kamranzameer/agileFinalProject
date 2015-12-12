@@ -36,7 +36,7 @@
 												<label class="control-label" for="testingProgramCode">
 													Select Testing Program
 												</label>
-												<select class="form-control" tooltip="Select Test Program" name="workPackageDTO.testingProgramCode" value="${workPackage.testingProgramCode}" placeholder="testingProgramCode" >
+												<select id="testingProgram" class="form-control" tooltip="Select Test Program" name="workPackageDTO.testingProgramCode" value="${workPackage.testingProgramCode}" placeholder="testingProgramCode" >
 												<s:iterator var = "testProgram" value="testPrograms">
 												<option value="${testProgram.testingProgramCode}">${testProgram.testingProgramDesc}</option>
 											</s:iterator>
@@ -160,7 +160,10 @@ if ('${workPackage.packageId}' != '') {
 	startDate = '${workPackage.startDate}';
 	endDate = '${workPackage.endDate}';
 	
-	$('#status').val('${workPackage.impactedApplications}');
+	testingProgram = '${workPackage.testingProgramCode}';
+	$('#status').val('${workPackage.status}');
+//	$('#impactedApplications').val('${workPackage.impactedApplications}');
+	$('#testingProgram').val(testingProgram);
 	
 	$('#createworkpackageform').attr('action', 'updateWorkPackage.action?workPackageId=${workPackage.packageId}');
 	$('#pageTitle').html('Update Work Package');

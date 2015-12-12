@@ -72,7 +72,7 @@ $(document).ready(function() {
                             if(!(new Date($('#contractToYear').val()).getTime() >= new Date($('#contractFromYear').val()).getTime())) {
                             	return {
                             		valid:false,
-                            		message: 'Contract End Year cannot be prior to start year'
+                            		message: 'Contract End Year cannot be prior to Start Year'
                             	};
                             }
                             return true;

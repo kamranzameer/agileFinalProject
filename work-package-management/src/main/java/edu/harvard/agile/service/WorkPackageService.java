@@ -1,14 +1,13 @@
 package edu.harvard.agile.service;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import edu.harvard.agile.dao.WorkPackageDAO;
 import edu.harvard.agile.dao.WorkRequestDAO;
-import edu.harvard.agile.model.ApplicationDTO;
+import edu.harvard.agile.model.StatusEnum;
 import edu.harvard.agile.model.WorkPackageDTO;
 import edu.harvard.agile.model.WorkRequestDTO;
 import edu.harvard.agile.util.DBUtil;
@@ -182,54 +181,41 @@ public class WorkPackageService {
 	
 	public void updatePackage(WorkPackageDTO workPackage) throws Exception {
 		Connection connection = DBUtil.getConnection();
-        workPackageDAO.updatePackage(workPackage);
-     //   workRequestDAO.findRequestsByPackageId(workPackage.getPackageId());
-       try{ 
-    	   
-    	 
-        if(workPackage.getStatus().equals("open")){
-        	
-        	 
-        	List<WorkRequestDTO> workRequests = workRequestDAO.findRequestsByPackageId(workPackage.getPackageId());
-        	
-        	System.out.println("in if open " + workRequests.size()); 
-        	for (WorkRequestDTO workRequest : workRequests) 
-			{
-        		workRequestDAO.deleteWorkRequest(workRequest, connection);
-			}
-        	
-        
-    	List<String> apps = workPackage.getImpactedApplications();
-		for (String application : apps) 
-		{
 		
-			System.out.println("in for app " + apps.size() + " : app name :  " + application); 
-			WorkRequestDTO workRequest = new WorkRequestDTO();
-			workRequest.setApplicationId(application);
-			workRequest.setPackageId(workPackage.getPackageId());
-			workRequest.setStatus(workPackage.getStatus());
-			workRequest.setCreateBy(workPackage.getCreateBy());
-			workRequest.setStartDate(workPackage.getStartDate());
-			workRequest.setEndDate(workPackage.getEndDate());
-			workRequest.setModifiedBy(workPackage.getModifiedBy());
-			
-			workRequestDAO.createWorkRequest(workRequest, connection);
+	 try{ 
+			 
+			workPackageDAO.updatePackage(workPackage);
+	        if(workPackage.getStatus().equals(StatusEnum.OPEN.name())){
+	        	List<WorkRequestDTO> workRequests = workRequestDAO.findRequestsByPackageId(workPackage.getPackageId());
+	        	System.out.println("in if open " + workRequests.size()); 
+	        	for (WorkRequestDTO workRequest : workRequests) { 
+		    		workRequestDAO.deleteWorkRequest(workRequest, connection);
+			}
+	        	
+	        
+	    	List<String> apps = workPackage.getImpactedApplications();
+			for (String application : apps) { 
+				System.out.println("in for app " + apps.size() + " : app name :  " + application); 
+				WorkRequestDTO workRequest = new WorkRequestDTO();
+				workRequest.setApplicationId(application);
+				workRequest.setPackageId(workPackage.getPackageId());
+				workRequest.setStatus(workPackage.getStatus());
+				workRequest.setCreateBy(workPackage.getCreateBy());
+				workRequest.setStartDate(workPackage.getStartDate());
+				workRequest.setEndDate(workPackage.getEndDate());
+				workRequest.setModifiedBy(workPackage.getModifiedBy());
+				
+				workRequestDAO.createWorkRequest(workRequest, connection);
+			}
+       
 		}
-	
-        
-       // updatePackageStatus(workPackage);
-   }
         connection.commit();
-	}	catch(Exception ex)
-		{
+	} catch(Exception ex) {
 			DBUtil.rollBack(connection);
 			throw ex;
-			
-		}
-		finally
-		{
+	} finally {
 			DBUtil.closeConnection(connection);
-		}
+	}
 
 
 }

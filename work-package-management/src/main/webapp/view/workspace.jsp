@@ -40,16 +40,36 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+ 
+	<link href="../css/datepicker.css" rel="stylesheet">
+ 
     <link href="../css/glyphicon.css" rel="stylesheet">
     <link href="../css/theme1/bootstrap.css" rel="stylesheet">
     <link href="../css/theme1/user.css" rel="stylesheet">
-    <link id="bsdp-css" href="../css/datepicker3.css" rel="stylesheet">
+   
 	<link href="../css/font-awesome.min.css" rel="stylesheet">
+	 
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/bootstrap-datepicker.js"></script>
 	<script src="../js/app.js"></script>
-	<script type="text/javascript" language="javascript" src="../js/datevalidation.js"></script>
+	<script src="../js/bootstrapValidator.min.js"></script>
+	
+	<style>
+/* 	.datepicker td span:hover {
+  background: black;
+} */
+.datepicker {
+	background-color: #fff ;
+	color: #333 ;
+}
+	
+	
+	label, .radio label, .checkbox label, .help-block {
+    font-size: 14px;
+    font-weight: 300;
+}
+	</style>
 </head>
 <body>
 <div class="container" style="margin-left:5px; margin-right:5px">
@@ -63,7 +83,7 @@
 		    <div class="row">
 		        <div class="col-md-12">
 		        <p>&nbsp;</p>
-	        	</div>
+		       	</div>
         	</div>
 
 		    <div class="row">

@@ -3,8 +3,12 @@ package edu.harvard.agile.util;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import edu.harvard.agile.model.StatusEnum;
 
 /**
  * Utility class for Work package management
@@ -25,5 +29,16 @@ public class WorkPackageUtil
 		{
 			return null;
 		}
+	}
+	
+
+	public static List<String> getValidStatus(){
+		List<String> statuses = new ArrayList<String>();
+		statuses.add(StatusEnum.OPEN.name());
+		statuses.add(StatusEnum.INPROGRESS.name());
+		statuses.add(StatusEnum.APPROVED.name());
+		statuses.add(StatusEnum.COMPLETED.name());
+		
+		return statuses;
 	}
 }

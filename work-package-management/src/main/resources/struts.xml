@@ -85,7 +85,7 @@
           </action>
           
           <action name="updateWorkPackage" class="workPackageAction" method="update">
-                 <result name="success">/view/workspace.jsp</result>
+                <result name="success" type="redirect">workPackageList.action</result>
           </action>
           <action name="updateWorkPackageStatus" class="workPackageDetailAction" method="update">
                      <result name="success">/view/workspace.jsp</result>

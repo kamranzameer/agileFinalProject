@@ -41,14 +41,13 @@ public class WorkPackageAction extends WPMActionBase {
 	public void prepare() throws Exception {
 		applications = applicationService.findAllApplications();
 		testPrograms = testingProgramService.findAllTestingPrograms();
+		statuses = WorkPackageUtil.getValidStatus();
 		
-		statuses.add("open");
-		statuses.add("close");
-		statuses.add("pend");
 	}
 	
 	public String execute(){
 		ServletActionContext.getRequest().setAttribute("p", "cnwp");
+		workPackage = null;
 		return SUCCESS;
 	}
 	
@@ -60,6 +59,7 @@ public class WorkPackageAction extends WPMActionBase {
 	{
 		try {
 			processNewPackage();
+			workPackageService.createPackage(workPackageDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			//return ERROR;
@@ -79,13 +79,24 @@ public class WorkPackageAction extends WPMActionBase {
 	}
 	
 	
-	public String update() throws Exception {
+/*	public String update() throws Exception {
 		workPackage = workPackageService.findByPackageId(workPackageId);
 		workPackage.setStatus(workPackageDTO.getStatus());
 		ServletActionContext.getRequest().setAttribute("p", "cnwp");
 		workPackageService.updatePackageStatus(workPackage);
 		return SUCCESS;
 	}
+*/
+	// can update entore method;
+	public String update() throws Exception {
+	        ServletActionContext.getRequest().setAttribute("p", "wpl");
+	        ServletActionContext.getRequest().setAttribute("message", "Updated Successfuly!!");
+	        workPackageDTO.setPackageId(workPackageId);
+	        processNewPackage();
+	        workPackageService.updatePackage(workPackageDTO);
+	        return SUCCESS;
+	    }
+
 
 	/**
 	 * Build WorkPackage DTO and create work package
@@ -102,7 +113,7 @@ public class WorkPackageAction extends WPMActionBase {
 		workPackageDTO.setRequestorName(userID);
 		workPackageDTO.setCreateBy(userID);
 		workPackageDTO.setModifiedBy(userID);
-		workPackageService.createPackage(workPackageDTO);
+		
 	}
 	
 	@Required

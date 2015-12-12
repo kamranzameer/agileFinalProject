@@ -7,7 +7,9 @@ import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Required;
 
+import clover.com.google.common.cache.AbstractCache.StatsCounter;
 import edu.harvard.agile.model.DashboardInfo;
+import edu.harvard.agile.model.StatusEnum;
 import edu.harvard.agile.model.WorkRequestDTO;
 import edu.harvard.agile.service.ApplicationService;
 import edu.harvard.agile.service.WorkPackageService;
@@ -77,10 +79,10 @@ public class DashboardAction extends WPMActionBase {
 		
 		//Prepare data for Dashboard page
 		dashboardInfo = new DashboardInfo();
-		dashboardInfo.setApprovedWorkPackagesCount(workPackageService.findCountByStatus("Approved"));
-		dashboardInfo.setOpenWorkPackagesCount(workPackageService.findCountByStatus("Open"));
-		dashboardInfo.setInprogressWorkPackagesCount(workPackageService.findCountByStatus("Inprogress"));
-		dashboardInfo.setCompletedWorkPackagesCount(workPackageService.findCountByStatus("Completed"));
+		dashboardInfo.setApprovedWorkPackagesCount(workPackageService.findCountByStatus(StatusEnum.APPROVED.name()));
+		dashboardInfo.setOpenWorkPackagesCount(workPackageService.findCountByStatus(StatusEnum.OPEN.name()));
+		dashboardInfo.setInprogressWorkPackagesCount(workPackageService.findCountByStatus(StatusEnum.INPROGRESS.name()));
+		dashboardInfo.setCompletedWorkPackagesCount(workPackageService.findCountByStatus(StatusEnum.COMPLETED.name()));
 		dashboardInfo.setTotalWorkPackagesCount(workPackageService.findAllPackages().size());
 		
 		

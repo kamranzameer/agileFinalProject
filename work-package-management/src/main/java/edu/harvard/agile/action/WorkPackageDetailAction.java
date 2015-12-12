@@ -15,6 +15,7 @@ import edu.harvard.agile.service.ActivityPhaseResourcesService;
 import edu.harvard.agile.service.AssumptionsService;
 import edu.harvard.agile.service.WorkPackageService;
 import edu.harvard.agile.service.WorkRequestService;
+import edu.harvard.agile.util.WorkPackageUtil;
 
 /**
  * @author Incredibles
@@ -67,11 +68,7 @@ public class WorkPackageDetailAction extends WPMActionBase {
 			}
 		}
         //we need to display as dynamic
-		statuses = new ArrayList<String>();
-        statuses.add("open");
-        statuses.add("close");
-        statuses.add("pend");
-        statuses.add("Approved");
+		statuses = WorkPackageUtil.getValidStatus();
 
 	}
 

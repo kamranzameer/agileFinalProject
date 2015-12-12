@@ -519,9 +519,9 @@ public class WorkPackageDAO
 		try {
 			con = DBUtil.getConnection();
 			String query = "SELECT count(PACKAGE_ID) "
-					+ "FROM WORK_PACKAGE where status = ?";
+					+ "FROM WORK_PACKAGE where UPPER(status) = ?";
 			stmt = con.prepareStatement(query);
-			stmt.setString(1, status);
+			stmt.setString(1, status.toUpperCase());
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {

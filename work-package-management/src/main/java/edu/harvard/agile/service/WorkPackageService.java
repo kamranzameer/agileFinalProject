@@ -2,6 +2,7 @@ package edu.harvard.agile.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -114,8 +115,17 @@ public class WorkPackageService {
 	 * @throws Exception
 	 */
 	public WorkPackageDTO findByPackageId(int workPackageId) throws Exception {
-
-		return workPackageDAO.findByPackageId(workPackageId);
+		WorkPackageDTO workPackage = workPackageDAO.findByPackageId(workPackageId);
+		List<WorkRequestDTO> workRequests =  workRequestDAO.findRequestsByPackageId(workPackageId);
+		List<String> apps = new ArrayList<String>();
+		for(WorkRequestDTO workRequest : workRequests){
+			apps.add(workRequest.getApplicationId());
+			System.out.println("adding app in finder package: " + workRequest.getApplicationId());
+		}
+		
+		workPackage.setImpactedApplications(apps);
+		
+		return workPackage ;
 	}
 	
 	
@@ -168,4 +178,60 @@ public class WorkPackageService {
 		return workPackage;
 
 	}	
+	
+	
+	public void updatePackage(WorkPackageDTO workPackage) throws Exception {
+		Connection connection = DBUtil.getConnection();
+        workPackageDAO.updatePackage(workPackage);
+     //   workRequestDAO.findRequestsByPackageId(workPackage.getPackageId());
+       try{ 
+    	   
+    	 
+        if(workPackage.getStatus().equals("open")){
+        	
+        	 
+        	List<WorkRequestDTO> workRequests = workRequestDAO.findRequestsByPackageId(workPackage.getPackageId());
+        	
+        	System.out.println("in if open " + workRequests.size()); 
+        	for (WorkRequestDTO workRequest : workRequests) 
+			{
+        		workRequestDAO.deleteWorkRequest(workRequest, connection);
+			}
+        	
+        
+    	List<String> apps = workPackage.getImpactedApplications();
+		for (String application : apps) 
+		{
+		
+			System.out.println("in for app " + apps.size() + " : app name :  " + application); 
+			WorkRequestDTO workRequest = new WorkRequestDTO();
+			workRequest.setApplicationId(application);
+			workRequest.setPackageId(workPackage.getPackageId());
+			workRequest.setStatus(workPackage.getStatus());
+			workRequest.setCreateBy(workPackage.getCreateBy());
+			workRequest.setStartDate(workPackage.getStartDate());
+			workRequest.setEndDate(workPackage.getEndDate());
+			workRequest.setModifiedBy(workPackage.getModifiedBy());
+			
+			workRequestDAO.createWorkRequest(workRequest, connection);
+		}
+	
+        
+       // updatePackageStatus(workPackage);
+   }
+        connection.commit();
+	}	catch(Exception ex)
+		{
+			DBUtil.rollBack(connection);
+			throw ex;
+			
+		}
+		finally
+		{
+			DBUtil.closeConnection(connection);
+		}
+
+
+}
+
 }

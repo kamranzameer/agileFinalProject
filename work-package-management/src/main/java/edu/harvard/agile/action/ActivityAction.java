@@ -27,8 +27,7 @@ public class ActivityAction extends WPMActionBase {
 	private List<ActivityTypeDTO> activityTypes;
 	private List<ResourceTypeDTO> resourceTypes;
 	private List<ActivityPhaseResourcesDTO> activityPhaseResourcesDTOs;// = new ArrayList<ActivityPhaseResourcesDTO>();; 
-	private String testString;
-	
+
 	@Override
 	public void prepare() throws Exception {
 		
@@ -108,15 +107,7 @@ public class ActivityAction extends WPMActionBase {
 	{
 		activityPhaseResourcesDTOs.add(new ActivityPhaseResourcesDTO());
 		System.out.println("in add row : "+activityPhaseResourcesDTOs.size());
-		testString = "I'm loaded with AJAX";
 		return SUCCESS;
 	}
 	
-	public String getTestString() {
-		return testString;
-	}
-
-	public void setTestString(String testString) {
-		this.testString = testString;
-	}
 }

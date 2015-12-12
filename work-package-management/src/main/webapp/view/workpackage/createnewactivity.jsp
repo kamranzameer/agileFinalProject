@@ -2,41 +2,78 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script>
 
-
+var itemCount = 0;
 $(document).ready(function() {
 	
-		$("#resourcesform").submit(function(e)
+	$("#resourcesform").submit(function(e)
+	{
+		var postData = $(this).serializeArray();
+		var formURL = $(this).attr("action");
+		$.ajax(
 		{
-			var postData = $(this).serializeArray();
-			var formURL = $(this).attr("action");
-			$.ajax(
+			url : formURL,
+			type: "POST",
+			data : postData,
+			success:function(data, textStatus, jqXHR) 
 			{
-				url : formURL,
-				type: "POST",
-				data : postData,
-				success:function(data, textStatus, jqXHR) 
-				{
-					$("#resourcetable").html(data);
+				$("#resourcetable").html(data);
 
-				},
-				error: function(jqXHR, textStatus, errorThrown) 
-				{
-					alert('error');
-				}
-			});
-		    e.preventDefault();	//STOP default action
-		    e.unbind();
+			},
+			error: function(jqXHR, textStatus, errorThrown) 
+			{
+				alert('error');
+			}
 		});
+	    e.preventDefault();	//STOP default action
+	    e.unbind();
+	});
+	
+	var objs=[];
+    var temp_objs=[];
+     
+    $( "#addRowBtn" ).click(function() {   
+        var html = "";
+        var str = $("#resourceTypeId").val().split(":");
+        var effort = $("#effort").val();
+        var cost = eval(effort * str[2]);
+        
+        var obj={
+            "ROW_ID" : itemCount,
+            "RESOURCE_TYPE_ID" : str[0],
+            "RESOURCE_TYPE_NAME" : str[1],
+            "HOURLY_RATE" : str[2],
+            "EFFORT" : effort,
+            "COST" : "$"+cost
+        }   
+     
+        // add object
+        objs.push(obj);
+                     
+        itemCount++;
+        // dynamically create rows in the table
+        html = "<tr id='tr"+ itemCount + "'><td>"+ obj['RESOURCE_TYPE_NAME'] + "</td> <td>" +  obj['EFFORT'] + " </td><td>" +  obj['COST'] + " </td><td><input type='button'  id='" + itemCount + "' value='X' class='btn btn-link'></td> </tr>";            
+         
+        //add to the table
+        $("#resourcesTable").append(html)
+         
+        // The remove button click
+        $("#"+itemCount).click(function() {
+            var buttonId = $(this).attr("id");
+            //write the logic for removing from the array
+            $("#tr"+ buttonId).remove();            
+        });
+         
+    });
 			
 });
 
 function resourcetypechanged(row)
 {
-	var row = row + 2;
-	
-    for (var r = 0, n = table.rows.length; r < n; r++) {
+	//var row = row + 2;
+	var table = document.getElementById("resourcesTable");
+    for (var r = 1, n = table.rows.length; r < n; r++) {
         for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
-            alert(table.rows[r].cells[c].innerHTML);
+            cell = table.rows[r].cells[c].innerHTML;
         }
     }
 	//var table = document.getElementById("resourcesTable");
@@ -110,38 +147,55 @@ function resourcetypechanged(row)
 
 					<br />
 
-
 					<form id="resourcesform" name="resourcesform"
 						class="form-horizontal" role="form" method="post"
 						action="addRow.action">
 
-						<div id="resourcetable">
+							<table id="addresources"
+								class="table table-striped table-hover">
+									<tr> 
+										<th>Resource Type</th>
+										<th>Estimated Effort</th>
+										<th />
+									 </tr>
+									 <tr>
+									 	<td>
+									 		<select class="form-control" tooltip="Select Resource Type" id="resourceTypeId"
+												name="resourceTypeId" value="resourceTypeId">
+												<s:iterator var="resourceType" value="resourceTypes">
+													<option value="${resourceType.resourceTypeId}:${resourceType.resourceTypeName}:${resourceType.hourlyRate}">${resourceType.resourceTypeName}</option>
+												</s:iterator>
+											</select>
+									 	</td>
+									 	<td>
+									 		<input class="form-control" type="text" id="effort" name="effort"/>
+										</td>
+										<td>
+											<button type="button" id="addRowBtn" name="addRowBtn"
+												class="btn btn-success">Add</button>
+										</td>
+									 </tr>
+								<tbody>
+								</tbody>
+							</table>
+							
+							<hr style="border-color: #EEEEEE;" />
+							
 							<table id="resourcesTable"
 								class="table table-striped table-hover">
-								<thead class="panel-heading">
-									<tr>
-										<td colspan="4" align="right">
-											<!-- <a id="addrow" href="javascript:addRow('resourcesTable');" class="btn btn-success">+</a> -->
-											<button type="submit" id="addRowBtn" name="save"
-												class="btn btn-success">+</button>
-										</td>
-									</tr>
-									<tr>
+								
+									<tr> 
 										<th>Resource Type</th>
 										<th>Estimated Effort</th>
 										<th>Cost</th>
 
 										<th />
-									</tr>
-								</thead>
+									 </tr>
 								<tbody>
 								</tbody>
 							</table>
-						</div>
 
 						<BR />
-
-
 						<table class="table table-striped table-hover">
 							<tr>
 								<td colspan="3" align="right"><b>Total Cost :</b></td>

@@ -1,4 +1,11 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-10 column">
@@ -191,7 +198,7 @@
 												<td>
 													<a href="workPackageDetail.action?workPackageId=${wp.packageId}" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
 													<a href="editWorkPackage.action?workPackageId=${wp.packageId}" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
-													<a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash">&nbsp;</i></a>
+													<a href="#" data-toggle="tooltip" title="Comming Soon..."><i class="fa fa-trash">&nbsp;</i></a>
 												</td>
 											</tr>
 										</s:iterator>	
@@ -308,7 +315,7 @@
 								</span>
 								&nbsp;&nbsp;Cancel
 							</button>
-							<button type="button" id="addNewBtn" class="btn btn-success" onclick="workPackageManagement.submitForm('saveAcademic', function(data) { var content = $( data ).find( '#academicsTable' ); $( '#academicDiv' ).empty().append( content );}, function() {$('#addNewAcademic').modal('hide');});">
+							<button type="button" id="addNewBtn" class="btn btn-success" >
 								<span class="fa fa-floppy-o">
 								</span>
 								&nbsp;&nbsp;Save
@@ -320,3 +327,4 @@
 		</div>
 	</div>
 </div>
+

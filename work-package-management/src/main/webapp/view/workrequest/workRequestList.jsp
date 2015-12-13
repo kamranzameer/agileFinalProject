@@ -1,4 +1,12 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
+
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-10 column">
@@ -10,11 +18,15 @@
 	            <div class="panel panel-info">
 	                <div class="panel-heading">
 	                    <div class="panel-title"><i class="fa fa-windows">
-					 </i> Work Request List  &nbsp; &nbsp; &nbsp; &nbsp;<s:if test="workRequests.size >0"> <span> Application Name : <s:text name="%{workRequests[0].applicationName}"/>  </span>  </s:if></div>
-
-
+					 		</i> Work Request List
+					 	</div>
 	                </div>
+	                
+	                
 	                <div style="padding-top:30px"; class="panel-body">
+	                	<s:if test="workRequests.size >0"> <span> <strong>Application Name :</strong> <s:text name="%{workRequests[0].applicationName}"/>  </span>  </s:if>
+	                	<hr style="border-color: #EEEEEE;"/>
+	                	
 						<div class="row clearfix">
 							<div id="academicDiv" class="table-responsive col-xs-12 col-sm-12 col-md-11 col-lg-11">
 								<table class="table table-striped table-hover" id="academicsTable">
@@ -60,8 +72,8 @@
 											</td>
 											<td>
 												<a href="workRequestDetail.action?workRequestId=${workRequest.workRequestId}" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
-												<a href="#" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
-												<a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash">&nbsp;</i></a>
+												<a href="#" data-toggle="tooltip" title="Comming Soon..."><i class="fa fa-keyboard-o">&nbsp;</i></a>
+												<a href="#" data-toggle="tooltip" title="Comming Soon..."><i class="fa fa-trash">&nbsp;</i></a>
 											</td>
 										</tr>
 										</s:iterator>

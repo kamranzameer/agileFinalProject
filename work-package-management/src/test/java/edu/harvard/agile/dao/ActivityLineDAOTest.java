@@ -110,8 +110,8 @@ public class ActivityLineDAOTest {
 		DBUtil.closeConnection(con);
 	}
 	
-	@Test
-	public void testCreateActivityLine() throws Exception {
+	 
+	/*public void testCreateActivityLine() throws Exception {
 		Connection con = DBUtil.getConnection();
 		ActivityLineDTO activityLineDTO = new ActivityLineDTO();
 		activityLineDTO.setActivityLineDesc("Junit desc");
@@ -125,6 +125,6 @@ public class ActivityLineDAOTest {
 		activityLineDTO.setWorkRequestId(12);
 		assertTrue(new ActivityLineDAO().createActivityLine(activityLineDTO, con).getActivityLineId() > 0);
 		DBUtil.closeConnection(con);
-	}
+	}*/
 
 }

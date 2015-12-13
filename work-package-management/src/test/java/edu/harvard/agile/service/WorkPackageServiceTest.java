@@ -144,12 +144,12 @@ public class WorkPackageServiceTest {
 		
 		
 		WorkPackageDTO workPackage = wps.findByPackageId(1);
-		workPackage.setStatus("Approved");
+		workPackage.setStatus("APPROVED");
 		workPackage.setModifiedBy("junit");
 		workPackage.setModifiedDate(new Date());
 		wps.updatePackageStatus(workPackage);
 		WorkPackageDTO newwp = wps.findByPackageId(1);
-		assertEquals(newwp.getStatus(),"Approved");
+		assertEquals(newwp.getStatus(),"APPROVED");
 		assertTrue(true);
 		
 	}

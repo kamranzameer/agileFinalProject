@@ -2,6 +2,7 @@ package edu.harvard.agile.service;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,10 +17,14 @@ import org.junit.Test;
 import edu.harvard.agile.dao.WorkPackageDAO;
 import edu.harvard.agile.dao.WorkRequestDAO;
 import edu.harvard.agile.model.ApplicationDTO;
+import edu.harvard.agile.model.StatusEnum;
 import edu.harvard.agile.model.WorkPackageDTO;
+import edu.harvard.agile.model.WorkRequestDTO;
+import edu.harvard.agile.util.DBUtil;
 
 public class WorkPackageServiceTest {
-
+	
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -50,7 +55,7 @@ public class WorkPackageServiceTest {
 		workPackage.setPackageDesc("TestPackage through service");
 		workPackage.setRequestorName("Joe");
 		workPackage.setTestingProgramCode("GRE");
-		workPackage.setStatus("Open");
+		workPackage.setStatus(StatusEnum.OPEN.name());
 		workPackage.setStartDate(new Date());
 		workPackage.setEndDate(new Date());
 		workPackage.setCreateBy("junit");
@@ -80,7 +85,7 @@ public class WorkPackageServiceTest {
 		workPackage.setPackageDesc("TestPackage through service");
 		workPackage.setRequestorName("Joe");
 		workPackage.setTestingProgramCode("GRE");
-		workPackage.setStatus("Open");
+		workPackage.setStatus(StatusEnum.OPEN.name());
 		workPackage.setStartDate(new Date());
 		workPackage.setEndDate(new Date());
 		workPackage.setCreateBy("junit");
@@ -100,7 +105,7 @@ public class WorkPackageServiceTest {
 	public void testFindCountBystatus() throws Exception {
 		WorkPackageService workPackageService = new WorkPackageService();
 		workPackageService.setWorkPackageDAO(new WorkPackageDAO());
-		int count = workPackageService.findCountByStatus("Open");
+		int count = workPackageService.findCountByStatus(StatusEnum.OPEN.name());
 		assertTrue(count >0);
 	}
 	
@@ -144,15 +149,17 @@ public class WorkPackageServiceTest {
 		
 		
 		WorkPackageDTO workPackage = wps.findByPackageId(1);
-		workPackage.setStatus("Approved");
+		workPackage.setStatus(StatusEnum.APPROVED.name());
 		workPackage.setModifiedBy("junit");
 		workPackage.setModifiedDate(new Date());
 		wps.updatePackageStatus(workPackage);
 		WorkPackageDTO newwp = wps.findByPackageId(1);
-		assertEquals(newwp.getStatus(),"Approved");
+		assertEquals(newwp.getStatus(),StatusEnum.APPROVED.name());
 		assertTrue(true);
 		
 	}
+
+
 
 	
 }

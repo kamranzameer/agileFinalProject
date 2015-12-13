@@ -52,5 +52,10 @@ public class WorkPackageUtilTest {
 	public void testConvertDateWithEmptyDate() throws ParseException {
 		assertNull(new WorkPackageUtil().convertDate("", "MM-dd-yyyy"));
 	}
+	
+	@Test 
+	public void testGetValidStatuses() throws ParseException {
+		assertEquals(4, new WorkPackageUtil().getValidStatus().size());
+	}
 
 }

@@ -113,8 +113,6 @@
         </div>
     </div>
 </div>
-<script>
-	workPackageManagement = workPackageManagement();
-</script>
+
 </body>
 </html>

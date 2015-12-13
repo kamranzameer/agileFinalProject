@@ -35,7 +35,7 @@
 
 						<div class="row clearfix">
 							<div class="col-xs-12 col-sm-10 col-md-8 col-lg-8  column col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
-								<button type="button" id="addNewBtn" class="btn btn-success" onclick="workPackageManagement.submitForm('changePasswordForm');">
+								<button type="button" id="addNewBtn" class="btn btn-success">
 									<span class="fa fa-floppy-o">
 									</span>
 									&nbsp;&nbsp;Save

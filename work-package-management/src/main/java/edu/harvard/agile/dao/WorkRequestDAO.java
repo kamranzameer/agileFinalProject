@@ -47,7 +47,7 @@ public class WorkRequestDAO {
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.WORK_REQUEST_ID, ");
-			query.append("        A.STATUS, ");
+			query.append("        UPPER(A.STATUS) AS STATUS, ");
 			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
@@ -123,7 +123,7 @@ public class WorkRequestDAO {
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.WORK_REQUEST_ID, ");
-			query.append("        A.STATUS, ");
+			query.append("        UPPER(A.STATUS) AS STATUS, ");
 			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
@@ -197,7 +197,7 @@ public class WorkRequestDAO {
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.WORK_REQUEST_ID, ");
-			query.append("        A.STATUS, ");
+			query.append("        UPPER(A.STATUS) AS STATUS, ");
 			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
@@ -268,7 +268,7 @@ public class WorkRequestDAO {
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.WORK_REQUEST_ID, ");
-			query.append("        A.STATUS, ");
+			query.append("        UPPER(A.STATUS) AS STATUS, ");
 			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
@@ -338,7 +338,7 @@ public class WorkRequestDAO {
 			stmt.setInt(1, seqId);
 			stmt.setInt(2, workRequest.getPackageId());
 			stmt.setString(3, workRequest.getApplicationId());
-			stmt.setString(4, workRequest.getStatus());
+			stmt.setString(4, workRequest.getStatus().toUpperCase());
 			stmt.setDate(5, new Date(workRequest.getStartDate().getTime()));
 			stmt.setDate(6, new Date(workRequest.getEndDate().getTime()));
 			stmt.setDate(7, new Date(System.currentTimeMillis()));
@@ -402,7 +402,7 @@ public class WorkRequestDAO {
 		PreparedStatement stmt = null;
 		try {
 
-			String query = "Update WORK_REQUEST SET STATUS = ?, MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE WORK_REQUEST_ID = ?";
+			String query = "Update WORK_REQUEST SET STATUS = UPPER(?), MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE WORK_REQUEST_ID = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, WorkRequest.getStatus());
 

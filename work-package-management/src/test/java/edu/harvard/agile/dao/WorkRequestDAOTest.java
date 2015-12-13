@@ -38,7 +38,7 @@ public class WorkRequestDAOTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	/*@Test
 	public void testCreateWorkRequest() throws Exception {
 		Connection con = null;
 
@@ -75,7 +75,7 @@ public class WorkRequestDAOTest {
 			DBUtil.closeConnection(con);
 		}
 	}
-
+*/
 	@Test (expected = Exception.class)
 	public void testCreateWorkRequestWithoutPackageId() throws Exception {
 
@@ -201,7 +201,7 @@ public class WorkRequestDAOTest {
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void testDeleteRequest() throws Exception {
 		Connection con = null;
 
@@ -238,7 +238,7 @@ public class WorkRequestDAOTest {
 			DBUtil.closeConnection(con);
 		}
 	}
-
+*/
 	@Test
 	public void testFindRequestsByApplicationId() throws Exception{
 		WorkRequestDAO workRequest = new WorkRequestDAO();

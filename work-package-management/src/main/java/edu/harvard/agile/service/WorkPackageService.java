@@ -109,6 +109,17 @@ public class WorkPackageService {
 	
 	
 	/**
+   * Fetch all work packages
+   * @return
+   * @throws Exception
+   */
+  public List<WorkPackageDTO> findAllPackages(WorkPackageDTO workPackageDTO) throws Exception {
+    return workPackageDAO.findAllPackages(workPackageDTO);
+  }
+  
+	
+	
+	/**
 	 * @param workPackageId
 	 * @return workpackageDTO
 	 * @throws Exception

@@ -75,6 +75,7 @@
     
     <bean id="workPackageListAction" class="edu.harvard.agile.action.WorkPackageListAction">
     	<property name="workPackageService" ref="workPackageService"/>
+    	<property name="testingProgramService" ref="testingProgramService"/>
     </bean>
     
     <bean id="activityAction" class="edu.harvard.agile.action.ActivityAction">

@@ -16,7 +16,88 @@
 
 <shiro:hasAnyRoles name="DM,BU">
 <div class="row" style="margin-top: 30px">
-    <div class="col-md-3 col-xs-6">
+    <div class="col-xs-3">
+        <!-- small box -->
+        <div class="small-box-usr bg-green">
+            <div class="inner">
+                <h3>
+                     ${dashboardInfo.inprogressWorkPackagesCount}<!-- <sup style="font-size: 20px">GB</sup> -->
+                </h3>
+                <p>
+                    In Progress<br>
+                    Work Packages
+                </p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-flask"></i>
+            </div>
+            <a href="workPackageList.action?workPackage.status=INPROGRESS" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    
+    <div class="col-xs-3">
+        <!-- small box -->
+        <div class="small-box-usr bg-blue">
+            <div class="inner">
+                <h3>
+                     ${dashboardInfo.openWorkPackagesCount}<!-- <sup style="font-size: 20px">GB</sup> -->
+                </h3>
+                <p>
+                    Open<br>
+                    Work Packages
+                </p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-flask"></i>
+            </div>
+            <a href="workPackageList.action?workPackage.status=OPEN" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    
+    <div class="col-xs-3">
+        <!-- small box -->
+        <div class="small-box-usr bg-red">
+            <div class="inner">
+                <h3>
+                   ${dashboardInfo.approvedWorkPackagesCount} 
+                </h3>
+                <p>
+                    Approved<br>Work Packages
+                </p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-email"></i>
+            </div>
+            <a href="workPackageList.action?workPackage.status=APPROVED" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    
+    <div class="col-xs-3">
+        <!-- small box -->
+        <div class="small-box-usr bg-yellow">
+            <div class="inner">
+                <h3>
+                    ${dashboardInfo.completedWorkPackagesCount}
+                </h3>
+                <p>
+                    Completed<br>Work Packages
+                </p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a href="workPackageList.action?workPackage.status=COMPLETED" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-xs-3">
         <!-- small box -->
         <div class="small-box-usr bg-aqua">
             <div class="inner">
@@ -32,74 +113,19 @@
             <div class="icon">
                 <i class="ion ion-checkmark-circled"></i>
             </div>
-            <a href="" class="small-box-usr-footer" ng-click="menuService.changeMenu('config')">
+            <a href="workPackageList.action?workPackage.status=" class="small-box-usr-footer" ng-click="menuService.changeMenu('config')">
                 More info <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
     </div><!-- ./col -->
-    <div class="col-md-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box-usr bg-green">
-            <div class="inner">
-                <h3>
-                     ${dashboardInfo.inprogressWorkPackagesCount}<!-- <sup style="font-size: 20px">GB</sup> -->
-                </h3>
-                <p>
-                    In Progress<br>
-                    Work Packages
-                </p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-flask"></i>
-            </div>
-            <a href="" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div><!-- ./col -->
-    <div class="col-md-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box-usr bg-yellow">
-            <div class="inner">
-                <h3>
-                    ${dashboardInfo.completedWorkPackagesCount}
-                </h3>
-                <p>
-                    Completed<br>Work Packages
-                </p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
-            </div>
-            <a href="" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div><!-- ./col -->
-    <div class="col-md-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box-usr bg-red">
-            <div class="inner">
-                <h3>
-                   ${dashboardInfo.approvedWorkPackagesCount} 
-                </h3>
-                <p>
-                    Approved<br>Work Packages
-                </p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-email"></i>
-            </div>
-            <a href="" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div><!-- ./col -->
+    
+    
+    
 </div><!-- /.row -->
 </shiro:hasAnyRoles>
 <shiro:hasAnyRoles name="AC">
 <div class="row" style="margin-top: 30px">
-    <div class="col-md-3 col-xs-6">
+    <div class="col-xs-3">
         <!-- small box -->
         <div class="small-box-usr bg-aqua">
             <div class="inner">

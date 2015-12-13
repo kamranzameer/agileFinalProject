@@ -7,7 +7,6 @@ import java.util.List;
 
 import edu.harvard.agile.dao.WorkPackageDAO;
 import edu.harvard.agile.dao.WorkRequestDAO;
-import edu.harvard.agile.model.SearchEnum;
 import edu.harvard.agile.model.StatusEnum;
 import edu.harvard.agile.model.WorkPackageDTO;
 import edu.harvard.agile.model.WorkRequestDTO;
@@ -104,9 +103,20 @@ public class WorkPackageService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<WorkPackageDTO> findAllPackages(SearchEnum searchEnum) throws Exception {
-		return workPackageDAO.findAllPackages(searchEnum);
+	public List<WorkPackageDTO> findAllPackages() throws Exception {
+		return workPackageDAO.findAllPackages();
 	}
+	
+	
+	/**
+   * Fetch all work packages
+   * @return
+   * @throws Exception
+   */
+  public List<WorkPackageDTO> findAllPackages(WorkPackageDTO workPackageDTO) throws Exception {
+    return workPackageDAO.findAllPackages(workPackageDTO);
+  }
+  
 	
 	
 	/**

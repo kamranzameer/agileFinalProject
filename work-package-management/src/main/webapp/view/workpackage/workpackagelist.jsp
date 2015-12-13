@@ -12,7 +12,134 @@
 	                    <div class="panel-title"><i class="fa fa-windows">
 					</i> Work Packages List</div>
 	                </div>
+	                
+	                <br/>
+	                <br/>
+	                <br/>
+	                
+					 
 	                <div style="padding-top:30px"; class="panel-body">
+	                
+	                	<div class="accordion" id="inneraccordion">
+						  <div class="accordion-group">
+						    <div class="accordion-heading">
+						      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#inneraccordion" href="#innercollapse">
+						         Search Filter
+						      </a> 
+						    </div>
+						    <div id="innercollapse" class="accordion-body collapse">
+						      <div class="accordion-inner">
+								<!--  ------------------------------------------------------------------------------------------->
+								
+								<div style="padding-top:30px"; class="panel-body">
+						<form id="workPackageListForm" name="createworkpackageform" class="form-horizontal" role="form" method="post" action="workPackageList.action">
+							<div class="row clearfix">
+								<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8  column col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+										<div class="form-group">
+											<div class="col-md-6">
+												<label class="control-label" for="packageName">
+													Package Name
+												</label>
+												<input class="form-control" id="packageName" name="workPackage.packageName" value="" placeholder="Enter package name">
+											</div>
+											<div class="col-md-6">
+												<label class="control-label" for="packageDesc">
+													Package Description
+												</label>
+												<input class="form-control" id="packageDesc" name="workPackage.packageDesc" value="" placeholder="Enter package description" type="text" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-6">
+												<label class="control-label" for="testingProgramCode">
+													Select Testing Program
+												</label>
+												<select id="testingProgram" class="form-control" tooltip="Select Test Program" name="workPackage.testingProgramCode" value="" placeholder="testingProgramCode" >
+												<option value="">---Select---</option>
+												<s:iterator var = "testProgram" value="testPrograms">
+												<option value="${testProgram.testingProgramCode}">${testProgram.testingProgramDesc}</option>
+											</s:iterator>
+												</select>
+											</div>
+											<div class="col-md-6">
+												<label class="control-label" for="requestor">
+													Requestor
+												</label>
+												
+												<input class="form-control" id="packageDesc" name="workPackage.requestorName" value="" placeholder="Enter Requester Name" type="text" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-6">
+												<label class="control-label" for="contractFromYear">
+													Contract Start Year
+												</label>
+											
+												<input class="form-control" id="contractFromYear" name="contractFromYear" value="" placeholder="Enter Contract Start Year" type="date">
+											</div>		
+				
+						
+											<div class="col-md-6">
+												<label class="control-label" for="contractToYear">
+													Contract End Year
+												</label>
+												<input class="form-control" id="contractToYear" name="contractToYear" value="" placeholder="Enter Contract End Year" type="date">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-6">
+												<label class="control-label" for="startDate">
+													Start Date
+												</label>
+												<input class="form-control" id="startDate" name="startDate" value="" placeholder="Enter Start Date" type="date">
+											</div>
+											<div class="col-md-6">
+												<label class="control-label" for="endDate">
+													End Date
+												</label>
+												<input class="form-control" id="endDate" name="endDate"  value="" placeholder="Enter End Date" type="date">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-6">
+												<label class="control-label" for="status">
+													Status
+												</label>
+												<select class="form-control" id="status" name="workPackage.status" >
+													<option value="">---Select---</option>
+													<s:iterator var = "statuss" value="statuses">
+													<option value="${statuss}">${statuss}</option>
+													</s:iterator>
+												</select>
+											</div>
+										</div>
+										
+								</div>
+							</div>
+							
+							<div class="row clearfix">
+								<div class="col-xs-12 col-sm-10 col-md-8 col-lg-8  column col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+								
+								
+								
+								<button type="submit" id="addNewBtn" name="save" class="btn btn-success" >
+										<span class="fa fa-floppy-o">
+										</span>
+										&nbsp;&nbsp;Search
+								</button>
+									
+								</div>
+							</div>
+						    
+						</form>
+					</div>
+								
+								<!-- --------------------------------------------------------------------------------------------- -->
+						      </div>
+						    </div>
+						  </div>
+						 </div>
+						 
 						<div class="row clearfix">
 							<div id="academicDiv" class="table-responsive col-xs-12 col-sm-12 col-md-11 col-lg-11">
 								<table class="table table-striped table-hover" id="academicsTable">
@@ -44,26 +171,26 @@
 										</tr>
 									</thead>
 									<tbody>
-										<s:iterator var = "workPackage" value="workPackages">
+										<s:iterator var = "wp" value="workPackages">
 											<tr>
 												<td>
-													${workPackage.packageName}
+													${wp.packageName}
 												</td>
 												<td>
-													${workPackage.startDate}
+													${wp.startDate}
 												</td>
 												<td>
-													${workPackage.totalApplications}
+													${wp.totalApplications}
 												</td>
 												<td>
-													${workPackage.totalCost}
+													${wp.totalCost}
 												</td>
 												<td>
-													${workPackage.status}
+													${wp.status}
 												</td>
 												<td>
-													<a href="workPackageDetail.action?workPackageId=${workPackage.packageId}" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
-													<a href="editWorkPackage.action?workPackageId=${workPackage.packageId}" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
+													<a href="workPackageDetail.action?workPackageId=${wp.packageId}" data-toggle="tooltip" title="View"><i class="fa fa-eye">&nbsp;</i></a>
+													<a href="editWorkPackage.action?workPackageId=${wp.packageId}" data-toggle="tooltip" title="Edit"><i class="fa fa-keyboard-o">&nbsp;</i></a>
 													<a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash">&nbsp;</i></a>
 												</td>
 											</tr>

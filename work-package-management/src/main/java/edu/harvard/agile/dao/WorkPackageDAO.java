@@ -215,16 +215,16 @@ public class WorkPackageDAO {
 
         if (wpd.getPackageDesc() != null && wpd.getPackageDesc().length() > 0) {
           i++;
-          stmt.setString(i, wpd.getPackageDesc().toUpperCase());
+          stmt.setString(i, "%"+wpd.getPackageDesc().toUpperCase()+"%");
 
         }
         if (wpd.getPackageName() != null && wpd.getPackageName().length() > 0) {
           i++;
-          stmt.setString(i, wpd.getPackageName().toUpperCase());
+          stmt.setString(i, "%"+wpd.getPackageName().toUpperCase()+"%");
         }
         if (wpd.getRequestorName() != null && wpd.getRequestorName().length() > 0) {
           i++;
-          stmt.setString(i, wpd.getRequestorName().toUpperCase());
+          stmt.setString(i, "%"+wpd.getRequestorName().toUpperCase()+"%");
         }
         if (wpd.getStartDate() != null) {
           i++;

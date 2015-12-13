@@ -36,35 +36,7 @@ public class WorkPackageDAOTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		Connection con = null;
-		PreparedStatement st = null;
-		String sql1 = "DELETE WORK_PACKAGE WHERE CREATE_BY= 'junit'";
-		String sql2 = "DELETE WORK_REQUEST WHERE CREATE_BY= 'junit'";
-		
-		try
-		{
-			con = DBUtil.getConnection();
-			st = con.prepareStatement(sql2);
-			st.executeUpdate();
-			st.close();
-			
-			st = con.prepareStatement(sql1);
-			st.executeUpdate();
-			
-			
-			con.commit();
-		}
-		catch(SQLException ex)
-		{
-			ex.printStackTrace();
-			con.rollback();
-			throw ex;
-		}
-		finally
-		{
-			DBUtil.closeStatement(st);
-			DBUtil.closeConnection(con);
-		}
+
 	}
 
 	@Before
@@ -129,7 +101,7 @@ public class WorkPackageDAOTest {
 	public void testFindAllPackages() throws Exception {
 		WorkPackageDAO workPackageDAO = new WorkPackageDAO();
 		List<WorkPackageDTO> workPackageDTOs = workPackageDAO.findAllPackages();
-		
+
 		assertTrue(workPackageDTOs.size() > 0);
 	}
 
@@ -159,7 +131,8 @@ public class WorkPackageDAOTest {
 
 			WorkPackageDTO workDTO = workPackageDAO.createPackage(workPackage, connection);
 			assertTrue(workDTO.getPackageId()!=0);
-			
+
+			connection.commit();
 		}
 		catch(Exception ex)
 		{
@@ -170,10 +143,7 @@ public class WorkPackageDAOTest {
 		}
 		finally
 		{
-			if(connection!=null)
-			{
-				DBUtil.closeConnection(connection);
-			}
+			DBUtil.closeConnection(connection);
 		}
 
 	}
@@ -266,7 +236,7 @@ public class WorkPackageDAOTest {
 		workPackage.setModifiedBy("uannipu");
 
 		assertTrue(workPackageDAO.updatePackage(workPackage) == 0);
-		
+
 
 	}
 
@@ -357,10 +327,10 @@ public class WorkPackageDAOTest {
 		workPackage.setModifiedBy("uannipu");
 
 		assertTrue(workPackageDAO.updatePackage(workPackage) == 0);
-		 
+
 	}
 
-	
+
 	/** 
 	 * This test is to test findAllPackagesByUser method of the DAO 
 	 * @throws Exception
@@ -371,10 +341,10 @@ public class WorkPackageDAOTest {
 		UsersDTO userDTO = new UsersDTO();
 		userDTO.setUserId("uannipu");
 		List<WorkPackageDTO> workPackageDTOs = workPackageDAO.findAllPackagesCreatedByUser(userDTO);
-		
+
 		assertTrue(workPackageDTOs.size() > 0);
 	}
-	
+
 	/**
 	 * This test is to test deletePackageByPackageName method of DAO
 	 * @throws Exception
@@ -384,9 +354,9 @@ public class WorkPackageDAOTest {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
 
 		assertTrue(workPackageDAO.deleteByPackageName("TestPackage for delete") > 0);
-		
+
 	}
-	
+
 	/**
 	 * This test is to test deletePackageByPackageName method of DAO
 	 * @throws Exception
@@ -396,9 +366,9 @@ public class WorkPackageDAOTest {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
 
 		assertTrue(workPackageDAO.deleteByPackageName("Invalid TestPackage for delete") == 0);
-		
+
 	}
-	
+
 	/**
 	 * This test is to test deletePackageByPackageName method of DAO
 	 * @throws Exception
@@ -408,10 +378,10 @@ public class WorkPackageDAOTest {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
 
 		assertTrue(workPackageDAO.deleteByPackageName("support continuous testing") == 0);
-		
+
 	}
-	
-	
+
+
 	/**
 	 * This test is to test findCountByStatus method of DAO
 	 * @throws Exception
@@ -422,9 +392,9 @@ public class WorkPackageDAOTest {
 
 		int count = workPackageDAO.findCountByStatus("Open");
 		assertTrue(count > 0); 
-		
+
 	}
-	
+
 	/**
 	 * This test is to test getTotalApplications method of DAO
 	 * @throws Exception
@@ -432,13 +402,19 @@ public class WorkPackageDAOTest {
 	@Test
 	public void testGetTotalApplications() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
-		
+
 		Connection con = DBUtil.getConnection();
-		assertTrue(workPackageDAO.getTotalApplications(1, con) > 0);
-		DBUtil.closeConnection(con);
-		
+		try
+		{
+			assertTrue(workPackageDAO.getTotalApplications(1, con) > 0);
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
+
 	}
-	
+
 	/**
 	 * This test is to test getTotalApplications method of DAO
 	 * @throws Exception
@@ -446,13 +422,19 @@ public class WorkPackageDAOTest {
 	@Test
 	public void testGetTotalApplicationsForAnInvalidPackage() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
-		
+
 		Connection con = DBUtil.getConnection();
-		assertTrue(workPackageDAO.getTotalApplications(73443322, con) == 0);
-		DBUtil.closeConnection(con);
-		
+		try
+		{
+			assertTrue(workPackageDAO.getTotalApplications(73443322, con) == 0);
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
+
 	}
-	
+
 	/**
 	 * This test is to test getWorkPackageTotalCost method of DAO
 	 * @throws Exception
@@ -460,13 +442,19 @@ public class WorkPackageDAOTest {
 	@Test
 	public void testgetWorkPackageTotalCost() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
-		
+
 		Connection con = DBUtil.getConnection();
-		assertTrue(workPackageDAO.getWorkPackageTotalCost(73, con) == 0);
-		DBUtil.closeConnection(con);
-		
+		try
+		{
+			assertTrue(workPackageDAO.getWorkPackageTotalCost(73, con) == 0);
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
+
 	}
-	
+
 	/**
 	 * This test is to test getWorkPackageTotalCost method of DAO
 	 * @throws Exception
@@ -474,11 +462,31 @@ public class WorkPackageDAOTest {
 	@Test
 	public void testgetWorkPackageTotalCostForAnInvalidPackage() throws Exception {
 		WorkPackageDAO workPackageDAO  = new WorkPackageDAO();
-		
+
 		Connection con = DBUtil.getConnection();
-		assertTrue(workPackageDAO.getWorkPackageTotalCost(73443322, con) == 0);
-		DBUtil.closeConnection(con);
-		
+		try
+		{
+			assertTrue(workPackageDAO.getWorkPackageTotalCost(73443322, con) == 0);
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
+
+	}
+
+	private void deletePackage(Connection con, int packageId) throws Exception
+	{
+		PreparedStatement stmt = null;
+		try {
+			String query = "DELETE FROM WORK_PACKAGE where PACKAGE_ID = ?";
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, packageId);
+			int rowsDeleted = stmt.executeUpdate();
+		}  finally {
+			DBUtil.closeStatement(stmt);
+
+		}
 	}
 
 }

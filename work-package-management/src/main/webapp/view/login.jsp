@@ -34,21 +34,10 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 control">
-                                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                                    <div class="col-sm-12 controls">
+                                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" align="center">
                                         <button type="submit" class="btn btn-success">
                                             <span class="glyphicon glyphicon-certificate"></span>Login
                                         </button>
-                                        <button type="button" class="btn btn-warning" onclick="location.href='view/resetpassword.jsp'">
-                                            <span class="glyphicon glyphicon-refresh"></span>Forgot Password
-                                        </button>
-                                        <div style="padding-top:5px; font-size:85%">
-                                            Don't have an account!
-                                            <a href="view/signup.jsp"> <!---data-toggle="modal" data-target="#exampleModal" data-backdrop="static"--->>
-                                                Sign Up Here
-                                            </a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -67,7 +67,6 @@ public class DBUtil {
 		Connection connection = ds.getConnection();
 		connection.setAutoCommit(false);
 		
-		//System.out.println("================ OPEN CONNECTION =====================");
 		return connection;
 	}
 
@@ -123,7 +122,6 @@ public class DBUtil {
 		if (connection != null) {
 			try {
 				connection.close();
-				//System.out.println("================ CLOSE CONNECTION =====================");
 				return connection.isClosed();
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -195,7 +195,6 @@ public class WorkPackageDAO {
 
       }
 
-      System.out.println("Query ---> " + query.toString());
       stmt = con.prepareStatement(query.toString());
 
     //please dont change the order of conditions

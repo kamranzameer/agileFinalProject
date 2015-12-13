@@ -73,7 +73,7 @@
 		</action>
 		<action name="saveActivity" class="activityAction"
 			method="saveActivity">
-			<result name="success">/view/homepage.jsp</result>
+			<result name="success" type="redirect">workRequestList.action</result>
 		</action>
 
 		<action name="myDashboard" class="dashboardAction">

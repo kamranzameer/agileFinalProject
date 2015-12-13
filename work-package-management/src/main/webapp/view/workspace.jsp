@@ -95,8 +95,6 @@
 						<shiro:hasAnyRoles name="DM,BU">
 						<li class=""> <a href="workPackageList.action" data-toggle="collapse" data-target="#workPackageMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages</a>
 						</li>
-						<li class=""> <a href="workspace.jsp?p=wps" data-toggle="collapse" data-target="#workRequestMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages Statistics</a>
-						</li>
 						</shiro:hasAnyRoles>
 						
 						<shiro:hasAnyRoles name="AC">

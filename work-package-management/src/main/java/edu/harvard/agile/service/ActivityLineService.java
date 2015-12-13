@@ -62,10 +62,13 @@ public class ActivityLineService {
 			activityPhaseResourceDAO.createActivityPhaseResources(activityLineDTO.getActivityPhaseResourcesDTOs(), con);
 			
 			//set Activity Line id to all Assumption dtos
-			for (AssumptionsDTO assumptionsDTO : activityLineDTO.getAssumptionDTOs()) {
-				assumptionsDTO.setActivityLineId(activityLineDTO.getActivityLineId());
+			if(activityLineDTO.getAssumptionDTOs() != null)
+			{
+				for (AssumptionsDTO assumptionsDTO : activityLineDTO.getAssumptionDTOs()) {
+					assumptionsDTO.setActivityLineId(activityLineDTO.getActivityLineId());
+				}
+				assumptionsDAO.createAssumptions(activityLineDTO.getAssumptionDTOs(), con);
 			}
-			assumptionsDAO.createAssumptions(activityLineDTO.getAssumptionDTOs(), con);
 			
 			con.commit();
 			

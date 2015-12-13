@@ -122,8 +122,14 @@ public class DBUtilTest {
 	
 	public void testGetNextSequenceInvalid() throws Exception{
 		Connection connection = DBUtil.getConnection();
-		DBUtil.getNextSequence("package_id_sequence", connection);
-		DBUtil.closeConnection(connection);
+		try
+		{
+			DBUtil.getNextSequence("package_id_sequence", connection);
+		}
+		finally
+		{
+			DBUtil.closeConnection(connection);
+		}
 	}
 
 }

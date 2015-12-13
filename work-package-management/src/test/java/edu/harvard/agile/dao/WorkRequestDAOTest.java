@@ -21,7 +21,7 @@ import edu.harvard.agile.util.DBUtil;
 
 public class WorkRequestDAOTest {
 
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -38,7 +38,7 @@ public class WorkRequestDAOTest {
 	public void tearDown() throws Exception {
 	}
 
-	/*@Test
+	@Test
 	public void testCreateWorkRequest() throws Exception {
 		Connection con = null;
 
@@ -48,7 +48,7 @@ public class WorkRequestDAOTest {
 			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 			WorkRequestDTO workRequest = new WorkRequestDTO();
 			workRequest.setPackageId(2);
-			workRequest.setApplicationId("eSS");
+			workRequest.setApplicationId("eReg");
 			workRequest.setStatus("Open");
 			workRequest.setStartDate(new Date());
 			workRequest.setEndDate(new Date());
@@ -57,13 +57,11 @@ public class WorkRequestDAOTest {
 
 			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			assertTrue(workRequest.getWorkRequestId()!=0);
-			
+
 			//cleanup
 			workRequestDAO.deleteWorkRequest(workRequest, con);
 			con.commit();
-			
-			
-			
+
 		}
 		catch(Exception ex)
 		{
@@ -75,7 +73,7 @@ public class WorkRequestDAOTest {
 			DBUtil.closeConnection(con);
 		}
 	}
-*/
+
 	@Test (expected = Exception.class)
 	public void testCreateWorkRequestWithoutPackageId() throws Exception {
 
@@ -200,20 +198,20 @@ public class WorkRequestDAOTest {
 			DBUtil.closeConnection(con);
 		}
 	}
-	
-	/*@Test
+
+	@Test
 	public void testDeleteRequest() throws Exception {
 		Connection con = null;
 
 		try
 		{
 			con = DBUtil.getConnection();
-			
+
 			//setup
 			WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
 			WorkRequestDTO workRequest = new WorkRequestDTO();
 			workRequest.setPackageId(2);
-			workRequest.setApplicationId("eSS");
+			workRequest.setApplicationId("eReg");
 			workRequest.setStatus("Open");
 			workRequest.setStartDate(new Date());
 			workRequest.setEndDate(new Date());
@@ -222,10 +220,10 @@ public class WorkRequestDAOTest {
 
 			workRequest = workRequestDAO.createWorkRequest(workRequest, con);
 			assertTrue(workRequestDAO.deleteWorkRequest(workRequest, con) > 0);
-			
+
 			con.commit();
-			
-			
+
+
 		}
 		catch(Exception ex)
 		{
@@ -238,7 +236,7 @@ public class WorkRequestDAOTest {
 			DBUtil.closeConnection(con);
 		}
 	}
-*/
+
 	@Test
 	public void testFindRequestsByApplicationId() throws Exception{
 		WorkRequestDAO workRequest = new WorkRequestDAO();
@@ -283,7 +281,7 @@ public class WorkRequestDAOTest {
 
 		try
 		{
-		assertTrue(workRequestDAO.updateWorkRequestStatus(workRequest, connection) > 0); 
+			assertTrue(workRequestDAO.updateWorkRequestStatus(workRequest, connection) > 0); 
 		}
 		catch(Exception ex)
 		{
@@ -311,7 +309,7 @@ public class WorkRequestDAOTest {
 
 		try
 		{
-		assertTrue(workRequestDAO.updateWorkRequestStatus(workRequest, connection) == 0); 
+			assertTrue(workRequestDAO.updateWorkRequestStatus(workRequest, connection) == 0); 
 		}
 		catch(Exception ex)
 		{
@@ -324,7 +322,7 @@ public class WorkRequestDAOTest {
 			DBUtil.closeConnection(connection);
 		}
 	}
-	
+
 	@Test (expected = SQLException.class)
 	public void testUpdateWorkRequestStatusWithNullStatus() throws Exception {
 		WorkRequestDAO workRequestDAO  = new WorkRequestDAO();
@@ -332,11 +330,11 @@ public class WorkRequestDAOTest {
 		workRequest.setWorkRequestId(12);
 		workRequest.setApplicationId("eSS");
 		workRequest.setStatus(null);
-		
+
 		Connection connection = DBUtil.getConnection();
 		try
 		{
-		workRequestDAO.updateWorkRequestStatus(workRequest, connection);
+			workRequestDAO.updateWorkRequestStatus(workRequest, connection);
 		}
 		catch(Exception ex)
 		{
@@ -348,49 +346,73 @@ public class WorkRequestDAOTest {
 			DBUtil.closeConnection(connection);
 		}
 	}
-	
+
 	@Test
 	public void testfindRequestsByPackageId() throws Exception
 	{
 		assertTrue(new WorkRequestDAO().findRequestsByPackageId(1).size() > 0);
 	}
-	
+
 	@Test
 	public void testfindRequestsByInvalidPackageId() throws Exception
 	{
 		assertTrue(new WorkRequestDAO().findRequestsByPackageId(123456).size() == 0);
 	}
-	
+
 	@Test
 	public void testgetWorkRequsetTotalCost() throws Exception
 	{
 		Connection con = DBUtil.getConnection();
-		assertTrue(new WorkRequestDAO().getWorkRequsetTotalCost(12, con) > 0);
-		DBUtil.closeConnection(con);
+		try
+		{
+			assertTrue(new WorkRequestDAO().getWorkRequsetTotalCost(12, con) > 0);
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
 	}
-	
+
 	@Test
 	public void testgetInvalidWorkRequsetTotalCost() throws Exception
 	{
 		Connection con = DBUtil.getConnection();
-		assertTrue(new WorkRequestDAO().getWorkRequsetTotalCost(123456, con) == 0);
-		DBUtil.closeConnection(con);
+		try
+		{
+			assertTrue(new WorkRequestDAO().getWorkRequsetTotalCost(123456, con) == 0);
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
 	}
-	
+
 	@Test
 	public void testgetWorkRequsetTotalHours() throws Exception
 	{
 		Connection con = DBUtil.getConnection();
-		assertTrue(new WorkRequestDAO().getWorkRequsetTotalHours(12, con) > 0);
-		DBUtil.closeConnection(con);
+		try
+		{
+			assertTrue(new WorkRequestDAO().getWorkRequsetTotalHours(12, con) > 0);
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
 	}
-	
+
 	@Test
 	public void testgetInvalidWorkRequsetTotalHours() throws Exception
 	{
 		Connection con = DBUtil.getConnection();
-		assertTrue(new WorkRequestDAO().getWorkRequsetTotalHours(123456, con) == 0);
-		DBUtil.closeConnection(con);
+		try
+		{
+			assertTrue(new WorkRequestDAO().getWorkRequsetTotalHours(123456, con) == 0);
+		}
+		finally
+		{
+			DBUtil.closeConnection(con);
+		}
 	}
 
 }

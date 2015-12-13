@@ -29,7 +29,7 @@
                 </p>
             </div>
             <div class="icon">
-                <i class="ion ion-flask"></i>
+                <i class="ion ion-load-a"></i>
             </div>
             <a href="workPackageList.action?workPackage.status=INPROGRESS" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
@@ -50,7 +50,7 @@
                 </p>
             </div>
             <div class="icon">
-                <i class="ion ion-flask"></i>
+                <i class="ion ion-unlocked"></i>
             </div>
             <a href="workPackageList.action?workPackage.status=OPEN" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
@@ -70,7 +70,7 @@
                 </p>
             </div>
             <div class="icon">
-                <i class="ion ion-email"></i>
+                <i class="ion ion-checkmark-circled"></i>
             </div>
             <a href="workPackageList.action?workPackage.status=APPROVED" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
@@ -90,7 +90,7 @@
                 </p>
             </div>
             <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="ion ion-load-d"></i>
             </div>
             <a href="workPackageList.action?workPackage.status=COMPLETED" ng-click="menuService.changeMenu('config')" class="small-box-usr-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
@@ -111,7 +111,7 @@
                 </p>
             </div>
             <div class="icon">
-                <i class="ion ion-checkmark-circled"></i>
+                <i class="ion ion-clipboard"></i>
             </div>
             <a href="workPackageList.action?workPackage.status=" class="small-box-usr-footer" ng-click="menuService.changeMenu('config')">
                 More info <i class="fa fa-arrow-circle-right"></i>
@@ -139,7 +139,7 @@
                 </p>
             </div>
             <div class="icon">
-                <i class="ion ion-checkmark-circled"></i>
+                <i class="ion ion-clipboard"></i>
             </div>
             <a href="workRequestList.action" class="small-box-usr-footer" ng-click="menuService.changeMenu('config')">
                 More info <i class="fa fa-arrow-circle-right"></i>

@@ -36,7 +36,7 @@ public class WorkPackageDAOTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		Connection con = null;
+		/*Connection con = null;
 		PreparedStatement st = null;
 		String sql1 = "DELETE WORK_PACKAGE WHERE CREATE_BY= 'junit'";
 		String sql2 = "DELETE WORK_REQUEST WHERE CREATE_BY= 'junit'";
@@ -64,7 +64,7 @@ public class WorkPackageDAOTest {
 		{
 			DBUtil.closeStatement(st);
 			DBUtil.closeConnection(con);
-		}
+		}*/
 	}
 
 	@Before

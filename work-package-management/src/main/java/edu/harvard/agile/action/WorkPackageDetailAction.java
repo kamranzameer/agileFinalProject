@@ -61,7 +61,6 @@ public class WorkPackageDetailAction extends WPMActionBase {
 		workRequests = workRequestService.findRequestsByPackageId(workPackageId);
 		for(WorkRequestDTO wr : workRequests){
 			wr.setActivityLineDTOs(activityLineService.findByRequestId(wr.getWorkRequestId()));
-			System.out.println("work reqest id = " + wr.getWorkRequestId() + "total activity lines found = " + wr.getActivityLineDTOs().size());
 			for(ActivityLineDTO ald : wr.getActivityLineDTOs()){
 				ald.setAssumptions(assumptionsService.findAssumptionsByActivityLineId(ald.getActivityLineId()));
 				ald.setActivityPhaseResourcesDTOs(activityPhaseResourcesService.findByActivityLineId(ald.getActivityLineId()));
@@ -110,7 +109,6 @@ public class WorkPackageDetailAction extends WPMActionBase {
 	}
 
 	public void setWorkPackageId(Integer workPackageId) {
-		System.out.println("setting work package id to --> " + workPackageId);
 		this.workPackageId = workPackageId;
 	}
 	

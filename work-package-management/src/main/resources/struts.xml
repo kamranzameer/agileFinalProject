@@ -71,9 +71,9 @@
 			method="save">
 			<result name="success">/view/homepage.jsp</result>
 		</action>
-		<action name="addRow" class="activityAction"
-			method="addRow">
-			<result name="success">/view/resourcetable.jsp</result>
+		<action name="saveActivity" class="activityAction"
+			method="saveActivity">
+			<result name="success">/view/homepage.jsp</result>
 		</action>
 
 		<action name="myDashboard" class="dashboardAction">

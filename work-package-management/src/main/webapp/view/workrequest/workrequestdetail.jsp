@@ -242,7 +242,7 @@
 										&nbsp;&nbsp;Back
 									</button>
 									
-									<a href="newActivity.action" class="btn btn-success">New</a>
+									<a href="newActivity.action?workRequestId=${workRequest.workRequestId}" class="btn btn-success">New</a>
 								</div>
 							</div>
 						    <div class="row clearfix">

@@ -78,15 +78,13 @@ public class AssumptionsDAO {
 		String sql = "INSERT INTO ASSUMPTIONS (ASSUMPTIONS_ID, ASSUMPTIONS_DESC, WORK_REQUEST_ID, "
 				+ "ACTIVITY_LINE_ID, CREATE_DATE, MODIFIED_DATE, CREATE_BY, MODIFIED_BY ) VALUES ("
 				+ "?, ?, ?, ?, ?, ?, ?, ?)";
-		PreparedStatement statement = null;
-		
+		PreparedStatement statement = con.prepareStatement(sql);
 		try
 		{
 			for (AssumptionsDTO assumption : assumptions) 
 			{
 				assumption.setAssumptionsId(DBUtil.getNextSequence("ASSUMPTIONS_ID_SEQ", con));
 				
-				statement = con.prepareStatement(sql);
 				statement.setInt(1, assumption.getAssumptionsId());
 				statement.setString(2, assumption.getAssumptionsDesc());
 				statement.setInt(3, assumption.getWorkRequestId());
@@ -96,11 +94,13 @@ public class AssumptionsDAO {
 				statement.setString(7,  assumption.getCreateBy());
 				statement.setString(8,  assumption.getModifiedBy());
 				
+				
 				statement.addBatch();
 			}
 			
 			
 			int[] rowsUpdated = statement.executeBatch();
+			
 			return rowsUpdated;
 		}
 		finally

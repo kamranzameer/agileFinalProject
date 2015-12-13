@@ -165,9 +165,14 @@ if ('${workPackage.packageId}' != '') {
 //	$('#impactedApplications').val('${workPackage.impactedApplications}');
 	$('#testingProgram').val(testingProgram);
 	
+	if('${workPackage.status}' != 'OPEN') {
+        $('#impactedApplications').attr('disabled','disabled');
+        //document.getElementById("impactedApplications")
+ 	}	
 	$('#createworkpackageform').attr('action', 'updateWorkPackage.action?workPackageId=${workPackage.packageId}');
 	$('#pageTitle').html('Update Work Package');
 }
+
 </script>
 
 <script src="../js/workpagevalidation.js"></script>

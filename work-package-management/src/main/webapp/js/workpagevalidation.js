@@ -20,7 +20,7 @@ $(document).ready(function() {
 						message : 'The Package Name must be more than 8 and less than 40 characters long'
 					},
 					regexp : {
-						regexp : /^[a-zA-Z0-9\s]+$/,
+						regexp : /^[a-zA-Z0-9\-\s]+$/,
 						message : 'The Package Name can only consist of alphabetical, number, and space'
 					}
 				}
@@ -31,7 +31,7 @@ $(document).ready(function() {
 						message : 'The Package Description is required'
 					},
 					regexp : {
-						regexp : /^[a-zA-Z0-9\s]+$/,
+						regexp : /^[a-zA-Z0-9\-\s]+$/,
 						message : 'The Package Name can only consist of alphabetical, number, and space.'
 					}
 				}

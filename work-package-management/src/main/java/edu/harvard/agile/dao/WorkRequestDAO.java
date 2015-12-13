@@ -332,13 +332,13 @@ public class WorkRequestDAO {
 		try {
 			int seqId = DBUtil.getNextSequence("WORK_REQUEST_ID_SEQ", connection);
 
-			String query = "Insert into WORK_REQUEST (WORK_REQUEST_ID,PACKAGE_ID,APPLICATION_ID,UPPER(STATUS) AS STATUS,START_DATE,END_DATE,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
+			String query = "Insert into WORK_REQUEST (WORK_REQUEST_ID,PACKAGE_ID,APPLICATION_ID,STATUS,START_DATE,END_DATE,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
 					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			stmt = connection.prepareStatement(query);
 			stmt.setInt(1, seqId);
 			stmt.setInt(2, workRequest.getPackageId());
 			stmt.setString(3, workRequest.getApplicationId());
-			stmt.setString(4, workRequest.getStatus());
+			stmt.setString(4, workRequest.getStatus().toUpperCase());
 			stmt.setDate(5, new Date(workRequest.getStartDate().getTime()));
 			stmt.setDate(6, new Date(workRequest.getEndDate().getTime()));
 			stmt.setDate(7, new Date(System.currentTimeMillis()));

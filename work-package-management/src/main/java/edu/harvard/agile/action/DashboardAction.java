@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import clover.com.google.common.cache.AbstractCache.StatsCounter;
 import edu.harvard.agile.model.DashboardInfo;
+import edu.harvard.agile.model.SearchEnum;
 import edu.harvard.agile.model.StatusEnum;
 import edu.harvard.agile.model.WorkRequestDTO;
 import edu.harvard.agile.service.ApplicationService;
@@ -83,7 +84,7 @@ public class DashboardAction extends WPMActionBase {
 		dashboardInfo.setOpenWorkPackagesCount(workPackageService.findCountByStatus(StatusEnum.OPEN.name()));
 		dashboardInfo.setInprogressWorkPackagesCount(workPackageService.findCountByStatus(StatusEnum.INPROGRESS.name()));
 		dashboardInfo.setCompletedWorkPackagesCount(workPackageService.findCountByStatus(StatusEnum.COMPLETED.name()));
-		dashboardInfo.setTotalWorkPackagesCount(workPackageService.findAllPackages().size());
+		dashboardInfo.setTotalWorkPackagesCount(workPackageService.findAllPackages(SearchEnum.ALL).size());
 		
 		
 		//Get the current logged in user

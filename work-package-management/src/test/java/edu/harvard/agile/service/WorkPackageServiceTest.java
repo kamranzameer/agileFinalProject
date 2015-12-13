@@ -16,6 +16,7 @@ import org.junit.Test;
 import edu.harvard.agile.dao.WorkPackageDAO;
 import edu.harvard.agile.dao.WorkRequestDAO;
 import edu.harvard.agile.model.ApplicationDTO;
+import edu.harvard.agile.model.SearchEnum;
 import edu.harvard.agile.model.WorkPackageDTO;
 
 public class WorkPackageServiceTest {
@@ -131,7 +132,7 @@ public class WorkPackageServiceTest {
 		wps.setWorkPackageDAO(new WorkPackageDAO());
 		wps.setWorkRequestDAO(new WorkRequestDAO());
 		
-		assertTrue(wps.findAllPackages().size() > 0);
+		assertTrue(wps.findAllPackages(SearchEnum.ALL).size() > 0);
 	}
 
 	@Test

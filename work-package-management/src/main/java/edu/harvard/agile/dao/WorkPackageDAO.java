@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.harvard.agile.model.SearchEnum;
 import edu.harvard.agile.model.UsersDTO;
 import edu.harvard.agile.model.WorkPackageDTO;
 import edu.harvard.agile.util.DBUtil;
@@ -44,7 +45,7 @@ public class WorkPackageDAO
 		WorkPackageDTO workPackage = null;
 		try {
 			con = DBUtil.getConnection();
-			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS "
+			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,UPPER(STATUS) AS STATUS "
 					+ "FROM WORK_PACKAGE where package_id = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setInt(1, id);
@@ -97,7 +98,7 @@ public class WorkPackageDAO
 		WorkPackageDTO workPackage = null;
 		try {
 			con = DBUtil.getConnection();
-			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS "
+			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,UPPER(STATUS) AS STATUS "
 					+ "FROM WORK_PACKAGE where PACKAGE_NAME = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, packageName);
@@ -132,7 +133,7 @@ public class WorkPackageDAO
 	 * @return a list work package DTOs
 	 * @throws Exception
 	 */
-	public List<WorkPackageDTO> findAllPackages() throws Exception {
+	public List<WorkPackageDTO> findAllPackages(SearchEnum searchEnum) throws Exception {
 		 /* Get connection from DBUtil, executes select query. Iterates through
 		 * result set, initialize new workPakcageDTO object with the values
 		 * returned from the database, add to the list and return the list of
@@ -146,8 +147,9 @@ public class WorkPackageDAO
 		try {
 
 			con = DBUtil.getConnection();
-			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS FROM WORK_PACKAGE";
+			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,UPPER(STATUS) AS STATUS FROM WORK_PACKAGE WHERE UPPER(STATUS) = nvl(?, UPPER(STATUS))" ;
 			stmt = con.prepareStatement(query);
+			stmt.setString(1, searchEnum.name().equals("ALL")?null:searchEnum.name());
 
 			rs = stmt.executeQuery();
 
@@ -204,7 +206,7 @@ public class WorkPackageDAO
 			int seqId = DBUtil.getNextSequence("package_id_seq", connection);
 
 			String query = "Insert into WORK_PACKAGE (PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE,REQUESTOR_NAME,CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
-					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, UPPER(?), ?, ?, ?, ? )";
 			stmt = connection.prepareStatement(query);
 			stmt.setInt(1, seqId);
 			stmt.setString(2, workPackage.getPackageName());
@@ -254,7 +256,7 @@ public class WorkPackageDAO
 			con = DBUtil.getConnection();
 
 			String query = "Update WORK_PACKAGE SET PACKAGE_NAME = ?, PACKAGE_DESC = ?,TESTING_PROGRAM_CODE = ?, REQUESTOR_NAME = ?, CONTRACT_FROM_YEAR = ?,CONTRACT_TO_YEAR = ?,START_DATE = ?,"
-					+ "END_DATE = ?,STATUS = ?,MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE PACKAGE_ID = ?";
+					+ "END_DATE = ?,STATUS = UPPER(?),MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE PACKAGE_ID = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, workPackage.getPackageName());
 			stmt.setString(2, workPackage.getPackageDesc());
@@ -303,7 +305,7 @@ public class WorkPackageDAO
 		PreparedStatement stmt = null;
 		try {
 
-			String query = "Update WORK_PACKAGE SET STATUS = ?, MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE PACKAGE_ID = ?";
+			String query = "Update WORK_PACKAGE SET STATUS = UPPER(?), MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE PACKAGE_ID = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, workPackage.getStatus());
 
@@ -340,7 +342,7 @@ public class WorkPackageDAO
 		try {
 
 			con = DBUtil.getConnection();
-			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,STATUS,CREATE_BY,CREATE_DATE,MODIFIED_BY,MODIFIED_DATE FROM WORK_PACKAGE"
+			String query = "SELECT PACKAGE_ID,PACKAGE_NAME,PACKAGE_DESC,TESTING_PROGRAM_CODE, REQUESTOR_NAME, CONTRACT_FROM_YEAR,CONTRACT_TO_YEAR,START_DATE,END_DATE,UPPER(STATUS) AS STATUS,CREATE_BY,CREATE_DATE,MODIFIED_BY,MODIFIED_DATE FROM WORK_PACKAGE"
 					+ "		WHERE CREATE_BY = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, user.getUserId());
@@ -519,7 +521,7 @@ public class WorkPackageDAO
 		try {
 			con = DBUtil.getConnection();
 			String query = "SELECT count(PACKAGE_ID) "
-					+ "FROM WORK_PACKAGE where UPPER(status) = ?";
+					+ "FROM WORK_PACKAGE where UPPER(status) = UPPER(?)";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, status.toUpperCase());
 			rs = stmt.executeQuery();

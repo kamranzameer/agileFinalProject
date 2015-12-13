@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import edu.harvard.agile.model.SearchEnum;
 import edu.harvard.agile.model.UsersDTO;
 import edu.harvard.agile.model.WorkPackageDTO;
 import edu.harvard.agile.util.DBUtil;
@@ -128,7 +129,7 @@ public class WorkPackageDAOTest {
 	@Test
 	public void testFindAllPackages() throws Exception {
 		WorkPackageDAO workPackageDAO = new WorkPackageDAO();
-		List<WorkPackageDTO> workPackageDTOs = workPackageDAO.findAllPackages();
+		List<WorkPackageDTO> workPackageDTOs = workPackageDAO.findAllPackages(SearchEnum.ALL);
 		
 		assertTrue(workPackageDTOs.size() > 0);
 	}

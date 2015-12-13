@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Required;
 
+import edu.harvard.agile.model.SearchEnum;
+import edu.harvard.agile.model.StatusEnum;
 import edu.harvard.agile.model.WorkPackageDTO;
 import edu.harvard.agile.service.WorkPackageService;
 
@@ -16,10 +18,14 @@ import edu.harvard.agile.service.WorkPackageService;
 public class WorkPackageListAction extends WPMActionBase {
 	private WorkPackageService workPackageService;
 	private List<WorkPackageDTO> workPackages;
+	private SearchEnum status;
 
 	@Override
 	public void prepare() throws Exception {
-		workPackages = workPackageService.findAllPackages();
+	  if(status == null){
+	    status = SearchEnum.ALL;
+	  }
+		workPackages = workPackageService.findAllPackages(status);
 	}
 
 	public String execute() throws Exception {
@@ -39,5 +45,19 @@ public class WorkPackageListAction extends WPMActionBase {
 	public void setWorkPackages(List<WorkPackageDTO> workPackages) {
 		this.workPackages = workPackages;
 	}
+
+  
+  public SearchEnum getStatus() {
+    return status;
+  }
+
+  
+  public void setStatus(SearchEnum status) {
+    this.status = status;
+  }
+
+  
+	
+	
 
 }

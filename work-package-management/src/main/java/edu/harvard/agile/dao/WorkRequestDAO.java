@@ -47,7 +47,7 @@ public class WorkRequestDAO {
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.WORK_REQUEST_ID, ");
-			query.append("        A.STATUS, ");
+			query.append("        UPPER(A.STATUS) AS STATUS, ");
 			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
@@ -123,7 +123,7 @@ public class WorkRequestDAO {
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.WORK_REQUEST_ID, ");
-			query.append("        A.STATUS, ");
+			query.append("        UPPER(A.STATUS) AS STATUS, ");
 			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
@@ -197,7 +197,7 @@ public class WorkRequestDAO {
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.WORK_REQUEST_ID, ");
-			query.append("        A.STATUS, ");
+			query.append("        UPPER(A.STATUS) AS STATUS, ");
 			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
@@ -268,7 +268,7 @@ public class WorkRequestDAO {
 			StringBuilder query = new StringBuilder();
 			query.append(" SELECT A.PACKAGE_ID, ");
 			query.append("        A.WORK_REQUEST_ID, ");
-			query.append("        A.STATUS, ");
+			query.append("        UPPER(A.STATUS) AS STATUS, ");
 			query.append("        A.START_DATE,");
 			query.append("        A.END_DATE, ");
 			query.append("        A.APPLICATION_ID, ");
@@ -332,7 +332,7 @@ public class WorkRequestDAO {
 		try {
 			int seqId = DBUtil.getNextSequence("WORK_REQUEST_ID_SEQ", connection);
 
-			String query = "Insert into WORK_REQUEST (WORK_REQUEST_ID,PACKAGE_ID,APPLICATION_ID,STATUS,START_DATE,END_DATE,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
+			String query = "Insert into WORK_REQUEST (WORK_REQUEST_ID,PACKAGE_ID,APPLICATION_ID,UPPER(STATUS) AS STATUS,START_DATE,END_DATE,CREATE_DATE,MODIFIED_DATE,CREATE_BY,MODIFIED_BY) "
 					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			stmt = connection.prepareStatement(query);
 			stmt.setInt(1, seqId);
@@ -402,7 +402,7 @@ public class WorkRequestDAO {
 		PreparedStatement stmt = null;
 		try {
 
-			String query = "Update WORK_REQUEST SET STATUS = ?, MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE WORK_REQUEST_ID = ?";
+			String query = "Update WORK_REQUEST SET STATUS = UPPER(?), MODIFIED_DATE = ?,MODIFIED_BY = ? WHERE WORK_REQUEST_ID = ?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, WorkRequest.getStatus());
 

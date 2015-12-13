@@ -11,7 +11,7 @@
 	            <div class="panel panel-info">
 	                <div class="panel-heading">
 	                    <div class="panel-title"><i class="fa fa-pencil">
-					</i> Work Package Detail</div>
+					</i> Work Request Detail</div>
 	                </div>
 	                <div style="padding-top:30px"; class="panel-body">
 						<form id="workPackageDetail" class="form-horizontal" role="form" method="post" action="workRequestList.action">

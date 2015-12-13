@@ -141,7 +141,7 @@
             <div class="icon">
                 <i class="ion ion-checkmark-circled"></i>
             </div>
-            <a href="" class="small-box-usr-footer" ng-click="menuService.changeMenu('config')">
+            <a href="workRequestList.action" class="small-box-usr-footer" ng-click="menuService.changeMenu('config')">
                 More info <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>

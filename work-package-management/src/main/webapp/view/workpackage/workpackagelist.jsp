@@ -190,7 +190,7 @@ $(function () {
 													${wp.totalApplications}
 												</td>
 												<td>
-													${wp.totalCost}
+													$<s:property value="getText('{0,number,#,##0.00}',{#wp.totalCost})"/>
 												</td>
 												<td>
 													${wp.status}

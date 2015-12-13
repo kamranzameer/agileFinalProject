@@ -65,7 +65,7 @@ $(function () {
 												${workRequest.totalHours}
 											</td>
 											<td>
-												${workRequest.totalCost}
+												$<s:property value="getText('{0,number,#,##0.00}',{#workRequest.totalCost})"/>
 											</td>
 											<td>
 												${workRequest.status}

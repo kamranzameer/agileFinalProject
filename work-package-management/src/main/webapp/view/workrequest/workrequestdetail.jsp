@@ -1,6 +1,6 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<div class="container">
+ <div class="container">
     <div class="row clearfix">
         <div class="col-md-10 column">
             <p>&nbsp</p>
@@ -52,7 +52,7 @@
 												</div>
 												
 												<div class="col-md-6">
-														${workRequest.totalCost}
+													$<s:property value="getText('{0,number,#,##0.00}',{workRequest.totalCost})"/>
 												</div>
 											</div>
 											
@@ -191,7 +191,8 @@
 																		      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#inneraccordion${activityLine.activityLineId}" href="#innercollapse${activityLine.activityLineId}">
 																		        (+)${activityLine.activityLineDesc},
 																		      </a>
-																		       <strong>Total Hours:</strong> ${activityLine.totalHours}, <strong>Total Cost:</strong> ${activityLine.totalCost}
+																		       <strong>Total Hours:</strong> ${activityLine.totalHours}, <strong>Total Cost:</strong>
+																		       $<s:property value="getText('{0,number,#,##0.00}',{#activityLine.totalCost})"/>
 																		    </div>
 																		    <div id="innercollapse${activityLine.activityLineId}" class="accordion-body collapse">
 																		      <div class="accordion-inner">
@@ -205,9 +206,9 @@
 																		        	<s:iterator var = "activityPhaseResource" value="#activityLine.activityPhaseResourcesDTOs">
 													      					        	<tr>
 																			        		<td>${activityPhaseResource.resourceTypeName} </td>
-																			        		<td>${activityPhaseResource.hourlyRate} </td>
+																			        		<td>$<s:property value="getText('{0,number,#,##0.00}',{#activityPhaseResource.hourlyRate})"/></td>
 																			        		<td>${activityPhaseResource.estimatedHours} </td>
-																			        		<td>${activityPhaseResource.totalCost} </td>
+																			        		<td>$<s:property value="getText('{0,number,#,##0.00}',{#activityPhaseResource.totalCost})"/></td>
 																			        	</tr>
 																			        </s:iterator>	
 																				</table>

@@ -144,7 +144,7 @@
 														</strong>
 												</div>
 												<div class="col-md-6">
-													${workPackage.totalCost}
+													$<s:property value="getText('{0,number,#,##0.00}',{workPackage.totalCost})"/>
 											</div>
 											</div>
 											
@@ -167,7 +167,8 @@
 												    <div class="accordion-heading">
 												      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse${workRequest.workRequestId}">
 												       (+) ${workRequest.applicationName}
-												      </a>, <strong>Total Hours : </strong>${workRequest.totalHours}, <strong>Total Cost :</strong> ${workRequest.totalCost}
+												      </a>, <strong>Total Hours : </strong>${workRequest.totalHours}, <strong>Total Cost :</strong> 
+												      	$<s:property value="getText('{0,number,#,##0.00}',{#workRequest.totalCost})"/>
 												    </div>
 												    <div id="collapse${workRequest.workRequestId}" class="accordion-body collapse">
 												      <div class="accordion-inner">
@@ -181,7 +182,9 @@
 																		      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#inneraccordion${activityLine.activityLineId}" href="#innercollapse${activityLine.activityLineId}">
 																		        (+)${activityLine.activityLineDesc},
 																		      </a>
-																		       <strong>Total Hours:</strong> ${activityLine.totalHours}, <strong>Total Cost:</strong> ${activityLine.totalCost}
+																		       <strong>Total Hours:</strong> ${activityLine.totalHours}, <strong>Total Cost:</strong>
+																		       $<s:property value="getText('{0,number,#,##0.00}',{#activityLine.totalCost})"/> 
+																		       	
 																		    </div>
 																		    <div id="innercollapse${activityLine.activityLineId}" class="accordion-body collapse">
 																		      <div class="accordion-inner">
@@ -195,9 +198,13 @@
 																		        	<s:iterator var = "activityPhaseResource" value="#activityLine.activityPhaseResourcesDTOs">
 													      					        	<tr>
 																			        		<td>${activityPhaseResource.resourceTypeName} </td>
-																			        		<td>${activityPhaseResource.hourlyRate} </td>
+																			        		<td>
+																			        			$<s:property value="getText('{0,number,#,##0.00}',{#activityPhaseResource.hourlyRate})"/> 
+																			        		</td>
 																			        		<td>${activityPhaseResource.estimatedHours} </td>
-																			        		<td>${activityPhaseResource.totalCost} </td>
+																			        		<td>
+																			        			$<s:property value="getText('{0,number,#,##0.00}',{#activityPhaseResource.totalCost})"/> 
+																			        		</td>
 																			        	</tr>
 																			        </s:iterator>	
 																				</table>

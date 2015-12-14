@@ -47,9 +47,20 @@
             <result>/view/workspace.jsp</result>
         </action>
         
+        
+        <action name="resetWorkPackageSearch"  class="workPackageListAction" method="reset">
+            <result>/view/workspace.jsp</result>
+        </action>
+        
+        
+	
+	
+        
         <action name="workRequestList"  class="workRequestListAction">
             <result>/view/workspace.jsp</result>
         </action>
+        
+        
 
 		<action name="workPackageDetail" class="workPackageDetailAction">
 			<result>/view/workspace.jsp</result>

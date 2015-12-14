@@ -67,6 +67,11 @@ public class WorkPackageListAction extends WPMActionBase {
   @Override
   public void prepare() throws Exception {
 
+
+  }
+  
+  public void populate(WorkPackageDTO workPackage)throws Exception{
+    
     if (workPackage == null) {
       workPackage = new WorkPackageDTO();
     }
@@ -90,9 +95,18 @@ public class WorkPackageListAction extends WPMActionBase {
     testPrograms = testingProgramService.findAllTestingPrograms();
     workPackages = workPackageService.findAllPackages(workPackage);
     statuses = WorkPackageUtil.getValidStatus();
+    
+  }
+  
+  public String reset() throws Exception {
+    System.out.println("In Reset !!!!!!!");
+    populate(null);
+    ServletActionContext.getRequest().setAttribute("p", "wpl");
+    return SUCCESS;
   }
 
   public String execute() throws Exception {
+    populate(workPackage);
     ServletActionContext.getRequest().setAttribute("p", "wpl");
     return SUCCESS;
   }

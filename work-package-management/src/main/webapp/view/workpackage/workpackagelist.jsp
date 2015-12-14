@@ -31,7 +31,7 @@ $(function () {
 						  <div class="accordion-group">
 						    <div class="accordion-heading">
 						      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#inneraccordion" href="#innercollapse">
-						         Search Filter
+						         (+) Search Filter
 						      </a> 
 						    </div>
 						    <div id="innercollapse" class="accordion-body collapse">
@@ -147,7 +147,17 @@ $(function () {
 						  </div>
 						 </div>
 						 
+						 
+						 
+						 
 						<div class="row clearfix">
+							<div id="academicDiv" class="table-responsive col-xs-12 col-sm-12 col-md-11 col-lg-11">
+								<hr/>
+								<a href="resetWorkPackageSearch.action">
+							         Reset Search
+							      </a>
+							</div>	      
+						      
 							<div id="academicDiv" class="table-responsive col-xs-12 col-sm-12 col-md-11 col-lg-11">
 								<table class="table table-striped table-hover" id="academicsTable">
 									<thead>

@@ -224,37 +224,4 @@ public class ActivityPhaseResourcesDAOTest {
 		
 	}
 	
-		
-	
-	
-
-	/*@Test
-	public void testGetTotalCost() throws Exception {
-		Connection con = DBUtil.getConnection();
-		assertTrue(new ActivityPhaseResourcesDAO().getTotalCost(10, con) > 0);
-		DBUtil.closeConnection(con);
-	}
-	
-	@Test
-	public void testGetTotalCostByInvalidActivityLineId() throws Exception {
-		Connection con = DBUtil.getConnection();
-		assertTrue(new ActivityPhaseResourcesDAO().getTotalCost(123456, con) == 0);
-		DBUtil.closeConnection(con);
-	}
-
-	@Test
-	public void testGetTotalHours() throws Exception {
-		Connection con = DBUtil.getConnection();
-		assertTrue(new ActivityPhaseResourcesDAO().getTotalHours(10, con) > 0);
-		DBUtil.closeConnection(con);
-		
-	}
-	
-	@Test
-	public void testGetTotalHoursByInvalidActivityLineId() throws Exception {
-		Connection con = DBUtil.getConnection();
-		assertTrue(new ActivityPhaseResourcesDAO().getTotalHours(123456, con) == 0);
-		DBUtil.closeConnection(con);
-	}*/
-
 }

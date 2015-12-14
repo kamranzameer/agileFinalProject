@@ -3,6 +3,7 @@ package edu.harvard.agile.service;
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -158,7 +159,140 @@ public class WorkPackageServiceTest {
 		assertTrue(true);
 		
 	}
+	
+	@Test
+	public void testUpdatePackage() throws Exception 
+	{
+		
+		List<String> impactedApps = new ArrayList<String>();
+		impactedApps.add("eReg");
+		WorkPackageDAO wpdao =  new WorkPackageDAO();
+		WorkRequestDAO wrdao =  new WorkRequestDAO();
+		WorkPackageService wps = new WorkPackageService();
+		
+		wps.setWorkRequestDAO(wrdao);
+		wps.setWorkPackageDAO(wpdao);
+		setUpPackage();
+		
+		WorkPackageDTO workPackage = wpdao.findByPackageName("UpdatePackage400");
+		assertNotNull(workPackage);
+		workPackage.setStatus(StatusEnum.OPEN.name());
+		workPackage.setTestingProgramCode("GRE");
+		workPackage.setImpactedApplications(impactedApps);
 
+		workPackage.setModifiedBy("junit");
+		workPackage.setModifiedDate(new Date());
+		workPackage.setCreateBy("junit");
+		workPackage.setCreateDate(new Date());
+
+		wps.updatePackage(workPackage);
+		
+		WorkPackageDTO newPackage = wpdao.findByPackageName("UpdatePackage400");
+		assertNotNull(newPackage);
+		
+		assertEquals(newPackage.getStatus(),StatusEnum.OPEN.name());
+		assertEquals(newPackage.getTestingProgramCode(),"GRE");
+		List<WorkRequestDTO> workRequests =  wrdao.findRequestsByPackageId(newPackage.getPackageId());
+		
+		assertEquals(workRequests.size(),1);
+		assertTrue(true);
+	//	List<WorkRequestDTO> workRequests =  wrdao.findRequestsByPackageId(newPackage.getPackageId());
+		cleanup(wrdao, workPackage, workRequests);
+
+	}
+	
+	@Test
+	public void testFindAllPackagesForSearch() throws Exception
+	{
+		WorkPackageDAO wpdao =  new WorkPackageDAO();
+		WorkRequestDAO wrdao =  new WorkRequestDAO();
+		WorkPackageService wps = new WorkPackageService();
+		wps.setWorkRequestDAO(wrdao);
+		wps.setWorkPackageDAO(wpdao);
+		
+		List<String> impactedApps = new ArrayList<String>();
+		impactedApps.add("eRS");
+		impactedApps.add("eSS");
+		
+		WorkPackageDTO workPackage = new WorkPackageDTO();
+		workPackage.setContractFromYear(new Date());
+		workPackage.setContractToYear(new Date());
+		workPackage.setPackageDesc("TestPackage through service");
+		workPackage.setRequestorName("Joe");
+		workPackage.setTestingProgramCode("GRE");
+		workPackage.setStatus(StatusEnum.OPEN.name());
+		workPackage.setContractFromYear(new Date());
+		workPackage.setContractToYear(new Date());
+		workPackage.setStartDate(new Date());
+		workPackage.setEndDate(new Date());
+		workPackage.setCreateBy("junit");
+		workPackage.setModifiedBy("junit");
+		workPackage.setImpactedApplications(impactedApps);
+		List packages = wps.findAllPackages(workPackage);
+		assertTrue(packages == null ||  packages.size() >= 0);
+	}
+
+	private void cleanup(WorkRequestDAO wrdao, WorkPackageDTO workPackage,
+			List<WorkRequestDTO> workRequests) throws Exception {
+		Connection connection = null;
+		try{
+			connection = DBUtil.getConnection();
+			for(WorkRequestDTO workRequest : workRequests){
+				wrdao.deleteWorkRequest(workRequest, connection);
+			}
+			deletePackage(connection, workPackage.getPackageId());
+			connection.commit();
+		} catch(Exception ex) {
+			DBUtil.rollBack(connection);
+			throw ex;
+		} finally {
+			DBUtil.closeConnection(connection);
+		}
+	}
+
+	
+	private void setUpPackage() throws Exception 
+	{
+		List<String> impactedApps = new ArrayList<String>();
+		impactedApps.add("eRS");
+		impactedApps.add("eSS");
+		
+		WorkPackageDTO workPackage = new WorkPackageDTO();
+		workPackage.setContractFromYear(new Date());
+		workPackage.setContractToYear(new Date());
+		workPackage.setPackageName("UpdatePackage400");
+		workPackage.setPackageDesc("TestPackage for update");
+		workPackage.setRequestorName("Bill");
+		workPackage.setTestingProgramCode("SAT");
+		workPackage.setStatus(StatusEnum.OPEN.name());
+		workPackage.setStartDate(new Date());
+		workPackage.setEndDate(new Date());
+		workPackage.setCreateBy("junit");
+		workPackage.setModifiedBy("junit");
+		workPackage.setCreateDate(new Date());
+	
+		workPackage.setImpactedApplications(impactedApps);
+		WorkPackageService wps = new WorkPackageService();
+		wps.setWorkPackageDAO(new WorkPackageDAO());
+		wps.setWorkRequestDAO(new WorkRequestDAO());
+		wps.createPackage(workPackage);
+		
+		
+	}
+	
+	private void deletePackage(Connection con, int packageId) throws Exception
+	{
+		PreparedStatement stmt = null;
+		try {
+			String query = "DELETE FROM WORK_PACKAGE where PACKAGE_ID = ?";
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, packageId);
+			int rowsDeleted = stmt.executeUpdate();
+		}  finally {
+			DBUtil.closeStatement(stmt);
+
+		}
+	}
 
 
 	

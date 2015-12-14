@@ -148,13 +148,21 @@ public class ActivityAction extends WPMActionBase {
 		activityLineDTO.setStartDate(WorkPackageUtil.convertDate(startDate, "yyyy-MM-dd"));
 		activityLineDTO.setEndDate(WorkPackageUtil.convertDate(endDate, "yyyy-MM-dd"));
 		
-		//populate logged in user details to ActivityPhaseResourcesDTO
+		//Remove any NULL DTOs because of result of delete from UI
+		List<ActivityPhaseResourcesDTO> activeActivityPhaseResourcesDTOs = new ArrayList<ActivityPhaseResourcesDTO>();
 		for (ActivityPhaseResourcesDTO activityPhaseResourcesDTO : activityPhaseResourcesDTOs) 
+		{
+			if(activityPhaseResourcesDTO != null)
+				activeActivityPhaseResourcesDTOs.add(activityPhaseResourcesDTO);
+		}
+		
+		//populate logged in user details to ActivityPhaseResourcesDTO
+		for (ActivityPhaseResourcesDTO activityPhaseResourcesDTO : activeActivityPhaseResourcesDTOs) 
 		{
 			activityPhaseResourcesDTO.setCreateBy(userID);
 			activityPhaseResourcesDTO.setModifiedBy(userID);
 		}
-		activityLineDTO.setActivityPhaseResourcesDTOs(activityPhaseResourcesDTOs);
+		activityLineDTO.setActivityPhaseResourcesDTOs(activeActivityPhaseResourcesDTOs);
 		
 		//If assumptions are entered populate them to ActivityLineDTO
 		if(assumptions != null && assumptions.length() > 0)

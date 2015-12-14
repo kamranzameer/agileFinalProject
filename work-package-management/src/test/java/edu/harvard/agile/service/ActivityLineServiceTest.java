@@ -32,39 +32,6 @@ public class ActivityLineServiceTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 
-		Connection con = null;
-		PreparedStatement st = null;
-		String sql1 = "DELETE ACTIVITY_PHASE_RESOURCES WHERE ACTIVITY_LINE_ID = 1";
-		String sql2 = "DELETE FROM ASSUMPTIONS WHERE WORK_REQUEST_ID = 12 AND ACTIVITY_LINE_ID = 1";
-		String sql3 = "DELETE ACTIVITY_LINE WHERE ACTIVITY_LINE_ID = 1";
-		
-		try
-		{
-			con = DBUtil.getConnection();
-			st = con.prepareStatement(sql1);
-			st.executeUpdate();
-			st.close();
-			
-			st = con.prepareStatement(sql2);
-			st.executeUpdate();
-			
-			st = con.prepareStatement(sql3);
-			st.executeUpdate();
-			
-			
-			con.commit();
-		}
-		catch(SQLException ex)
-		{
-			ex.printStackTrace();
-			con.rollback();
-		}
-		finally
-		{
-			DBUtil.closeStatement(st);
-			DBUtil.closeConnection(con);
-		}
-	
 	}
 
 	@Before
@@ -136,6 +103,48 @@ public class ActivityLineServiceTest {
 		activityLineDTO = als.createActivityLine(activityLineDTO);
 		
 		assertTrue(activityLineDTO.getActivityLineId() > 0);
+		
+		//cleanup
+		deleteActivityLine(activityLineDTO.getActivityLineId());
+	}
+
+	private void deleteActivityLine(Integer activityLineId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		String sql1 = "DELETE ACTIVITY_PHASE_RESOURCES WHERE ACTIVITY_LINE_ID = ?";
+		String sql2 = "DELETE FROM ASSUMPTIONS WHERE WORK_REQUEST_ID = 12 AND ACTIVITY_LINE_ID = ?";
+		String sql3 = "DELETE ACTIVITY_LINE WHERE ACTIVITY_LINE_ID = ?";
+		
+		try
+		{
+			con = DBUtil.getConnection();
+			st = con.prepareStatement(sql1);
+			st.setInt(1, activityLineId);
+			st.executeUpdate();
+			st.close();
+			
+			st = con.prepareStatement(sql2);
+			st.setInt(1, activityLineId);
+			st.executeUpdate();
+			
+			st = con.prepareStatement(sql3);
+			st.setInt(1, activityLineId);
+			st.executeUpdate();
+			
+			
+			con.commit();
+		}
+		catch(SQLException ex)
+		{
+			ex.printStackTrace();
+			con.rollback();
+		}
+		finally
+		{
+			DBUtil.closeStatement(st);
+			DBUtil.closeConnection(con);
+		}
+		
 	}
 	
 }

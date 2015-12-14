@@ -263,7 +263,7 @@
               if('${workPackage.status}' != $('#status').val()) {
                      window.location='updateWorkPackageStatus.action?workPackageId=${workPackage.packageId}&status='+$('#status').val();  
               } else {
-                     alert('Please update status.')
+                     
               }
               
        }

@@ -20,11 +20,6 @@ $(function () {
 					</i> Work Packages List</div>
 	                </div>
 	                
-	                <br/>
-	                <br/>
-	                <br/>
-	                
-					 
 	                <div style="padding-top:30px"; class="panel-body">
 	                
 	                	<div class="accordion" id="inneraccordion">

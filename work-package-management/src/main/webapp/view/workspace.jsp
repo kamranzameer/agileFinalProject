@@ -93,7 +93,7 @@
 		                <li><a href="homepage.jsp"><i class="glyphicon glyphicon-dashboard">&nbsp;</i>Dashboard</a></li>
 
 						<shiro:hasAnyRoles name="DM,BU">
-						<li class=""> <a href="workPackageList.action" data-toggle="collapse" data-target="#workPackageMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages</a>
+						<li class=""> <a href="resetWorkPackageSearch.action" data-toggle="collapse" data-target="#workPackageMenu"><i class="fa fa-newspaper-o">&nbsp;</i>Work Packages</a>
 						</li>
 						</shiro:hasAnyRoles>
 						

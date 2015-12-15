@@ -32,15 +32,25 @@ Likewise, all the estimates are collected from all the application users and whe
 A business user can choose different criteria to view the reports, such as show all approved work, show cancelled work, show open work, show all work packages etc.
 
 **TECHNOLOGY:**
+
 Authentication - Apache Shiro framework
+
 UI - JQuery, JSP
+
 Language - Java
+
 Framework - Spring and Struts
+
 Web Server - Tomcat
+
 Build - Maven
+
 Continuous integration - Jenkins
+
 Unit Testing - JUnit
+
 Database - Oracle
+
 Production Server - AWS Server - EC2
 
 **STAKEHOLDERS:**

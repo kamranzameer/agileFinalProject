@@ -8,9 +8,10 @@ Application group user : userapp1/passwd
 TEAM NAME: 
 The Incredibles
 TEAM MEMBERS
-? Usha Annipu (PO and DEV)
-? Kamran Zameer (DEV)
-? Yetish Narayana (SM and DEV)
+* Usha Annipu (PO and DEV)
+* Kamran Zameer (DEV)
+* Yetish Narayana (SM and DEV)
+
 PRODUCT VISION:
 Accomplish faster throughput and greater transparency when estimating RFPs and Work Packages.
 PROBLEM STATEMENT:
@@ -37,113 +38,53 @@ Unit Testing - JUnit
 Database - Oracle
 Production Server - AWS Server - EC2
 STAKEHOLDERS: 
-? Ted Geherty, IT Director of Demand Management Group
-? Kimi Glaab , IT services consultant works in Demand Management Group.
-? Jennifer Brown who is an Executive Director in the Strategic bidding and contracting group.
-? Donna Ott is a Sr.Director for Program Operations who oversees operations group for Teacher Licensure Tests.
-? Marianne Gorcz is a finance manager
+* Ted Geherty, IT Director of Demand Management Group
+* Kimi Glaab , IT services consultant works in Demand Management Group.
+* Jennifer Brown who is an Executive Director in the Strategic bidding and contracting group.
+* Donna Ott is a Sr.Director for Program Operations who oversees operations group for Teacher Licensure Tests.
+* Marianne Gorcz is a finance manager
 HIGH LEVEL REQUIREMENT:
-? A user interface to capture information such as work description, work title, live date, testing program, applications impacted etc. about the work package or RFP, available for demand management users.
-? A user interface to capture estimates in hours, amount by activity line items with assigned resources. The total amount should be calculated automatically based on the hourly rate of a particular resource assigned to the activity. This UI is applicable for individual application users who are impacted by the RFP or a work package. The UI should also allow to capture assumptions for each work request.
-?  A user interface to show the reports, based on criteria selected. Any number of work packages can be selected based on the criteria and aggregation report or view is available for either demand management users or business users.
-? Capability to edit the work package by business or demand management users to primarily change the status of the work package to either approved, cancelled or open.
-? Support for enhanced criteria for report generation based on date range. Search for work packages with creation time based on date range.
-? Resource management user interface to manage resource allocation on each of the work packages once the work is approved.
-? Create user/role user interface
-? Support for administrative work to assign application contacts to appropriate applications.
-? UI to view the budget forecast by monthly, quarterly, yearly basis.
-? Enhanced UI to estimate hardware requirements to support work packages. The cost varies based on the number of servers, Engineer support, Number of environments, memory, CPU, processors, hard disk etc. 
-? UI to support different portfolios and customize the view by application groups for easy maintenance for the business users so that they can navigate to individual groups easily.
-? Search capability of the work packages by id, description, statuses, on the application users view as well as the business users.
+* A user interface to capture information such as work description, work title, live date, testing program, applications impacted etc. about the work package or RFP, available for demand management users.
+* A user interface to capture estimates in hours, amount by activity line items with assigned resources. The total amount should be calculated automatically based on the hourly rate of a particular resource assigned to the activity. This UI is applicable for individual application users who are impacted by the RFP or a work package. The UI should also allow to capture assumptions for each work request.
+* A user interface to show the reports, based on criteria selected. Any number of work packages can be selected based on the criteria and aggregation report or view is available for either demand management users or business users.
+* Capability to edit the work package by business or demand management users to primarily change the status of the work package to either approved, cancelled or open.
+* Support for enhanced criteria for report generation based on date range. Search for work packages with creation time based on date range.
+* Resource management user interface to manage resource allocation on each of the work packages once the work is approved.
+* Create user/role user interface
+* Support for administrative work to assign application contacts to appropriate applications.
+* UI to view the budget forecast by monthly, quarterly, yearly basis.
+* Enhanced UI to estimate hardware requirements to support work packages. The cost varies based on the number of servers, Engineer support, Number of environments, memory, CPU, processors, hard disk etc. 
+* UI to support different portfolios and customize the view by application groups for easy maintenance for the business users so that they can navigate to individual groups easily.
+* Search capability of the work packages by id, description, statuses, on the application users view as well as the business users.
 PRODUCT BACKLOG ITEMS:
-Updated Product Backlog Items can be seen at following URL:
-https://github.com/kamranzameer/agileFinalProject/blob/master/docs/WorkPackageManagement_PBI.xlsx
+* Updated Product Backlog Items can be seen at following URL:
+* https://github.com/kamranzameer/agileFinalProject/blob/master/docs/WorkPackageManagement_PBI.xlsx
 DEFINITION OF DONE:
-? Code is complete and produced and is checked into the repository against the current version
-? Code is well formatted with comments for readability
-? Code builds without any errors
-? Unit tests are written and ensure all the tests are passing
-? Documentation, or use case specifications produced if applicable
-? Deployed to AWS server and passes Smoke Test.
-? Passes User Acceptance testing when applicable
-? Code reviews conducted or pair programmed.
-? Verify upgrade while keeping all the code intact. 
-? Summary of changes updated to include newly implemented features
+* Code is complete and produced and is checked into the repository against the current version
+* Code is well formatted with comments for readability
+* Code builds without any errors
+* Unit tests are written and ensure all the tests are passing
+* Documentation, or use case specifications produced if applicable
+* Deployed to AWS server and passes Smoke Test.
+* Passes User Acceptance testing when applicable
+* Code reviews conducted or pair programmed.
+* Verify upgrade while keeping all the code intact. 
+* Summary of changes updated to include newly implemented features
 
 ASSUMPTIONS:
 Demand management users have knowledge of all application systems in the company.
 
 
-SPRINT 1 STATUS REPORT
+
+SPRINT 1 STATUS REPORT : 
+https://github.com/kamranzameer/agileFinalProject/blob/master/docs/Sprint%201/Sprint%201%20Status%20Report.docx
+
+SPRINT 2 STATUS REPORT :
+https://github.com/kamranzameer/agileFinalProject/blob/master/docs/Sprint%202/Sprint%202%20Status%20Report.docx
+
+SPRINT 3 STATUS REPORT :
+https://github.com/kamranzameer/agileFinalProject/blob/master/docs/Sprint%203/Sprint%203%20Status%20Report.docx 
 
 
 
 
-
-
-
-
-Youtube links
-Mob session 1 : https://youtu.be/NF2m7UWl9Ak
-Mob session 2 : https://youtu.be/ZXdk3RnZHdg
-Sprint 1 Retrospective : https://youtu.be/kxd9nJxSA80
-SPRINT 2 STATUS REPORT
-
-PRODUCT DEMO
-https://youtu.be/O5yeH4EwrdY
-
-BUILD STATUS
-
-CODE COVERAGE
-
-
-
-
-UNIT TEST RESULTS
-
-BURN DOWN CHART
-
-BACKLOG ITEMS
-
-
-STAKE HOLDER FEEDBACK
-* WorkPackage detail screen should be made more presentable
-* Dollar amount should be preceded with a ‘$’ sign in all screens
-* It is not required to show Application name in WorkRequests list screen.
-
-
-SPRINT 3 STATUS REPORT
-BUILD STATUS
-
-CODE COVERAGE
-
-UNIT TEST RESULTS
-
-BURN DOWN CHART
-
-RELEASE BURNDOWN
-
-
-VELOCITY CHART
-
-
-BACKLOG ITEMS
-
-
-STAKE HOLDER FEEDBACK
-* Pleased with Sprint 2 feedback items implemented in Sprint 3
-* In Create Activity screen, Resource Type section should not be shown until a Resource type is added.
-* In Create Activity screen, Assumptions data should be captured in the same way as Resource Types.
-* In create new WorkPackage and Activity screens, Drop downs like Resource Type, Activity Type, Test Program should not have a pre-selected value. 
-* Work Package detail - Work Request section should not be shown if no work requests are available for the package
-* Work Request detail - Activity Type should also be displayed
-* Reset search is not fitting into the UI of WorkPackage list screen.
-WHAT WORKED WELL.
-* Collaboration between members
-* TDD - Enabled us to come up with good amount of unit tests and increased code quality
-* Code coverage - Helped us to identify gaps in unit tests
-* Implementation of continuous integration
-* ScrumDesk - Scrum project management tool to follow Agile methodology 
-WHAT DID NOT WORK WELL
-* Use of Github desktop client - Does not help to resolve conflicts during code merge
-* Mob programming - We found Mob programming sessions to be very challenging because of conflicting schedules of Team members
